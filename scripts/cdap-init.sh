@@ -6,9 +6,9 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #      http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -135,7 +135,7 @@ with open('/etc/hosts', 'a') as f:
   for index in range(0, count):
     hn=fqdns[index][0: fqdns[index].index('.')]
     f.write("{ip} {fqdn} {hn}\n".format(ip=localips[index],hn=hn,fqdn=fqdns[index]))
-  
+
 def pxc(f, m):
   a = "<?xml version='1.0' encoding='UTF-8'?>\n<?xml-stylesheet type='text/xsl' href='configuration.xsl'?>\n<configuration>"
   for n in m.keys():
@@ -345,7 +345,7 @@ then
 	su - hive -c 'nohup /usr/hdp/current/hive-metastore/bin/hive --service metastore >>/var/log/hive/hive.out 2>>/var/log/hive/hive.log </dev/null &'
 	(cd /bin; wget https://raw.githubusercontent.com/caskdata/cdap-monitoring-tools/develop/nagios/check_cdap/bin/check_cdap)
 	chmod 755 /bin/check_cdap
-	wget -qO- $CODE_SOURCE/${CODE_VERSION}-raw/cloud_init/instconsulagentub16.sh >/tmp/cinst.sh
+	wget -qO- $CODE_SOURCE/${CODE_VERSION}/raw/cloud_init/instconsulagentub16.sh >/tmp/cinst.sh
 	bash /tmp/cinst.sh <<!EOF
 {
   "bind_addr": "0.0.0.0",
