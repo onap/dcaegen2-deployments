@@ -275,6 +275,7 @@ limitations under the License.
                 <MVN_PROJECT_ARTIFACTID>${project.artifactId}</MVN_PROJECT_ARTIFACTID>
                 <MVN_PROJECT_VERSION>${project.version}</MVN_PROJECT_VERSION>
                 <MVN_NEXUSPROXY>${onap.nexus.url}</MVN_NEXUSPROXY>
+                <MVN_SERVER_ID>${project.distributionManagement.snapshotRepository.id}</MVN_SERVER_ID>
               </environmentVariables>
             </configuration>
           </execution>

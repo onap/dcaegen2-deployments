@@ -76,7 +76,7 @@ deploy)
     hostport=$(echo $1 | cut -f3 -d /)
     host=$(echo $hostport | cut -f1 -d:)
     settings=$HOME/.m2/settings.xml
-    ( echo machine $host; echo login $(xpath $settings "//servers/server[id='$hostport']/username/text()"); echo password $(xpath $settings "//servers/server[id='$hostport']/password/text()") ) >$HOME/.netrc
+    ( echo machine $host; echo login $(xpath $settings "//servers/server[id='$MVN_SERVER_ID']/username/text()"); echo password $(xpath $settings "//servers/server[id='$MVN_SERVER_ID']/password/text()") ) >$HOME/.netrc
     chmod 600 $HOME/.netrc
     set -x
   }
