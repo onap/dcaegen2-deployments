@@ -29,7 +29,7 @@ limitations under the License.
   <!--- CHANGE THE FOLLOWING 3 OBJECTS for your own repo -->
   <groupId>org.onap.dcaegen2</groupId>
   <artifactId>deployments</artifactId>
-  <name>deployments</name>
+  <name>dcaegen2-deployments</name>
 
   <version>1.0.0-SNAPSHOT</version>
   <url>http://maven.apache.org</url>
