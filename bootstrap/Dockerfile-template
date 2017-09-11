@@ -1,0 +1,19 @@
+FROM ubuntu:16.04
+MAINTAINER maintainer
+ENV INSROOT  /opt/app
+ENV APPUSER installer
+RUN apt-get update\
+    && apt-get install -y wget python-virtualenv python-pip ssh ed curl\
+    && apt-get clean\
+    && pip install --upgrade pip\
+    && mkdir -p ${INSROOT}/${APPUSER}/blueprints\
+    &&  useradd -d ${INSROOT}/${APPUSER}  ${APPUSER}
+COPY installer-docker.sh ${INSROOT}/${APPUSER}/installer
+# COPY *.yaml ${INSROOT}/${APPUSER}/blueprints/
+RUN wget -P ${INSROOT}/${APPUSER}/blueprints/ {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints/centos_vm.yaml
+RUN wget -P ${INSROOT}/${APPUSER}/blueprints/ {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints/consul_cluster.yaml
+WORKDIR ${INSROOT}/${APPUSER}
+RUN chown -R ${APPUSER}:${APPUSER} ${INSROOT}/${APPUSER}  && chmod +x ${INSROOT}/${APPUSER}/installer
+USER ${APPUSER}
+ENTRYPOINT exec "${INSROOT}/${APPUSER}/installer"
+ 
