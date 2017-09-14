@@ -3,7 +3,7 @@ MAINTAINER maintainer
 ENV INSROOT  /opt/app
 ENV APPUSER installer
 RUN apt-get update\
-    && apt-get install -y wget python-virtualenv python-pip ssh ed curl\
+    && apt-get install -y wget python-virtualenv python-pip ssh ed curl uuid-runtime\
     && apt-get clean\
     && pip install --upgrade pip\
     && mkdir -p ${INSROOT}/${APPUSER}/blueprints\
