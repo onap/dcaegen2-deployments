@@ -345,7 +345,12 @@ then
 	su - hive -c 'nohup /usr/hdp/current/hive-metastore/bin/hive --service metastore >>/var/log/hive/hive.out 2>>/var/log/hive/hive.log </dev/null &'
 	(cd /bin; wget https://raw.githubusercontent.com/caskdata/cdap-monitoring-tools/develop/nagios/check_cdap/bin/check_cdap)
 	chmod 755 /bin/check_cdap
-	wget -qO- $CODE_SOURCE/${CODE_VERSION}/raw/cloud_init/instconsulagentub16.sh >/tmp/cinst.sh
+        # lji: making more flexible:
+        # for LF nexus:  
+        #     CODE_SOURCE='https://nexus.onap.org/service/local/repositories/raw/content'
+        #     CODE_VERSION=org.onap.dcaegen2.deployments/releases/scripts
+	#wget -qO- $CODE_SOURCE/${CODE_VERSION}/raw/cloud_init/instconsulagentub16.sh >/tmp/cinst.sh
+	wget -qO- $CODE_SOURCE/${CODE_VERSION}/instconsulagentub16.sh >/tmp/cinst.sh
 	bash /tmp/cinst.sh <<!EOF
 {
   "bind_addr": "0.0.0.0",
