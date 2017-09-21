@@ -19,6 +19,70 @@
 # ECOMP is a trademark and service mark of AT&T Intellectual Property.
 
 
+#MVN_PROJECT_MODULEID="$1"
+#MVN_PHASE="$2"
+#PROJECT_ROOT=$(dirname $0)
+
+FQDN="${MVN_PROJECT_GROUPID}"
+if [ "$MVN_PROJECT_MODULEID" == "__" ]; then
+  MVN_PROJECT_MODULEID=""
+fi
+
+if [[ "$MVN_PROJECT_VERSION" == *SNAPSHOT ]]; then
+  echo "=> for SNAPSHOT artifact build"
+  MVN_DEPLOYMENT_TYPE='SNAPSHOT'
+else
+  echo "=> for STAGING/RELEASE artifact build"
+  MVN_DEPLOYMENT_TYPE='STAGING'
+fi
+echo "MVN_DEPLOYMENT_TYPE is             [$MVN_DEPLOYMENT_TYPE]"
+
+
+TIMESTAMP=$(date +%C%y%m%dT%H%M%S)
+
+# expected environment variables
+if [ -z "${MVN_NEXUSPROXY}" ]; then
+    echo "MVN_NEXUSPROXY environment variable not set.  Cannot proceed"
+    exit
+fi
+MVN_NEXUSPROXY_HOST=$(echo "$MVN_NEXUSPROXY" |cut -f3 -d'/' | cut -f1 -d':')
+echo "=> Nexus Proxy at $MVN_NEXUSPROXY_HOST, $MVN_NEXUSPROXY"
+
+if [ -z "$WORKSPACE" ]; then
+    WORKSPACE=$(pwd)
+fi
+
+if [ -z "$SETTINGS_FILE" ]; then
+    echo "SETTINGS_FILE environment variable not set.  Cannot proceed"
+    exit
+fi
+
+
+
+# mvn phase in life cycle
+MVN_PHASE="$2"
+
+echo "MVN_PROJECT_MODULEID is            [$MVN_PROJECT_MODULEID]"
+echo "MVN_PHASE is                       [$MVN_PHASE]"
+echo "MVN_PROJECT_GROUPID is             [$MVN_PROJECT_GROUPID]"
+echo "MVN_PROJECT_ARTIFACTID is          [$MVN_PROJECT_ARTIFACTID]"
+echo "MVN_PROJECT_VERSION is             [$MVN_PROJECT_VERSION]"
+echo "MVN_NEXUSPROXY is                  [$MVN_NEXUSPROXY]"
+echo "MVN_RAWREPO_BASEURL_UPLOAD is      [$MVN_RAWREPO_BASEURL_UPLOAD]"
+echo "MVN_RAWREPO_BASEURL_DOWNLOAD is    [$MVN_RAWREPO_BASEURL_DOWNLOAD]"
+MVN_RAWREPO_HOST=$(echo "$MVN_RAWREPO_BASEURL_UPLOAD" | cut -f3 -d'/' |cut -f1 -d':')
+echo "MVN_RAWREPO_HOST is                [$MVN_RAWREPO_HOST]"
+echo "MVN_RAWREPO_SERVERID is            [$MVN_RAWREPO_SERVERID]"
+echo "MVN_DOCKERREGISTRY_SNAOSHOT is     [$MVN_DOCKERREGISTRY_SNAPSHOT]"
+echo "MVN_DOCKERREGISTRY_RELEASE is      [$MVN_DOCKERREGISTRY_RELEASE]"
+echo "MVN_DOCKERREGISTRY_SNAPSHOT_SERVERID is [$MVN_DOCKERREGISTRY_SNAPSHOT_SERVERID]"
+echo "MVN_DOCKERREGISTRY_RELEASE_SERVERID is  [$MVN_DOCKERREGISTRY_RELEASE_SERVERID]"
+
+echo "MVN_PYPISERVER_SERVERID            [$MVN_PYPISERVER_SERVERID]"
+echo "MVN_PYPISERVER_BASEURL is          [$MVN_PYPISERVER_BASEURL]"
+
+
+
 clean_templated_files() 
 {
   TEMPLATE_FILES=$(find . -name "*-template")
@@ -52,7 +116,7 @@ expand_templates()
   export ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases="$MVN_RAWREPO_BASEURL_DOWNLOAD/org.onap.dcaegen2.platform.blueprints/releases"
   export ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_snapshots="$MVN_RAWREPO_BASEURL_DOWNLOAD/org.onap.dcaegen2.platform.blueprints/snapshots"
 
-  export ONAPTEMPLATE_PYPIURL_org_onap_dcaegen2="${MVN_NEXUSPROXY}/content/sites/pypi"
+  export ONAPTEMPLATE_PYPIURL_org_onap_dcaegen2="$MVN_PYPISERVER_BASEURL"
 
   export ONAPTEMPLATE_DOCKERREGURL_org_onap_dcaegen2_releases="$MVN_DOCKERREGISTRY_DAILY"
   export ONAPTEMPLATE_DOCKERREGURL_org_onap_dcaegen2_snapshots="$MVN_DOCKERREGISTRY_DAILY/snapshots"
@@ -169,10 +233,12 @@ upload_raw_file()
 
   REPO="$MVN_RAWREPO_BASEURL_UPLOAD"
 
-  OUTPUT_FILE=$1
+  OUTPUT_FILE=$(echo "$1" | sed -e "s/^.\///")
   EXT=$(echo "$OUTPUT_FILE" | rev |cut -f1 -d '.' |rev)
   if [ "$EXT" == 'yaml' ]; then
     OUTPUT_FILE_TYPE='text/x-yaml'
+  elif [ "$EXT" == 'json' ]; then
+    OUTPUT_FILE_TYPE='application/json'
   elif [ "$EXT" == 'sh' ]; then
     OUTPUT_FILE_TYPE='text/x-shellscript'
   elif [ "$EXT" == 'gz' ]; then
@@ -185,9 +251,9 @@ upload_raw_file()
 
 
   if [ "$MVN_DEPLOYMENT_TYPE" == 'SNAPSHOT' ]; then
-    SEND_TO="${REPO}/${FQDN}/snapshots"
+    SEND_TO="${REPO}/${MVN_PROJECT_GROUPID}/snapshots"
   elif [ "$MVN_DEPLOYMENT_TYPE" == 'STAGING' ]; then
-    SEND_TO="${REPO}/${FQDN}/releases"
+    SEND_TO="${REPO}/{$MVN_PROJECT_GROUPID}/releases"
   else
     echo "Unreconfnized deployment type, quit"
     exit
@@ -226,11 +292,40 @@ upload_files_of_extension()
 }
 
 
+generate_pypirc_then_publish() 
+{
+  set +x
+  USER=$(xpath -e "//servers/server[id='$MVN_PYPISERVER_SERVERID']/username/text()" "$SETTINGS_FILE")
+  PASS=$(xpath -e "//servers/server[id='$MVN_PYPISERVER_SERVERID']/password/text()" "$SETTINGS_FILE")
+
+  if [[ "$MVN_PYPISERVER_BASEURL" != */ ]]; then
+    MVN_PYPISERVER_BASEURL="${MVN_PYPISERVER_BASEURL}/"
+  fi
+ 
+
+  cat > ~/.pypirc <<EOL
+[distutils]
+index-servers = 
+  $MVN_PYPISERVER_SERVERID
+ 
+[$MVN_PYPISERVER_SERVERID]
+repository: $MVN_PYPISERVER_BASEURL
+username: $USER
+password: $PASS
+EOL
+
+  # this may fail if a package of same version exists
+  python setup.py sdist register -r "$MVN_PYPISERVER_SERVERID" upload -r "$MVN_PYPISERVER_SERVERID"
+  set -x
+}
+
+
 
 build_and_push_docker()
 {
-  IMAGENAME="onap/${FQDN}.${MVN_PROJECT_MODULEID}"
+  IMAGENAME="onap/${MVN_PROJECT_GROUPID}.${MVN_PROJECT_MODULEID}"
   IMAGENAME=$(echo "$IMAGENAME" | sed -e 's/_*$//g' -e 's/\.*$//g')
+  IMAGENAME=$(echo "$IMAGENAME" | tr '[:upper:]' '[:lower:]')
 
   # use the major and minor version of the MVN artifact version as docker image version
   VERSION="${MVN_PROJECT_VERSION//[^0-9.]/}"
@@ -242,20 +337,23 @@ build_and_push_docker()
 
   REPO=""
   if [ $MVN_DEPLOYMENT_TYPE == "SNAPSHOT" ]; then
-     REPO=$MVN_DOCKERREGISTRY_DAILY
+     REPO=$MVN_DOCKERREGISTRY_SNAPSHOT
+     SERVERID=$MVN_DOCKERREGISTRY_SNAPSHOT_SERVERID
   elif [ $MVN_DEPLOYMENT_TYPE == "STAGING" ]; then
      # there seems to be no staging docker registry?  set to use SNAPSHOT also
      #REPO=$MVN_DOCKERREGISTRY_RELEASE
-     REPO=$MVN_DOCKERREGISTRY_DAILY
+     REPO=$MVN_DOCKERREGISTRY_SNAPSHOT
+     SERVERID=$MVN_DOCKERREGISTRY_SNAPSHOT_SERVERID
   else
      echo "Fail to determine DEPLOYMENT_TYPE"
-     REPO=$MVN_DOCKERREGISTRY_DAILY
+     REPO=$MVN_DOCKERREGISTRY_SNAPSHOT
+     SERVERID=$MVN_DOCKERREGISTRY_SNAPSHOT_SERVERID
   fi
   echo "DEPLOYMENT_TYPE is: $MVN_DEPLOYMENT_TYPE, repo is $REPO"
 
   if [ ! -z "$REPO" ]; then
-    USER=$(xpath -e "//servers/server[id='$REPO']/username/text()" "$SETTINGS_FILE")
-    PASS=$(xpath -e "//servers/server[id='$REPO']/password/text()" "$SETTINGS_FILE")
+    USER=$(xpath -e "//servers/server[id='$SERVERID']/username/text()" "$SETTINGS_FILE")
+    PASS=$(xpath -e "//servers/server[id='$SERVERID']/password/text()" "$SETTINGS_FILE")
     if [ -z "$USER" ]; then
       echo "Error: no user provided"
     fi

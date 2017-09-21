@@ -27,6 +27,8 @@ DESIGPLUG={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}
 SSHKEYTYPES={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/type_files/sshkeyshare/sshkey_types.yaml
 SSHKEYPLUG={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/sshkeyshare-1.0.0-py27-none-any.wgn
 OSPLUGINZIP=https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.4.zip
+OSPLUGINWGN=https://github.com/cloudify-cosmo/cloudify-openstack-plugin/releases/download/2.2.0/cloudify_openstack_plugin-2.2.0-py27-none-linux_x86_64-centos-Core.wgn
+
 
 # Make sure ssh doesn't prompt for new host or choke on a new host with an IP it's seen before
 SSHOPTS="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
@@ -36,7 +38,7 @@ SSHUSER=centos
 PVTKEY=./config/key
 INPUTS=./config/inputs.yaml
 
-if ["$LOCATION" = "" ]
+if [ "$LOCATION" = "" ]
 then
 	echo 'Environment variable LOCATION not set.  Should be set to location ID for this installation.'
 	exit 1
