@@ -26,6 +26,8 @@ DESIGTYPES={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }
 DESIGPLUG={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/dnsdesig-1.0.0-py27-none-any.wgn
 SSHKEYTYPES={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/type_files/sshkeyshare/sshkey_types.yaml
 SSHKEYPLUG={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/sshkeyshare-1.0.0-py27-none-any.wgn
+PGAASTYPES={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/type_files/pgaas_plugin/1.0.0/pgaas_types.yaml
+PGAASPLUG={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/pgaas_plugin-1.0.0-py27-none-any.wgn
 OSPLUGINZIP=https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.4.zip
 OSPLUGINWGN=https://github.com/cloudify-cosmo/cloudify-openstack-plugin/releases/download/2.2.0/cloudify_openstack_plugin-2.2.0-py27-none-linux_x86_64-centos-Core.wgn
 
@@ -74,12 +76,15 @@ pip install openstack.zip
 mkdir types
 wget -qO- ${DESIGTYPES} > types/dns_types.yaml
 wget -qO- ${SSHKEYTYPES} > types/sshkey_types.yaml
+wget -qO- ${PGAASTYPES} > types/pgaas_types.yaml
 
 wget -O dnsdesig.wgn ${DESIGPLUG}
 wget -O sshkeyshare.wgn ${SSHKEYPLUG}
+wget -O pgaas.wgn ${PGAASPLUG}
 
 wagon install -s dnsdesig.wgn
 wagon install -s sshkeyshare.wgn
+wagon install -s pgaas.wgn
 
 ## Fix up the inputs file to get the private key locally
 sed -e "s#key_filename:.*#key_filename: $PVTKEY#" < ${INPUTS} > /tmp/local_inputs
@@ -237,6 +242,7 @@ plugin_resources:
   - 'http://repository.cloudifysource.org/org/cloudify3/wagons/cloudify-fabric-plugin/1.4.1/cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn'
   - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/dnsdesig-1.0.0-py27-none-any.wgn'
   - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/sshkeyshare-1.0.0-py27-none-any.wgn'
+  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/pgaas_plugin-1.0.0-py27-none-any.wgn'
 !EOF
 #
 #	And away we go
