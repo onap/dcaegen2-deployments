@@ -230,13 +230,17 @@ sed <simple-manager-blueprint-inputs.yaml >bootstrap-inputs.yaml \
 	-e "s;.*ignore_bootstrap_validations: .*;ignore_bootstrap_validations: true;" \
 
 # Add plugin resources
-# TODO Add the other plugins when they're available
+# TODO Maintain plugin list as updates/additions occur
 cat >>bootstrap-inputs.yaml <<'!EOF'
 plugin_resources:
   - 'http://repository.cloudifysource.org/org/cloudify3/wagons/cloudify-openstack-plugin/1.4/cloudify_openstack_plugin-1.4-py27-none-linux_x86_64-centos-Core.wgn'
   - 'http://repository.cloudifysource.org/org/cloudify3/wagons/cloudify-fabric-plugin/1.4.1/cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn'
   - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/dnsdesig-1.0.0-py27-none-any.wgn'
   - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/sshkeyshare-1.0.0-py27-none-any.wgn'
+  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}/plugins/cdapcloudify/cdapcloudify-14.2.5-py27-none-any.wgn'
+  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}/plugins/dcaepolicyplugin/dcaepolicyplugin-1.0.0-py27-none-any.wgn'
+  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}/plugins/dockerplugin/dockerplugin-2.4.0-py27-none-any.wgn'
+  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}/plugins/relationshipplugin/relationshipplugin-1.0.0-py27-none-any.wgn'
 !EOF
 #
 #	And away we go
