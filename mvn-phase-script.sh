@@ -77,6 +77,11 @@ package)
   ;;
 install)
   echo "==> install phase script"
+  case $MVN_PROJECT_MODULEID in
+  bootstrap)
+    upload_files_of_extension sh
+    ;;
+  esac
   ;;
 deploy)
   echo "==> deploy phase script"
@@ -84,6 +89,7 @@ deploy)
   case $MVN_PROJECT_MODULEID in
   bootstrap)
     # build docker image from Docker file (under module dir) and push to registry
+    upload_files_of_extension sh
     build_and_push_docker
     ;;
   scripts)
