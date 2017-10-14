@@ -9,11 +9,12 @@ RUN apt-get update\
     && mkdir -p ${INSROOT}/${APPUSER}/blueprints\
     &&  useradd -d ${INSROOT}/${APPUSER}  ${APPUSER}
 COPY installer-docker.sh ${INSROOT}/${APPUSER}/installer
+COPY teardown.sh ${INSROOT}/${APPUSER}/teardown
 # COPY *.yaml ${INSROOT}/${APPUSER}/blueprints/
 RUN wget -P ${INSROOT}/${APPUSER}/blueprints/ {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints/centos_vm.yaml
 RUN wget -P ${INSROOT}/${APPUSER}/blueprints/ {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints/consul_cluster.yaml
 WORKDIR ${INSROOT}/${APPUSER}
-RUN chown -R ${APPUSER}:${APPUSER} ${INSROOT}/${APPUSER}  && chmod +x ${INSROOT}/${APPUSER}/installer
+RUN chown -R ${APPUSER}:${APPUSER} ${INSROOT}/${APPUSER}  && chmod +x ${INSROOT}/${APPUSER}/installer && chmod +x ${INSROOT}/${APPUSER}/teardown
 USER ${APPUSER}
 ENTRYPOINT exec "${INSROOT}/${APPUSER}/installer"
  

@@ -6,13 +6,17 @@
       a private network interconnecting the VMs; and an external network that provides "floating" IP addresses for the VMs.A router connects the two networks.  Each VM is assigned two IP addresses, one allocated from the private network when the VM is launched.
 Then a floating IP is assigned to the VM from the external network. The UUID's of the private and external networks are needed for preparing the inputs.yaml file needed for running the bootstrap container.
 
-   b) Add a public key to openStack, note its name (we will use KEYNAME as example for below).  Save the private key (we will use KAYPATH as its path example), make sure it's permission is globally readable.
+   b) Add a public key to openStack, note its name (we will use KEYNAME as example for below).  Save the private key (we will use KEYPATH as its path example), make sure its permission is globally readable.
 
     c) Load the flowing base VM images to OpenStack:  a CentOS 7 base image and a Ubuntu 16.04 base image.
 
     d) Obtain the resource IDs/UUIDs for resources needed by the inputs.yaml file, as explained below, from OpenStack.
 
-2. On dev machine, edit an inputs.yaml file at INPUTSYAMLPATH
+2. On dev machine, set up a directory to hold environment-specific configuration files. Call its path CONFIGDIR.
+
+3. Put the private key mentioned above into CONFIGDIR as a file named `key`, and make it globally readable.
+4. Create a file named `inputs.yaml` in CONFIGDIR
+
 ```
 1  centos7image_id: '7c8d7524-de1f-490b-8418-db294bfa2d65'
 2  ubuntu1604image_id: '4b09c18b-d69e-4ba8-a1bd-562cab91ff20'
@@ -55,9 +59,80 @@ Here is a line-by-line explanation of the parameters
   18. Path to the boot scripts within the raw artifact repo, for example: 'org.onap.dcaegen2.deployments/releases/scripts'
 
 
-3. Pull and run the docker container
+5. Create a file in CONFIGDIR called `invinputs.yaml`.  This contains environment-specific information for the inventory service.  (TODO: examples only, not the correct values for the ONAP integration environment.)
+
+```
+1 docker_host_override: "platform_dockerhost"
+2 asdc_address: "sdc.onap.org:8443"
+3 asdc_uri: "https://sdc.onap.org:8443"
+4 asdc_user: "ci"
+5 asdc_password: !!str 123456
+6 asdc_environment_name: "ONAP-AMDOCS"
+7 postgres_user_inventory: "postgres"
+8 postgres_password_inventory: "onap123"
+9 service_change_handler_image: "nexus3.onap.org:10001/onap/org.onap.dcaegen2.platform.servicechange-handler:latest"
+10 inventory_image: "nexus3.onap.org:10001/onap/org.onap.dcaegen2.platform.inventory-api:latest
+```
+Here is a line-by-line description of the parameters:
+  1. The service name for the platform docker host (should be the same in all environments)
+  2. The hostname and port of the SDC service
+  3. The URI of the SDC service
+  4. The SDC username
+  5. The SDC password
+  6. The SDC environment name
+  7. The postgres user name
+  8. The postgres password
+  9. The Docker image to be used for the service change handler (should be the same in all environments)
+  10. The Docker image to be used for the inventory service (should be the same in all environments)
+  
+6. Create a file in CONFIGDIR called `phinputs.yaml`.  This contains environment-specific information for the policy handler.
+
+```
+application_config:
+  policy_handler :
+    # parallelize the getConfig queries to policy-engine on each policy-update notification
+    thread_pool_size : 4
+ 
+    # parallelize requests to policy-engine and keep them alive
+    pool_connections : 20
+ 
+    # list of policyName prefixes (filters) that DCAE-Controller handles (=ignores any other policyName values)
+    scope_prefixes : ["DCAE.Config_"]
+ 
+    # retry to getConfig from policy-engine on policy-update notification
+    policy_retry_count : 5
+    policy_retry_sleep : 5
+ 
+    # policy-engine config
+    # These are the url of and the auth for the external system, namely the policy-engine (PDP).
+    # We obtain that info manually from PDP folks at the moment.
+    # In long run we should figure out a way of bringing that info into consul record
+    #    related to policy-engine itself.
+    policy_engine :
+        url : "https://peawiv9nspd01.pedc.sbc.com:8081"
+        path_pdp : "/pdp/"
+        path_api : "/pdp/api/"
+        headers :
+            Accept : "application/json"
+            "Content-Type" : "application/json"
+            ClientAuth : "Basic bTAzOTQ5OnBvbGljeVIwY2sk"
+            Authorization : "Basic dGVzdHBkcDphbHBoYTEyMw=="
+            Environment : "TEST"
+        target_entity : "policy_engine"
+    # name of deployment-handler service in consul for policy-handler to direct the policy-updates to
+    deploy_handler : "deployment_handler"
+```
+TODO: provide explanations
+
+7. Pull and run the docker container
 ```
 docker pull nexus3.onap.org:10003/onap/org.onap.dcaegen2.deployments.bootstrap:1.0
-docker run -v KEYPATH:/opt/app/installer/config/key -v INPUTSYAMLPATH:/opt/app/installer/config/inputs.yaml -e "LOCATION=dg2" nexus3.onap.org:10003/onap/org.onap.dcaegen2.deployments.bootstrap:1.0
+docker run -d --name boot -v CONFIGDIR:/opt/app/installer/config -e "LOCATION=dg2" nexus3.onap.org:10003/onap/org.onap.dcaegen2.deployments.bootstrap:1.0
 ```
 The container stays up even after the installation is complete.  Using the docker exec command to get inside of the container, then run cfy commands to interact with the Cloudify Manager.
+
+8. To tear down all of the DCAE installation:
+
+```
+docker exec -it boot ./teardown
+```

@@ -29,6 +29,24 @@ SSHKEYPLUG={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }
 OSPLUGINZIP=https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.4.zip
 OSPLUGINWGN=https://github.com/cloudify-cosmo/cloudify-openstack-plugin/releases/download/2.2.0/cloudify_openstack_plugin-2.2.0-py27-none-linux_x86_64-centos-Core.wgn
 
+PLATBPSRC={{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints
+DOCKERBP=DockerBP.yaml
+CBSBP=config_binding_service.yaml
+CDAPBP=cdapbp7.yaml
+CDAPBROKERBP=cdap_broker.yaml
+INVBP=inventory.yaml
+DHBP=DeploymentHandler.yaml
+PHBP=policy_handler.yaml
+
+DOCKERBPURL="${PLATBPSRC}/${DOCKERBP}"
+CBSBPURL="${PLATBPSRC}/${CBSBP}"
+CDAPBPURL="${PLATBPSRC}/${CDAPBP}"
+CDAPBROKERBPURL="${PLATBPSRC}/${CDAPBROKERBP}"
+INVBPURL="${PLATBPSRC}/${INVBP}"
+DHBPURL="${PLATBPSRC}/${DHBP}"
+PHBPURL="${PLATBPSRC}/${PHBP}"
+
+LOCATIONID=$(printenv LOCATION)
 
 # Make sure ssh doesn't prompt for new host or choke on a new host with an IP it's seen before
 SSHOPTS="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
@@ -258,7 +276,7 @@ cfy use -t ${PUBIP}
 echo "Deploying Consul VM"
 
 set +e
-if wget -P ../blueprints/ {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints/consul_cluster.yaml; then
+if wget -P ../blueprints/ {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/consul_cluster.yaml; then
   echo "Succeeded in getting the newest consul_cluster.yaml"
 else
   echo "Failed to update consul_cluster.yaml, using default version"
@@ -320,6 +338,69 @@ scp $SSHOPTS -i ../$PVTKEY $ENVINI $SSHUSER@$PUBIP:/tmp/env.ini
 ssh -t $SSHOPTS -i ../$PVTKEY $SSHUSER@$PUBIP sudo mv /tmp/env.ini /opt/env.ini
 rm $ENVINI
 
+
+##### INSTALLATION OF PLATFORM COMPONENTS
+
+# Get component blueprints
+wget -P ./blueprints/docker/ ${DOCKERBPURL}
+wget -P ./blueprints/cbs/ ${CBSBPURL}
+wget -P ./blueprints/cdap/ ${CDAPBPURL}
+wget -P ./blueprints/cdapbroker/ ${CDAPBROKERBPURL}
+wget -P ./blueprints/inv/ ${INVBPURL}
+wget -P ./blueprints/dh/ ${DHBPURL}
+wget -P ./blueprints/ph/ ${PHBPURL}
+
+
+# Set up the credentials for access to the Docker registry
+curl -X PUT -H "Content-Type: application/json" --data-binary '[{"username":"docker", "password":"docker", "registry": "nexus3.onap.org:10001"}]'  http://${CONSULIP}:8500/v1/kv/docker_plugin/docker_logins
+
+# Install platform Docker host
+# Note we're still in the "consul" directory, which is init'ed for talking to CM
+
+set +e 
+# Docker host for platform containers
+cfy install -v -p ./blueprints/docker/${DOCKERBP} -b DockerBP -d DockerPlatform -i ../${INPUTS} -i "registered_dockerhost_name=platform_dockerhost" -i "registrator_image=onapdcae/registrator:v7" -i "location_id=${LOCATION}" -i "node_name=dokp00" -i "target_datacenter=${LOCATION}"
+
+# Docker host for service containers
+cfy deployments create -b DockerBP -d DockerComponent -i ../${INPUTS} -i "registered_dockerhost_name=component_dockerhost" -i "location_id=${LOCATION}" -i "registrator_image=onapdcae/registrator:v7" -i "node_name=doks00" -i "target_datacenter=${LOCATION}"
+cfy executions start -d DockerComponent -w install
+
+# wait for the extended platform VMs settle
+#sleep 180
+
+
+# CDAP cluster
+#cfy install -p ./blueprints/cdap/${CDAPBP} -b cdapbp7 -d cdap7 -i ../${INPUTS} -i "location_id=${LOCATION}"
+
+
+# config binding service
+cfy install -p ./blueprints/cbs/${CBSBP} -b config_binding_service -d config_binding_service -i "location_id=${LOCATION}"
+
+
+# Inventory
+cfy install -p ./blueprints/inv/${INVBP} -b PlatformServicesInventory -d PlatformServicesInventory -i "location_id=${LOCATION}" -i ../config/invinputs.yaml
+
+
+# Deployment Handler DH
+cat >../dhinputs <<EOL
+application_config:
+  cloudify:
+    protocol: "http"
+  inventory:
+    protocol: "http"
+EOL
+cfy install -p ./blueprints/dh/${DHBP} -b DeploymentHandlerBP -d DeploymentHandler -i "location_id=${LOCATION}"  -i ../dhinputs
+
+
+# Policy Handler PH
+cfy install -p ./blueprints/ph/${PHBP} -b policy_handler_BP -d policy_handler -i 'policy_handler_image=nexus3.onap.org:10001/onap/org.onap.dcaegen2.platform.policy-handler:1.1-latest' -i "location_id=${LOCATION}" -i ../config/phinputs.yaml
+
+
+# CDAP Broker
+#cfy install -p ./blueprints/cdapbroker/${CDAPBROKERBP} -b cdapbroker -d cdapbroker -i "location_id=${LOCATION}"
+
+
+# Keep the container up
 while true
 do
     sleep 300
