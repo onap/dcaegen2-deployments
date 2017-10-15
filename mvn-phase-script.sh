@@ -95,6 +95,7 @@ deploy)
   scripts)
     # upload all sh file under the root of module 
     upload_files_of_extension sh
+    upload_files_of_extension py
     ;;
   *)
     echo "====> unknown mvn project module"
