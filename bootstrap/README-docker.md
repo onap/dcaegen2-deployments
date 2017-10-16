@@ -109,7 +109,7 @@ application_config:
     # In long run we should figure out a way of bringing that info into consul record
     #    related to policy-engine itself.
     policy_engine :
-        url : "https://peawiv9nspd01.pedc.sbc.com:8081"
+        url : "https://policy-engine.onap.org:8081"
         path_pdp : "/pdp/"
         path_api : "/pdp/api/"
         headers :
@@ -126,8 +126,9 @@ TODO: provide explanations
 
 7. Pull and run the docker container
 ```
-docker pull nexus3.onap.org:10003/onap/org.onap.dcaegen2.deployments.bootstrap:1.0
-docker run -d --name boot -v CONFIGDIR:/opt/app/installer/config -e "LOCATION=dg2" nexus3.onap.org:10003/onap/org.onap.dcaegen2.deployments.bootstrap:1.0
+docker login -u docker -p docker nexus3.onap.org:10001
+docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.deployments.bootstrap:1.1-latest0
+docker run -d --name boot -v CONFIGDIR:/opt/app/installer/config -e "LOCATION=dg2" nexus3.onap.org:10003/onap/org.onap.dcaegen2.deployments.bootstrap:1.1-latest
 ```
 The container stays up even after the installation is complete.  Using the docker exec command to get inside of the container, then run cfy commands to interact with the Cloudify Manager.
 
