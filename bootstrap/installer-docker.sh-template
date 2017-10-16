@@ -401,7 +401,8 @@ cfy install -p ./blueprints/ph/${PHBP} -b policy_handler_BP -d policy_handler -i
 
 
 # Keep the container up
-while true
+rm -f /tmp/ready_to_exit
+while [ ! -e /tmp/ready_to_exit ]
 do
-    sleep 300
+    sleep 30
 done

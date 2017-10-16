@@ -22,6 +22,9 @@
 #
 set -x
 set -e
+
+rm -f /tmp/ready_to_exit
+
 source ./dcaeinstall/bin/activate
 cd ./consul
 cfy status
@@ -37,3 +40,4 @@ cfy uninstall -d consul
 cd ..
 cfy local uninstall
 
+touch /tmp/ready_to_exit
