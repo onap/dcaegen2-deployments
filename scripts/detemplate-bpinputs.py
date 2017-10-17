@@ -77,6 +77,23 @@ def detemplate_bpinputs(jjt_directory, in_directory, out_directory):
             inputs = render_template(infpath, context)
             f.write(inputs)
 
+
+def add_keystone_20(conf_directory, filename):
+    fpath = os.path.join(conf_directory, filename)
+    newurl = ''
+    with open(fpath, 'r') as f:
+        url = f.readline().rstrip()
+        if not url.endswith('/2.0'):
+            if url.endswith('/'):
+                newurl = url + '2.0'
+            else:
+                newurl = url + '/2.0'
+        f.close()
+    if newurl:
+        with open(fpath, 'w') as f:
+            f.write(newurl)
+
+
 def main():
     if len(sys.argv) != 4:
         print("Usgae:  {} variable_def_dir template_dir template_output_dir".format(sys.argv[0]))
@@ -84,8 +101,8 @@ def main():
 
     print("De-templatizing templates in {} using variable defs from {}, results in {}".format(sys.argv[1], sys.argv[2], sys.argv[3]))
     check_templates(sys.argv[1], sys.argv[2])
-    detemplate_bpinputs(sys.argv[1], sys.argv[2], sys.argv[3])
-    
+    detemplate_bpinputs(jjt_directory = sys.argv[1], in_directory = sys.argv[2], out_directory = sys.argv[3])
+    add_keystone_20(conf_directory = sys.argv[3], filename = 'keystone_url.txt') 
  
 ########################################
 if __name__ == "__main__":
