@@ -241,6 +241,8 @@ upload_raw_file()
     OUTPUT_FILE_TYPE='application/json'
   elif [ "$EXT" == 'sh' ]; then
     OUTPUT_FILE_TYPE='text/x-shellscript'
+  elif [ "$EXT" == 'py' ]; then
+    OUTPUT_FILE_TYPE='text/x-python'
   elif [ "$EXT" == 'gz' ]; then
     OUTPUT_FILE_TYPE='application/gzip'
   elif [ "$EXT" == 'wgn' ]; then
@@ -263,7 +265,7 @@ upload_raw_file()
   fi
 
   echo "Sending ${OUTPUT_FILE} to Nexus: ${SEND_TO}"
-  curl -vkn --netrc-file "${NETRC}" --upload-file "${OUTPUT_FILE}" -X PUT -H "Content-Type: $OUTPUT_FILE_TYPE" "${SEND_TO}/${OUTPUT_FILE}-${MVN_PROJECT_VERSION}-${TIMESTAMP}"
+  #curl -vkn --netrc-file "${NETRC}" --upload-file "${OUTPUT_FILE}" -X PUT -H "Content-Type: $OUTPUT_FILE_TYPE" "${SEND_TO}/${OUTPUT_FILE}-${MVN_PROJECT_VERSION}-${TIMESTAMP}"
   curl -vkn --netrc-file "${NETRC}" --upload-file "${OUTPUT_FILE}" -X PUT -H "Content-Type: $OUTPUT_FILE_TYPE" "${SEND_TO}/${OUTPUT_FILE}-${MVN_PROJECT_VERSION}"
   curl -vkn --netrc-file "${NETRC}" --upload-file "${OUTPUT_FILE}" -X PUT -H "Content-Type: $OUTPUT_FILE_TYPE" "${SEND_TO}/${OUTPUT_FILE}"
 }
@@ -286,6 +288,13 @@ upload_wagons_and_type_yamls()
 upload_files_of_extension()
 {
   FILES=$(ls -1 ./*."$1")
+  for F in $FILES ; do
+    upload_raw_file "$F"
+  done
+}
+upload_files_of_extension_recursively()
+{
+  FILES=$(find . -name "*.$1")
   for F in $FILES ; do
     upload_raw_file "$F"
   done
