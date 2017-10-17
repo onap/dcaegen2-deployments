@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a2f8d8d_cb79f6fd",
+        "filename": "cloud_init/cdap-init.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1907
+      },
+      "writtenOn": "2017-10-17T13:52:36Z",
+      "side": 1,
+      "message": "Delete commented out line. Don\u0027t clutter code with old versions.",
+      "revId": "1a886082eb2903f95e42d42a1513244e0e85881b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
