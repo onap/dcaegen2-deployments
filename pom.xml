@@ -38,6 +38,7 @@ limitations under the License.
   <modules>
      <module>bootstrap</module>
      <module>scripts</module>
+     <module>cloud_init</module>
   </modules>
 
   <properties>
