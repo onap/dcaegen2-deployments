@@ -92,7 +92,7 @@ deploy)
     upload_files_of_extension sh
     build_and_push_docker
     ;;
-  scripts)
+  scripts|cloud_init)
     # upload all sh file under the root of module 
     upload_files_of_extension_recursively sh
     upload_files_of_extension_recursively py
