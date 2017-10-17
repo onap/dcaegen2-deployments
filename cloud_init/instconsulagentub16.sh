@@ -17,8 +17,8 @@
 # limitations under the License.
 # ============LICENSE_END======================================================
 
-CONSULVER=consul_0.8.3
-CONSULNAME=${CONSULVER}_linux_amd64
+CONSULVER=0.8.3
+CONSULNAME=consul_${CONSULVER}_linux_amd64
 CB=/opt/consul/bin
 CD=/opt/consul/data
 CF=/opt/consul/config
