@@ -370,8 +370,7 @@ cfy executions start -d DockerComponent -w install
 
 
 # CDAP cluster
-#cfy install -p ./blueprints/cdap/${CDAPBP} -b cdapbp7 -d cdap7 -i ../${INPUTS} -i "location_id=${LOCATION}"
-
+cfy install -p ./blueprints/cdap/${CDAPBP} -b cdapbp7 -d cdap7 -i ../${INPUTS} -i "location_id=${LOCATION}"
 
 # config binding service
 cfy install -p ./blueprints/cbs/${CBSBP} -b config_binding_service -d config_binding_service -i "location_id=${LOCATION}"
@@ -396,8 +395,18 @@ cfy install -p ./blueprints/dh/${DHBP} -b DeploymentHandlerBP -d DeploymentHandl
 cfy install -p ./blueprints/ph/${PHBP} -b policy_handler_BP -d policy_handler -i 'policy_handler_image=nexus3.onap.org:10001/onap/org.onap.dcaegen2.platform.policy-handler:1.1-latest' -i "location_id=${LOCATION}" -i ../config/phinputs.yaml
 
 
+# Wait for the CDAP cluster to be registered in Consul
+echo "Waiting for CDAP cluster to register"
+until curl -Ss http://${CONSULIP}:8500/v1/catalog/service/cdap | grep cdap
+do 
+    echo -n .
+    sleep 30
+done
+echo "CDAP cluster registered"
+
+
 # CDAP Broker
-#cfy install -p ./blueprints/cdapbroker/${CDAPBROKERBP} -b cdapbroker -d cdapbroker -i "location_id=${LOCATION}"
+cfy install -p ./blueprints/cdapbroker/${CDAPBROKERBP} -b cdapbroker -d cdapbroker -i "location_id=${LOCATION}"
 
 
 # Keep the container up

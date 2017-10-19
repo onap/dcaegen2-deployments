@@ -29,6 +29,8 @@ source ./dcaeinstall/bin/activate
 cd ./consul
 cfy status
 set +e
+cfy uninstall -d cdapbroker
+cfy uninstall -d cdap7
 cfy uninstall -d policy_handler
 cfy uninstall -d DeploymentHandler
 cfy uninstall -d PlatformServicesInventory
