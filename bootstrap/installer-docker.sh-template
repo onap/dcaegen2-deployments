@@ -52,6 +52,11 @@ LOCATIONID=$(printenv LOCATION)
 SSHOPTS="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 STARTDIR=$(pwd)
 
+# clear out files for writing out floating IP addresses
+rm -f "$STARTDIR"/config/runtime.ip.consul
+rm -f "$STARTDIR"/config/runtime.ip.cm
+
+
 SSHUSER=centos
 PVTKEY=./config/key
 INPUTS=./config/inputs.yaml
@@ -408,6 +413,11 @@ echo "CDAP cluster registered"
 
 # CDAP Broker
 cfy install -p ./blueprints/cdapbroker/${CDAPBROKERBP} -b cdapbroker -d cdapbroker -i "location_id=${LOCATION}"
+
+
+# write out IP addresses
+echo "$CONSULIP" > "$STARTDIR"/config/runtime.ip.consul
+echo "$PUBIP" > "$STARTDIR"/config/runtime.ip.cm
 
 
 # Keep the container up
