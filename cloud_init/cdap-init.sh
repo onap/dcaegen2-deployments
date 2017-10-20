@@ -38,7 +38,7 @@ chmod 400 /root/.mysqlpw
 wget -qO- http://public-repo-1.hortonworks.com/HDP/ubuntu16/2.x/updates/2.6.0.3/hdp.list >/etc/apt/sources.list.d/hdp.list
 wget -qO- http://repository.cask.co/ubuntu/precise/amd64/cdap/4.1/cask.list >/etc/apt/sources.list.d/cask.list
 wget -qO- http://repository.cask.co/ubuntu/precise/amd64/cdap/4.1/pubkey.gpg | apt-key add -
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com B9733A7A07513CAD
+apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 B9733A7A07513CAD
 apt-get update
 #
 # install software from apt repositories
