@@ -1,0 +1,107 @@
+simpledemo.onap.org: {{ dns_floating_ip_addr }}
+
+vm1.aai.simpledemo.onap.org: {{ aai1_floating_ip_addr }}
+c1.vm1.aai.simpledemo.onap.org: {{ aai1_floating_ip_adr }}
+c2.vm1.aai.simpledemo.onap.org: {{ aai1_floating_ip_addr }}
+c3.vm1.aai.simpledemo.onap.org: {{ aai1_floating_ip_addr }}
+
+vm2.aai.simpledemo.onap.org: {{ aai2_floating_ip_addr }}
+c1.vm2.aai.simpledemo.onap.org: {{ aai2_floating_ip_addr }}
+c2.vm2.aai.simpledemo.onap.org: {{ aai2_floating_ip_addr }}
+c3.vm2.aai.simpledemo.onap.org: {{ aai2_floating_ip_addr }}
+
+vm1.appc.simpledemo.onap.org: {{ appc_floating_ip_addr }}
+c1.vm1.appc.simpledemo.onap.org: {{ appc_floating_ip_addr }}
+c2.vm1.appc.simpledemo.onap.org: {{ appc_floating_ip_addr }}
+
+vm1.sdc.simpledemo.onap.org: {{ sdc_floating_ip_addr }}
+c1.vm1.sdc.simpledemo.onap.org: {{ sdc_floating_ip_addr }}
+c2.vm1.sdc.simpledemo.onap.org: {{ sdc_floating_ip_addr }}
+c3.vm1.sdc.simpledemo.onap.org: {{ sdc_floating_ip_addr }}
+c4.vm1.sdc.simpledemo.onap.org: {{ sdc_floating_ip_addr }}
+
+vm1.dcae.simpledemo.onap.org: {{ dcae_floating_ip_addr }}
+c1.vm1.dcae.simpledemo.onap.org: {{ dcae_floating_ip_addr }}
+c2.vm1.dcae.simpledemo.onap.org: {{ dcae_floating_ip_addr }}
+c3.vm1.dcae.simpledemo.onap.org: {{ dcae_floating_ip_addr }}
+
+vm1.mso.simpledemo.onap.org: {{ so_floating_ip_addr }}
+c1.vm1.mso.simpledemo.onap.org: {{ so_floating_ip_addr }}
+c1.vm1.mso.simpledemo.onap.org: {{ so_floating_ip_addr }}
+
+vm1.policy.simpledemo.onap.org: {{ policy_floating_ip_addr }}
+c1.vm1.policy.simpledemo.onap.org: {{ policy_floating_ip_addr }}
+c2.vm1.policy.simpledemo.onap.org: {{ policy_floating_ip_addr }}
+c3.vm1.policy.simpledemo.onap.org: {{ policy_floating_ip_addr }}
+c4.vm1.policy.simpledemo.onap.org: {{ policy_floating_ip_addr }}
+c5.vm1.policy.simpledemo.onap.org: {{ policy_floating_ip_addr }}
+c6.vm1.policy.simpledemo.onap.org: {{ policy_floating_ip_addr }}
+c7.vm1.policy.simpledemo.onap.org: {{ policy_floating_ip_addr }}
+c8.vm1.policy.simpledemo.onap.org: {{ policy_floating_ip_addr }}
+
+vm1.sdnc.simpledemo.onap.org: {{ sdnc_floating_ip_addr }}
+c1.vm1.sdnc.simpledemo.onap.org: {{ sdnc_floating_ip_addr }}
+c2.vm1.sdnc.simpledemo.onap.org: {{ sdnc_floating_ip_addr }}
+c3.vm1.sdnc.simpledemo.onap.org: {{ sdnc_floating_ip_addr }}
+c4.vm1.sdnc.simpledemo.onap.org: {{ sdnc_floating_ip_addr }}
+
+vm1.vid.simpledemo.onap.org: {{ vid_floating_ip_addr }}
+c1.vm1.vid.simpledemo.onap.org: {{ vid_floating_ip_addr }}
+c2.vm1.vid.simpledemo.onap.org: {{ vid_floating_ip_addr }}
+
+vm1.portal.simpledemo.onap.org: {{ portal_floating_ip_addr }}
+c1.vm1.portal.simpledemo.onap.org: {{ portal_floating_ip_addr }}
+c2.vm1.portal.simpledemo.onap.org: {{ portal_floating_ip_addr }}
+
+vm1.robot.simpledemo.onap.org: {{ robot_floating_ip_addr }}
+c1.vm1.robot.simpledemo.onap.org: {{ robot_floating_ip_addr }}
+c2.vm1.robot.simpledemo.onap.org: {{ robot_floating_ip_addr }}
+
+vm1.clamp.simpledemo.onap.org: {{ clamp_floating_ip_addr }}
+c1.vm1.clamp.simpledemo.onap.org: {{ clamp_floating_ip_addr }}
+c2.vm1.clamp.simpledemo.onap.org: {{ clamp_floating_ip_addr }}
+
+vm1.mr.simpledemo.onap.org: {{ mr_floating_ip_addr }}
+
+vm1.openo.simpledemo.onap.org: {{ openo_floating_ip_addr }}
+
+collector.api.simpledemo.onap.org: {{ dcae_coll_floating_ip_addr }}
+
+
+aai.api.simpledemo.onap.org: 'vm1.aai.simpledemo.onap.org'
+aai.ui.simpledemo.onap.org: 'vm1.aai.simpledemo.onap.org'
+aai.searchservice.simpledemo.onap.org: 'vm1.aai.simpledemo.onap.org'
+aai.hbase.simpledemo.onap.org: 'vm2.aai.simpledemo.onap.org'
+aai.gremlinserver.simpledemo.onap.org: 'vm2.aai.simpledemo.onap.org'
+aai.elasticsearch.simpledemo.onap.org: 'vm2.aai.simpledemo.onap.org'
+
+appc.api.simpledemo.onap.org: 'vm1.appc.simpledemo.onap.org'
+
+sdc.api.simpledemo.onap.org: 'vm1.sdc.simpledemo.onap.org' 
+
+dcae.api.simpledemo.onap.org: 'vm1.dcae.simpledemo.onap.org'
+
+mso.api.simpledemo.onap.org: 'vm1.mso.simpledemo.onap.org'
+
+policy.api.simpledemo.onap.org: 'vm1.policy.simpledemo.onap.org'
+
+sdnc.api.simpledemo.onap.org: 'vm1.sdnc.simpledemo.onap.org'
+
+vid.api.simpledemo.onap.org: 'vm1.vid.simpledemo.onap.org'  
+
+portal.api.simpledemo.onap.org: 'vm1.portal.simpledemo.onap.org'
+
+ueb.api.simpledemo.onap.org: 'vm1.mr.simpledemo.onap.org'
+
+clamp.api.simpledemo.onap.org: 'vm1.clamp.simpledemo.onap.org'
+
+robot.api.simpledemo.onap.org: 'vm1.robot.simpledemo.onap.org'
+sniro.api.simpledemo.onap.org: 'vm1.robot.simpledemo.onap.org'
+
+msb.api.simpledemo.onap.org: 'vm1.openo.simpledemo.onap.org'
+mvim.api.simpledemo.onap.org: 'vm1.openo.simpledemo.onap.org'
+vnfsdk.api.simpledemo.onap.org: 'vm1.openo.simpledemo.onap.org'
+vfc.api.simpledemo.onap.org: 'vm1.openo.simpledemo.onap.org'
+uui.api.simpledemo.onap.org: 'vm1.openo.simpledemo.onap.org'
+esr.api.simpledemo.onap.org: 'vm1.openo.simpledemo.onap.org'
+
