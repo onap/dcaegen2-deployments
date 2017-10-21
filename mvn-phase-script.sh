@@ -96,6 +96,7 @@ deploy)
     # upload all sh file under the root of module 
     upload_files_of_extension_recursively sh
     upload_files_of_extension_recursively py
+    upload_files_of_extension_recursively yaml
     ;;
   *)
     echo "====> unknown mvn project module"
