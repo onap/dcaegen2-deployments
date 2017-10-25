@@ -110,10 +110,12 @@ sed -e "s#key_filename:.*#key_filename: $PVTKEY#" < ${INPUTS} > /tmp/local_input
 # Now install the VM
 # Don't exit on error after this point--keep container running so we can do uninstalls after a failure
 set +e
-if wget -P ./blueprints/ {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints/centos_vm.yaml; then
+if wget -O /tmp/centos_vm.yaml {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints/centos_vm.yaml; then
+  mv -f /tmp/centos_vm.yaml ./blueprints/
   echo "Succeeded in getting the newest centos_vm.yaml"
 else
   echo "Failed to update centos_vm.yaml, using default version"
+  rm -f /tmp/centos_vm.yaml
 fi
 set -e
 cfy local init --install-plugins -p ./blueprints/centos_vm.yaml -i /tmp/local_inputs -i "datacenter=$LOCATION"
@@ -122,7 +124,13 @@ PUBIP=$(cfy local outputs | grep -Po '"public_ip": "\K.*?(?=")')
 
 
 ## It's probably not completely ready when the installation finish, so wait
-sleep 180
+#sleep 180
+while [ $( ping -c 1 $PUBIP 2> /dev/null | grep icmp* | wc -l ) -eq 0 ];
+do
+  sleep 5
+  echo "."
+done
+sleep 10
 
 echo "Installing Cloudify Manager on ${PUBIP}."
 
@@ -282,10 +290,12 @@ cfy use -t ${PUBIP}
 echo "Deploying Consul VM"
 
 set +e
-if wget -P ../blueprints/ {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/consul_cluster.yaml; then
+if wget -O /tmp/consul_cluster.yaml {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints/consul_cluster.yaml; then
+  mv -f /tmp/consul_cluster.yaml ../blueprints/
   echo "Succeeded in getting the newest consul_cluster.yaml"
 else
   echo "Failed to update consul_cluster.yaml, using default version"
+  rm -f /tmp/consul_cluster.yaml
 fi
 set -e
 cfy install -p ../blueprints/consul_cluster.yaml -d consul -i ../${INPUTS} -i "datacenter=$LOCATION"
