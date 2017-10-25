@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Jack Lucas <jflucas@research.att.com>
+Code-Review+2: Lusheng Ji <lji@research.att.com>
+Submitted-by: Lusheng Ji <lji@research.att.com>
+Submitted-at: Wed, 25 Oct 2017 23:59:13 +0000
+Reviewed-on: http://gerrit.onap.org/r/20587
+Project: dcaegen2/deployments
+Branch: refs/heads/master
