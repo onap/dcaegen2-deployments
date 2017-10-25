@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a2f8d8d_f687e00d",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2017-10-25T21:23:56Z",
+      "side": 1,
+      "message": "Is this how we want it to work?  On the plus side, we don\u0027t have to rebuild the Docker image if the blueprints change.  On the negative side, running the same image at different times (or with different network conditions) can give install different versions.   Probably doesn\u0027t matter too much, as the blueprints aren\u0027t likely to change often any.",
+      "revId": "557c2cd33a111c48212d400860637f65edb4fcb6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
