@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a2f8d8d_4064a921",
+        "filename": "scripts/designate_import.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2017-10-26T12:26:01Z",
+      "side": 1,
+      "message": "usernaem \u003d\u003e username",
+      "revId": "17517880075aee8f0f2d3ad9752645d0dc78096f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a2f8d8d_60a7a550",
+        "filename": "scripts/designate_import.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2017-10-26T12:26:01Z",
+      "side": 1,
+      "message": "usernaem \u003d\u003e username",
+      "revId": "17517880075aee8f0f2d3ad9752645d0dc78096f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a2f8d8d_c0b0998d",
+        "filename": "scripts/designate_import.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2017-10-26T12:26:01Z",
+      "side": 1,
+      "message": "Usage",
+      "revId": "17517880075aee8f0f2d3ad9752645d0dc78096f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a2f8d8d_a0746dcf",
+        "filename": "scripts/detemplate-bpinputs.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2017-10-26T12:26:01Z",
+      "side": 1,
+      "message": "f.close() is not needed when using with",
+      "revId": "17517880075aee8f0f2d3ad9752645d0dc78096f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a2f8d8d_80817191",
+        "filename": "scripts/detemplate-bpinputs.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2017-10-26T12:26:01Z",
+      "side": 1,
+      "message": "f.close() is not needed when using with",
+      "revId": "17517880075aee8f0f2d3ad9752645d0dc78096f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
