@@ -49,6 +49,9 @@ def main():
         print("Creating DNS records using record defs from {}, authurl {}, usernaem {}, tenant {}".format(
           shell.env('OS_AUTH_URL'), shell.env('OS_USERNAME'), shell.env('OS_PASSWORD'), shell.env('OS_PROJECT_NAME')))
 
+    print("Usgae:  {} disabled until changed".format(sys.argv[0]))
+    exit(1)
+
     inputfilepath = sys.argv[1]
     auth = ""
 
