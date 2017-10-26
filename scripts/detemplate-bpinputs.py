@@ -81,17 +81,24 @@ def detemplate_bpinputs(jjt_directory, in_directory, out_directory):
 def add_keystone_20(conf_directory, filename):
     fpath = os.path.join(conf_directory, filename)
     newurl = ''
-    with open(fpath, 'r') as f:
-        url = f.readline().rstrip()
-        if not url.endswith('/2.0'):
-            if url.endswith('/'):
-                newurl = url + '2.0'
-            else:
-                newurl = url + '/2.0'
-        f.close()
+    try:
+        with open(fpath, 'r') as f:
+            url = f.readline().rstrip()
+            if not url.endswith('/v2.0'):
+                if url.endswith('/'):
+                    newurl = url + 'v2.0'
+                else:
+                    newurl = url + '/v2.0'
+    except:
+        newurl = ''
+        print("add_keystone_20 eception reading file: " + conf_directory + "/" + filename)
+
     if newurl:
-        with open(fpath, 'w') as f:
-            f.write(newurl)
+        try:
+            with open(fpath, 'w') as f:
+                f.write(newurl)
+        except:
+            print("add_keystone_20 eception writing file: " + conf_directory + "/" + filename)
 
 
 def main():
@@ -100,9 +107,9 @@ def main():
         exit(1)
 
     print("De-templatizing templates in {} using variable defs from {}, results in {}".format(sys.argv[1], sys.argv[2], sys.argv[3]))
+    add_keystone_20(conf_directory = sys.argv[1], filename = 'keystone_url.txt') 
     check_templates(sys.argv[1], sys.argv[2])
     detemplate_bpinputs(jjt_directory = sys.argv[1], in_directory = sys.argv[2], out_directory = sys.argv[3])
-    add_keystone_20(conf_directory = sys.argv[3], filename = 'keystone_url.txt') 
  
 ########################################
 if __name__ == "__main__":

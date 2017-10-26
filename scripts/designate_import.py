@@ -43,11 +43,14 @@ def main():
         print("Usgae:  {} input_file [auth_url username password tenant]".format(sys.argv[0]))
         exit(1)
     if len(sys.argv) == 6:
-        print("Creating DNS records using record defs from {}, authurl {}, usernaem {}, tenant {}".format(
+        print("Creating DNS records using record defs from {}, authurl {}, username {}, tenant {}".format(
           sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[5]))
     else:
-        print("Creating DNS records using record defs from {}, authurl {}, usernaem {}, tenant {}".format(
+        print("Creating DNS records using record defs from {}, authurl {}, username {}, tenant {}".format(
           shell.env('OS_AUTH_URL'), shell.env('OS_USERNAME'), shell.env('OS_PASSWORD'), shell.env('OS_PROJECT_NAME')))
+
+    print("Usage:  {} disabled until changed".format(sys.argv[0]))
+    exit(1)
 
     inputfilepath = sys.argv[1]
     auth = ""
