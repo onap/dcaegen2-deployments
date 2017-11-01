@@ -32,19 +32,29 @@ OSPLUGINWGN=https://github.com/cloudify-cosmo/cloudify-openstack-plugin/releases
 PLATBPSRC={{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints
 DOCKERBP=DockerBP.yaml
 CBSBP=config_binding_service.yaml
+PGBP=pgaas-onevm.yaml
 CDAPBP=cdapbp7.yaml
 CDAPBROKERBP=cdap_broker.yaml
 INVBP=inventory.yaml
 DHBP=DeploymentHandler.yaml
 PHBP=policy_handler.yaml
+VESBP=ves.yaml
+TCABP=tca.yaml
+HRULESBP=holmes-rules.yaml
+HENGINEBP=holmes-engine.yaml
 
 DOCKERBPURL="${PLATBPSRC}/${DOCKERBP}"
 CBSBPURL="${PLATBPSRC}/${CBSBP}"
+PGBPURL=${PLATBPSRC}/${PGBP}
 CDAPBPURL="${PLATBPSRC}/${CDAPBP}"
 CDAPBROKERBPURL="${PLATBPSRC}/${CDAPBROKERBP}"
 INVBPURL="${PLATBPSRC}/${INVBP}"
 DHBPURL="${PLATBPSRC}/${DHBP}"
 PHBPURL="${PLATBPSRC}/${PHBP}"
+VESBPURL="${PLATBPSRC}/${VESBP}"
+TCABPURL="${PLATBPSRC}/${TCABP}"
+HRULESBPURL="${PLATBPSRC}/${HRULESBP}"
+HENGINEBPURL="${PLATBPSRC}/${HENGINEBP}"
 
 LOCATIONID=$(printenv LOCATION)
 
@@ -360,11 +370,16 @@ rm $ENVINI
 # Get component blueprints
 wget -P ./blueprints/docker/ ${DOCKERBPURL}
 wget -P ./blueprints/cbs/ ${CBSBPURL}
+wget -P ./blueprints/pg/ ${PGBPURL}
 wget -P ./blueprints/cdap/ ${CDAPBPURL}
 wget -P ./blueprints/cdapbroker/ ${CDAPBROKERBPURL}
 wget -P ./blueprints/inv/ ${INVBPURL}
 wget -P ./blueprints/dh/ ${DHBPURL}
 wget -P ./blueprints/ph/ ${PHBPURL}
+wget -P ./blueprints/ves/ ${VESBPURL}
+wget -P ./blueprints/tca/ ${TCABPURL}
+wget -P ./blueprints/hrules/ ${HRULESBPURL}
+wget -P ./blueprints/hengine/ ${HENGINEBPURL}
 
 
 # Set up the credentials for access to the Docker registry
@@ -390,6 +405,10 @@ cfy install -p ./blueprints/cdap/${CDAPBP} -b cdapbp7 -d cdap7 -i ../${INPUTS} -
 
 # config binding service
 cfy install -p ./blueprints/cbs/${CBSBP} -b config_binding_service -d config_binding_service -i "location_id=${LOCATION}"
+
+
+# Postgres
+cfy install -p ./blueprints/pg/${PGBP} -b pgaas -d pgaas  -i ../${INPUTS}
 
 
 # Inventory
@@ -423,6 +442,18 @@ echo "CDAP cluster registered"
 
 # CDAP Broker
 cfy install -p ./blueprints/cdapbroker/${CDAPBROKERBP} -b cdapbroker -d cdapbroker -i "location_id=${LOCATION}"
+
+
+# VES
+cfy install -p ./blueprints/ves/${VESBP} -b ves -d ves -i ../config/vesinput.yaml
+
+
+# TCA
+cfy install -p ./blueprints/tca/${TCABP} -b tca -d tca -i ../config/tcainputs.yaml
+
+# Holmes
+cfy install -p ./blueprints/hrules/${HRULESBP} -b hrules -d hrules -i ../config/hr-ip.yaml
+cfy install -p ./blueprints/hengine/${HENGINEBP} -b hengine -d hengine -i ../config/he-ip.yaml
 
 
 # write out IP addresses

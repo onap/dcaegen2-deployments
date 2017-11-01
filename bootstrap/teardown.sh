@@ -29,11 +29,16 @@ source ./dcaeinstall/bin/activate
 cd ./consul
 cfy status
 set +e
+cfy uninstall -d hengine
+cfy uninstall -d hrules
+cfy uninstall -d tca
+cfy uninstall -d ves
 cfy uninstall -d cdapbroker
 cfy uninstall -d cdap7
 cfy uninstall -d policy_handler
 cfy uninstall -d DeploymentHandler
 cfy uninstall -d PlatformServicesInventory
+cfy uninstall -d pgaas
 cfy uninstall -d config_binding_service
 cfy executions start -w uninstall -d DockerComponent
 cfy deployments delete -d DockerComponent
