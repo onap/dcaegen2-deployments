@@ -401,7 +401,7 @@ cfy executions start -d DockerComponent -w install
 
 
 # CDAP cluster
-cfy install -p ./blueprints/cdap/${CDAPBP} -b cdapbp7 -d cdap7 -i ../${INPUTS} -i "location_id=${LOCATION}"
+cfy install -p ./blueprints/cdap/${CDAPBP} -b cdapbp7 -d cdap7 -i ../config/cdapinputs.yaml -i "location_id=${LOCATION}"
 
 # config binding service
 cfy install -p ./blueprints/cbs/${CBSBP} -b config_binding_service -d config_binding_service -i "location_id=${LOCATION}"
