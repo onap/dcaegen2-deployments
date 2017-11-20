@@ -132,27 +132,16 @@ cfy local init --install-plugins -p ./blueprints/centos_vm.yaml -i /tmp/local_in
 cfy local execute -w install --task-retries=10
 PUBIP=$(cfy local outputs | grep -Po '"public_ip": "\K.*?(?=")')
 
-
-## It's probably not completely ready when the installation finish, so wait
-#sleep 180
-while [ $( ping -c 1 $PUBIP 2> /dev/null | grep icmp* | wc -l ) -eq 0 ];
-do
-  sleep 5
-  echo "."
-done
+# wait till the cloudify manager's sshd ready
+while ! nc -z -v -w5 ${PUBIP} 22; do echo "."; done
 sleep 10
 
 echo "Installing Cloudify Manager on ${PUBIP}."
-
 PVTIP=$(ssh $SSHOPTS -i "$PVTKEY" "$SSHUSER"@"$PUBIP" 'echo PVTIP=`curl --silent http://169.254.169.254/2009-04-04/meta-data/local-ipv4`' | grep PVTIP | sed 's/PVTIP=//')
 if [ "$PVTIP" = "" ]
 then
-	echo Cannot access specified machine at $PUBIP using supplied credentials
-	# Don't exit--keep the container up so we can uninstall the VM and supporting entities
-	while true
-    do
-        sleep 300
-    done
+    echo Cannot access specified machine at $PUBIP using supplied credentials
+    exit
 fi
 
 
