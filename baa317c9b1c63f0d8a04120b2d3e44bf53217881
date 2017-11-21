@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da87b5cf_8d18e485",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 707
+      },
+      "writtenOn": "2017-11-21T15:00:56Z",
+      "side": 1,
+      "message": "teh -\u003e the\nredy -\u003e ready",
+      "revId": "baa317c9b1c63f0d8a04120b2d3e44bf53217881",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da87b5cf_ed02d00a",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 707
+      },
+      "writtenOn": "2017-11-21T15:00:56Z",
+      "side": 1,
+      "message": "Is there any value in keeping this loop? Why not just delete the whole thing from line 145-149?",
+      "revId": "baa317c9b1c63f0d8a04120b2d3e44bf53217881",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
