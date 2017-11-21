@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da87b5cf_43994d6d",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 707
+      },
+      "writtenOn": "2017-11-21T20:16:03Z",
+      "side": 0,
+      "message": "When I first looked at your change I didn\u0027t read this comment. Apparently the while loop was specifically intended to prevent the container from getting deleted. When you added an exit, were you intentionally changing that behavior?\n\nIf so, fine, but if not, then you should leave the while loop in and NOT add an exit to it.",
+      "range": {
+        "startLine": 151,
+        "startChar": 3,
+        "endLine": 151,
+        "endChar": 87
+      },
+      "revId": "aa8ed202ba4a89f5a0332001964292bb8b0a9cde",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
