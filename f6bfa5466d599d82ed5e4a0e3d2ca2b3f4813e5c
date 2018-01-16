@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_57d78fbf",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-01-16T16:30:36Z",
+      "side": 1,
+      "message": "version in nexus v1.1.0",
+      "range": {
+        "startLine": 419,
+        "startChar": 172,
+        "endLine": 419,
+        "endChar": 177
+      },
+      "revId": "f6bfa5466d599d82ed5e4a0e3d2ca2b3f4813e5c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
