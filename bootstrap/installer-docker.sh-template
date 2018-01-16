@@ -416,7 +416,7 @@ cfy install -p ./blueprints/dh/${DHBP} -b DeploymentHandlerBP -d DeploymentHandl
 
 
 # Policy Handler PH
-cfy install -p ./blueprints/ph/${PHBP} -b policy_handler_BP -d policy_handler -i 'policy_handler_image=nexus3.onap.org:10001/onap/org.onap.dcaegen2.platform.policy-handler:1.1-latest' -i "location_id=${LOCATION}" -i ../config/phinputs.yaml
+cfy install -p ./blueprints/ph/${PHBP} -b policy_handler_BP -d policy_handler -i 'policy_handler_image=nexus3.onap.org:10001/onap/org.onap.dcaegen2.platform.policy-handler:1.1.0' -i "location_id=${LOCATION}" -i ../config/phinputs.yaml
 
 
 # Wait for the CDAP cluster to be registered in Consul
