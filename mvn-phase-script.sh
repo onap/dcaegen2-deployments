@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ================================================================================
-# Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2017-2018 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,11 +16,9 @@
 # limitations under the License.
 # ============LICENSE_END=========================================================
 #
-# ECOMP is a trademark and service mark of AT&T Intellectual Property.
 
 
 set -ex
-
 
 echo "running script: [$0] for module [$1] at stage [$2]"
 
@@ -38,9 +36,11 @@ if [ -z "$SETTINGS_FILE" ]; then
     exit 2
 fi
 
-
+if ! wget -O ${PROJECT_ROOT}/mvn-phase-lib.sh \
+  "$MVN_RAWREPO_BASEURL_DOWNLOAD"/org.onap.dcaegen2.utils/releases/scripts/mvn-phase-lib.sh; then
+  cp "${PROJECT_ROOT}"/scripts/mvn-phase-lib.sh "${PROJECT_ROOT}/mvn-phase-lib.sh"
+fi
 source "${PROJECT_ROOT}"/mvn-phase-lib.sh
-
 
 # This is the base for where "deploy" will upload
 # MVN_NEXUSPROXY is set in the pom.xml
@@ -48,7 +48,6 @@ REPO=$MVN_NEXUSPROXY/content/sites/raw/$MVN_PROJECT_GROUPID
 
 TIMESTAMP=$(date +%C%y%m%dT%H%M%S)
 export BUILD_NUMBER="${TIMESTAMP}"
-
 
 shift 2
 
@@ -90,6 +89,9 @@ deploy)
   bootstrap)
     # build docker image from Docker file (under module dir) and push to registry
     upload_files_of_extension sh
+    build_and_push_docker
+    ;;
+  k8s-bootstrap|tca-cdap-container|cm-container|redis-cluster-container)
     build_and_push_docker
     ;;
   scripts|cloud_init)
