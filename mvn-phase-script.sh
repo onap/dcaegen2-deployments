@@ -83,7 +83,7 @@ deploy)
     upload_files_of_extension sh
     build_and_push_docker
     ;;
-  k8s-bootstrap|tca-cdap-container|cmcontainer|redis-cluster-container)
+  k8s-bootstrap|tca-cdap-container|cm-container|redis-cluster-container)
     build_and_push_docker
     ;;
   scripts|cloud_init)

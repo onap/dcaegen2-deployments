@@ -41,6 +41,7 @@ limitations under the License.
      <module>cloud_init</module>
      <module>redis-cluster-container</module>
      <module>tca-cdap-container</module>
+     <module>cm-container</module>
   </modules>
 
   <properties>
