@@ -1,0 +1,19 @@
+{
+  "artifact": {
+    "name": "dcae-analytics-cdap-tca",
+    "scope": "user",
+    "version": "2.2.0"
+  },
+  "config": {
+    "appDescription": "DCAE Analytics Threshold Crossing Alert Application",
+    "appName": "dcae-tca",
+    "tcaAlertsAbatementTableName": "TCAAlertsAbatementTable",
+    "tcaAlertsAbatementTableTTLSeconds": 1728000,
+    "tcaSubscriberOutputStreamName": "TCASubscriberOutputStream",
+    "tcaVESAlertsTableName": "TCAVESAlertsTable",
+    "tcaVESAlertsTableTTLSeconds": 1728000,
+    "tcaVESMessageStatusTableName": "TCAVESMessageStatusTable",
+    "tcaVESMessageStatusTableTTLSeconds": 86400,
+    "thresholdCalculatorFlowletInstances": 2
+  }
+}
