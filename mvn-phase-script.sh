@@ -26,29 +26,24 @@ MVN_PROJECT_MODULEID="$1"
 MVN_PHASE="$2"
 PROJECT_ROOT=$(dirname $0)
 
-# expected environment variables
-if [ -z "${MVN_NEXUSPROXY}" ]; then
-    echo "MVN_NEXUSPROXY environment variable not set.  Cannot proceed"
-    exit 1
-fi
-if [ -z "$SETTINGS_FILE" ]; then
-    echo "SETTINGS_FILE environment variable not set.  Cannot proceed"
-    exit 2
-fi
 
+echo "MVN_RELEASE_TAG is set to [$MVN_RELEASE_TAG]"
+RELEASE_TAG=${MVN_RELEASE_TAG:-R2}
+if [ "$RELEASE_TAG" != "R1" ]; then
+  RELEASE_TAGGED_DIR="${RELEASE_TAG}/"
+else
+  RELEASE_TAGGED_DIR=""
+fi
 if ! wget -O ${PROJECT_ROOT}/mvn-phase-lib.sh \
-  "$MVN_RAWREPO_BASEURL_DOWNLOAD"/org.onap.dcaegen2.utils/releases/scripts/mvn-phase-lib.sh; then
-  cp "${PROJECT_ROOT}"/scripts/mvn-phase-lib.sh "${PROJECT_ROOT}/mvn-phase-lib.sh"
+  "$MVN_RAWREPO_BASEURL_DOWNLOAD"/org.onap.dcaegen2.utils/${RELEASE_TAGGED_DIR}scripts/mvn-phase-lib.sh; then
+  echo "Fail to download mvn-phase-lib.sh"
+  exit 1
 fi
 source "${PROJECT_ROOT}"/mvn-phase-lib.sh
 
-# This is the base for where "deploy" will upload
-# MVN_NEXUSPROXY is set in the pom.xml
-REPO=$MVN_NEXUSPROXY/content/sites/raw/$MVN_PROJECT_GROUPID
 
 TIMESTAMP=$(date +%C%y%m%dT%H%M%S)
 export BUILD_NUMBER="${TIMESTAMP}"
-
 shift 2
 
 case $MVN_PHASE in
@@ -67,9 +62,6 @@ compile)
   ;;
 test)
   echo "==> test phase script"
-  set +e
-  run_tox_test
-  set -e
   ;;
 package)
   echo "==> package phase script"
