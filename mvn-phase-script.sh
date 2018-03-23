@@ -36,11 +36,15 @@ if [ -z "$SETTINGS_FILE" ]; then
     exit 2
 fi
 
+
+MVN_RELEASE_TAG="${MVN_RELEASE_TAG:-R2}"
 if ! wget -O ${PROJECT_ROOT}/mvn-phase-lib.sh \
-  "$MVN_RAWREPO_BASEURL_DOWNLOAD"/org.onap.dcaegen2.utils/releases/scripts/mvn-phase-lib.sh; then
-  cp "${PROJECT_ROOT}"/scripts/mvn-phase-lib.sh "${PROJECT_ROOT}/mvn-phase-lib.sh"
+  "$MVN_RAWREPO_BASEURL_DOWNLOAD"/org.onap.dcaegen2.utils/${MVN_RELEASE_TAG}/scripts/mvn-phase-lib.sh; then
+  echo "Fail to download mvn-phase-lib.sh"
+  exit 1
 fi
 source "${PROJECT_ROOT}"/mvn-phase-lib.sh
+
 
 # This is the base for where "deploy" will upload
 # MVN_NEXUSPROXY is set in the pom.xml
