@@ -17,11 +17,14 @@ FROM redis:4.0.8
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -y update \
   && apt-get -y upgrade \
-  && apt-get -y --no-install-recommends install ruby wget \
+  && apt-get -y --no-install-recommends install ruby wget jq \
   && gem install redis -v 3.3.5 \
   && apt-get -y autoremove \
   && apt-get -y clean
 RUN wget -O /usr/local/bin/redis-trib http://download.redis.io/redis-stable/src/redis-trib.rb
 RUN sed -i -e 's/yes_or_die \"/#yes_or_die \"/g' /usr/local/bin/redis-trib
 RUN chmod 755 /usr/local/bin/redis-trib
-CMD redis-server
+COPY redis-server-config.sh /usr/local/bin/redis-server-config.sh
+RUN chmod 755 /usr/local/bin/redis-server-config.sh
+#CMD redis-server
+CMD redis-server-config.sh
