@@ -17,8 +17,9 @@
 FROM caskdata/cdap-standalone:4.1.2
 
 RUN apt-get update
-RUN apt-get install -y netcat jq
-ADD https://nexus.onap.org/content/repositories/snapshots/org/onap/dcaegen2/analytics/tca/dcae-analytics-cdap-tca/2.2.0-SNAPSHOT/dcae-analytics-cdap-tca-2.2.0-20180320.190629-1.jar /opt/tca/dcae-analytics-cdap-tca-2.2.0.jar
+RUN apt-get install -y netcat jq wget
+COPY get-tca.sh /opt/tca/get-tca.sh
+RUN /opt/tca/get-tca.sh
 COPY tca_app_config.json /opt/tca/tca_app_config.json
 COPY tca_app_preferences.json /opt/tca/tca_app_preferences.json
 COPY restart.sh /opt/tca/restart.sh
