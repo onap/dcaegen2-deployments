@@ -86,11 +86,11 @@ deploy)
   k8s-bootstrap-container|tca-cdap-container|cm-container|redis-cluster-container)
     build_and_push_docker
     ;;
-  scripts|cloud_init)
+  scripts|cloud_init|heat)
     # upload all sh file under the root of module 
-    upload_files_of_extension_recursively sh
-    upload_files_of_extension_recursively py
-    upload_files_of_extension_recursively yaml
+    upload_files_of_extension_recursively sh $MVN_PROJECT_MODULEID
+    upload_files_of_extension_recursively py $MVN_PROJECT_MODULEID
+    upload_files_of_extension_recursively yaml $MVN_PROJECT_MODULEID
     ;;
   *)
     echo "====> unknown mvn project module"
