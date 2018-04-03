@@ -1,0 +1,22 @@
+version: '2'
+services:
+   db:
+      image: postgres
+      ports:
+       - "5432:5432"
+      environment:
+         POSTGRES_USER: "user"
+         POSTGRES_PASSWORD: "pass"
+   ves:
+      image: {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.ves.vescollector:1.2.0
+      expose:
+       - 8080
+   tca: 
+      image: {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.deployments.tca-cdap-container:1.0.0
+      container_name: tca
+      hostname: tca
+      environment:
+       - DMAAPHOST={{ mr_ip_addr }}
+      expose:
+       - 11011
+
