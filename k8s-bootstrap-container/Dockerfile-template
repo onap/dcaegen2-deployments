@@ -31,7 +31,7 @@ RUN yum install -y gcc python-devel
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
   && python get-pip.py \
   && rm get-pip.py \
-  && pip install cloudify==17.11.22
+  && pip install cloudify==4.3
 
 # Get plugin archives and build wagons
 RUN mkdir scripts
