@@ -36,13 +36,14 @@ limitations under the License.
   <packaging>pom</packaging>
 
   <modules>
-     <module>bootstrap</module>
+     <module>heat</module>
      <module>scripts</module>
      <module>cloud_init</module>
+     <module>bootstrap</module>
      <module>redis-cluster-container</module>
-     <module>tca-cdap-container</module>
      <module>cm-container</module>
      <module>k8s-bootstrap-container</module>
+     <module>tca-cdap-container</module>
   </modules>
 
   <properties>
