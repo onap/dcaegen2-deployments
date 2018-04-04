@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_98544855",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-04-04T21:59:12Z",
+      "side": 1,
+      "message": "why second registration is required for CBS? Also the service address should be mapped to cluster-ip as emailed little earlier",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 8
+      },
+      "revId": "5b12c6d479c0bfe411967e1451735ff40807cfaf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
