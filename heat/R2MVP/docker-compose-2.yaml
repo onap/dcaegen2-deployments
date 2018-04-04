@@ -1,34 +1,5 @@
-version: '2'
+version: '2.1'
 services:
-   db:
-      image: postgres:9.5
-      container_name: "db"
-      hostname: "db"
-      ports:
-       - "5432:5432"
-      environment:
-         POSTGRES_USER: "holmes"
-         POSTGRES_PASSWORD: "holmespwd"
-         
-   consul:
-      image: consul:0.8.3
-      container_name: "consul"
-      hostname: "consul"
-      ports:
-       - "8400:8400"
-       - "8500:8500"
-       - "8600:8600"
-      command: "-server -bootstrap-expect 1"
-
-   config_binding_service:
-      image: {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.configbinding:v1.2.0
-      container_name: "config_binding_service"
-      hostname: "config_binding_service"
-      environment:
-       - CONSUL_HOST: consul
-      expose:
-       - "10000:10000"
-
    ves:
       image: {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.ves.vescollector:1.2.0
       container_name: "ves"
@@ -40,7 +11,7 @@ services:
        - CONFIG_BINDING_SERVICE=config_binding_service
        - SERVICE_NAME=ves
        - HOSTNAME=ves
-      expose:
+      ports:
        - "8080:8080"
        - "8443:8443"
 
@@ -56,14 +27,14 @@ services:
        - CBS_PORT=10000
        - SERVICE_NAME=tca
        - CONFIG_BINDING_SERVICE=config_binding_service
-      expose:
+      ports:
        - "11011:11011"
        - "11015:11015"
 
    holmes-engine:
       image: {{ nexus_docker_repo }}/onap/holmes/engine-management:latest
-      conatiner_name: he
-      host_name: he
+      container_name: he
+      hostname: he
       environment:
        - URL_JDBC=db:5432
        - JDBC_USERNAME=holmes
@@ -72,13 +43,13 @@ services:
        - CONSUL_HOST=consul
        - CONSUL_PORT=8500
        - HOSTNAME=he
-      expose:
+      ports:
        - "9102:9102"
 
    holmes-rule:
       image: {{ nexus_docker_repo }}/onap/holmes/rule-management:latest
-      conatiner_name: hr
-      host_name: hr
+      container_name: hr
+      hostname: hr
       environment:
        - URL_JDBC=db:5432
        - JDBC_USERNAME=holmes
@@ -87,5 +58,5 @@ services:
        - CONSUL_HOST=consul
        - CONSUL_PORT=8500
        - HOSTNAME=hr
-      expose:
+      ports:
        - "9101:9101"
