@@ -1,22 +1,91 @@
 version: '2'
 services:
    db:
-      image: postgres
+      image: postgres:9.5
+      container_name: "db"
+      hostname: "db"
       ports:
        - "5432:5432"
       environment:
-         POSTGRES_USER: "user"
-         POSTGRES_PASSWORD: "pass"
+         POSTGRES_USER: "holmes"
+         POSTGRES_PASSWORD: "holmespwd"
+         
+   consul:
+      image: consul:0.8.3
+      container_name: "consul"
+      hostname: "consul"
+      ports:
+       - "8400:8400"
+       - "8500:8500"
+       - "8600:8600"
+      command: "-server -bootstrap-expect 1"
+
+   config_binding_service:
+      image: {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.configbinding:v1.2.0
+      container_name: "config_binding_service"
+      hostname: "config_binding_service"
+      environment:
+       - CONSUL_HOST: consul
+      expose:
+       - "10000:10000"
+
    ves:
       image: {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.ves.vescollector:1.2.0
+      container_name: "ves"
+      hostname: "ves"
+      environment:
+       - DMAAPHOST={{ mr_ip_addr }}
+       - CONSUL_HOST=consul
+       - CONSUL_PORT=8500
+       - CONFIG_BINDING_SERVICE=config_binding_service
+       - SERVICE_NAME=ves
+       - HOSTNAME=ves
       expose:
-       - 8080
-   tca: 
+       - "8080:8080"
+       - "8443:8443"
+
+   tca:
       image: {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.deployments.tca-cdap-container:1.0.0
       container_name: tca
       hostname: tca
       environment:
        - DMAAPHOST={{ mr_ip_addr }}
+       - CONSUL_HOST=consul
+       - CONSUL_PORT=8500
+       - CBS_HOST=cbs
+       - CBS_PORT=10000
+       - SERVICE_NAME=tca
+       - CONFIG_BINDING_SERVICE=config_binding_service
       expose:
-       - 11011
+       - "11011:11011"
+       - "11015:11015"
 
+   holmes-engine:
+      image: {{ nexus_docker_repo }}/onap/holmes/engine-management:latest
+      conatiner_name: he
+      host_name: he
+      environment:
+       - URL_JDBC=db:5432
+       - JDBC_USERNAME=holmes
+       - JDBC_PASSWORD=holmespwd
+       - MSB_ADDR={{ msb_ip_addr }}
+       - CONSUL_HOST=consul
+       - CONSUL_PORT=8500
+       - HOSTNAME=he
+      expose:
+       - "9102:9102"
+
+   holmes-rule:
+      image: {{ nexus_docker_repo }}/onap/holmes/rule-management:latest
+      conatiner_name: hr
+      host_name: hr
+      environment:
+       - URL_JDBC=db:5432
+       - JDBC_USERNAME=holmes
+       - JDBC_PASSWORD=holmespwd
+       - MSB_ADDR={{ msb_ip_addr }}
+       - CONSUL_HOST=consul
+       - CONSUL_PORT=8500
+       - HOSTNAME=hr
+      expose:
+       - "9101:9101"
