@@ -147,9 +147,24 @@ function tca_poll_policy {
     URL2="$URL1:preferences"
 
     echo "tca_poll_policy: Retrieving configuration file at ${URL1}"
-    curl -s "$URL1" | jq . --sort-keys > "${TCA_CONF_TEMP}"
-    echo "Retrieving preferences file at ${URL1}"
-    curl -s "$URL2" | jq . --sort-keys > "${TCA_PREF_TEMP}"
+    HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" "$URL1")
+    HTTP_BODY=$(echo $HTTP_RESPONSE | sed -e 's/HTTPSTATUS\:.*//g')
+    HTTP_STATUS=$(echo $HTTP_RESPONSE | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+    if [ "$HTTP_STATUS" != "200" ]; then
+      echo "receiving $HTTP_RESPONSE from CBS"
+      return
+    fi
+    echo $HTTP_BODY | jq . --sort-keys > "${TCA_CONF_TEMP}"
+
+    echo "tca_poll_policy: Retrieving preferences file at ${URL1}"
+    HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" "$URL2")
+    HTTP_BODY=$(echo $HTTP_RESPONSE | sed -e 's/HTTPSTATUS\:.*//g')
+    HTTP_STATUS=$(echo $HTTP_RESPONSE | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+    if [ "$HTTP_STATUS" != "200" ]; then
+      echo "receiving $HTTP_RESPONSE from CBS"
+      return
+    fi
+    echo $HTTP_BODY | jq . --sort-keys > "${TCA_PREF_TEMP}"
 
     if [ ! -e "${TCA_CONF_TEMP}" ] || [ "$(ls -sh ${TCA_CONF_TEMP} |cut -f1 -d' ' |sed -e 's/[^0-9]//g')"  -lt "1" ]; then
 	echo "Fail to receive configuration"
