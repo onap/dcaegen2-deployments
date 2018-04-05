@@ -23,9 +23,9 @@ TCA_NAMESPACE='cdap_tca_hi_lo'
 TCA_APPNAME='dcae-tca'
 
 TCA_ARTIFACT='dcae-analytics-cdap-tca'
-TCA_ARTIFACT_VERSION='2.2.0'
+TCA_ARTIFACT_VERSION='2.2.0-SNAPSHOT'
 TCA_FILE_PATH='/opt/tca'
-TCA_JAR="${TCA_FILE_PATH}/${TCA_ARTIFACT}-${TCA_ARTIFACT_VERSION}.jar"
+TCA_JAR="${TCA_FILE_PATH}/${TCA_ARTIFACT}.${TCA_ARTIFACT_VERSION}.jar"
 TCA_APP_CONF="${TCA_FILE_PATH}/tca_app_config.json"
 TCA_CONF="${TCA_FILE_PATH}/tca_config.json"
 TCA_PREF="${TCA_FILE_PATH}/tca_app_preferences.json"
@@ -36,10 +36,39 @@ TCA_PREF_TEMP='/tmp/tca_preferences.json'
 TCA_PATH_APP="${CDAP_HOST}:${CDAP_PORT}/v3/namespaces/${TCA_NAMESPACE}/apps/${TCA_APPNAME}"
 TCA_PATH_ARTIFACT="${CDAP_HOST}:${CDAP_PORT}/v3/namespaces/${TCA_NAMESPACE}/artifacts"
 
-if [ -z "$CONSUL_HOST" ]; then CONSUL_HOST='consul'; fi
-if [ -z "$CONSUL_PORT" ]; then CONSUL_PORT='8500'; fi
-if [ -z "$CONFIG_BINDING_SERVICE" ]; then CONFIG_BINDING_SERVICE='config_binding_service'; fi
 
+CONSUL_HOST=${CONSU_HOST:-consul}
+CONSUL_PORT=${CONSU_PORT:-8500}
+CONFIG_BINDING_SERVICE=${CONFIG_BINDING_SERVICE:-config_binding_service}
+
+CBS_SERVICE_NAME=${CONFIG_BINDING_SERVICE}
+
+CBS_HOST=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServiceAddress |sed -e 's/\"//g')
+CBS_PORT=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServicePort |sed -e 's/\"//g')
+CBS_HOST=${CBS_HOST:-config_binding_service}
+CBS_PORT=${CBS_PORT:-10000}
+
+MY_NAME=${SERVICE_NAME:-tca}
+
+echo "TCA environment: I am ${MY_NAME}, consul at ${CONSUL_HOST}:${CONSUL_PORT}, CBS at ${CBS_HOST}:${CBS_PORT}, service name ${CBS_SERVICE_NAME}"
+
+
+echo "Generting preference file"
+sed -i 's/{{DMAAPHOST}}/'"${DMAAPHOST}"'/g' ${TCA_PREF}
+sed -i 's/{{DMAAPPORT}}/'"${DMAAPPORT}"'/g' ${TCA_PREF}
+sed -i 's/{{DMAAPPUBTOPIC}}/'"${DMAAPPUBTOPIC}"'/g' ${TCA_PREF}
+sed -i 's/{{DMAAPSUBTOPIC}}/'"${DMAAPSUBTOPIC}"'/g' ${TCA_PREF}
+sed -i 's/{{DMAAPSUBGROUP}}/OpenDCAEc12/g' ${TCA_PREF}
+sed -i 's/{{DMAAPSUBID}}/c12/g' ${TCA_PREF}
+sed -i 's/{{AAIHOST}}/'"${AAIHOST}"'/g' ${TCA_PREF}
+sed -i 's/{{AAIPORT}}/'"${AAIPORT}"'/g' ${TCA_PREF}
+if [ -z $REDISHOSTPORT ]; then
+  sed -i 's/{{REDISHOSTPORT}}/NONE/g' ${TCA_PREF}
+  sed -i 's/{{REDISCACHING}}/false/g' ${TCA_PREF}
+else
+  sed -i 's/{{REDISHOSTPORT}}/'"${REDISHOSTPORT}"'/g' ${TCA_PREF}
+  sed -i 's/{{REDISCACHING}}/true/g' ${TCA_PREF}
+fi
 
 function tca_stop {
     # stop programs
@@ -55,20 +84,20 @@ function tca_stop {
 
 function tca_load_artifact {
     echo
-    echo "Loading artifact ..."
+    echo "Loading artifact ${TCA_JAR} to http://${TCA_PATH_ARTIFACT}/${TCA_ARTIFACT}..."
     curl -s -X POST --data-binary @"${TCA_JAR}" "http://${TCA_PATH_ARTIFACT}/${TCA_ARTIFACT}"
     echo
 }
 
 function tca_load_conf {
     echo
-    echo "Loading configuration ..."
+    echo "Loading configuration ${TCA_APP_CONF} to http://${TCA_PATH_APP}"
     curl -s -X PUT -d @${TCA_APP_CONF} http://${TCA_PATH_APP}
     echo
 
     # load preferences
     echo
-    echo "Loading preferences ..."
+    echo "Loading preferences ${TCA_PREF} to http://${TCA_PATH_APP}/preferences"
     curl -s -X PUT -d @${TCA_PREF} http://${TCA_PATH_APP}/preferences
     echo
 }
@@ -76,13 +105,13 @@ function tca_load_conf {
 
 function tca_delete {
     echo
-    echo "Deleting application dcae-tca ..."
+    echo "Deleting application dcae-tca http://${TCA_PATH_APP}"
     curl -s -X DELETE http://${TCA_PATH_APP}
     echo
 
     # delete artifact
     echo
-    echo "Deleting artifact dcae-analytics-cdap-tca version ${TCA_ARTIFACT_VERSION} ..."
+    echo "Deleting artifact http://${TCA_PATH_ARTIFACT}/${TCA_ARTIFACT}/versions/${TCA_ARTIFACT_VERSION}   ..."
     curl -s -X DELETE "http://${TCA_PATH_ARTIFACT}/${TCA_ARTIFACT}/versions/${TCA_ARTIFACT_VERSION}"
     echo
 }
@@ -112,24 +141,12 @@ function tca_status {
 
 
 function tca_poll_policy {
-    #CBS_HOST=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServiceAddress |sed -e 's/\"//g')
-    #CBS_PORT=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServicePort |sed -e 's/\"//g')
-
-    CBS_HOST='bd-service-dcaegen2-platform-cbs.default'
-    CBS_PORT='10000'
-    if [ -z "${CBS_HOST}" ] || [ -z "${CBS_PORT}" ]; then
-	echo 'CBS HOST or PORT not defined'
-	return
-    fi
-
-   
     MY_NAME=${SERVICE_NAME:-tca}
-    #MY_NAME=$(hostname |rev |cut -f 3- -d '-' |rev)
 
     URL1="${CBS_HOST}:${CBS_PORT}/service_component/${MY_NAME}"
     URL2="$URL1:preferences"
 
-    echo "Retrieving configuration file at ${URL1}"
+    echo "tca_poll_policy: Retrieving configuration file at ${URL1}"
     curl -s "$URL1" | jq . --sort-keys > "${TCA_CONF_TEMP}"
     echo "Retrieving preferences file at ${URL1}"
     curl -s "$URL2" | jq . --sort-keys > "${TCA_PREF_TEMP}"
