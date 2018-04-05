@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_9bb0c28c",
+        "filename": "tca-cdap-container/restart.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-04-05T04:52:59Z",
+      "side": 1,
+      "message": "Would be better to parameterize artifact version.",
+      "range": {
+        "startLine": 26,
+        "startChar": 22,
+        "endLine": 26,
+        "endChar": 36
+      },
+      "revId": "3622f7a20e615d409dd5a8dea3ae592115df91ae",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_5baa3a1a",
+        "filename": "tca-cdap-container/tca_app_config.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-04-05T04:52:59Z",
+      "side": 1,
+      "message": "templating would help here too",
+      "range": {
+        "startLine": 5,
+        "startChar": 16,
+        "endLine": 5,
+        "endChar": 20
+      },
+      "revId": "3622f7a20e615d409dd5a8dea3ae592115df91ae",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
