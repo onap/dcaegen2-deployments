@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_9153c338",
+        "filename": "tca-cdap-container/restart.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-04-05T16:45:38Z",
+      "side": 1,
+      "message": "why is preferences queried. If you are looking to get policy it should be under \u003cCBS\u003e/service_component_all/\u003cservice_component_name\u003e",
+      "range": {
+        "startLine": 147,
+        "startChar": 3,
+        "endLine": 147,
+        "endChar": 28
+      },
+      "revId": "ac864ceb9f1eeef6057d105e7a670ad064701750",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
