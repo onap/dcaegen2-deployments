@@ -7,7 +7,7 @@
   "aaiEnrichmentUserPassword": "DCAE",
   "aaiVMEnrichmentAPIPath": "/aai/v11/search/nodes-query",
   "aaiVNFEnrichmentAPIPath": "/aai/v11/network/generic-vnfs/generic-vnf",
-  "enableAAIEnrichment": "false",
+  "enableAAIEnrichment": "true",
   "enableAlertCEFFormat": "false",
   "enableRedisCaching": "{{REDISCACHING}}",
   "redisHosts": "{{REDISHOSTPORT}}",

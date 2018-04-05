@@ -22,7 +22,7 @@ services:
       environment:
        - DMAAPHOST={{ mr_ip_addr }}
        - DMAAPPORT=3904
-       - DMAAPPUBTOPIC=unauthenticated.TCA_EVENT_OUTPUT
+       - DMAAPPUBTOPIC=unauthenticated.DCAE_CL_OUTPUT
        - DMAAPSUBTOPIC=unauthenticated.SEC_MEASUREMENT_OUTPUT
        - AAIHOST={{ aai1_ip_addr }}
        - AAIPORT=8443
