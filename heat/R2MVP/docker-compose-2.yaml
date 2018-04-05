@@ -22,7 +22,7 @@ services:
       environment:
        - DMAAPHOST={{ mr_ip_addr }}
        - DMAAPPORT=3904
-       - DMAAPPUBTOPIC=unauthenticated.TCA_EVENT_OUTPUT
+       - DMAAPPUBTOPIC=unauthenticated.DCAE_CL_OUTPUT
        - DMAAPSUBTOPIC=unauthenticated.SEC_MEASUREMENT_OUTPUT
        - AAIHOST={{ aai1_ip_addr }}
        - AAIPORT=8443
@@ -31,6 +31,7 @@ services:
        - CBS_HOST=cbs
        - CBS_PORT=10000
        - SERVICE_NAME=tca
+       - HOSTNAME=tca
        - CONFIG_BINDING_SERVICE=config_binding_service
        # set the parameter below to enable REDIS caching. 
        #- REDISHOSTPORT=redis-cluster:6379

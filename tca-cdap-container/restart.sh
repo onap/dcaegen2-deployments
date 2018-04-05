@@ -48,7 +48,8 @@ CBS_PORT=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVI
 CBS_HOST=${CBS_HOST:-config_binding_service}
 CBS_PORT=${CBS_PORT:-10000}
 
-MY_NAME=${SERVICE_NAME:-tca}
+#Changing to HOSTNAME parameter for consistency with k8s deploy
+MY_NAME=${HOSTNAME:-tca}
 
 echo "TCA environment: I am ${MY_NAME}, consul at ${CONSUL_HOST}:${CONSUL_PORT}, CBS at ${CBS_HOST}:${CBS_PORT}, service name ${CBS_SERVICE_NAME}"
 
@@ -141,7 +142,7 @@ function tca_status {
 
 
 function tca_poll_policy {
-    MY_NAME=${SERVICE_NAME:-tca}
+    MY_NAME=${HOSTNAME:-tca}
 
     URL1="${CBS_HOST}:${CBS_PORT}/service_component/${MY_NAME}"
     URL2="$URL1:preferences"
