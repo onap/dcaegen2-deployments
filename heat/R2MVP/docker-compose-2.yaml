@@ -21,12 +21,19 @@ services:
       hostname: tca
       environment:
        - DMAAPHOST={{ mr_ip_addr }}
+       - DMAAPPORT=3904
+       - DMAAPPUBTOPIC=unauthenticated.TCA_EVENT_OUTPUT
+       - DMAAPSUBTOPIC=unauthenticated.SEC_MEASUREMENT_OUTPUT
+       - AAIHOST={{ aai1_ip_addr }}
+       - AAIPORT=8443
        - CONSUL_HOST=consul
        - CONSUL_PORT=8500
        - CBS_HOST=cbs
        - CBS_PORT=10000
        - SERVICE_NAME=tca
        - CONFIG_BINDING_SERVICE=config_binding_service
+       # set the parameter below to enable REDIS caching. 
+       #- REDISHOSTPORT
       ports:
        - "11011:11011"
        - "11015:11015"
