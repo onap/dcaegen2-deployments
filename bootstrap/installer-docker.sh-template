@@ -94,6 +94,9 @@ chmod 600 ${PVTKEY}
 virtualenv dcaeinstall
 source dcaeinstall/bin/activate
 
+# forcing pip version (pip>=10.0.0 no longer support use wheel)
+pip install pip==9.0.3 
+
 # Install Cloudify
 pip install cloudify==3.4.0
 
