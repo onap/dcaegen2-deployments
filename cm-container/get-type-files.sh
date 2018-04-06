@@ -21,27 +21,49 @@
 
 # Pull type files from repos
 # Set up the CM import resolver
-# $1 is the repo URL
+# $1 is the DCAE repo URL
+# $2 is the CCSDK repo URL
 #
 set -x
 DEST=/opt/manager/resources/onapspec
-ONAPTYPEFILES=\
+
+DCAETYPEFILES=\
 "\
-/dcaepolicyplugin/2.0.0/dcaepolicyplugin_types.yaml \
+/dcaepolicyplugin/2.2.1/dcaepolicyplugin_types.yaml \
 /relationshipplugin/1.0.0/relationshipplugin_types.yaml \
-/k8splugin/1.0.0/k8splugin_types.yaml \
+/k8splugin/1.0.1/k8splugin_types.yaml \
 
 "
+
+CCSDKTYPEFILES=\
+"\
+/type_files/pgaas/1.1.0/pgaas_types.yaml \
+/type_files/sshkeyshare/sshkey_types.yaml \
+
+"
+
 mkdir ${DEST}
-for typefile in ${ONAPTYPEFILES}
+
+for typefile in ${DCAETYPEFILES}
 do
 	mkdir -p ${DEST}/$(dirname ${typefile})
 	curl -Ss $1/${typefile} >> ${DEST}/${typefile}
 done
+
+for typefile in ${CCSDKTYPEFILES}
+do
+	mkdir -p ${DEST}/$(dirname ${typefile})
+	curl -Ss $2/${typefile} >> ${DEST}/${typefile}
+done
+
 chown cfyuser:cfyuser ${DEST}
+
 # Add our local type file store to CM import resolver configuration
-TYPE_RULE="{${TYPE_REPO}: file://${DEST}}"
+TYPE_RULE0="{$1: file://${DEST}}"
+TYPE_RULE1="{$2: file://${DEST}}"
 # This sed re is 'brittle' but we can be sure the config.yaml file
 # won't change as long as we do not change the source Docker image for CM
-sed -i -e "s#      rules:#      rules:\n      - ${TYPE_RULE}#" /etc/cloudify/config.yaml
+sed -i -e "s#      rules:#      rules:\n      - ${TYPE_RULE0}#" /etc/cloudify/config.yaml
+sed -i -e "s#      rules:#      rules:\n      - ${TYPE_RULE1}#" /etc/cloudify/config.yaml
+
 chown cfyuser:cfyuser /etc/cloudify/config.yaml

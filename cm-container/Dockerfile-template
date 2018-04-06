@@ -21,12 +21,13 @@ FROM cloudifyplatform/community:cloudify-manager-18.2.28
 MAINTAINER maintainer
 
 ENV TYPE_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}
+ENV CCSDK_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}
+
 # Store type files locally
-RUN pwd
 RUN mkdir scripts
 COPY get-type-files.sh scripts
 # Load our type files and the Cloudify 3.4 type files
-RUN scripts/get-type-files.sh ${TYPE_REPO}\
+RUN scripts/get-type-files.sh ${TYPE_REPO} ${CCSDK_REPO}\
     && mkdir /opt/manager/resources/spec/cloudify/3.4\
     && curl -Ss https://cloudify.co/spec/cloudify/3.4/types.yaml > /opt/manager/resources/spec/cloudify/3.4/types.yaml\
     && chown -R cfyuser:cfyuser /opt/manager/resources/spec/cloudify/3.4
