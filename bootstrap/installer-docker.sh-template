@@ -2,7 +2,7 @@
 #
 # ============LICENSE_START==========================================
 # ===================================================================
-# Copyright © 2017 AT&T Intellectual Property. All rights reserved.
+# Copyright © 2017-2018 AT&T Intellectual Property. All rights reserved.
 # ===================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,19 +17,16 @@
 # limitations under the License.
 # ============LICENSE_END============================================
 #
-# ECOMP and OpenECOMP are trademarks
-# and service marks of AT&T Intellectual Property.
-#
 
 # URLs for artifacts needed for installation
-DESIGTYPES={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/type_files/dnsdesig/dns_types.yaml
-DESIGPLUG={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/dnsdesig-1.0.0-py27-none-any.wgn
-SSHKEYTYPES={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/type_files/sshkeyshare/sshkey_types.yaml
-SSHKEYPLUG={{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/sshkeyshare-1.0.0-py27-none-any.wgn
+DESIGTYPES=https://nexus.onap.org/service/local/repositories/raw/content/org.onap.ccsdk.platform.plugins/releases/type_files/dnsdesig/dns_types.yaml
+DESIGPLUG=https://nexus.onap.org/service/local/repositories/raw/content/org.onap.ccsdk.platform.plugins/releases/plugins/dnsdesig-1.0.0-py27-none-any.wgn
+SSHKEYTYPES=https://nexus.onap.org/service/local/repositories/raw/content/org.onap.ccsdk.platform.plugins/releases/type_files/sshkeyshare/sshkey_types.yaml
+SSHKEYPLUG=https://nexus.onap.org/service/local/repositories/raw/content/org.onap.ccsdk.platform.plugins/releases/plugins/sshkeyshare-1.0.0-py27-none-any.wgn
 OSPLUGINZIP=https://github.com/cloudify-cosmo/cloudify-openstack-plugin/archive/1.4.zip
 OSPLUGINWGN=https://github.com/cloudify-cosmo/cloudify-openstack-plugin/releases/download/2.2.0/cloudify_openstack_plugin-2.2.0-py27-none-linux_x86_64-centos-Core.wgn
 
-PLATBPSRC={{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints
+PLATBPSRC=https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.blueprints/releases/blueprints
 DOCKERBP=DockerBP.yaml
 CBSBP=config_binding_service.yaml
 PGBP=pgaas-onevm.yaml
@@ -45,7 +42,7 @@ HENGINEBP=holmes-engine.yaml
 
 DOCKERBPURL="${PLATBPSRC}/${DOCKERBP}"
 CBSBPURL="${PLATBPSRC}/${CBSBP}"
-PGBPURL=${PLATBPSRC}/${PGBP}
+PGBPURL="${PLATBPSRC}/${PGBP}"
 CDAPBPURL="${PLATBPSRC}/${CDAPBP}"
 CDAPBROKERBPURL="${PLATBPSRC}/${CDAPBROKERBP}"
 INVBPURL="${PLATBPSRC}/${INVBP}"
@@ -123,7 +120,7 @@ sed -e "s#key_filename:.*#key_filename: $PVTKEY#" < ${INPUTS} > /tmp/local_input
 # Now install the VM
 # Don't exit on error after this point--keep container running so we can do uninstalls after a failure
 set +e
-if wget -O /tmp/centos_vm.yaml {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints/centos_vm.yaml; then
+if wget -O /tmp/centos_vm.yaml "${PLATBPSRC}"/centos_vm.yaml; then
   mv -f /tmp/centos_vm.yaml ./blueprints/
   echo "Succeeded in getting the newest centos_vm.yaml"
 else
@@ -268,13 +265,13 @@ cat >>bootstrap-inputs.yaml <<'!EOF'
 plugin_resources:
   - 'http://repository.cloudifysource.org/org/cloudify3/wagons/cloudify-openstack-plugin/1.4/cloudify_openstack_plugin-1.4-py27-none-linux_x86_64-centos-Core.wgn'
   - 'http://repository.cloudifysource.org/org/cloudify3/wagons/cloudify-fabric-plugin/1.4.1/cloudify_fabric_plugin-1.4.1-py27-none-linux_x86_64-centos-Core.wgn'
-  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/dnsdesig-1.0.0-py27-none-any.wgn'
-  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/sshkeyshare-1.0.0-py27-none-any.wgn'
-  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}/plugins/pgaas-1.0.0-py27-none-any.wgn'
-  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}/plugins/cdapcloudify/cdapcloudify-14.2.5-py27-none-any.wgn'
-  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}/plugins/dcaepolicyplugin/dcaepolicyplugin-1.0.0-py27-none-any.wgn'
-  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}/plugins/dockerplugin/dockerplugin-2.4.0-py27-none-any.wgn'
-  - '{{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}/plugins/relationshipplugin/relationshipplugin-1.0.0-py27-none-any.wgn'
+  - 'https://nexus.onap.org/service/local/repositories/raw/content/org.onap.ccsdk.platform.plugins/releases/plugins/dnsdesig-1.0.0-py27-none-any.wgn'
+  - 'https://nexus.onap.org/service/local/repositories/raw/content/org.onap.ccsdk.platform.plugins/releases/plugins/sshkeyshare-1.0.0-py27-none-any.wgn'
+  - 'https://nexus.onap.org/service/local/repositories/raw/content/org.onap.ccsdk.platform.plugins/releases/plugins/pgaas-1.0.0-py27-none-any.wgn'
+  - 'https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/releases/plugins/cdapcloudify/cdapcloudify-14.2.5-py27-none-any.wgn'
+  - 'https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/releases/plugins/dcaepolicyplugin/dcaepolicyplugin-1.0.0-py27-none-any.wgn'
+  - 'https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/releases/plugins/dockerplugin/dockerplugin-2.4.0-py27-none-any.wgn'
+  - 'https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/releases/plugins/relationshipplugin/relationshipplugin-1.0.0-py27-none-any.wgn'
 !EOF
 #
 #	And away we go
@@ -292,7 +289,7 @@ cfy use -t ${PUBIP}
 echo "Deploying Consul VM"
 
 set +e
-if wget -O /tmp/consul_cluster.yaml {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_releases }}/blueprints/consul_cluster.yaml; then
+if wget -O /tmp/consul_cluster.yaml "${PLATBPSRC}"/consul_cluster.yaml; then
   mv -f /tmp/consul_cluster.yaml ../blueprints/
   echo "Succeeded in getting the newest consul_cluster.yaml"
 else
