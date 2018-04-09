@@ -7,6 +7,7 @@ set -x
 
 BLUEPRINTS=\
 "
+k8s-pgaas-initdb.yaml \
 k8s-config_binding_service.yaml  \
 k8s-deployment_handler.yaml  \
 k8s-inventory.yaml  \

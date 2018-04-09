@@ -31,14 +31,14 @@ DEST=wagons
 # For DCAE, we get zips of the archives and build wagons
 DCAEPLUGINFILES=\
 "\
-k8splugin/1.0.0/k8splugin-1.0.0.tgz 
-dcaepolicyplugin/2.1.0/dcaepolicyplugin-2.1.0.tgz \
+k8splugin/1.0.1/k8splugin-1.0.1.tgz 
+dcaepolicyplugin/2.2.1/dcaepolicyplugin-2.2.1.tgz \
 "
 
 # For CCSDK, we pull down the wagon files directly
 CCSDKPLUGINFILES=\
 "\
-plugins/pgaas-1.0.0-py27-none-any.wgn
+plugins/pgaas-1.1.0-py27-none-any.wgn
 plugins/sshkeyshare-1.0.0-py27-none-any.wgn
 "
 
