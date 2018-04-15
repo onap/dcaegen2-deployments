@@ -43,9 +43,16 @@ CONFIG_BINDING_SERVICE=${CONFIG_BINDING_SERVICE:-config_binding_service}
 
 CBS_SERVICE_NAME=${CONFIG_BINDING_SERVICE}
 
-CBS_HOST=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServiceAddress |sed -e 's/\"//g')
-CBS_PORT=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServicePort |sed -e 's/\"//g')
-CBS_HOST=${CBS_HOST:-config_binding_service}
+unset CBS_HOST
+unset CBS_PORT
+until [ ! -z "$CBS_HOST" ]; do
+  echo "Retrieving host and port for ${CBS_SERVICE_NAME} from ${CONSUL_HOST}:${CONSUL_PORT}" 
+  sleep 2
+  CBS_HOST=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServiceAddress |sed -e 's/\"//g')
+  CBS_PORT=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServicePort |sed -e 's/\"//g')
+done
+echo "Retrieved host and port for ${CBS_SERVICE_NAME} as ${CBS_HOST}:${CBS_PORT}" 
+CBS_HOST=${CBS_HOST:-config-binding-service}
 CBS_PORT=${CBS_PORT:-10000}
 
 #Changing to HOSTNAME parameter for consistency with k8s deploy
