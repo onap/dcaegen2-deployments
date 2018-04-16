@@ -1,70 +1,102 @@
+#############################################################################
+#
+# Copyright (c) 2018 AT&T Intellectual Property. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#        http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+#############################################################################
 version: '2.1'
 services:
-   ves:
-      image: {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.ves.vescollector:1.2.0
-      container_name: "ves"
-      hostname: "ves"
-      environment:
-       - DMAAPHOST={{ mr_ip_addr }}
-       - CONSUL_HOST=consul
-       - CONSUL_PORT=8500
-       - CONFIG_BINDING_SERVICE=config_binding_service
-       - SERVICE_NAME=ves
-       - HOSTNAME=ves
-      ports:
-       - "8080:8080"
-       - "8443:8443"
 
-   tca:
-      image: {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.deployments.tca-cdap-container:1.0.0
-      container_name: tca
-      hostname: tca
+   mvp-dcaegen2-collectors-ves:
+      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.collectors.ves.vescollector:{{ dcae_docker_ves }}"
+      container_name: "mvp-dcaegen2-collectors-ves"
+      hostname: "mvp-dcaegen2-collectors-ves"
       environment:
-       - DMAAPHOST={{ mr_ip_addr }}
-       - DMAAPPORT=3904
-       - DMAAPPUBTOPIC=unauthenticated.DCAE_CL_OUTPUT
-       - DMAAPSUBTOPIC=unauthenticated.SEC_MEASUREMENT_OUTPUT
-       - AAIHOST={{ aai1_ip_addr }}
-       - AAIPORT=8443
-       - CONSUL_HOST=consul
-       - CONSUL_PORT=8500
-       - CBS_HOST=cbs
-       - CBS_PORT=10000
-       - SERVICE_NAME=tca
-       - HOSTNAME=tca
-       - CONFIG_BINDING_SERVICE=config_binding_service
+       - "DMAAPHOST={{ mr_ip_addr }}"
+       - "CONSUL_HOST=consul"
+       - "CONSUL_PORT=8500"
+       - "CONFIG_BINDING_SERVICE=config_binding_service"
+       - "SERVICE_NAME=mvp-dcaegen2-collectors-ves"
+       - "HOSTNAME=mvp-dcaegen2-collectors-ves"
+      ports:
+       - "8081:8080"
+      labels:
+       - "SERVICE_8080_NAME=mvp-dcaegen2-collectors-ves"
+       - "SERVICE_8080_CHECK_HTTP=/healthcheck"
+       - "SERVICE_8080_CHECK_INTERVAL=15s"
+       - "SERVICE_8080_CHECK_INITIAL_STATUS=passing"
+
+
+   mvp-dcaegen2-analytics-tca:
+      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.deployments.tca-cdap-container:{{ dcae_docker_tca }}"
+      container_name: "mvp-dcaegen2-analytics-tca"
+      hostname: "mvp-dcaegen2-analytics-tca"
+      environment:
+       - "DMAAPHOST={{ mr_ip_addr }}"
+       - "DMAAPPORT=3904"
+       - "DMAAPPUBTOPIC=unauthenticated.DCAE_CL_OUTPUT"
+       - "DMAAPSUBTOPIC=unauthenticated.SEC_MEASUREMENT_OUTPUT"
+       - "AAIHOST={{ aai1_ip_addr }}"
+       - "AAIPORT=8443"
+       - "CONSUL_HOST=consul"
+       - "CONSUL_PORT=8500"
+       - "CBS_HOST=config-binding-service"
+       - "CBS_PORT=10000"
+       - "SERVICE_NAME=mvp-dcaegen2-analytics-tca"
+       - "HOSTNAME=mvp-dcaegen2-analytics-tca"
+       - "CONFIG_BINDING_SERVICE=config_binding_service"
        # set the parameter below to enable REDIS caching. 
        #- REDISHOSTPORT=redis-cluster:6379
       ports:
        - "11011:11011"
-       - "11015:11015"
+       #- "11015:11015"
+      labels:
+       - "SERVICE_11011_NAME=mvp-dcaegen2-analytics-tca"
+       - "SERVICE_11011_CHECK_HTTP=/cdap/ns/cdap_tca_hi_lo"
+       - "SERVICE_11011_CHECK_INTERVAL=15s"
+       - "SERVICE_11011_CHECK_INITIAL_STATUS=passing"
 
-   holmes-engine:
-      image: {{ nexus_docker_repo }}/onap/holmes/engine-management:latest
-      container_name: he
-      hostname: he
+   mvp-dcae-analytics-holmes-engine-management:
+      image: "{{ nexus_docker_repo}}/onap/holmes/engine-management:{{ holmes_docker_em }}"
+      container_name: "mvp-dcae-analytics-holmes-engine-management"
+      hostname: "mvp-dcae-analytics-holmes-engine-management"
       environment:
-       - URL_JDBC=db:5432
-       - JDBC_USERNAME=holmes
-       - JDBC_PASSWORD=holmespwd
-       - MSB_ADDR={{ msb_ip_addr }}
-       - CONSUL_HOST=consul
-       - CONSUL_PORT=8500
-       - HOSTNAME=he
+       - "URL_JDBC=pgHolmes:5432"
+       - "JDBC_USERNAME=holmes"
+       - "JDBC_PASSWORD=holmespwd"
+       - "MSB_ADDR={{ msb_ip_addr }}"
+       - "CONSUL_HOST=consul"
+       - "CONSUL_PORT=8500"
+       - "HOSTNAME=mvp-dcae-analytics-holmes-engine-management"
       ports:
        - "9102:9102"
+      labels:
+       - "SERVICE_9102_IGNORE=true"
 
-   holmes-rule:
-      image: {{ nexus_docker_repo }}/onap/holmes/rule-management:latest
-      container_name: hr
-      hostname: hr
+   mvp-dcae-analytics-holmes-rule-management:
+      image: "{{ nexus_docker_repo}}/onap/holmes/rule-management:{{ holmes_docker_rm }}"
+      container_name: "mvp-dcae-analytics-holmes-rule-management"
+      hostname: "mvp-dcae-analytics-holmes-rule-management"
       environment:
-       - URL_JDBC=db:5432
-       - JDBC_USERNAME=holmes
-       - JDBC_PASSWORD=holmespwd
-       - MSB_ADDR={{ msb_ip_addr }}
-       - CONSUL_HOST=consul
-       - CONSUL_PORT=8500
-       - HOSTNAME=hr
+       - "URL_JDBC=pgHolmes:5432"
+       - "JDBC_USERNAME=holmes"
+       - "JDBC_PASSWORD=holmespwd"
+       - "MSB_ADDR={{ msb_ip_addr }}"
+       - "CONSUL_HOST=consul"
+       - "CONSUL_PORT=8500"
+       - "HOSTNAME=mvp-dcae-analytics-holmes-rule-management"
       ports:
        - "9101:9101"
+      labels:
+       - "SERVICE_9101_IGNORE=true"
+

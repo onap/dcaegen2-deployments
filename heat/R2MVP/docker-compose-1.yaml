@@ -1,33 +1,81 @@
+#############################################################################
+#
+# Copyright (c) 2018 AT&T Intellectual Property. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#        http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+#############################################################################
 version: '2.1'
 services:
-   db:
-      image: postgres:9.5
-      container_name: "db"
-      hostname: "db"
+   pgHolmes:
+      image: "postgres:9.5"
+      container_name: "pgHolmes"
+      hostname: "phHolmes"
+      environment:
+       - "POSTGRES_USER=holmes"
+       - "POSTGRES_PASSWORD=holmespwd"
       ports:
        - "5432:5432"
+      labels:
+       - "SERVICE_5432_NAME=pgHolmes"
+       - "SERVICE_5432_CHECK_TCP=true"
+       - "SERVICE_5432_CHECK_INTERVAL=15s"
+       - "SERVICE_5432_CHECK_INITIAL_STATUS=passing"
+
+   pgInventory:
+      image: "postgres:9.5"
+      container_name: "pgInventory"
+      hostname: "pgInventory"
       environment:
-       - POSTGRES_USER=holmes
-       - POSTGRES_PASSWORD=holmespwd
+       - "POSTGRES_USER=inventory"
+       - "POSTGRES_PASSWORD=inventorypwd"
+      ports:
+       - "5433:5432"
+      labels:
+       - "SERVICE_5432_NAME=pgInventory"
+       - "SERVICE_5432_CHECK_TCP=true"
+       - "SERVICE_5432_CHECK_INTERVAL=15s"
+       - "SERVICE_5432_CHECK_INITIAL_STATUS=passing"
+
 
    consul:
       image: consul:0.8.3
       container_name: "consul"
       hostname: "consul"
       ports:
-       - "8400:8400"
        - "8500:8500"
-       - "8600:8600"
-      command: "agent -server -bootstrap-expect 1 -client 0.0.0.0"
-
-   config_binding_service:
-      image: {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.configbinding:v1.2.0
-      container_name: "config_binding_service"
-      hostname: "config_binding_service"
       environment:
-       - CONSUL_HOST="consul"
+       - "DOCKER_HOST=tcp://{{ dcae_ip_addr }}:2376"
+      command: "agent -ui -server -bootstrap-expect 1 -client 0.0.0.0 -log-level trace"
+      labels:
+       - "SERVICE_8500_NAME=consul"
+       - "SERVICE_8500_CHECK_HTTP=/v1/agent/services"
+       - "SERVICE_8500_CHECK_INTERVAL=15s"
+       - "SERVICE_8500_CHECK_INITIAL_STATUS=passing"
+
+
+   config-binding-service:
+      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.platform.configbinding:{{ dcae_docker_cbs }}"
+      container_name: "config_binding_service"
+      hostname: "config-binding-service"
+      environment:
+       - "CONSUL_HOST=consul"
       ports:
        - "10000:10000"
       depends_on:
-       - consul
+       - "consul"
+      labels:
+       - "SERVICE_10000_NAME=config_binding_service"
+       - "SERVICE_10000_CHECK_HTTP=/healthcheck"
+       - "SERVICE_10000_CHECK_INTERVAL=15s"
+       - "SERVICE_10000_CHECK_INITIAL_STATUS=passing"
 
