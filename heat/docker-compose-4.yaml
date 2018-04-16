@@ -1,0 +1,49 @@
+version: '2.1'
+services:
+   heartbeat:
+      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.platform.heartbeat:{{ dcae_docker_heartbeat }}"
+
+      #image: nexus3.onap.org:10001/onap/org.onap.dcaegen2.services.heartbeat:latest
+      container_name: heartbeat
+      hostname: heartbeat
+      environment:
+       - CONSUL_HOST=consul
+       - CONSUL_PORT=8500
+       - HOSTNAME=
+      ports:
+       - "1003:1003"
+      labels:
+       - SERVICE_NAME=static-dcaegen2-services-heartbeat
+       - SERVICE_CHECK_INITIAL_STATUS=passing
+
+
+   prh:
+      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.services.prh.prh-app-server:{{ dcae_docker_prh }}"
+      container_name: prh
+      hostname: prh
+      environment:
+       - CONSUL_HOST=consul
+       - CONSUL_PORT=8500
+       - HOSTNAME=
+      ports:
+       - "1002:1002"
+      labels:
+       - SERVICE_NAME=static-dcaegen2-services-prh-prh-app-server
+       - SERVICE_CHECK_INITIAL_STATUS=passing
+
+
+   snmptrap:
+      image: nexus3.onap.org:10001/onap/org.onap.dcaegen2.collectors.snmptrap:latest
+      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.collectors.snmptrap:{{ dcae_docker_snmptrap }}"
+      container_name: snmptrap
+      hostname: snmptrap
+      environment:
+       - CONSUL_HOST=consul
+       - CONSUL_PORT=8500
+       - HOSTNAME=
+      ports:
+       - "162:162/udp"
+      labels:
+       - SERVICE_NAME=static-dcaegen2-collectors-snamptrap
+       - SERVICE_CHECK_INITIAL_STATUS=passing
+
