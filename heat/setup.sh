@@ -75,7 +75,8 @@ while ! nc -z localhost 80; do sleep 1; done
 
 echo "Upload plugins to Cloudify Manager"
 
-docker exec -it cloudify-manager /tmp/bin/install-plugins.sh
+# run as detached because this script is intended to be run in background
+docker exec -itd cloudify-manager /tmp/bin/install-plugins.sh
 
 echo "Cloudify Manager setup complete"
 
