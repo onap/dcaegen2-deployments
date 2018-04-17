@@ -29,7 +29,7 @@ services:
        - "POSTGRES_PASSWORD=inventorypwd"
       labels:
        - "SERVICE_NAME=service_change_handler"
-       - "SERVICE_CHECK_SCRIPT=/opt/health.sh"
+       - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/health.sh"
        - "SERVICE_CHECK_INTERVAL=15s"
        - "SERVICE_CHECK_INITIAL_STATUS=passing"
 
