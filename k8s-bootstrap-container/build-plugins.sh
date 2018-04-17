@@ -31,9 +31,9 @@ DEST=wagons
 # For DCAE, we get zips of the archives and build wagons
 DCAEPLUGINFILES=\
 "\
-k8splugin/1.0.1/k8splugin-1.0.1.tgz 
+k8splugin/1.1.0/k8splugin-1.1.0.tgz 
 dockerplugin/3.2.0/dockerplugin-3.2.0.tgz 
-dcaepolicyplugin/2.2.1/dcaepolicyplugin-2.2.1.tgz \
+dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0.tgz \
 "
 
 # For CCSDK, we pull down the wagon files directly

@@ -29,9 +29,9 @@ DEST=/opt/manager/resources/onapspec
 
 DCAETYPEFILES=\
 "\
-/dcaepolicyplugin/2.2.1/dcaepolicyplugin_types.yaml \
+/dcaepolicyplugin/2.3.0/dcaepolicyplugin_types.yaml \
 /relationshipplugin/1.0.0/relationshipplugin_types.yaml \
-/k8splugin/1.0.1/k8splugin_types.yaml \
+/k8splugin/1.1.0/k8splugin_types.yaml \
 
 "
 
