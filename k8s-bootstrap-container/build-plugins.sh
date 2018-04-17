@@ -32,6 +32,7 @@ DEST=wagons
 DCAEPLUGINFILES=\
 "\
 k8splugin/1.0.1/k8splugin-1.0.1.tgz 
+dockerplugin/3.2.0/dockerplugin-3.2.0.tgz 
 dcaepolicyplugin/2.2.1/dcaepolicyplugin-2.2.1.tgz \
 "
 
