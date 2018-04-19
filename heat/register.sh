@@ -19,7 +19,7 @@
 
 
 
-# We now register services that are not handled by Registrator 
+# We now register services that are not handled by Registrator
 # minimum platform components
 HOSTNAME_CONSUL="consul"
 HOSTNAME_CM="cloudify_manager"
@@ -113,7 +113,7 @@ curl -v -X PUT -H "Content-Type: application/json" --data "${REGKV}" http://${HO
 # checked
 
 # policy handler
-REGKV="{\"policy_handler\": {\"deploy_handler\": \"deployment_handler\", \"thread_pool_size\": 4, \"policy_retry_count\": 5, \"scope_prefixes\": [\"DCAE.Config_\"], \"pool_connections\": 20, \"policy_retry_sleep\": 5, \"policy_engine\": {\"path_api\": \"/pdp/api/\", \"headers\": {\"Environment\": \"TEST\", \"ClientAuth\": \"cHl0aG9uOnRlc3Q=\", \"Content-Type\": \"application\/json\", \"Accept\": \"application/json\", \"Authorization\": \"Basic dGVzdHBkcDphbHBoYTEyMw==\"}, \"path_pdp\": \"/pdp/\", \"url\": \"http://10.0.6.1:8081\", \"target_entity\": \"policy_engine\"}}}"
+REGKV="{\"policy_handler\": {\"deploy_handler\": \"deployment_handler\", \"thread_pool_size\": 4, \"policy_retry_count\": 5, \"scope_prefixes\": [\"DCAE.Config_\",\"CLAMP\"], \"pool_connections\": 20, \"policy_retry_sleep\": 5, \"policy_engine\": {\"path_api\": \"/pdp/api/\", \"headers\": {\"Environment\": \"TEST\", \"ClientAuth\": \"cHl0aG9uOnRlc3Q=\", \"Content-Type\": \"application\/json\", \"Accept\": \"application/json\", \"Authorization\": \"Basic dGVzdHBkcDphbHBoYTEyMw==\"}, \"path_pdp\": \"/pdp/\", \"url\": \"http://10.0.6.1:8081\", \"target_entity\": \"policy_engine\"}}}"
 curl -v -X PUT -H "Content-Type: application/json" --data "${REGKV}" http://${HOSTNAME_CONSUL}:8500/v1/kv/policy_handler
 
 
