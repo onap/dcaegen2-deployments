@@ -61,6 +61,20 @@ curl -v -X PUT -H 'Content-Type: application/json' \
 --data-binary "$REGREQ" \
 "http://${HOSTNAME_CONSUL}:8500/v1/agent/service/register"
 
+#Add KV for dockerplugin login
+REGREQ="
+[
+	{ 
+		\"username\": \"docker\", 
+		\"password\": \"docker\", 
+		\"registry\": \"nexus3.onap.org:10001\" 
+	}
+]
+"
+curl -v -X PUT -H 'Content-Type: application/json' \
+--data-binary "$REGREQ" \
+"http://${HOSTNAME_CONSUL}:8500/v1/kv/docker_plugin/docker_logins"
+
 
 
 # registering Holmes services
