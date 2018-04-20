@@ -33,6 +33,8 @@ DCAEPLUGINFILES=\
 "\
 k8splugin/1.1.0/k8splugin-1.1.0.tgz 
 dockerplugin/3.2.0/dockerplugin-3.2.0.tgz 
+relationshipplugin/1.0.0/relationshipplugin-1.0.0.tgz
+dockerplugin/3.2.0/dockerplugin-3.2.0.tgz
 dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0.tgz \
 "
 
