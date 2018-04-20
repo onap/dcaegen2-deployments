@@ -1,0 +1,11 @@
+{
+  "name": "k8s-healthcheck",
+  "description": "DCAE healthcheck server",
+  "version": "1.0.0",
+  "main": "healthcheck.js",
+  "dependencies": {
+    "request": "2.85.0"
+  },
+  "author": "author",
+  "license": "(Apache-2.0)"
+}
