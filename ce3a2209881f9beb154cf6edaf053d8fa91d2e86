@@ -16,6 +16,24 @@
       "revId": "ce3a2209881f9beb154cf6edaf053d8fa91d2e86",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_fd741ed0",
+        "filename": "k8s-bootstrap-container/build-plugins.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-04-20T21:43:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_3db84674",
+      "revId": "ce3a2209881f9beb154cf6edaf053d8fa91d2e86",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
