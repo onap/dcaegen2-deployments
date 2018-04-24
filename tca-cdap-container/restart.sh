@@ -151,28 +151,44 @@ function tca_status {
 function tca_poll_policy {
     MY_NAME=${HOSTNAME:-tca}
 
-    URL1="${CBS_HOST}:${CBS_PORT}/service_component/${MY_NAME}"
-    URL2="$URL1:preferences"
-
-    echo "tca_poll_policy: Retrieving configuration file at ${URL1}"
-    HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" "$URL1")
+    URL0="${CBS_HOST}:${CBS_PORT}/service_component_all/${MY_NAME}"
+    echo "tca_poll_policy: Retrieving configuration file at ${URL0}"
+    HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" "$URL0")
     HTTP_BODY=$(echo $HTTP_RESPONSE | sed -e 's/HTTPSTATUS\:.*//g')
     HTTP_STATUS=$(echo $HTTP_RESPONSE | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
-    if [ "$HTTP_STATUS" != "200" ]; then
-      echo "receiving $HTTP_RESPONSE from CBS"
-      return
-    fi
-    echo $HTTP_BODY | jq . --sort-keys > "${TCA_CONF_TEMP}"
 
-    echo "tca_poll_policy: Retrieving preferences file at ${URL1}"
-    HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" "$URL2")
-    HTTP_BODY=$(echo $HTTP_RESPONSE | sed -e 's/HTTPSTATUS\:.*//g')
-    HTTP_STATUS=$(echo $HTTP_RESPONSE | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
     if [ "$HTTP_STATUS" != "200" ]; then
-      echo "receiving $HTTP_RESPONSE from CBS"
-      return
+        URL1="${CBS_HOST}:${CBS_PORT}/service_component/${MY_NAME}"
+        echo "tca_poll_policy: Retrieving configuration file at ${URL1}"
+        HTTP_RESPONSE1=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" "$URL1")
+        HTTP_BODY1=$(echo $HTTP_RESPONSE1 | sed -e 's/HTTPSTATUS\:.*//g')
+        HTTP_STATUS1=$(echo $HTTP_RESPONSE1 | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+        if [ "$HTTP_STATUS1" != "200" ]; then
+            echo "receiving $HTTP_RESPONSE1 from CBS"
+            return
+        fi
+
+        URL2="$URL1:preferences"
+        echo "tca_poll_policy: Retrieving preferences file at ${URL1}"
+        HTTP_RESPONSE2=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" "$URL2")
+        HTTP_BODY2=$(echo $HTTP_RESPONSE2 | sed -e 's/HTTPSTATUS\:.*//g')
+        HTTP_STATUS2=$(echo $HTTP_RESPONSE2 | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+        if [ "$HTTP_STATUS2" != "200" ]; then
+            echo "receiving $HTTP_RESPONSE2 from CBS"
+            return
+        fi
+
+        echo $HTTP_BODY1 | jq . --sort-keys > "${TCA_CONF_TEMP}"
+        echo $HTTP_BODY2 | jq . --sort-keys > "${TCA_PREF_TEMP}"
+    else
+        CONFIG=$(echo $HTTP_BODY | jq .config.app_config)
+        PREF=$(echo $HTTP_BODY | jq .config.app_preferences)
+        POLICY=$(echo $HTTP_BODY | jq .policies.items[0].config.content)
+        NEWPREF=$(echo $PREF | jq --arg tca_policy "$POLICY" '. + {tca_policy: $tca_policy}')
+        NEWPREF=$(echo $NEWPREF | sed 's/\\n//g')
+        echo $CONFIG | jq . --sort-keys > "${TCA_CONF_TEMP}"
+        echo $NEWPREF | jq . --sort_keys > "${TCA_PREF_TEMP}"
     fi
-    echo $HTTP_BODY | jq . --sort-keys > "${TCA_PREF_TEMP}"
 
     if [ ! -e "${TCA_CONF_TEMP}" ] || [ "$(ls -sh ${TCA_CONF_TEMP} |cut -f1 -d' ' |sed -e 's/[^0-9]//g')"  -lt "1" ]; then
 	echo "Fail to receive configuration"
