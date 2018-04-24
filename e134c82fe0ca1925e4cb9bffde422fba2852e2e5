@@ -22,6 +22,30 @@
       "revId": "e134c82fe0ca1925e4cb9bffde422fba2852e2e5",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_7f09dd82",
+        "filename": "tca-cdap-container/restart.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 51
+      },
+      "writtenOn": "2018-04-24T11:00:11Z",
+      "side": 1,
+      "message": "Line 187\u0027s jq command already does.",
+      "parentUuid": "5a93c517_df2cb19b",
+      "range": {
+        "startLine": 190,
+        "startChar": 8,
+        "endLine": 190,
+        "endChar": 60
+      },
+      "revId": "e134c82fe0ca1925e4cb9bffde422fba2852e2e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
