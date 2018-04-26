@@ -61,6 +61,7 @@ services:
        - "MSB_ADDR={{ msb_ip_addr }}"
        - "CONSUL_HOST=consul"
        - "CONSUL_PORT=8500"
+       - "CONFIG_BINDING_SERVICE=config_binding_service"
        - "HOSTNAME=mvp-dcae-analytics-holmes-engine-management"
       ports:
        - "9102:9102"
@@ -78,6 +79,7 @@ services:
        - "MSB_ADDR={{ msb_ip_addr }}"
        - "CONSUL_HOST=consul"
        - "CONSUL_PORT=8500"
+       - "CONFIG_BINDING_SERVICE=config_binding_service"
        - "HOSTNAME=mvp-dcae-analytics-holmes-rule-management"
       ports:
        - "9101:9101"
