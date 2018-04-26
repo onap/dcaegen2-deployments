@@ -187,7 +187,7 @@ function tca_poll_policy {
         NEWPREF=$(echo $PREF | jq --arg tca_policy "$POLICY" '. + {tca_policy: $tca_policy}')
         NEWPREF=$(echo $NEWPREF | sed 's/\\n//g')
         echo $CONFIG | jq . --sort-keys > "${TCA_CONF_TEMP}"
-        echo $NEWPREF | jq . --sort_keys > "${TCA_PREF_TEMP}"
+        echo $NEWPREF | jq . --sort-keys > "${TCA_PREF_TEMP}"
     fi
 
     if [ ! -e "${TCA_CONF_TEMP}" ] || [ "$(ls -sh ${TCA_CONF_TEMP} |cut -f1 -d' ' |sed -e 's/[^0-9]//g')"  -lt "1" ]; then
