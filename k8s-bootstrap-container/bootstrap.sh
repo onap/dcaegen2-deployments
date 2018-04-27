@@ -86,6 +86,13 @@ deploy config_binding_service k8s-config_binding_service.yaml k8s-config_binding
 deploy inventory k8s-inventory.yaml k8s-inventory-inputs.yaml
 deploy deployment_handler k8s-deployment_handler.yaml k8s-deployment_handler-inputs.yaml
 deploy policy_handler k8s-policy_handler.yaml k8s-policy_handler-inputs.yaml
+deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml
+
+# Deploy service components
+#deploy tca k8s-tca.yaml k8s-tca-inputs.yaml
+#deploy ves k8s-ves.yaml k8s-ves-inputs.yaml
+#deploy holmes_engine k8s-holmes-engine.yaml k8s-holmes_engine-inputs.yaml
+#deploy holmes_rules k8s-holmes-rules.yaml k8s-holmes_rules-inputs.yaml
 
 # Display deployments, for debugging purposes
 cfy deployments list
