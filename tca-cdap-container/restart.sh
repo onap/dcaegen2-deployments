@@ -183,7 +183,7 @@ function tca_poll_policy {
     else
         CONFIG=$(echo $HTTP_BODY | jq .config.app_config)
         PREF=$(echo $HTTP_BODY | jq .config.app_preferences)
-        POLICY=$(echo $HTTP_BODY | jq .policies.items[0].config.content)
+        POLICY=$(echo $HTTP_BODY | jq .policies.items[0].config.content.tca_policy)
         NEWPREF=$(echo $PREF | jq --arg tca_policy "$POLICY" '. + {$tca_policy}')
         NEWPREF=$(echo $NEWPREF | sed 's/\\n//g')
         echo $CONFIG | jq . --sort-keys > "${TCA_CONF_TEMP}"
