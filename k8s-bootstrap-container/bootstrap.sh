@@ -32,10 +32,9 @@ CBS_REG='{"ID": "dcae-cbs0", "Name": "config_binding_service", "Address": "confi
 CBS_REG1='{"ID": "dcae-cbs1", "Name": "config-binding-service", "Address": "config-binding-service", "Port": 10000}'
 CM_REG='{"ID": "dcae-cm0", "Name": "cloudify_manager", "Address": "cloudify-manager.onap", "Port": 80}'
 INV_REG='{"ID": "dcae-inv0", "Name": "inventory", "Address": "inventory", "Port": 8080}'
-
-
-
-
+# Policy handler will be looked up from a plugin on CM, which is running in the "onap" namespace,
+# so the Address field has to add the .dcae qualifier.
+PH_REG='{"ID": "dcae-ph0", "Name": "policy_handler", "Address": "policy-handler.dcae", "Port": 25577}'
 
 # Deploy components
 # $1 -- name (for bp and deployment)
@@ -66,6 +65,7 @@ curl -v -X PUT -H "Content-Type: application/json" --data "${CBS_REG}" ${CONSUL}
 curl -v -X PUT -H "Content-Type: application/json" --data "${CBS_REG1}" ${CONSUL}/v1/agent/service/register
 curl -v -X PUT -H "Content-Type: application/json" --data "${CM_REG}" ${CONSUL}/v1/agent/service/register
 curl -v -X PUT -H "Content-Type: application/json" --data "${INV_REG}" ${CONSUL}/v1/agent/service/register
+curl -v -X PUT -H "Content-Type: application/json" --data "${PH_REG}" ${CONSUL}/v1/agent/service/register
 
 # Store the CM password into a Cloudify secret
 cfy secret create -s ${CMPASS} cmpass
@@ -89,10 +89,14 @@ deploy policy_handler k8s-policy_handler.yaml k8s-policy_handler-inputs.yaml
 deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml
 
 # Deploy service components
-#deploy tca k8s-tca.yaml k8s-tca-inputs.yaml
-#deploy ves k8s-ves.yaml k8s-ves-inputs.yaml
-#deploy holmes_engine k8s-holmes-engine.yaml k8s-holmes_engine-inputs.yaml
-#deploy holmes_rules k8s-holmes-rules.yaml k8s-holmes_rules-inputs.yaml
+# (don't let failure of one stop the script)
+set +e
+deploy tca k8s-tca.yaml k8s-tca-inputs.yaml
+deploy ves k8s-ves.yaml k8s-ves-inputs.yaml
+# holmes_rules must be deployed before holmes_engine
+deploy holmes_rules k8s-holmes-rules.yaml k8s-holmes_rules-inputs.yaml
+deploy holmes_engine k8s-holmes-engine.yaml k8s-holmes_engine-inputs.yaml
+set -e
 
 # Display deployments, for debugging purposes
 cfy deployments list
