@@ -184,7 +184,18 @@ function tca_poll_policy {
         CONFIG=$(echo $HTTP_BODY | jq .config.app_config)
         PREF=$(echo $HTTP_BODY | jq .config.app_preferences)
         POLICY=$(echo $HTTP_BODY | jq .policies.items[0].config.content.tca_policy)
-        NEWPREF=$(echo $PREF | jq --arg tca_policy "$POLICY" '. + {$tca_policy}')
+
+	## Check if policy content under tca_policy is returned null
+	## null indicates no active policy flow; hence use configuration loaded 
+	## from blueprint
+
+        if [ $POLICY==null ]; then
+		# tca_policy through blueprint
+		NEWPREF=${PREF}
+        else
+		# tca_policy through active policy flow through PH
+        	NEWPREF=$(echo $PREF | jq --arg tca_policy "$POLICY" '. + {$tca_policy}')
+        fi
         NEWPREF=$(echo $NEWPREF | sed 's/\\n//g')
         echo $CONFIG | jq . --sort-keys > "${TCA_CONF_TEMP}"
         echo $NEWPREF | jq . --sort-keys > "${TCA_PREF_TEMP}"
