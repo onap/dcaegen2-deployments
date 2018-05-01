@@ -52,8 +52,7 @@ REGREQ="
     \"Name\" : \"${SVC_NAME}_health\",
     \"Interval\" : \"15s\",
     \"HTTP\" : \"http://${SVC_IP}:2376/containers/registrator/json\",
-    \"Status\" : \"passing\",
-    \"DeregisterCriticalServiceAfter\" : \"30m\"
+    \"Status\" : \"passing\"
   }
 }
 "
@@ -91,8 +90,7 @@ REGREQ="
     \"Interval\" : \"15s\",
     \"HTTP\" : \"https://${SVC_IP}:9101/api/holmes-rule-mgmt/v1/healthcheck\",
     \"tls_skip_verify\": true,
-    \"Status\" : \"passing\",
-    \"DeregisterCriticalServiceAfter\" : \"30m\"
+    \"Status\" : \"passing\"
   }
 }
 "
@@ -114,8 +112,7 @@ REGREQ="
     \"Interval\" : \"15s\",
     \"HTTP\" : \"https://${SVC_IP}:9102/api/holmes-engine-mgmt/v1/healthcheck\",
     \"tls_skip_verify\": true,
-    \"Status\" : \"passing\",
-    \"DeregisterCriticalServiceAfter\" : \"30m\"
+    \"Status\" : \"passing\"
   }
 }
 "
