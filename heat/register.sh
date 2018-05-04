@@ -239,6 +239,7 @@ curl -v -X PUT -H "Content-Type: application/json" \
 # deployment handler
 REGKV='
 {
+  "logLevel": "DEBUG",
   "cloudify": {
     "protocol": "http"
   },
