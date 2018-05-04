@@ -81,6 +81,8 @@ do
 done
 set -e
 
+set +e
+# (don't let failure of one stop the script.  this is likely due to image pull taking too long)
 # Deploy platform components
 deploy config_binding_service k8s-config_binding_service.yaml k8s-config_binding_service-inputs.yaml
 deploy inventory k8s-inventory.yaml k8s-inventory-inputs.yaml
@@ -89,8 +91,6 @@ deploy policy_handler k8s-policy_handler.yaml k8s-policy_handler-inputs.yaml
 deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml
 
 # Deploy service components
-# (don't let failure of one stop the script)
-set +e
 deploy tca k8s-tca.yaml k8s-tca-inputs.yaml
 deploy ves k8s-ves.yaml k8s-ves-inputs.yaml
 # holmes_rules must be deployed before holmes_engine
