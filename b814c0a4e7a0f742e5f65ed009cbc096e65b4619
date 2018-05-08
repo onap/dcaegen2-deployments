@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_8ca6d30d",
+        "filename": "heat/docker-compose-4.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 51
+      },
+      "writtenOn": "2018-05-08T18:46:29Z",
+      "side": 1,
+      "message": "Ok thanks.  I was only looking at the dockerfile and thought the container port was 162. Will make the change.",
+      "parentUuid": "5a93c517_0c5ba322",
+      "range": {
+        "startLine": 59,
+        "startChar": 14,
+        "endLine": 59,
+        "endChar": 17
+      },
+      "revId": "b814c0a4e7a0f742e5f65ed009cbc096e65b4619",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_e9ee69ec",
         "filename": "heat/register.sh",
         "patchSetId": 1
