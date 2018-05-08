@@ -3,7 +3,7 @@ services:
 
    inventory:
       image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.inventory-api:{{ dcae_docker_inv }}"
-      restart: always
+      restart: "always"
       container_name: "inventory"
       hostname: "inventory"
       environment:
@@ -21,6 +21,7 @@ services:
    service-change-handler:
       image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.servicechange-handler:{{ dcae_docker_sch }}"
       container_name: "service-change-handler"
+      restart: "always"
       hostname: "service-change-handler"
       ports:
        - "8079:8079"
@@ -36,8 +37,8 @@ services:
 
    deployment_handler:
       image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.deployment-handler:{{ dcae_docker_dh }}"
-      restart: always
       container_name: "deployment-handler"
+      restart: "always"
       hostname: "deployment-handler"
       environment:
        - "CLOUDIFY_PASSWORD=admin"
@@ -53,8 +54,8 @@ services:
 
    policy_handler:
       image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.policy-handler:{{ dcae_docker_ph }}"
-      restart: always
       container_name: "policy-handler"
+      restart: "always"
       hostname: "policy-handler"
       ports:
        - "25577:25577"
