@@ -33,10 +33,20 @@ HOSTNAME_MVP_VES="mvp-dcaegen2-collectors-ves"
 SRVCNAME_MVP_VES="mvp-dcaegen2-collectors-ves"
 HOSTNAME_MVP_TCA="mvp-dcaegen2-analytics-tca"
 SRVCNAME_MVP_TCA="mvp-dcaegen2-analytics-tca"
-HOSTNAME_MVP_HR="mvp-dcae-analytics-holmes-rule-management"
-SRVCNAME_MVP_HR="mvp-dcae-analytics-holmes-rule-management"
-HOSTNAME_MVP_HE="mvp-dcae-analytics-holmes-engine-management"
-SRVCNAME_MVP_HE="mvp-dcae-analytics-holmes-engine-management"
+HOSTNAME_MVP_HR="mvp-dcaegen2-analytics-holmes-rule-management"
+SRVCNAME_MVP_HR="mvp-dcaegen2-analytics-holmes-rule-management"
+HOSTNAME_MVP_HE="mvp-dcaegen2-analytics-holmes-engine-management"
+SRVCNAME_MVP_HE="mvp-dcaegen2-analytics-holmes-engine-management"
+
+# R2 PLUS service components
+HOSTNAME_STATIC_SNMPTRAP="static-dcaegen2-collectors-snmptrap"
+SRVCNAME_STATIC_SNMPTRAP="static-dcaegen2-collectors-snmptrap"
+HOSTNAME_STATIC_MAPPER="static-dcaegen2-services-mapper"
+SRVCNAME_STATIC_MAPPER="static-dcaegen2-services-mapper"
+HOSTNAME_STATIC_HEARTBEAT="static-dcaegen2-services-heartbeat"
+SRVCNAME_STATIC_HEARTBEAT="static-dcaegen2-services-heartbeat"
+HOSTNAME_STATIC_PRH="static-dcaegen2-services-prh"
+SRVCNAME_STATIC_PRH="static-dcaegen2-services-prh"
 
 
 # registering docker host
@@ -409,3 +419,79 @@ REGKV='{
 curl -v -X PUT -H "Content-Type: application/json" \
 --data "${REGKV}" \
 "http://${HOSTNAME_CONSUL}:8500/v1/kv/mvp-dcaegen2-analytics-tca:preferences"
+
+
+
+# SNMP Trap Collector
+REGKV='{
+"snmptrap.version": "1.3.0",
+"snmptrap.title": "ONAP SNMP Trap Receiver" ,
+"protocols.transport": "udp",
+"protocols.ipv4_interface": "0.0.0.0",
+"protocols.ipv4_port": 6162,
+"protocols.ipv6_interface": "::1",
+"protocols.ipv6_port": 6162,
+"cache.dns_cache_ttl_seconds": 60,
+"publisher.http_timeout_milliseconds": 1500,
+"publisher.http_retries": 3,
+"publisher.http_milliseconds_between_retries": 750,
+"publisher.http_primary_publisher": "true",
+"publisher.http_peer_publisher": "unavailable",
+"publisher.max_traps_between_publishes": 10,
+"publisher.max_milliseconds_between_publishes": 10000,
+    "streams_publishes": {
+            "sec_measurement": {
+                "aaf_password": "aaf_password",
+                "dmaap_info": {
+                    "location": "mtl5",
+                    "client_id": "111111",
+                    "client_role": "com.att.dcae.member",
+                    "topic_url": null
+                },
+                "aaf_username": "aaf_username"
+            },
+            "sec_fault_unsecure": {
+                "type": "message_router",
+                "aaf_password": null,
+                "dmaap_info": {
+                    "location": "mtl5",
+                    "client_id": null,
+                    "client_role": null,
+                    "topic_url": "http://{{ mr_ip_addr }}:3904/events/ONAP-COLLECTOR-SNMPTRAP"
+                },
+                "aaf_username": null
+            }
+    },
+"files.runtime_base_dir": "/opt/app/snmptrap",
+"files.log_dir": "logs",
+"files.data_dir": "data",
+"files.pid_dir": "tmp",
+"files.arriving_traps_log": "snmptrapd_arriving_traps.log",
+"files.snmptrapd_diag": "snmptrapd_prog_diag.log",
+"files.traps_stats_log": "snmptrapd_stats.csv",
+"files.perm_status_file": "snmptrapd_status.log",
+"files.eelf_base_dir": "/opt/app/snmptrap/logs",
+"files.eelf_error": "error.log",
+"files.eelf_debug": "debug.log",
+"files.eelf_audit": "audit.log",
+"files.eelf_metrics": "metrics.log",
+"files.roll_frequency": "hour",
+"files.minimum_severity_to_log": 1,
+"trap_def.1.trap_oid" : ".1.3.6.1.4.1.74.2.46.12.1.1",
+"trap_def.1.trap_category": "ONAP-COLLECTOR-SNMPTRAP",
+"trap_def.2.trap_oid" : "*",
+"trap_def.2.trap_category": "ONAP-COLLECTOR-SNMPTRAP",
+"stormwatch.1.stormwatch_oid" : ".1.3.6.1.4.1.74.2.46.12.1.1",
+"stormwatch.1.low_water_rearm_per_minute" : "5",
+"stormwatch.1.high_water_arm_per_minute" : "100",
+"stormwatch.2.stormwatch_oid" : ".1.3.6.1.4.1.74.2.46.12.1.2",
+"stormwatch.2.low_water_rearm_per_minute" : "2",
+"stormwatch.2.high_water_arm_per_minute" : "200",
+"stormwatch.3.stormwatch_oid" : ".1.3.6.1.4.1.74.2.46.12.1.2",
+"stormwatch.3.low_water_rearm_per_minute" : "2",
+"stormwatch.3.high_water_arm_per_minute" : "200"
+}'
+curl -v -X PUT -H "Content-Type: application/json" \
+--data "${REGKV}" \
+"http://${HOSTNAME_CONSUL}:8500/v1/kv/${SRVCNAME_STATIC_SNMPTRAP}"
+
