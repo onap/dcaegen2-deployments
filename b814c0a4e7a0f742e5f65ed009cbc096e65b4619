@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_0c2de38e",
+        "filename": "heat/docker-compose-4.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 51
+      },
+      "writtenOn": "2018-05-08T18:28:43Z",
+      "side": 1,
+      "message": "consul is resolvable when this is deployed through docker-compose, --it is a hostname known on the docker-compose network.",
+      "parentUuid": "5a93c517_29e9b1e5",
+      "range": {
+        "startLine": 52,
+        "startChar": 22,
+        "endLine": 52,
+        "endChar": 28
+      },
+      "revId": "b814c0a4e7a0f742e5f65ed009cbc096e65b4619",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_49e43d0c",
         "filename": "heat/docker-compose-4.yaml",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-05-08T15:40:52Z",
       "side": 1,
       "message": "should be 6162 to match the config",
+      "range": {
+        "startLine": 59,
+        "startChar": 14,
+        "endLine": 59,
+        "endChar": 17
+      },
+      "revId": "b814c0a4e7a0f742e5f65ed009cbc096e65b4619",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_6c5587f8",
+        "filename": "heat/docker-compose-4.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 51
+      },
+      "writtenOn": "2018-05-08T18:28:43Z",
+      "side": 1,
+      "message": "Do you mean \"6162:162/udp\"?",
+      "parentUuid": "5a93c517_49e43d0c",
       "range": {
         "startLine": 59,
         "startChar": 14,
