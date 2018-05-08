@@ -2,8 +2,9 @@ version: '2.1'
 services:
    heartbeat:
       image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.platform.heartbeat:{{ dcae_docker_heartbeat }}"
-      container_name: static-dcaegen2-services-heartbeat
-      hostname: static-dcaegen2-services-heartbeat
+      container_name: "static-dcaegen2-services-heartbeat"
+      restart: "always"
+      hostname: "static-dcaegen2-services-heartbeat"
       environment:
        - "DMAAPHOST={{ mr_ip_addr }}"
        - "CONSUL_HOST=consul"
@@ -22,8 +23,9 @@ services:
 
    prh:
       image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.services.prh.prh-app-server:{{ dcae_docker_prh }}"
-      container_name: prh
-      hostname: prh
+      container_name: "static-dcaegen2-services-prh"
+      restart: "always"
+      hostname: "static-dcaegen2-services-prh"
       environment:
        - "DMAAPHOST={{ mr_ip_addr }}"
        - "CONSUL_HOST=consul"
@@ -42,8 +44,9 @@ services:
 
    snmptrap:
       image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.collectors.snmptrap:{{ dcae_docker_snmptrap }}"
-      container_name: static-dcaegen2-collectors-snmptrap
-      hostname: static-dcaegen2-collectors-snmptrap
+      container_name: "static-dcaegen2-collectors-snmptrap"
+      restart: "always"
+      hostname: "static-dcaegen2-collectors-snmptrap"
       environment:
        - "DMAAPHOST={{ mr_ip_addr }}"
        - "CONSUL_HOST=consul"
@@ -51,8 +54,9 @@ services:
        - "CONFIG_BINDING_SERVICE=config_binding_service"
        - "SERVICE_NAME=static-dcaegen2-collectors-snmptrap"
        - "HOSTNAME=static-dcaegen2-collectors-snmptrap"
+       - "HOSTALIASES=/etc/host.aliases"
       ports:
-       - "162:162/udp"
+       - "6162:162/udp"
       labels:
        - "SERVICE_NAME=static-dcaegen2-collectors-snmptrap"
        - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/snmptrap/bin/healthcheck.sh"

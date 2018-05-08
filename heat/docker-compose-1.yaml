@@ -3,6 +3,7 @@ services:
    pgHolmes:
       image: "postgres:9.5"
       container_name: "pgHolmes"
+      restart: "always"
       hostname: "phHolmes"
       environment:
        - "POSTGRES_USER=holmes"
@@ -18,6 +19,7 @@ services:
    pgInventory:
       image: "postgres:9.5"
       container_name: "pgInventory"
+      restart: "always"
       hostname: "pgInventory"
       environment:
        - "POSTGRES_USER=inventory"
@@ -32,8 +34,9 @@ services:
 
 
    consul:
-      image: consul:0.8.3
+      image: "consul:0.8.3"
       container_name: "consul"
+      restart: "always"
       hostname: "consul"
       ports:
        - "8500:8500"
@@ -50,6 +53,7 @@ services:
    config-binding-service:
       image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.platform.configbinding:{{ dcae_docker_cbs }}"
       container_name: "config_binding_service"
+      restart: "always"
       hostname: "config-binding-service"
       environment:
        - "CONSUL_HOST=consul"
