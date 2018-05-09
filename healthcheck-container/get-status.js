@@ -96,6 +96,30 @@ const getStatus = function(path, extract, callback) {
 	});
 };
 
+const getStatusSinglePromise = function (item) {
+	// Expect item to be of the form {namespace: "namespace", deployment: "deployment_name"}
+	return new Promise(function(resolve, reject){
+		const path = K8S_PATH + item.namespace + '/deployments/' + item.deployment;
+		queryKubernetes(path, function(error, res, body){
+			if (error) {
+				reject(error);
+			}
+			else if (res.statusCode === 404) {
+				// Treat absent deployment as if it's an unhealthy deployment
+				resolve ({
+					metadata: {name: item.deployment},
+					status: {unavailableReplicas: 1}
+				});
+			}
+			else if (res.statusCode != 200) {
+				reject(body);
+			}
+			else {
+				resolve(body);
+			}
+		});
+	});
+}
 exports.getStatusNamespace = function (namespace, callback) {
 	// Get readiness information for all deployments in namespace
 	const path = K8S_PATH + namespace + '/deployments';
@@ -107,3 +131,11 @@ exports.getStatusSingle = function (namespace, deployment, callback) {
 	const path = K8S_PATH + namespace + '/deployments/' + deployment;
 	getStatus(path, summarizeDeployment, callback);
 };
+
+exports.getStatusListPromise = function (list) {
+	// List is of the form [{namespace: "namespace", deployment: "deployment_name"}, ... ]
+	const p = Promise.all(list.map(getStatusSinglePromise))
+	return p.then(function(results) {
+	    return summarizeDeploymentList({items: results});
+	});
+}

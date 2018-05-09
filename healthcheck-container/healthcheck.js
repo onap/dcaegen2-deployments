@@ -17,15 +17,43 @@ See the License for the specific language governing permissions and limitations 
 //Expect ONAP and DCAE namespaces and Helm "release" name to be passed via environment variables
 // 
 const ONAP_NS = process.env.ONAP_NAMESPACE || 'default';
-const DCAE_NS = process.env.DCAE_NAMESPACE || 'default';
+const DCAE_NS = process.env.DCAE_NAMESPACE || process.env.ONAP_NAMESPACE || 'default';
 const HELM_REL = process.env.HELM_RELEASE || '';
 
 const HEALTHY = 200;
 const UNHEALTHY = 500;
 const UNKNOWN = 503;
 
+// List of deployments expected to be created via Helm
+const helmDeps = 
+	[
+		'dcae-cloudify-manager'
+	];
+
+// List of deployments expected to be created via Cloudify Manager
+const dcaeDeps  = 
+	[
+		'dep-config-binding-service',
+		'dep-deployment-handler',
+		'dep-inventory',
+		'dep-service-change-handler',
+		'dep-policy-handler',
+		'dep-ves-collector'
+	];
+
 const status = require('./get-status');
 const http = require('http');
+
+// Helm deployments are always in the ONAP namespace and prefixed by Helm release name
+const helmList = helmDeps.map(function(name) {
+	return {namespace: ONAP_NS, deployment: HELM_REL.length > 0 ? HELM_REL + '-' + name : name};
+});
+
+// DCAE deployments via CM don't have a release prefix and are in the DCAE namespace,
+// which can be the same as the ONAP namespace
+const dcaeList = dcaeDeps.map(function(name) {
+	return {namespace: DCAE_NS, deployment: name};
+});
 
 const isHealthy = function(summary) {
 	// Current healthiness criterion is simple--all deployments are ready
@@ -38,33 +66,13 @@ const checkHealth = function (callback) {
 	// If we get responses from k8s but don't find all deployments ready, health status is UNHEALTHY (503)
 	// If we get responses from k8s and all deployments are ready, health status is HEALTHY (200)
 	// This could be a lot more nuanced, but what's here should be sufficient for R2 OOM healthchecking
-	status.getStatusNamespace(DCAE_NS, function(err, res, body) {
-		let ret = {status : UNKNOWN, body: [body]};
-		if (err) {
-			callback(ret);
-		}
-		else if (body.type && body.type === 'summary') {
-			if (isHealthy(body)) {
-				// All the DCAE components report healthy -- check Cloudify Manager
-				let cmDeployment = 'dcae-cloudify-manager';
-				if (HELM_REL.length > 0) {
-					cmDeployment = HELM_REL + '-' + cmDeployment;
-				}
-				status.getStatusSingle(ONAP_NS, cmDeployment, function (err, res, body){
-					ret.body.push(body);
-					if (err) {
-						callback(ret);
-					}
-					if (body.type && body.type === 'summary') {
-						ret.status = isHealthy(body) ? HEALTHY : UNHEALTHY;
-					}
-					callback(ret);
-				});
-			}
-			else {
-				callback(ret);
-			}
-		}
+	
+	status.getStatusListPromise(helmList.concat(dcaeList))
+	.then(function(body) {
+		callback({status: isHealthy(body) ? HEALTHY : UNHEALTHY, body: body});
+	})
+	.catch(function(error){
+		callback({status: UNKNOWN, body: [error]})
 	});
 };
 
