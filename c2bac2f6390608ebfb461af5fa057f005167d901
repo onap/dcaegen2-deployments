@@ -70,6 +70,30 @@
       "revId": "c2bac2f6390608ebfb461af5fa057f005167d901",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_72b55deb",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-05-10T14:21:36Z",
+      "side": 1,
+      "message": "I noticed it was issue only for ves (actual deployment name was dep-dcae-ves-collector). Thinking if we should change all platform components to have dcae prefix? Let me know if I should update all BP\u0027s template (including TCA to use ContainerizedPlatformComponent nodetype)",
+      "parentUuid": "5a93c517_3248352c",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 14
+      },
+      "revId": "c2bac2f6390608ebfb461af5fa057f005167d901",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
