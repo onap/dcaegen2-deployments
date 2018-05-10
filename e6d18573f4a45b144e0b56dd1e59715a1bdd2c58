@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_f2fe4d05",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-05-10T15:51:08Z",
+      "side": 1,
+      "message": "Submitted a change https://gerrit.onap.org/r/47077 for updating dcae prefix on other components. This should be synced to it (can be done as subsequent PR if needed)",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "e6d18573f4a45b144e0b56dd1e59715a1bdd2c58",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
