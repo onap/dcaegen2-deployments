@@ -22,6 +22,30 @@
       "revId": "c2bac2f6390608ebfb461af5fa057f005167d901",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_1ede65da",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2018-05-10T11:51:42Z",
+      "side": 1,
+      "message": "We will need to use ContainerizedPlatformComponent for TCA if you want healthcheck to look for it.  What will the name be?",
+      "parentUuid": "5a93c517_c33906a5",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 14
+      },
+      "revId": "c2bac2f6390608ebfb461af5fa057f005167d901",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
