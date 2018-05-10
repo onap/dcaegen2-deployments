@@ -32,9 +32,15 @@ CBS_REG='{"ID": "dcae-cbs0", "Name": "config_binding_service", "Address": "confi
 CBS_REG1='{"ID": "dcae-cbs1", "Name": "config-binding-service", "Address": "config-binding-service", "Port": 10000}'
 CM_REG='{"ID": "dcae-cm0", "Name": "cloudify_manager", "Address": "cloudify-manager.onap", "Port": 80}'
 INV_REG='{"ID": "dcae-inv0", "Name": "inventory", "Address": "inventory", "Port": 8080}'
-# Policy handler will be looked up from a plugin on CM, which is running in the "onap" namespace,
-# so the Address field has to add the .dcae qualifier.
-PH_REG='{"ID": "dcae-ph0", "Name": "policy_handler", "Address": "policy-handler.dcae", "Port": 25577}'
+# Policy handler will be looked up from a plugin on CM.  If DCAE components are running in a different k8s
+# namespace than CM (which always runs in the common ONAP namespace), then the policy handler address must
+# be qualified with the DCAE namespace.
+PH_REG='{"ID": "dcae-ph0", "Name": "policy_handler", "Port": 25577, "Address: policy-handler'
+if [ ! -z "${DCAE_NAMESPACE}" ]
+then
+	PH_REG="${PH_REG}.${DCAE_NAMESPACE}"
+fi
+PH_REG="${PH_REG}\"}"
 
 # Deploy components
 # $1 -- name (for bp and deployment)
