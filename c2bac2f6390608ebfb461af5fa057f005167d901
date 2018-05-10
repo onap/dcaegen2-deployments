@@ -46,6 +46,30 @@
       "revId": "c2bac2f6390608ebfb461af5fa057f005167d901",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_3248352c",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-05-10T13:59:00Z",
+      "side": 1,
+      "message": "can we set it to dcae-tca-analytics? And these names doesn\u0027t seem to map into blueprint \"name\" property defined (where are they being set?) \n\nFrom the services deployed in k8sc1-[0-5] cluster, I don\u0027t see dep- prefix.",
+      "parentUuid": "5a93c517_1ede65da",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 14
+      },
+      "revId": "c2bac2f6390608ebfb461af5fa057f005167d901",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
