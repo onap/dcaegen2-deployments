@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_c33906a5",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-05-10T02:41:34Z",
+      "side": 1,
+      "message": "TCA should be included also. I understand the service name is dynamic currently (we can switch default installed TCA to use ContainerizedPlatformComponent nodetype unless there is way to search based on suffice pattern)",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 14
+      },
+      "revId": "c2bac2f6390608ebfb461af5fa057f005167d901",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
