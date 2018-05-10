@@ -22,6 +22,30 @@
       "revId": "e6d18573f4a45b144e0b56dd1e59715a1bdd2c58",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_954fb36a",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 51
+      },
+      "writtenOn": "2018-05-10T16:09:08Z",
+      "side": 1,
+      "message": "I provided a -1 for that submission.  The name changes for platform components in that submission will break this check because they will be called dep-dcae-inventory, etc.  Please take out name changes for platform components for that submission, only keep TCA.  Thanks.",
+      "parentUuid": "5a93c517_f2fe4d05",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "e6d18573f4a45b144e0b56dd1e59715a1bdd2c58",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
