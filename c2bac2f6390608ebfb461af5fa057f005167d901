@@ -94,6 +94,47 @@
       "revId": "c2bac2f6390608ebfb461af5fa057f005167d901",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_323cb52e",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2018-05-10T15:01:24Z",
+      "side": 1,
+      "message": "The k8s plugin sets the deployment name for a ContainerizedPlatformComponent to \"dep-\" + the component name.\nIf you set the component name to dcae-tca-analytics in the blueprint, there will be a deployment called dep-dcae-tca-analytics.\nI don\u0027t know what\u0027s happening in the k8sc1 cluster.  Note that the deployment name is NOT the same as the Service name.",
+      "parentUuid": "5a93c517_3248352c",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 14
+      },
+      "revId": "c2bac2f6390608ebfb461af5fa057f005167d901",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_f2416da6",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2018-05-10T15:01:24Z",
+      "side": 1,
+      "message": "This should be dep-dcae-ves-collector",
+      "revId": "c2bac2f6390608ebfb461af5fa057f005167d901",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
