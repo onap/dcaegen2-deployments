@@ -35,7 +35,7 @@ INV_REG='{"ID": "dcae-inv0", "Name": "inventory", "Address": "inventory", "Port"
 # Policy handler will be looked up from a plugin on CM.  If DCAE components are running in a different k8s
 # namespace than CM (which always runs in the common ONAP namespace), then the policy handler address must
 # be qualified with the DCAE namespace.
-PH_REG='{"ID": "dcae-ph0", "Name": "policy_handler", "Port": 25577, "Address: policy-handler'
+PH_REG='{"ID": "dcae-ph0", "Name": "policy_handler", "Port": 25577, "Address": "policy-handler'
 if [ ! -z "${DCAE_NAMESPACE}" ]
 then
 	PH_REG="${PH_REG}.${DCAE_NAMESPACE}"
