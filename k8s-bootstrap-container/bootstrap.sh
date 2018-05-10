@@ -19,6 +19,8 @@
 # Expects:
 #   CM address (IP or DNS) in CMADDR environment variable
 #   CM password in CMPASS environment variable (assumes user is "admin")
+#   ONAP common Kubernetes namespace in ONAP_NAMESPACE environment variable
+#   If DCAE components are deployed in a separate Kubernetes namespace, that namespace in DCAE_NAMESPACE variable.
 #   Consul address with port in CONSUL variable
 #   Plugin wagon files in /wagons
 # 	Blueprints for components to be installed in /blueprints
@@ -30,12 +32,13 @@ set -ex
 # Consul service registration data
 CBS_REG='{"ID": "dcae-cbs0", "Name": "config_binding_service", "Address": "config-binding-service", "Port": 10000}'
 CBS_REG1='{"ID": "dcae-cbs1", "Name": "config-binding-service", "Address": "config-binding-service", "Port": 10000}'
-CM_REG='{"ID": "dcae-cm0", "Name": "cloudify_manager", "Address": "cloudify-manager.onap", "Port": 80}'
 INV_REG='{"ID": "dcae-inv0", "Name": "inventory", "Address": "inventory", "Port": 8080}'
+# Cloudify Manager will always be in the ONAP namespace.
+CM_REG='{"ID": "dcae-cm0", "Name": "cloudify_manager", "Port": 80, "Address": "dcae-cloudify-manager.'${ONAP_NAMESPACE}'"}'
 # Policy handler will be looked up from a plugin on CM.  If DCAE components are running in a different k8s
 # namespace than CM (which always runs in the common ONAP namespace), then the policy handler address must
 # be qualified with the DCAE namespace.
-PH_REG='{"ID": "dcae-ph0", "Name": "policy_handler", "Port": 25577, "Address: policy-handler'
+PH_REG='{"ID": "dcae-ph0", "Name": "policy_handler", "Port": 25577, "Address": "policy-handler'
 if [ ! -z "${DCAE_NAMESPACE}" ]
 then
 	PH_REG="${PH_REG}.${DCAE_NAMESPACE}"
