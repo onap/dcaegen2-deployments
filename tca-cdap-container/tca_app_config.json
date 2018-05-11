@@ -2,7 +2,7 @@
   "artifact": {
     "name": "dcae-analytics-cdap-tca",
     "scope": "user",
-    "version": "2.2.0.SNAPSHOT"
+    "version": "2.2.1"
   },
   "config": {
     "appDescription": "DCAE Analytics Threshold Crossing Alert Application",

@@ -16,8 +16,7 @@
 
 FROM caskdata/cdap-standalone:4.1.2
 
-RUN apt-get update
-RUN apt-get install -y netcat jq wget vim iputils-ping
+RUN apt-get update && apt-get install -y netcat jq iputils-ping wget vim
 COPY get-tca.sh /opt/tca/get-tca.sh
 RUN /opt/tca/get-tca.sh
 COPY tca_app_config.json /opt/tca/tca_app_config.json

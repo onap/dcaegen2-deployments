@@ -23,9 +23,9 @@ TCA_NAMESPACE='cdap_tca_hi_lo'
 TCA_APPNAME='dcae-tca'
 
 TCA_ARTIFACT='dcae-analytics-cdap-tca'
-TCA_ARTIFACT_VERSION='2.2.0-SNAPSHOT'
 TCA_FILE_PATH='/opt/tca'
-TCA_JAR="${TCA_FILE_PATH}/${TCA_ARTIFACT}.${TCA_ARTIFACT_VERSION}.jar"
+TCA_JAR="$(ls -1r ${TCA_FILE_PATH}/${TCA_ARTIFACT}*.jar | head -1)"
+TCA_ARTIFACT_VERSION=$(echo "$TCA_JAR" |rev |cut -f 2-4 -d '.' |rev)
 TCA_APP_CONF="${TCA_FILE_PATH}/tca_app_config.json"
 TCA_CONF="${TCA_FILE_PATH}/tca_config.json"
 TCA_PREF="${TCA_FILE_PATH}/tca_app_preferences.json"
@@ -37,28 +37,14 @@ TCA_PATH_APP="${CDAP_HOST}:${CDAP_PORT}/v3/namespaces/${TCA_NAMESPACE}/apps/${TC
 TCA_PATH_ARTIFACT="${CDAP_HOST}:${CDAP_PORT}/v3/namespaces/${TCA_NAMESPACE}/artifacts"
 
 
-CONSUL_HOST=${CONSU_HOST:-consul}
-CONSUL_PORT=${CONSU_PORT:-8500}
+CONSUL_HOST=${CONSUL_HOST:-consul}
+CONSUL_PORT=${CONSUL_PORT:-8500}
 CONFIG_BINDING_SERVICE=${CONFIG_BINDING_SERVICE:-config_binding_service}
 
 CBS_SERVICE_NAME=${CONFIG_BINDING_SERVICE}
 
-unset CBS_HOST
-unset CBS_PORT
-until [ ! -z "$CBS_HOST" ]; do
-  echo "Retrieving host and port for ${CBS_SERVICE_NAME} from ${CONSUL_HOST}:${CONSUL_PORT}" 
-  sleep 2
-  CBS_HOST=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServiceAddress |sed -e 's/\"//g')
-  CBS_PORT=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServicePort |sed -e 's/\"//g')
-done
-echo "Retrieved host and port for ${CBS_SERVICE_NAME} as ${CBS_HOST}:${CBS_PORT}" 
-CBS_HOST=${CBS_HOST:-config-binding-service}
-CBS_PORT=${CBS_PORT:-10000}
-
 #Changing to HOSTNAME parameter for consistency with k8s deploy
 MY_NAME=${HOSTNAME:-tca}
-
-echo "TCA environment: I am ${MY_NAME}, consul at ${CONSUL_HOST}:${CONSUL_PORT}, CBS at ${CBS_HOST}:${CBS_PORT}, service name ${CBS_SERVICE_NAME}"
 
 
 echo "Generting preference file"
@@ -70,7 +56,7 @@ sed -i 's/{{DMAAPSUBGROUP}}/OpenDCAEc12/g' ${TCA_PREF}
 sed -i 's/{{DMAAPSUBID}}/c12/g' ${TCA_PREF}
 sed -i 's/{{AAIHOST}}/'"${AAIHOST}"'/g' ${TCA_PREF}
 sed -i 's/{{AAIPORT}}/'"${AAIPORT}"'/g' ${TCA_PREF}
-if [ -z $REDISHOSTPORT ]; then
+if [ -z "$REDISHOSTPORT" ]; then
   sed -i 's/{{REDISHOSTPORT}}/NONE/g' ${TCA_PREF}
   sed -i 's/{{REDISCACHING}}/false/g' ${TCA_PREF}
 else
@@ -149,56 +135,76 @@ function tca_status {
 
 
 function tca_poll_policy {
-    MY_NAME=${HOSTNAME:-tca}
-
     URL0="${CBS_HOST}:${CBS_PORT}/service_component_all/${MY_NAME}"
-    echo "tca_poll_policy: Retrieving configuration file at ${URL0}"
+    echo "tca_poll_policy: Retrieving all-in-one config at ${URL0}"
     HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" "$URL0")
-    HTTP_BODY=$(echo $HTTP_RESPONSE | sed -e 's/HTTPSTATUS\:.*//g')
-    HTTP_STATUS=$(echo $HTTP_RESPONSE | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+    HTTP_BODY=$(echo "$HTTP_RESPONSE" | sed -e 's/HTTPSTATUS\:.*//g')
+    HTTP_STATUS=$(echo "$HTTP_RESPONSE" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
 
     if [ "$HTTP_STATUS" != "200" ]; then
+        echo "tca_poll_policy: Retrieving all-in-one config failed with status $HTTP_STATUS"
         URL1="${CBS_HOST}:${CBS_PORT}/service_component/${MY_NAME}"
-        echo "tca_poll_policy: Retrieving configuration file at ${URL1}"
+        echo "tca_poll_policy: Retrieving app config only at ${URL1}"
         HTTP_RESPONSE1=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" "$URL1")
-        HTTP_BODY1=$(echo $HTTP_RESPONSE1 | sed -e 's/HTTPSTATUS\:.*//g')
-        HTTP_STATUS1=$(echo $HTTP_RESPONSE1 | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+        HTTP_BODY1=$(echo "$HTTP_RESPONSE1" | sed -e 's/HTTPSTATUS\:.*//g')
+        HTTP_STATUS1=$(echo "$HTTP_RESPONSE1" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
         if [ "$HTTP_STATUS1" != "200" ]; then
-            echo "receiving $HTTP_RESPONSE1 from CBS"
+            echo "tca_poll_policy: Retrieving app config only failed with status $HTTP_STATUS1"
             return
         fi
 
         URL2="$URL1:preferences"
-        echo "tca_poll_policy: Retrieving preferences file at ${URL1}"
+        echo "tca_poll_policy: Retrieving app preferences only at ${URL2}"
         HTTP_RESPONSE2=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" "$URL2")
-        HTTP_BODY2=$(echo $HTTP_RESPONSE2 | sed -e 's/HTTPSTATUS\:.*//g')
-        HTTP_STATUS2=$(echo $HTTP_RESPONSE2 | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+        HTTP_BODY2=$(echo "$HTTP_RESPONSE2" | sed -e 's/HTTPSTATUS\:.*//g')
+        HTTP_STATUS2=$(echo "$HTTP_RESPONSE2" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
         if [ "$HTTP_STATUS2" != "200" ]; then
-            echo "receiving $HTTP_RESPONSE2 from CBS"
+            echo "tca_poll_policy: Retrieving app preferences only failed with status $HTTP_STATUS2"
+            return
+        fi
+  
+        if [[ "$CONFIG" == "null"  || "$PREF" == "null" ]]; then
+            echo "tca_poll_policy: either app config or app preferences being empty, config not applicable"
             return
         fi
 
-        echo $HTTP_BODY1 | jq . --sort-keys > "${TCA_CONF_TEMP}"
-        echo $HTTP_BODY2 | jq . --sort-keys > "${TCA_PREF_TEMP}"
+        echo "$HTTP_BODY1" | jq . --sort-keys > "${TCA_CONF_TEMP}"
+        echo "$HTTP_BODY2" | jq . --sort-keys > "${TCA_PREF_TEMP}"
     else
-        CONFIG=$(echo $HTTP_BODY | jq .config.app_config)
-        PREF=$(echo $HTTP_BODY | jq .config.app_preferences)
-        POLICY=$(echo $HTTP_BODY | jq .policies.items[0].config.content.tca_policy)
+        CONFIG=$(echo "$HTTP_BODY" | jq .config.app_config)
+        PREF=$(echo "$HTTP_BODY" | jq .config.app_preferences)
+        POLICY=$(echo "$HTTP_BODY" | jq .policies.items[0].config.content.tca_policy)
 
-	## Check if policy content under tca_policy is returned null
-	## null indicates no active policy flow; hence use configuration loaded 
-	## from blueprint
 
-        if [ $POLICY==null ]; then
-		# tca_policy through blueprint
-		NEWPREF=${PREF}
+        if [[ "$CONFIG" == "null"  || "$PREF" == "null" ]]; then
+            echo "tca_poll_policy: CONFIG received is parsed to be empty, trying to parse using R1 format" 
+            CONFIG=$(echo "$HTTP_BODY" | jq .config)
+            NEWPREF=$(echo "$HTTP_BODY" | jq .preferences)
+
+            #echo "CONFIG is [$CONFIG]"
+            #echo "NEWPREF is [$NEWPREF]"
         else
-		# tca_policy through active policy flow through PH
-        	NEWPREF=$(echo $PREF | jq --arg tca_policy "$POLICY" '. + {$tca_policy}')
+            echo "tca_poll_policy: CONFIG is [${CONFIG}], PREF is [${PREF}], POLICY is [${POLICY}]"
+	    ## Check if policy content under tca_policy is returned null
+	    ## null indicates no active policy flow; hence use configuration loaded 
+	    ## from blueprint
+            if [ "$POLICY" == "null" ]; then
+                # tca_policy through blueprint
+                NEWPREF=${PREF}
+            else
+                # tca_policy through active policy flow through PH
+                NEWPREF=$(echo "$PREF" | jq --arg tca_policy "$POLICY" '. + {$tca_policy}')
+            fi
+            NEWPREF=$(echo "$NEWPREF" | sed 's/\\n//g') 
         fi
-        NEWPREF=$(echo $NEWPREF | sed 's/\\n//g')
-        echo $CONFIG | jq . --sort-keys > "${TCA_CONF_TEMP}"
-        echo $NEWPREF | jq . --sort-keys > "${TCA_PREF_TEMP}"
+       
+        if [[ "$CONFIG" == "null"  || "$NEWPREF" == "null" ]]; then
+             echo "tca_poll_policy: either app config or app preferences being empty, config not applicable"
+             return
+        fi
+
+        echo "$CONFIG" | jq . --sort-keys > "${TCA_CONF_TEMP}"
+        echo "$NEWPREF" | jq . --sort-keys > "${TCA_PREF_TEMP}"
     fi
 
     if [ ! -e "${TCA_CONF_TEMP}" ] || [ "$(ls -sh ${TCA_CONF_TEMP} |cut -f1 -d' ' |sed -e 's/[^0-9]//g')"  -lt "1" ]; then
@@ -229,7 +235,7 @@ function tca_poll_policy {
     CONSUMERID=$(jq .subscriberConsumerId ${TCA_PREF_TEMP} |sed -e 's/\"//g')
     if ! (echo "$CONSUMERID" |grep "$HOSTID"); then
         CONSUMERID="${CONSUMERID}-${HOSTID}"
-        jq --arg CID ${CONSUMERID} '.subscriberConsumerId = $CID' < "${TCA_PREF_TEMP}" > "${TCA_PREF_TEMP}2"
+        jq --arg CID "${CONSUMERID}" '.subscriberConsumerId = $CID' < "${TCA_PREF_TEMP}" > "${TCA_PREF_TEMP}2"
         mv "${TCA_PREF_TEMP}2" "${TCA_PREF_TEMP}"
     fi 
     if ! diff ${TCA_PREF} ${TCA_PREF_TEMP} ; then
@@ -238,7 +244,8 @@ function tca_poll_policy {
         PERF_CHANGED=1
     fi
 
-    if [[ "$PERF_CHANGED" == "1" || "$CONF_CHANGED" == "1" ]]; then 
+    if [[ "$PERF_CHANGED" == "1" || "$CONF_CHANGED" == "1" ]]; then
+        echo "Newly received configuration/preference differ from the running instance's.  reload confg"
 	tca_stop
 	tca_delete
         tca_load_artifact
@@ -251,48 +258,60 @@ function tca_poll_policy {
 
 export PATH=${PATH}:/opt/cdap/sdk/bin
 
+
+echo "Starting TCA-CDAP in standalone mode"
+
 # starting CDAP SDK in background
 cdap sdk start 
 
-
-
-echo "Waiting CDAP ready on port 11015 ..."
+echo "Started, waiting CDAP ready on port 11015 ..."
 while ! nc -z ${CDAP_HOST} ${CDAP_PORT}; do   
   sleep 0.1 # wait for 1/10 of the second before check again
 done
-echo "CDAP has started"
-
 
 echo "Creating namespace cdap_tca_hi_lo ..."
 curl -s -X PUT "http://${CDAP_HOST}:${CDAP_PORT}/v3/namespaces/cdap_tca_hi_lo"
 
-
 # stop programs
 tca_stop
 
-
 # delete application
 tca_delete
-
 
 # load artifact
 tca_load_artifact
 tca_load_conf
 
-
 # start programs
 tca_start
-
 
 # get status of programs
 tca_status
 
+echo "TCA-CDAP standalone mode initialization completed"
 
 
-while echo -n
+
+#Changing to HOSTNAME parameter for consistency with k8s deploy
+MY_NAME=${HOSTNAME:-tca}
+
+unset CBS_HOST
+unset CBS_PORT
+echo "TCA environment: I am ${MY_NAME}, consul at ${CONSUL_HOST}:${CONSUL_PORT}, CBS service name ${CBS_SERVICE_NAME}"
+
+while echo
 do
-    echo "======================================================"
-    date
-    tca_poll_policy
+    echo "$(date):  ======================================================"
+    if [[ -z "$CBS_HOST" ||  -z "$CBS_PORT" ]]; then
+       echo "Retrieving host and port for ${CBS_SERVICE_NAME} from ${CONSUL_HOST}:${CONSUL_PORT}"
+       sleep 2
+       CBS_HOST=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServiceAddress |sed -e 's/\"//g')
+       CBS_PORT=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServicePort |sed -e 's/\"//g')
+       echo "CBS discovered to be at ${CBS_HOST}:${CBS_PORT}"
+    fi
+
+    if [ ! -z "$CBS_HOST" ] && [ ! -z "$CBS_PORT" ]; then
+       tca_poll_policy
+    fi
     sleep 30
 done
