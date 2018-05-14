@@ -271,7 +271,7 @@ REGKV='
   "collector.schema.checkflag": "1",
   "collector.dmaap.streamid": "fault=ves_fault|syslog=ves_syslog|heartbeat=ves_heartbeat|measurementsForVfScaling=ves_measurement|mobileFlow=ves_mobileflow|other=ves_other|stateChange=ves_statechange|thresholdCrossingAlert=ves_thresholdCrossingAlert|voiceQuality=ves_voicequality|sipSignaling=ves_sipsignaling",
   "collector.service.port": "8080",
-  "collector.schema.file": "{\"v1\":\"./etc/CommonEventFormat_27.2.json\",\"v2\":\"./etc/CommonEventFormat_27.2.json\",\"v3\":\"./etc/CommonEventFormat_27.2.json\",\"v4\":\"./etc/CommonEventFormat_27.2.json\",\"v5\":\"./etc/CommonEventFormat_28.4.1.json\"}\",
+  "collector.schema.file": "{\"v1\":\"./etc/CommonEventFormat_27.2.json\",\"v2\":\"./etc/CommonEventFormat_27.2.json\",\"v3\":\"./etc/CommonEventFormat_27.2.json\",\"v4\":\"./etc/CommonEventFormat_27.2.json\",\"v5\":\"./etc/CommonEventFormat_28.4.1.json\"}",
   "collector.keystore.passwordfile": "/opt/app/VESCollector/etc/passwordfile",
   "collector.inputQueue.maxPending": "8096",
   "streams_publishes": {
