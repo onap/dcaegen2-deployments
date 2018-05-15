@@ -16,13 +16,15 @@
 
 FROM caskdata/cdap-standalone:4.1.2
 
-RUN apt-get update && apt-get install -y netcat jq iputils-ping wget vim
+RUN apt-get update && apt-get install -y netcat jq iputils-ping wget vim curl
 COPY get-tca.sh /opt/tca/get-tca.sh
 RUN /opt/tca/get-tca.sh
 COPY tca_app_config.json /opt/tca/tca_app_config.json
 COPY tca_app_preferences.json /opt/tca/tca_app_preferences.json
 COPY restart.sh /opt/tca/restart.sh
 RUN chmod 755 /opt/tca/restart.sh
+COPY mr-watchdog.sh /opt/tca/mr-watchdog.sh
+RUN chmod 755 /opt/tca/mr-watchdog.sh
 
 #COPY host.aliases /etc/host.aliases
 #RUN echo "export HOSTALIASES=/etc/host.aliases" >> /etc/profile

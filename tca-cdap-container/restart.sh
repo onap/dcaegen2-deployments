@@ -36,6 +36,10 @@ TCA_PREF_TEMP='/tmp/tca_preferences.json'
 TCA_PATH_APP="${CDAP_HOST}:${CDAP_PORT}/v3/namespaces/${TCA_NAMESPACE}/apps/${TCA_APPNAME}"
 TCA_PATH_ARTIFACT="${CDAP_HOST}:${CDAP_PORT}/v3/namespaces/${TCA_NAMESPACE}/artifacts"
 
+MR_WATCHDOG_PATH="${TCA_FILE_PATH}/mr-watchdog.sh"
+
+
+WORKER_COUNT='0'
 
 CONSUL_HOST=${CONSUL_HOST:-consul}
 CONSUL_PORT=${CONSUL_PORT:-8500}
@@ -121,18 +125,40 @@ function tca_start {
 
 
 function tca_status {
+    WORKER_COUNT='0'
     echo
-    echo "TCADMaaPMRPublisherWorker status: "
-    curl -s "http://${TCA_PATH_APP}/workers/TCADMaaPMRPublisherWorker/status"
+    STATUS=$(curl -s "http://${TCA_PATH_APP}/workers/TCADMaaPMRPublisherWorker/status")
+    echo "TCADMaaPMRPublisherWorker status: $STATUS"
+    INC=$(echo "$STATUS" | jq . |grep RUNNING |wc -l)
+    WORKER_COUNT=$((WORKER_COUNT+INC))
+
+    STATUS=$(curl -s "http://${TCA_PATH_APP}/workers/TCADMaaPMRSubscriberWorker/status")
+    echo "TCADMaaPMRSubscriberWorker status: $STATUS"
+    INC=$(echo "$STATUS" | jq . |grep RUNNING |wc -l)
+    WORKER_COUNT=$((WORKER_COUNT+INC))
+
+    STATUS=$(curl -s "http://${TCA_PATH_APP}/flows/TCAVESCollectorFlow/status")
+    echo "TCAVESCollectorFlow status: $STATUS"
+    INC=$(echo "$STATUS" | jq . |grep RUNNING |wc -l)
+    WORKER_COUNT=$((WORKER_COUNT+INC))
     echo
-    echo "TCADMaaPMRSubscriberWorker status: "
-    curl -s "http://${TCA_PATH_APP}/workers/TCADMaaPMRSubscriberWorker/status"
-    echo
-    echo "TCAVESCollectorFlow status"
-    curl -s "http://${TCA_PATH_APP}/flows/TCAVESCollectorFlow/status"
-    echo; echo
 }
 
+
+function tca_restart {
+    MR_HOST=$(jq .subscriberHostName ${TCA_PREF} |sed -e 's/\"//g')
+    MR_PORT=$(jq .subscriberHostPort ${TCA_PREF} |sed -e 's/\"//g')
+    MR_TOPIC=$(jq .subscriberTopicName ${TCA_PREF}  |sed -e 's/\"//g')
+    echo "Verifying DMaaP topic: ${MR_TOPIC}@${MR_HOST}:${MR_PORT} (will block until topic ready)"
+    "${MR_WATCHDOG_PATH}" "${MR_HOST}" "${MR_PORT}" "${MR_TOPIC}"
+    tca_stop
+    tca_delete
+    tca_load_artifact
+    tca_load_conf
+    tca_start
+    sleep 5
+    tca_status
+}
 
 function tca_poll_policy {
     URL0="${CBS_HOST}:${CBS_PORT}/service_component_all/${MY_NAME}"
@@ -246,12 +272,9 @@ function tca_poll_policy {
 
     if [[ "$PERF_CHANGED" == "1" || "$CONF_CHANGED" == "1" ]]; then
         echo "Newly received configuration/preference differ from the running instance's.  reload confg"
-	tca_stop
-	tca_delete
-        tca_load_artifact
-	tca_load_conf
-	tca_start
-	tca_status
+        tca_restart
+    else
+        echo "Newly received configuration/preference identical from the running instance's"
     fi 
 }
 
@@ -264,9 +287,9 @@ echo "Starting TCA-CDAP in standalone mode"
 # starting CDAP SDK in background
 cdap sdk start 
 
-echo "Started, waiting CDAP ready on port 11015 ..."
+echo "CDAP Started, waiting CDAP ready on ${CDAP_HOST}:${CDAP_PORT} ..."
 while ! nc -z ${CDAP_HOST} ${CDAP_PORT}; do   
-  sleep 0.1 # wait for 1/10 of the second before check again
+  sleep 1 # wait for 1 second before check again
 done
 
 echo "Creating namespace cdap_tca_hi_lo ..."
@@ -274,21 +297,18 @@ curl -s -X PUT "http://${CDAP_HOST}:${CDAP_PORT}/v3/namespaces/cdap_tca_hi_lo"
 
 # stop programs
 tca_stop
-
 # delete application
 tca_delete
-
 # load artifact
 tca_load_artifact
 tca_load_conf
-
 # start programs
 tca_start
 
 # get status of programs
 tca_status
 
-echo "TCA-CDAP standalone mode initialization completed"
+echo "TCA-CDAP standalone mode initialization completed, with $WORKER_COUNT / 3 up"
 
 
 
@@ -301,7 +321,18 @@ echo "TCA environment: I am ${MY_NAME}, consul at ${CONSUL_HOST}:${CONSUL_PORT},
 
 while echo
 do
-    echo "$(date):  ======================================================"
+    echo "======================================================> $(date)"
+    tca_status
+
+    while [ "$WORKER_COUNT" != "3" ]; do
+        echo "Status checking: worker count is $WORKER_COUNT, needs a reset"
+        sleep 5
+
+        tca_restart
+        echo "TCA restarted"
+    done
+
+
     if [[ -z "$CBS_HOST" ||  -z "$CBS_PORT" ]]; then
        echo "Retrieving host and port for ${CBS_SERVICE_NAME} from ${CONSUL_HOST}:${CONSUL_PORT}"
        sleep 2

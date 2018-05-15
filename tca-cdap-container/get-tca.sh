@@ -37,7 +37,7 @@ echo "Getting version $VERSION of $GROUPID.$ARTIFACTID from $REPO repo on $NEXUS
 if [ "$REPO" == "snapshots" ]; then
   # SNOTSHOT repo container many snapshots for each version.  get the newest among them
   URL="${PROTO}://${NEXUSREPO}/service/local/repositories/${REPO}/content/${GROUPID//.//}/${ARTIFACTID}/${VERSION}/maven-metadata.xml"
-  VT=$(wget --no-check-certificate -O- $URL | grep -m 1 \<value\> | sed -e 's/<value>\(.*\)<\/value>/\1/' | sed -e 's/ //g')
+  VT=$(wget --no-check-certificate -O- "$URL" | grep -m 1 \<value\> | sed -e 's/<value>\(.*\)<\/value>/\1/' | sed -e 's/ //g')
 else
   VT=${VERSION}
 fi
