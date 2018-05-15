@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_3a580389",
+        "filename": "tca-cdap-container/restart.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-05-15T03:52:43Z",
+      "side": 1,
+      "message": "This may be replaced by tca_restart",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 10
+      },
+      "revId": "e380f6bb14fb0e5fae4e9a6d9b9af40a9340f11a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
