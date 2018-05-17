@@ -33,6 +33,9 @@ set -ex
 CBS_REG='{"ID": "dcae-cbs0", "Name": "config_binding_service", "Address": "config-binding-service", "Port": 10000}'
 CBS_REG1='{"ID": "dcae-cbs1", "Name": "config-binding-service", "Address": "config-binding-service", "Port": 10000}'
 INV_REG='{"ID": "dcae-inv0", "Name": "inventory", "Address": "inventory", "Port": 8080}'
+HE_REG='{"ID": "dcae-he0", "Name": "holmes-engine-mgmt", "Address": "holmes-engine-mgmt", "Port": 9102}'
+HR_REG='{"ID": "dcae-hr0", "Name": "holmes-rule-mgmt", "Address": "holmes-rule-mgmt", "Port": 9101}'
+
 # Cloudify Manager will always be in the ONAP namespace.
 CM_REG='{"ID": "dcae-cm0", "Name": "cloudify_manager", "Port": 80, "Address": "dcae-cloudify-manager.'${ONAP_NAMESPACE}'"}'
 # Policy handler will be looked up from a plugin on CM.  If DCAE components are running in a different k8s
@@ -75,6 +78,8 @@ curl -v -X PUT -H "Content-Type: application/json" --data "${CBS_REG1}" ${CONSUL
 curl -v -X PUT -H "Content-Type: application/json" --data "${CM_REG}" ${CONSUL}/v1/agent/service/register
 curl -v -X PUT -H "Content-Type: application/json" --data "${INV_REG}" ${CONSUL}/v1/agent/service/register
 curl -v -X PUT -H "Content-Type: application/json" --data "${PH_REG}" ${CONSUL}/v1/agent/service/register
+curl -v -X PUT -H "Content-Type: application/json" --data "${HE_REG}" ${CONSUL}/v1/agent/service/register
+curl -v -X PUT -H "Content-Type: application/json" --data "${HR_REG}" ${CONSUL}/v1/agent/service/register
 
 # Store the CM password into a Cloudify secret
 cfy secret create -s ${CMPASS} cmpass
