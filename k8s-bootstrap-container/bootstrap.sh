@@ -107,6 +107,7 @@ deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml
 # Deploy service components
 deploy tca k8s-tca.yaml k8s-tca-inputs.yaml
 deploy ves k8s-ves.yaml k8s-ves-inputs.yaml
+deploy prh k8s-prh.yaml k8s-prh-inputs.yaml
 # holmes_rules must be deployed before holmes_engine
 deploy holmes_rules k8s-holmes-rules.yaml k8s-holmes_rules-inputs.yaml
 deploy holmes_engine k8s-holmes-engine.yaml k8s-holmes_engine-inputs.yaml
