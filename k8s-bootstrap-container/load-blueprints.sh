@@ -15,7 +15,8 @@ k8s-inventory.yaml  \
 k8s-policy_handler.yaml \
 k8s-pgaas-initdb.yaml \
 k8s-tca.yaml \
-k8s-ves.yaml
+k8s-ves.yaml \
+k8s-prh.yaml
 "
 
 BPDEST=blueprints
