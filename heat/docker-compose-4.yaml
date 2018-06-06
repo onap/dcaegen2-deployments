@@ -1,47 +1,5 @@
 version: '2.1'
 services:
-   heartbeat:
-      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.platform.heartbeat:{{ dcae_docker_heartbeat }}"
-      container_name: "static-dcaegen2-services-heartbeat"
-      restart: "always"
-      hostname: "static-dcaegen2-services-heartbeat"
-      environment:
-       - "DMAAPHOST={{ mr_ip_addr }}"
-       - "CONSUL_HOST=consul"
-       - "CONSUL_PORT=8500"
-       - "CONFIG_BINDING_SERVICE=config_binding_service"
-       - "SERVICE_NAME=static-dcaegen2-services-heartbeat"
-       - "HOSTNAME=static-dcaegen2-services-heartbeat"
-      ports:
-       - "10001:10000"
-      labels:
-       - "SERVICE_NAME=static-dcaegen2-services-heartbeat"
-       - "SERVICE_CHECK_DOCKER_SCRIPT=/app/bin/check_health.py"
-       - "SERVICE_CHECK_INTERVAL=15s"
-       - "SERVICE_CHECK_INITIAL_STATUS=passing"
-
-
-   prh:
-      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.services.prh.prh-app-server:{{ dcae_docker_prh }}"
-      container_name: "static-dcaegen2-services-prh"
-      restart: "always"
-      hostname: "static-dcaegen2-services-prh"
-      environment:
-       - "DMAAPHOST={{ mr_ip_addr }}"
-       - "CONSUL_HOST=consul"
-       - "CONSUL_PORT=8500"
-       - "CONFIG_BINDING_SERVICE=config_binding_service"
-       - "SERVICE_NAME=static-dcaegen2-services-prh"
-       - "HOSTNAME=static-dcaegen2-services-prh"
-      ports:
-       - "8100:8100"
-      labels:
-       - "SERVICE_8100_NAME=static-dcaegen2-services-prh"
-       - "SERVICE_8100_CHECK_TCP=true"
-       - "SERVICE_8100_CHECK_INTERVAL=15s"
-       - "SERVICE_8100_CHECK_INITIAL_STATUS=passing"
-
-
    snmptrap:
       image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.collectors.snmptrap:{{ dcae_docker_snmptrap }}"
       container_name: "static-dcaegen2-collectors-snmptrap"
