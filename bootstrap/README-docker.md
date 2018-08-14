@@ -54,7 +54,7 @@ Here is a line-by-line explanation of the parameters
   14. Path to the private key within the container (!! Do not change!!)
   15. Prefix (location code) of all DCAEGEN2 VMs
   16. Domain name of the OpenStack tenant 'onapr1.playground.onap.org'
-  17. Location of the raw artifact repo hosting additional boot scripts called by DCAEGEN2 VMs' cloud-init, for example: 
+  17. Location of the raw artifact repo hosting additional boot scripts called by DCAEGEN2 VMs' cloud-init, for example:
   'https://nexus.onap.org/service/local/repositories/raw/content'
   18. Path to the boot scripts within the raw artifact repo, for example: 'org.onap.dcaegen2.deployments/releases/scripts'
 
@@ -84,7 +84,7 @@ Here is a line-by-line description of the parameters:
   8. The postgres password
   9. The Docker image to be used for the service change handler (should be the same in all environments)
   10. The Docker image to be used for the inventory service (should be the same in all environments)
-  
+
 6. Create a file in CONFIGDIR called `phinputs.yaml`.  This contains environment-specific information for the policy handler.
 
 ```
@@ -92,17 +92,14 @@ application_config:
   policy_handler :
     # parallelize the getConfig queries to policy-engine on each policy-update notification
     thread_pool_size : 4
- 
+
     # parallelize requests to policy-engine and keep them alive
     pool_connections : 20
- 
-    # list of policyName prefixes (filters) that DCAE-Controller handles (=ignores any other policyName values)
-    scope_prefixes : ["DCAE.Config_"]
- 
+
     # retry to getConfig from policy-engine on policy-update notification
     policy_retry_count : 5
     policy_retry_sleep : 5
- 
+
     # policy-engine config
     # These are the url of and the auth for the external system, namely the policy-engine (PDP).
     # We obtain that info manually from PDP folks at the moment.
@@ -119,8 +116,21 @@ application_config:
             Authorization : "Basic dGVzdHBkcDphbHBoYTEyMw=="
             Environment : "TEST"
         target_entity : "policy_engine"
-    # name of deployment-handler service in consul for policy-handler to direct the policy-updates to
-    deploy_handler : "deployment_handler"
+    # deploy_handler config
+    #    changed from string "deployment_handler" in 2.3.1 to structure in 2.4.0
+    deploy_handler :
+        # name of deployment-handler service used by policy-handler for logging
+        target_entity : "deployment_handler"
+        # url of the deployment-handler service for policy-handler to direct the policy-updates to
+        #   - expecting dns to resolve the hostname deployment-handler to ip address
+        url : "http://deployment-handler:8188"
+        # limit the size of a single data segment for policy-update messages
+        #       from policy-handler to deployment-handler in megabytes
+        max_msg_length_mb : 5
+        query :
+            # optionally specify the tenant name for the cloudify under deployment-handler
+            #    if not specified the "default_tenant" is used by the deployment-handler
+            cfy_tenant_name : "default_tenant"
 ```
 TODO: provide explanations
 
