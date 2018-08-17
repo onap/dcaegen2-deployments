@@ -27,23 +27,39 @@ ENV BP_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_blueprints_rel
 # Install gcc
 RUN yum install -y gcc python-devel
 
+# Install Consul
+RUN yum install -y unzip \
+  && mkdir -p /opt/consul/bin \
+  && mkdir -p /opt/consul/data \
+  && mkdir -p /opt/consul/config \
+  && curl -Ss https://releases.hashicorp.com/consul/1.2.1/consul_1.2.1_linux_amd64.zip > /tmp/consul.zip \
+  && unzip -pj /tmp/consul.zip > /opt/consul/bin/consul \
+  && chmod +x /opt/consul/bin/consul
+COPY 00-consul.json /opt/consul/config/
+
+# Install jq
+RUN curl -Ss -L "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"  > /bin/jq \
+&& chmod +x /bin/jq
+
 # Install pip
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
   && python get-pip.py \
   && rm get-pip.py \
   && pip install cloudify==4.2
 
-# Get plugin archives and build wagons
+# Copy scripts
 RUN mkdir scripts
-COPY build-plugins.sh scripts
+COPY build-plugins.sh load-blueprints.sh bootstrap.sh uninstall.sh scripts/
+RUN chmod +x /scripts/*.sh
+
+# Get plugin archives and build wagons
 RUN scripts/build-plugins.sh ${DCAE_REPO} ${CCSDK_REPO} \
   && rm scripts/build-plugins.sh
 
 # Load blueprints and input templates
-COPY load-blueprints.sh scripts
 RUN scripts/load-blueprints.sh ${BP_REPO} \
   && rm scripts/load-blueprints.sh
 
+
 # Set up runtime script
-COPY bootstrap.sh scripts
 ENTRYPOINT exec "/scripts/bootstrap.sh"

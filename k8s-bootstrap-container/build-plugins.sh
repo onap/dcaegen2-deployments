@@ -31,8 +31,7 @@ DEST=wagons
 # For DCAE, we get zips of the archives and build wagons
 DCAEPLUGINFILES=\
 "\
-k8splugin/1.4.0/k8splugin-1.4.0.tgz 
-dockerplugin/3.2.0/dockerplugin-3.2.0.tgz 
+k8splugin/1.4.1/k8splugin-1.4.1.tgz
 relationshipplugin/1.0.0/relationshipplugin-1.0.0.tgz
 dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0.tgz \
 "
@@ -56,7 +55,7 @@ function build {
 		target=$(basename ${plugin})
 		curl -Ss $1/${plugin} > ${target}
 		tar zxvf ${target} --strip-components=2 -C work
-		wagon create -t tar.gz -o ${DEST}  -r work/requirements.txt --validate ./work 
+		wagon create -t tar.gz -o ${DEST}  -r work/requirements.txt --validate ./work
 		rm -rf work
 	done
 }
