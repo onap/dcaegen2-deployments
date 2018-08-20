@@ -83,11 +83,11 @@ deploy)
     upload_files_of_extension sh
     build_and_push_docker
     ;;
-  k8s-bootstrap-container|tca-cdap-container|cm-container|redis-cluster-container|healthcheck-container)
+  k8s-bootstrap-container|tca-cdap-container|cm-container|redis-cluster-container|healthcheck-container|pnda-mirror-container)
     build_and_push_docker
     ;;
   scripts|cloud_init|heat)
-    # upload all sh file under the root of module 
+    # upload all sh file under the root of module
     upload_files_of_extension_recursively sh $MVN_PROJECT_MODULEID
     upload_files_of_extension_recursively py $MVN_PROJECT_MODULEID
     upload_files_of_extension_recursively yaml $MVN_PROJECT_MODULEID
