@@ -45,6 +45,7 @@ limitations under the License.
      <module>k8s-bootstrap-container</module>
      <module>tca-cdap-container</module>
      <module>healthcheck-container</module>
+     <module>pnda-mirror-container</module>
   </modules>
 
   <properties>
