@@ -17,7 +17,7 @@
 # ============LICENSE_END=========================================================
 #
 # ECOMP is a trademark and service mark of AT&T Intellectual Property.
-FROM cloudifyplatform/community:cloudify-manager-18.2.28
+FROM cloudifyplatform/community:18.7.23
 MAINTAINER maintainer
 
 ENV TYPE_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}
@@ -25,18 +25,23 @@ ENV CCSDK_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releas
 
 # Store type files locally
 RUN mkdir scripts
-COPY get-type-files.sh scripts
+COPY get-type-files.sh dcae-cleanup.sh scripts/
 # Load our type files and the Cloudify 3.4 type files
 RUN scripts/get-type-files.sh ${TYPE_REPO} ${CCSDK_REPO}\
     && mkdir /opt/manager/resources/spec/cloudify/3.4\
     && curl -Ss https://cloudify.co/spec/cloudify/3.4/types.yaml > /opt/manager/resources/spec/cloudify/3.4/types.yaml\
-    && chown -R cfyuser:cfyuser /opt/manager/resources/spec/cloudify/3.4
+    && chown -R cfyuser:cfyuser /opt/manager/resources/spec/cloudify/3.4\
+    && chmod +x scripts/*.sh
 # Create mount point for CM config file
 RUN mkdir -p /opt/onap && chown cfyuser:cfyuser /opt/onap
 
 # For HEAT environment, install software needed to use Cloudify CLI 4.2 to install plugins & deploy blueprints locally
 # Install python development-related packages
 RUN yum install -y gcc python-devel python-virtualenv python-pip
+
+# Install jq (used for cleanup--parsing output of CM API call)
+RUN curl -Ss -L "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"  > /bin/jq \
+&& chmod +x /bin/jq
 
 # Set up virtualenv and install Cloudify CLI 4.2
 RUN pip install --upgrade pip==9.0.3 \

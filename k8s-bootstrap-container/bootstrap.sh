@@ -195,8 +195,9 @@ do
     install_plugin ${wagon}
 done
 
+# After this point, failures should not stop the script or block later commands
+trap - ERR
 set +e
-# (Don't let failure of one stop the script.  This is likely due to image pull taking too long.)
 
 # Deploy platform components
 # Allow for some parallelism to speed up the process.  Probably could be somewhat more aggressive.
@@ -223,7 +224,6 @@ deploy prh k8s-prh.yaml &
 # holmes_rules must be deployed before holmes_engine, but holmes_rules can go in parallel with other service components
 deploy holmes_rules k8s-holmes-rules.yaml k8s-holmes_rules-inputs.yaml
 deploy holmes_engine k8s-holmes-engine.yaml k8s-holmes_engine-inputs.yaml
-set -e
 
 # Display deployments, for debugging purposes
 cfy deployments list

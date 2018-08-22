@@ -41,7 +41,7 @@ COPY 00-consul.json /opt/consul/config/
 RUN curl -Ss -L "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"  > /bin/jq \
 && chmod +x /bin/jq
 
-# Install pip
+# Install pip and Cloudify CLI (stay at version 4.2 because of changes in higher versions)
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
   && python get-pip.py \
   && rm get-pip.py \
