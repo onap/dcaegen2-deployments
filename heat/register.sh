@@ -191,17 +191,23 @@ http://${HOSTNAME_CONSUL}:8500/v1/kv/inventory
 REGKV='
 {
   "policy_handler": {
-    "deploy_handler" : {
-        "target_entity" : "deployment_handler",
-        "max_msg_length_mb" : 5,
-        "query" : {
-            "cfy_tenant_name" : "default_tenant"
+    "deploy_handler": {
+        "target_entity": "deployment_handler",
+        "max_msg_length_mb": 5,
+        "query": {
+          "cfy_tenant_name": "default_tenant"
         }
     },
     "thread_pool_size": 4,
     "policy_retry_count": 5,
     "pool_connections": 20,
     "policy_retry_sleep": 5,
+    "catch_up": {
+      "interval": 1200
+    },
+    "reconfigure": {
+      "interval": 600
+    },
     "policy_engine": {
       "path_api": "/pdp/api/",
       "headers": {
