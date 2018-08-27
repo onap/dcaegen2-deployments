@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_94973490",
+        "filename": "pnda-bootstrap-container/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 745
+      },
+      "writtenOn": "2018-08-27T09:09:51Z",
+      "side": 1,
+      "message": "Commented block could be removed",
+      "revId": "173d168f21d5430e4dfef28266bf86cb0f3c99a8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_f480e847",
+        "filename": "pnda-bootstrap-container/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 745
+      },
+      "writtenOn": "2018-08-27T09:09:51Z",
+      "side": 1,
+      "message": "Commented block could be removed",
+      "revId": "173d168f21d5430e4dfef28266bf86cb0f3c99a8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_d47dac6f",
+        "filename": "pnda-bootstrap-container/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 745
+      },
+      "writtenOn": "2018-08-27T09:09:51Z",
+      "side": 1,
+      "message": "Commented block could be removed",
+      "revId": "173d168f21d5430e4dfef28266bf86cb0f3c99a8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
