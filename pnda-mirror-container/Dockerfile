@@ -25,15 +25,14 @@ RUN yum clean all && rm -rf /var/cache/yum/* && yum install gettext git -y
 RUN git clone -b $PNDARELEASE https://github.com/pndaproject/pnda.git
 
 WORKDIR /pnda/mirror
-RUN ./create_mirror.sh
-RUN rm -rf /pnda/mirror/mirror-dist/mirror_cloudera
+RUN ./create_mirror.sh HDP
 
 WORKDIR /pnda/build
 RUN ./install-build-tools.sh
 
 RUN yum install bzip2 make which -y
 RUN source ./set-pnda-env.sh \
-    && ./build-pnda.sh BRANCH $PNDARELEASE
+    && ./build-pnda.sh BRANCH $PNDARELEASE HDP
 
 FROM nginx:alpine
 
