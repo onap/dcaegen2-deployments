@@ -46,6 +46,7 @@ limitations under the License.
      <module>tca-cdap-container</module>
      <module>healthcheck-container</module>
      <module>pnda-mirror-container</module>
+     <module>pnda-bootstrap-container</module>
   </modules>
 
   <properties>
