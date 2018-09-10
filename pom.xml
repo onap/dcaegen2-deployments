@@ -47,6 +47,7 @@ limitations under the License.
      <module>healthcheck-container</module>
      <module>pnda-mirror-container</module>
      <module>pnda-bootstrap-container</module>
+     <module>tls-init-container</module>
   </modules>
 
   <properties>

@@ -27,7 +27,7 @@ limitations under the License.
   <groupId>org.onap.dcaegen2.deployments</groupId>
   <artifactId>cm-container</artifactId>
   <name>dcaegen2-deployments-cm-container</name>
-  <version>1.4.0</version>
+  <version>1.4.1</version>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
