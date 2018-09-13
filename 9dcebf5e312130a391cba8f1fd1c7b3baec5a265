@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_ad572c57",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 3701
+      },
+      "writtenOn": "2018-09-13T13:03:42Z",
+      "side": 1,
+      "message": "wrong comment, change to HV-VES",
+      "revId": "9dcebf5e312130a391cba8f1fd1c7b3baec5a265",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
