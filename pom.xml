@@ -45,10 +45,18 @@ limitations under the License.
      <module>k8s-bootstrap-container</module>
      <module>tca-cdap-container</module>
      <module>healthcheck-container</module>
-     <module>pnda-mirror-container</module>
-     <module>pnda-bootstrap-container</module>
      <module>tls-init-container</module>
   </modules>
+  <profiles>
+    <profile>
+      <id>pnda</id>
+      <activation><activeByDefault>false</activeByDefault></activation>
+      <modules>
+        <module>pnda-mirror-container</module>
+        <module>pnda-bootstrap-container</module>
+      </modules>
+    </profile>
+  </profiles>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
