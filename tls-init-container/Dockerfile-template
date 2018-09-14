@@ -17,6 +17,7 @@
 # ============LICENSE_END=========================================================
 FROM busybox
 RUN mkdir -p /opt/tls/source && mkdir -p /opt/tls/shared
+RUN base64 -d ./tls/trust.jks.b64 > ./tls/trust.jks  && base64 -d ./tls/cert.jks.b64 > ./tls/cert.jks && base64 -d ./tls/cert.p12.b64 > ./tls/cert.p12
 COPY ./tls /opt/tls/source
 COPY setup-tls.sh /opt/tls
 ENTRYPOINT  ["/opt/tls/setup-tls.sh"]
