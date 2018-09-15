@@ -40,6 +40,7 @@ TCABP=tca.yaml
 HRULESBP=holmes-rules.yaml
 HENGINEBP=holmes-engine.yaml
 PRHBP=prh.yaml
+HVVESBP=hv-ves.yaml
 
 DOCKERBPURL="${PLATBPSRC}/${DOCKERBP}"
 CBSBPURL="${PLATBPSRC}/${CBSBP}"
@@ -54,6 +55,7 @@ TCABPURL="${PLATBPSRC}/${TCABP}"
 HRULESBPURL="${PLATBPSRC}/${HRULESBP}"
 HENGINEBPURL="${PLATBPSRC}/${HENGINEBP}"
 PRHBPURL="${PLATBPSRC}/${PRHBP}"
+HVVESBPURL="${PLATBPSRC}/${HVVESBP}"
 
 LOCATIONID=$(printenv LOCATION)
 
@@ -372,6 +374,7 @@ wget -P ./blueprints/tca/ ${TCABPURL}
 wget -P ./blueprints/hrules/ ${HRULESBPURL}
 wget -P ./blueprints/hengine/ ${HENGINEBPURL}
 wget -P ./blueprints/prh/ ${PRHBPURL}
+wget -P ./blueprints/hv-ves/ ${HVVESBPURL}
 
 
 # Set up the credentials for access to the Docker registry
@@ -449,6 +452,10 @@ cfy install -p ./blueprints/hengine/${HENGINEBP} -b hengine -d hengine -i ../con
 
 # PRH
 cfy install -p ./blueprints/prh/${PRHBP} -b prh -d prh -i ../config/prhinput.yaml
+
+# HV-VES
+cfy install -p ./blueprints/hv-ves/${HVVESBP} -b hv-ves -d hv-ves
+
 
 # write out IP addresses
 echo "$CONSULIP" > "$STARTDIR"/config/runtime.ip.consul
