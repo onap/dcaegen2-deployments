@@ -28,7 +28,7 @@ SRVCNAME_CM="cloudify_manager"
 HOSTNAME_CBS="config-binding-service"
 SRVCNAME_CBS="config_binding_service"
 
-# R2 MVP service components
+# R3 MVP service components
 HOSTNAME_MVP_VES="mvp-dcaegen2-collectors-ves"
 SRVCNAME_MVP_VES="mvp-dcaegen2-collectors-ves"
 HOSTNAME_MVP_TCA="mvp-dcaegen2-analytics-tca"
@@ -38,7 +38,7 @@ SRVCNAME_MVP_HR="mvp-dcaegen2-analytics-holmes-rule-management"
 HOSTNAME_MVP_HE="mvp-dcaegen2-analytics-holmes-engine-management"
 SRVCNAME_MVP_HE="mvp-dcaegen2-analytics-holmes-engine-management"
 
-# R2 PLUS service components
+# R3 PLUS service components
 HOSTNAME_STATIC_SNMPTRAP="static-dcaegen2-collectors-snmptrap"
 SRVCNAME_STATIC_SNMPTRAP="static-dcaegen2-collectors-snmptrap"
 HOSTNAME_STATIC_MAPPER="static-dcaegen2-services-mapper"
@@ -47,6 +47,10 @@ HOSTNAME_STATIC_HEARTBEAT="static-dcaegen2-services-heartbeat"
 SRVCNAME_STATIC_HEARTBEAT="static-dcaegen2-services-heartbeat"
 HOSTNAME_STATIC_PRH="static-dcaegen2-services-prh"
 SRVCNAME_STATIC_PRH="static-dcaegen2-services-prh"
+HOSTNAME_STATIC_HVVES="static-dcaegen2-collectors-hvves"
+SRVCNAME_STATIC_HVVES="static-dcaegen2-collectors-hvves"
+HOSTNAME_STATIC_DF="static-dcaegen2-collectors-df"
+SRVCNAME_STATIC_DF="static-dcaegen2-collectors-df"
 
 
 # registering docker host
@@ -434,65 +438,118 @@ curl -v -X PUT -H "Content-Type: application/json" \
 
 
 # SNMP Trap Collector
+SERVICENAME="${SRVCNAME_STATIC_SNMPTRAP}
 REGKV='{
-"snmptrap.version": "1.3.0",
-"snmptrap.title": "ONAP SNMP Trap Receiver" ,
-"protocols.transport": "udp",
-"protocols.ipv4_interface": "0.0.0.0",
-"protocols.ipv4_port": 6162,
-"protocols.ipv6_interface": "::1",
-"protocols.ipv6_port": 6162,
-"cache.dns_cache_ttl_seconds": 60,
-"publisher.http_timeout_milliseconds": 1500,
-"publisher.http_retries": 3,
-"publisher.http_milliseconds_between_retries": 750,
-"publisher.http_primary_publisher": "true",
-"publisher.http_peer_publisher": "unavailable",
-"publisher.max_traps_between_publishes": 10,
-"publisher.max_milliseconds_between_publishes": 10000,
-    "streams_publishes": {
-            "sec_fault_unsecure": {
-                "type": "message_router",
-                "aaf_password": null,
-                "dmaap_info": {
-                    "location": "mtl5",
-                    "client_id": null,
-                    "client_role": null,
-                    "topic_url": "http://{{ mr_ip_addr }}:3904/events/ONAP-COLLECTOR-SNMPTRAP"
-                },
-                "aaf_username": null
-            }
-    },
-"files.runtime_base_dir": "/opt/app/snmptrap",
-"files.log_dir": "logs",
-"files.data_dir": "data",
-"files.pid_dir": "tmp",
-"files.arriving_traps_log": "snmptrapd_arriving_traps.log",
-"files.snmptrapd_diag": "snmptrapd_prog_diag.log",
-"files.traps_stats_log": "snmptrapd_stats.csv",
-"files.perm_status_file": "snmptrapd_status.log",
-"files.eelf_base_dir": "/opt/app/snmptrap/logs",
-"files.eelf_error": "error.log",
-"files.eelf_debug": "debug.log",
-"files.eelf_audit": "audit.log",
-"files.eelf_metrics": "metrics.log",
-"files.roll_frequency": "hour",
-"files.minimum_severity_to_log": 1,
-"trap_def.1.trap_oid" : ".1.3.6.1.4.1.74.2.46.12.1.1",
-"trap_def.1.trap_category": "ONAP-COLLECTOR-SNMPTRAP",
-"trap_def.2.trap_oid" : "*",
-"trap_def.2.trap_category": "ONAP-COLLECTOR-SNMPTRAP",
-"stormwatch.1.stormwatch_oid" : ".1.3.6.1.4.1.74.2.46.12.1.1",
-"stormwatch.1.low_water_rearm_per_minute" : "5",
-"stormwatch.1.high_water_arm_per_minute" : "100",
-"stormwatch.2.stormwatch_oid" : ".1.3.6.1.4.1.74.2.46.12.1.2",
-"stormwatch.2.low_water_rearm_per_minute" : "2",
-"stormwatch.2.high_water_arm_per_minute" : "200",
-"stormwatch.3.stormwatch_oid" : ".1.3.6.1.4.1.74.2.46.12.1.2",
-"stormwatch.3.low_water_rearm_per_minute" : "2",
-"stormwatch.3.high_water_arm_per_minute" : "200"
+  "files": {
+    "roll_frequency": "day",
+    "data_dir": "data",
+    "arriving_traps_log": "snmptrapd_arriving_traps.log",
+    "minimum_severity_to_log": 2,
+    "traps_stats_log": "snmptrapd_stats.csv",
+    "perm_status_file": "snmptrapd_status.log",
+    "pid_dir": "tmp",
+    "eelf_audit": "audit.log",
+    "log_dir": "logs",
+    "eelf_metrics": "metrics.log",
+    "eelf_base_dir": "/opt/app/snmptrap/logs",
+    "runtime_base_dir": "/opt/app/snmptrap",
+    "eelf_error": "error.log",
+    "eelf_debug": "debug.log",
+    "snmptrapd_diag": "snmptrapd_prog_diag.log"
+  },
+  "publisher": {
+    "http_milliseconds_between_retries": 750,
+    "max_milliseconds_between_publishes": 10000,
+    "max_traps_between_publishes": 10,
+    "http_retries": 3,
+    "http_primary_publisher": "true",
+    "http_milliseconds_timeout": 1500,
+    "http_peer_publisher": "unavailable"
+  },
+  "snmptrapd": {
+    "version": "1.4.0",
+    "title": "Collector for receiving SNMP traps and publishing to DMAAP/MR"
+  },
+  "cache": {
+    "dns_cache_ttl_seconds": 60
+  },
+  "sw_interval_in_seconds": 60,
+  "streams_publishes": {
+    "sec_fault_unsecure": {
+      "type": "message_router",
+      "dmaap_info": {
+        "topic_url": "http://{{ mr_ip_addr }}:3904/events/unauthenticated.ONAP-COLLECTOR-SNMPTRAP"
+      }
+    }
+  },
+  "StormWatchPolicy": "",
+  "services_calls": {},
+  "protocols": {
+    "ipv4_interface": "0.0.0.0",
+    "ipv4_port": 6162,
+    "ipv6_interface": "::1",
+    "ipv6_port": 6162
+  }
 }'
 curl -v -X PUT -H "Content-Type: application/json" \
 --data "${REGKV}" \
-"http://${HOSTNAME_CONSUL}:8500/v1/kv/${SRVCNAME_STATIC_SNMPTRAP}"
+"http://${HOSTNAME_CONSUL}:8500/v1/kv/${SERVICENAME}"
 
+
+
+# hv-ves collector 
+SERVICENAME="${SRVCNAME_STATIC_HVVES}
+REGKV='{ 
+  "dmaap.kafkaBootstrapServers": "{{ mr_ip_addr }}:9092", 
+  "collector.routing": {
+    "fromDomain": "HVMEAS", 
+    "toTopic": "HV_VES_MEASUREMENTS"
+  }
+}'
+curl -v -X PUT -H "Content-Type: application/json" \
+--data "${REGKV}" \
+"http://${HOSTNAME_CONSUL}:8500/v1/kv/${SERVICENAME}"
+
+
+# data file collector
+SERVICENAME="${SRVCNAME_STATIC_DF}
+REGKV='{
+}'
+curl -v -X PUT -H "Content-Type: application/json" \
+--data "${REGKV}" \
+"http://${HOSTNAME_CONSUL}:8500/v1/kv/${SERVICENAME}"
+
+
+# PNF Registration Handler
+SERVICENAME="${SRVCNAME_STATIC_PRH}
+REGKV='{
+  "dmaap.dmaapProducerConfiguration.dmaapTopicName": "/events/unauthenticated.PNF_READY",
+  "dmaap.dmaapConsumerConfiguration.dmaapHostName": "{{ mr_ip_addr }}",
+  "aai.aaiClientConfiguration.aaiPnfPath": "/network/pnfs/pnf",
+  "aai.aaiClientConfiguration.aaiUserPassword": "AAI",
+  "dmaap.dmaapConsumerConfiguration.dmaapUserName": "admin",
+  "aai.aaiClientConfiguration.aaiBasePath": "/aai/v12",
+  "dmaap.dmaapConsumerConfiguration.timeoutMs": -1,
+  "dmaap.dmaapProducerConfiguration.dmaapPortNumber": 3904,
+  "aai.aaiClientConfiguration.aaiHost": "{{ aai_ip_addr }}",
+  "dmaap.dmaapConsumerConfiguration.dmaapUserPassword": "admin",
+  "dmaap.dmaapProducerConfiguration.dmaapProtocol": "http",
+  "aai.aaiClientConfiguration.aaiIgnoreSslCertificateErrors": true,
+  "dmaap.dmaapProducerConfiguration.dmaapContentType": "application/json",
+  "dmaap.dmaapConsumerConfiguration.dmaapTopicName": "/events/unauthenticated.VES_PNFREG_OUTPUT",
+  "dmaap.dmaapConsumerConfiguration.dmaapPortNumber": 3904,
+  "dmaap.dmaapConsumerConfiguration.dmaapContentType": "application/json",
+  "dmaap.dmaapConsumerConfiguration.messageLimit": -1,
+  "dmaap.dmaapConsumerConfiguration.dmaapProtocol": "http",
+  "aai.aaiClientConfiguration.aaiUserName": "AAI",
+  "dmaap.dmaapConsumerConfiguration.consumerId": "c12",
+  "dmaap.dmaapProducerConfiguration.dmaapHostName": "{{ mr_ip_addr }}",
+  "aai.aaiClientConfiguration.aaiHostPortNumber": 8443,
+  "dmaap.dmaapConsumerConfiguration.consumerGroup": "OpenDCAE-c12",
+  "aai.aaiClientConfiguration.aaiProtocol": "https",
+  "dmaap.dmaapProducerConfiguration.dmaapUserName": "admin",
+  "dmaap.dmaapProducerConfiguration.dmaapUserPassword": "admin"
+}'
+curl -v -X PUT -H "Content-Type: application/json" \
+--data "${REGKV}" \
+"http://${HOSTNAME_CONSUL}:8500/v1/kv/${SERVICENAME}"

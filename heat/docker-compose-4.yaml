@@ -1,7 +1,7 @@
 version: '2.1'
 services:
    snmptrap:
-      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.collectors.snmptrap:{{ dcae_docker_snmptrap }}"
+      image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.snmptrap:{{ dcae_docker_snmptrap }}"
       container_name: "static-dcaegen2-collectors-snmptrap"
       restart: "always"
       hostname: "static-dcaegen2-collectors-snmptrap"
@@ -17,7 +17,129 @@ services:
        - "162:6162/udp"
       labels:
        - "SERVICE_NAME=static-dcaegen2-collectors-snmptrap"
-       - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/snmptrap/bin/healthcheck.sh"
+       - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/snmptrap/bin/snmptrapd.sh status"
+       - "SERVICE_CHECK_INTERVAL=300s"
+       - "SERVICE_CHECK_INITIAL_STATUS=passing"
+
+
+   prh:
+      image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.services.prh.prh-app-server:{{ dcae_docker_prh }}"
+      container_name: "static-dcaegen2-services-prh"
+      restart: "always"
+      hostname: "static-dcaegen2-services-prh"
+      environment:
+       - "DMAAPHOST={{ mr_ip_addr }}"
+       - "CONSUL_HOST=consul"
+       - "CONSUL_PORT=8500"
+       - "CONFIG_BINDING_SERVICE=config_binding_service"
+       - "SERVICE_NAME=static-dcaegen2-services-prh"
+       - "HOSTNAME=static-dcaegen2-services-prh"
+       - "HOSTALIASES=/etc/host.aliases"
+      ports:
+       - "8082:8080"
+      labels:
+       - "SERVICE_8082_NAME=static-dcaegen2-services-prh"
+       - "SERVICE_8082_CHECK_HTTP=/heartbeat"
+       - "SERVICE_8082_CHECK_INTERVAL=15s"
+       - "SERVICE_8082_CHECK_INITIAL_STATUS=passing"
+
+
+   hvves:
+      image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.hv-ves.hv-collector-main:{{ dcae_docker_hvves }}"
+      container_name: "static-dcaegen2-collectors-hvves"
+      restart: "always"
+      hostname: "static-dcaegen2-collectors-hvves"
+      environment:
+       - "DMAAPHOST={{ mr_ip_addr }}"
+       - "CONSUL_HOST=consul"
+       - "CONSUL_PORT=8500"
+       - "CONFIG_BINDING_SERVICE=config_binding_service"
+       - "SERVICE_NAME=static-dcaegen2-collectors-hvves"
+       - "HOSTNAME=static-dcaegen2-collectors-hvves"
+       - "HOSTALIASES=/etc/host.aliases"
+      ports:
+       - "6061:6061"
+      labels:
+       - "SERVICE_NAME=static-dcaegen2-collectors-hvves"
+       - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/hvves/bin/healthcheck.sh"
        - "SERVICE_CHECK_INTERVAL=15s"
+       - "SERVICE_CHECK_INITIAL_STATUS=passing"
+
+
+   datafile:
+      image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.datafile.datafile-app-server:{{ dcae_docker_datafile }}"
+      container_name: "static-dcaegen2-collectors-datafile"
+      restart: "always"
+      hostname: "static-dcaegen2-collectors-datafile"
+      environment:
+       - "DMAAPHOST={{ mr_ip_addr }}"
+       - "CONSUL_HOST=consul"
+       - "CONSUL_PORT=8500"
+       - "CONFIG_BINDING_SERVICE=config_binding_service"
+       - "SERVICE_NAME=static-dcaegen2-collectors-datafile"
+       - "HOSTNAME=static-dcaegen2-collectors-datafile"
+       - "HOSTALIASES=/etc/host.aliases"
+      labels:
+       - "SERVICE_NAME=static-dcaegen2-collectors-datafile"
+       - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/datafile/bin/healthcheck.sh"
+       - "SERVICE_CHECK_INTERVAL=15s"
+       - "SERVICE_CHECK_INITIAL_STATUS=passing"
+
+   mapper-universalvesadaptor:
+      image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.services.mapper.vesadapter.universalvesadaptor:{{ dcae_docker_mua }}"
+      container_name: "static-dcaegen2-services-mua"
+      restart: "always"
+      hostname: "static-dcaegen2-services-mua"
+      environment:
+       - "DMAAPHOST={{ mr_ip_addr }}"
+       - "CONSUL_HOST=consul"
+       - "CONSUL_PORT=8500"
+       - "CONFIG_BINDING_SERVICE=config_binding_service"
+       - "SERVICE_NAME=static-dcaegen2-services-mua"
+       - "HOSTNAME=static-dcaegen2-services-mua"
+       - "HOSTALIASES=/etc/host.aliases"
+      labels:
+       - "SERVICE_NAME=static-dcaegen2-services-mua"
+       - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/datafile/bin/healthcheck.sh"
+       - "SERVICE_CHECK_INTERVAL=15s"
+       - "SERVICE_CHECK_INITIAL_STATUS=passing"
+
+   mapper-snmp:
+      image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.services.mapper.vesadapter.snmpmapper:{{ dcae_docker_msnmp }}"
+      container_name: "static-dcaegen2-services-msnmp"
+      restart: "always"
+      hostname: "static-dcaegen2-services-msnmp"
+      environment:
+       - "DMAAPHOST={{ mr_ip_addr }}"
+       - "CONSUL_HOST=consul"
+       - "CONSUL_PORT=8500"
+       - "CONFIG_BINDING_SERVICE=config_binding_service"
+       - "SERVICE_NAME=static-dcaegen2-services-msnmp"
+       - "HOSTNAME=static-dcaegen2-services-msnmp"
+       - "HOSTALIASES=/etc/host.aliases"
+      labels:
+       - "SERVICE_NAME=static-dcaegen2-services-msnmp"
+       - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/datafile/bin/healthcheck.sh"
+       - "SERVICE_CHECK_INTERVAL=15s"
+       - "SERVICE_CHECK_INITIAL_STATUS=passing"
+
+
+   heartbeat:
+      image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.services.heartbeat:{{ dcae_docker_heartbeat }}"
+      container_name: "static-dcaegen2-services-heartbeat"
+      restart: "always"
+      hostname: "static-dcaegen2-services-heartbeat"
+      environment:
+       - "DMAAPHOST={{ mr_ip_addr }}"
+       - "CONSUL_HOST=consul"
+       - "CONSUL_PORT=8500"
+       - "CONFIG_BINDING_SERVICE=config_binding_service"
+       - "SERVICE_NAME=static-dcaegen2-services-heartbeat"
+       - "HOSTNAME=static-dcaegen2-services-heartbeat"
+       - "HOSTALIASES=/etc/host.aliases"
+      labels:
+       - "SERVICE_NAME=static-dcaegen2-services-heartbeat"
+       - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/datafile/bin/healthcheck.sh"
+       - "SERVICE_CHECK_INTERVAL=15s"      
        - "SERVICE_CHECK_INITIAL_STATUS=passing"
 

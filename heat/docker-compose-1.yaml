@@ -51,7 +51,7 @@ services:
 
 
    config-binding-service:
-      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.platform.configbinding:{{ dcae_docker_cbs }}"
+      image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.configbinding.app-app:{{ dcae_docker_cbs }}"
       container_name: "config_binding_service"
       restart: "always"
       hostname: "config-binding-service"

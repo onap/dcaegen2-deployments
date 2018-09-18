@@ -16,22 +16,25 @@
 #
 #############################################################################
 
-docker login nexus3.onap.org:10001 -u docker -p docker
+docker login {{ nexus_docker_repo }} -u {{ nexus_username }} -p {{ nexus_password }}
 
 docker pull postgres:9.5
 docker pull consul:0.8.3
 docker pull nginx:latest
 docker pull onapdcae/registrator:v7
-docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.platform.configbinding:latest
-docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.collectors.ves.vescollector:latest
-docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.deployments.tca-cdap-container:latest
-docker pull nexus3.onap.org:10001/onap/holmes/engine-management:latest
-docker pull nexus3.onap.org:10001/onap/holmes/rule-management:latest
-docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.deployments.cm-container:latest
-docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.platform.deployment-handler:latest
-docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.platform.policy-handler:latest
-docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.platform.servicechange-handler:latest
-docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.platform.inventory-api:latest
-docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.services.heartbeat:latest
-docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.services.prh.prh-app-server:latest
-docker pull nexus3.onap.org:10001/onap/org.onap.dcaegen2.collectors.snmptrap:latest
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.configbinding.app-app:{{ dcae_docker_cbs }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.ves.vescollector:{{ dcae_docker_ves }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.deployments.tca-cdap-container:{{ dcae_docker_tca }}
+docker pull {{ nexus_docker_repo }}/onap/holmes/engine-management:{{ holmes_docker_em }}
+docker pull {{ nexus_docker_repo }}/onap/holmes/rule-management:{{ holmes_docker_rm }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.inventory-api:{{ dcae_docker_inv }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.servicechange-handler:{{ dcae_docker_sch }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.deployment-handler:{{ dcae_docker_dh }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.policy-handler:{{ dcae_docker_ph }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.snmptrap:{{ dcae_docker_snmptrap }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.services.prh.prh-app-server:{{ dcae_docker_prh }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.hv-ves.hv-collector-main:{{ dcae_docker_hvves }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.datafile.datafile-app-server:{{ dcae_docker_datafile }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.services.mapper.vesadapter.universalvesadaptor:{{ dcae_docker_mua }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.services.mapper.vesadapter.snmpmapper:{{ dcae_docker_msnmp }}
+docker pull {{ nexus_docker_repo }}/onap/org.onap.dcaegen2.services.heartbeat:{{ dcae_docker_heartbeat }}

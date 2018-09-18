@@ -2,7 +2,7 @@ version: '2.1'
 services:
 
    mvp-dcaegen2-collectors-ves:
-      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.collectors.ves.vescollector:{{ dcae_docker_ves }}"
+      image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.collectors.ves.vescollector:{{ dcae_docker_ves }}"
       container_name: "mvp-dcaegen2-collectors-ves"
       restart: "always"
       hostname: "mvp-dcaegen2-collectors-ves"
@@ -23,7 +23,7 @@ services:
 
 
    mvp-dcaegen2-analytics-tca:
-      image: "{{ nexus_docker_repo}}/onap/org.onap.dcaegen2.deployments.tca-cdap-container:{{ dcae_docker_tca }}"
+      image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.deployments.tca-cdap-container:{{ dcae_docker_tca }}"
       container_name: "mvp-dcaegen2-analytics-tca"
       restart: "always"
       hostname: "mvp-dcaegen2-analytics-tca"
@@ -53,7 +53,7 @@ services:
        - "SERVICE_11011_CHECK_INITIAL_STATUS=passing"
 
    mvp-dcaegen2-analytics-holmes-engine-management:
-      image: "{{ nexus_docker_repo}}/onap/holmes/engine-management:{{ holmes_docker_em }}"
+      image: "{{ nexus_docker_repo }}/onap/holmes/engine-management:{{ holmes_docker_em }}"
       container_name: "mvp-dcaegen2-analytics-holmes-engine-management"
       restart: "always"
       hostname: "mvp-dcaegen2-analytics-holmes-engine-management"
@@ -72,7 +72,7 @@ services:
        - "SERVICE_9102_IGNORE=true"
 
    mvp-dcaegen2-analytics-holmes-rule-management:
-      image: "{{ nexus_docker_repo}}/onap/holmes/rule-management:{{ holmes_docker_rm }}"
+      image: "{{ nexus_docker_repo }}/onap/holmes/rule-management:{{ holmes_docker_rm }}"
       container_name: "mvp-dcaegen2-analytics-holmes-rule-management"
       restart: "always"
       hostname: "mvp-dcaegen2-analytics-holmes-rule-management"
