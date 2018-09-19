@@ -438,7 +438,7 @@ curl -v -X PUT -H "Content-Type: application/json" \
 
 
 # SNMP Trap Collector
-SERVICENAME="${SRVCNAME_STATIC_SNMPTRAP}
+SERVICENAME="${SRVCNAME_STATIC_SNMPTRAP}"
 REGKV='{
   "files": {
     "roll_frequency": "day",
@@ -498,7 +498,7 @@ curl -v -X PUT -H "Content-Type: application/json" \
 
 
 # hv-ves collector 
-SERVICENAME="${SRVCNAME_STATIC_HVVES}
+SERVICENAME="${SRVCNAME_STATIC_HVVES}"
 REGKV='{ 
   "dmaap.kafkaBootstrapServers": "{{ mr_ip_addr }}:9092", 
   "collector.routing": {
@@ -512,7 +512,7 @@ curl -v -X PUT -H "Content-Type: application/json" \
 
 
 # data file collector
-SERVICENAME="${SRVCNAME_STATIC_DF}
+SERVICENAME="${SRVCNAME_STATIC_DF}"
 REGKV='{
 }'
 curl -v -X PUT -H "Content-Type: application/json" \
@@ -521,7 +521,7 @@ curl -v -X PUT -H "Content-Type: application/json" \
 
 
 # PNF Registration Handler
-SERVICENAME="${SRVCNAME_STATIC_PRH}
+SERVICENAME="${SRVCNAME_STATIC_PRH}"
 REGKV='{
   "dmaap.dmaapProducerConfiguration.dmaapTopicName": "/events/unauthenticated.PNF_READY",
   "dmaap.dmaapConsumerConfiguration.dmaapHostName": "{{ mr_ip_addr }}",
