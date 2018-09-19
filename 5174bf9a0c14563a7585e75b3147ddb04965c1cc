@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_01b2884b",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2018-09-19T15:09:03Z",
+      "side": 1,
+      "message": "I think this is missing a leading \".\", as in \"./blueprints/\"",
+      "revId": "5174bf9a0c14563a7585e75b3147ddb04965c1cc",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
