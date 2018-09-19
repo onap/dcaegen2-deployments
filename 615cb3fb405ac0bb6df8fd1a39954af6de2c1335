@@ -16,6 +16,24 @@
       "revId": "615cb3fb405ac0bb6df8fd1a39954af6de2c1335",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_a2e077cd",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 2813
+      },
+      "writtenOn": "2018-09-19T12:48:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a76adc5_62b33f0a",
+      "revId": "615cb3fb405ac0bb6df8fd1a39954af6de2c1335",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
