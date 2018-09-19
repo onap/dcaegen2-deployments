@@ -217,12 +217,13 @@ PH_PID=$!
 wait ${INV_PID} ${DH_PID} ${PH_PID}
 
 # Deploy service components
-# tca, ves, prh, hv-ves can be deployed simultaneously
+# tca, ves, prh, hv-ves, datafile-collector can be deployed simultaneously
 deploy tca k8s-tca.yaml k8s-tca-inputs.yaml &
 deploy ves k8s-ves.yaml k8s-ves-inputs.yaml &
 deploy snmptrap k8s-snmptrap.yaml k8s-snmptrap-inputs.yaml &
 deploy prh k8s-prh.yaml k8s-prh-inputs.yaml &
 deploy hv-ves k8s-hv-ves.yaml k8s-hv_ves-inputs.yaml &
+deploy datafile-collector k8s-datafile-collector.yaml k8s-datafile-collector-input.yaml &
 # holmes_rules must be deployed before holmes_engine, but holmes_rules can go in parallel with other service components
 deploy holmes_rules k8s-holmes-rules.yaml k8s-holmes_rules-inputs.yaml
 deploy holmes_engine k8s-holmes-engine.yaml k8s-holmes_engine-inputs.yaml
