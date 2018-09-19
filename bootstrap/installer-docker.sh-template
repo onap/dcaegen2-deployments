@@ -383,7 +383,7 @@ curl -X PUT -H "Content-Type: application/json" --data-binary '[{"username":"doc
 # Install platform Docker host
 # Note we're still in the "consul" directory, which is init'ed for talking to CM
 
-set +e 
+set +e
 # Docker host for platform containers
 cfy install -v -p ./blueprints/docker/${DOCKERBP} -b DockerBP -d DockerPlatform -i ../${INPUTS} -i "registered_dockerhost_name=platform_dockerhost" -i "registrator_image=onapdcae/registrator:v7" -i "location_id=${LOCATION}" -i "node_name=dokp00" -i "target_datacenter=${LOCATION}"
 
@@ -451,7 +451,7 @@ cfy install -p ./blueprints/hrules/${HRULESBP} -b hrules -d hrules -i ../config/
 cfy install -p ./blueprints/hengine/${HENGINEBP} -b hengine -d hengine -i ../config/he-ip.yaml
 
 # PRH
-cfy install -p ./blueprints/prh/${PRHBP} -b prh -d prh -i ../config/prhinput.yaml
+cfy install -p ./blueprints/prh/${PRHBP} -b prh -d prh -i ../config/prh-input.yaml
 
 # HV-VES
 cfy install -p ./blueprints/hv-ves/${HVVESBP} -b hv-ves -d hv-ves
