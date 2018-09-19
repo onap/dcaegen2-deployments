@@ -41,6 +41,7 @@ HRULESBP=holmes-rules.yaml
 HENGINEBP=holmes-engine.yaml
 PRHBP=prh.yaml
 HVVESBP=hv-ves.yaml
+DFCBP=datafile-collector.yaml
 
 DOCKERBPURL="${PLATBPSRC}/${DOCKERBP}"
 CBSBPURL="${PLATBPSRC}/${CBSBP}"
@@ -56,6 +57,7 @@ HRULESBPURL="${PLATBPSRC}/${HRULESBP}"
 HENGINEBPURL="${PLATBPSRC}/${HENGINEBP}"
 PRHBPURL="${PLATBPSRC}/${PRHBP}"
 HVVESBPURL="${PLATBPSRC}/${HVVESBP}"
+DFCBPURL="${PLATBPSRC}/${DFCBP}"
 
 LOCATIONID=$(printenv LOCATION)
 
@@ -375,6 +377,7 @@ wget -P ./blueprints/hrules/ ${HRULESBPURL}
 wget -P ./blueprints/hengine/ ${HENGINEBPURL}
 wget -P ./blueprints/prh/ ${PRHBPURL}
 wget -P ./blueprints/hv-ves/ ${HVVESBPURL}
+wget -P ./blueprints/datafile-collector/ ${DFCBPURL}
 
 
 # Set up the credentials for access to the Docker registry
@@ -383,7 +386,7 @@ curl -X PUT -H "Content-Type: application/json" --data-binary '[{"username":"doc
 # Install platform Docker host
 # Note we're still in the "consul" directory, which is init'ed for talking to CM
 
-set +e 
+set +e
 # Docker host for platform containers
 cfy install -v -p ./blueprints/docker/${DOCKERBP} -b DockerBP -d DockerPlatform -i ../${INPUTS} -i "registered_dockerhost_name=platform_dockerhost" -i "registrator_image=onapdcae/registrator:v7" -i "location_id=${LOCATION}" -i "node_name=dokp00" -i "target_datacenter=${LOCATION}"
 
@@ -451,10 +454,13 @@ cfy install -p ./blueprints/hrules/${HRULESBP} -b hrules -d hrules -i ../config/
 cfy install -p ./blueprints/hengine/${HENGINEBP} -b hengine -d hengine -i ../config/he-ip.yaml
 
 # PRH
-cfy install -p ./blueprints/prh/${PRHBP} -b prh -d prh -i ../config/prhinput.yaml
+cfy install -p ./blueprints/prh/${PRHBP} -b prh -d prh -i ../config/prh-input.yaml
 
 # HV-VES
 cfy install -p ./blueprints/hv-ves/${HVVESBP} -b hv-ves -d hv-ves
+
+# DATAFILE-COLLECTOR
+cfy install -p /blueprints/hv-ves/${DFCBP} -b datafile-collector -d datafile-collector -i ../config/datafile-collector-input.yaml
 
 
 # write out IP addresses
