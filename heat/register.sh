@@ -531,7 +531,7 @@ REGKV='{
   "aai.aaiClientConfiguration.aaiBasePath": "/aai/v12",
   "dmaap.dmaapConsumerConfiguration.timeoutMs": -1,
   "dmaap.dmaapProducerConfiguration.dmaapPortNumber": 3904,
-  "aai.aaiClientConfiguration.aaiHost": "{{ aai_ip_addr }}",
+  "aai.aaiClientConfiguration.aaiHost": "{{ aai1_ip_addr }}",
   "dmaap.dmaapConsumerConfiguration.dmaapUserPassword": "admin",
   "dmaap.dmaapProducerConfiguration.dmaapProtocol": "http",
   "aai.aaiClientConfiguration.aaiIgnoreSslCertificateErrors": true,
