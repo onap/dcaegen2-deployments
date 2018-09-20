@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_cdea7ad7",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-09-20T14:51:10Z",
+      "side": 1,
+      "message": "This blueprint doesn\u0027t exist and should be dockerized version (type/plugins will changes).  Also this script is only used for Heat based deployment involving cloudify which is not used in current deployment.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "856f78fb13f75e8b1c38f8e2d5b052634f7f0e0f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_8da7a2bc",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-09-20T14:51:10Z",
+      "side": 1,
+      "message": "Dependent on https://gerrit.onap.org/r/#/c/67401/ to be merged. And the input file (k8s-datafile-collector-input.yaml) for OOM K8S deploy should go under OOm repo here - https://git.onap.org/oom/tree/kubernetes/dcaegen2/charts/dcae-bootstrap/resources/inputs",
+      "range": {
+        "startLine": 226,
+        "startChar": 54,
+        "endLine": 226,
+        "endChar": 87
+      },
+      "revId": "856f78fb13f75e8b1c38f8e2d5b052634f7f0e0f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
