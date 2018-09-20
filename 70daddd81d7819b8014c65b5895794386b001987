@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_5b114502",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 3
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 4407
+      },
+      "writtenOn": "2018-09-20T08:20:33Z",
+      "side": 1,
+      "message": "This should be datafile-collector",
+      "range": {
+        "startLine": 463,
+        "startChar": 27,
+        "endLine": 463,
+        "endChar": 35
+      },
+      "revId": "70daddd81d7819b8014c65b5895794386b001987",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
