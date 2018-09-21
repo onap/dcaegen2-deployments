@@ -18,12 +18,11 @@
 
 FROM python:2.7.15 as build
 
-ARG PNDARELEASE=develop
+ARG PNDACLITAG=2.0.0rc1
+ARG PLATFORMSALTTAG=5.0.0rc2
 
-# RUN git clone -b $PNDARELEASE https://github.com/pndaproject/pnda-cli.git
-# Use this repository temporary until it's merged into PNDA upstream
-RUN git clone -b existing-network https://github.com/donaldh/pnda-cli.git
-RUN git clone -b $PNDARELEASE https://github.com/pndaproject/platform-salt.git
+RUN git clone -b $PNDACLITAG https://github.com/pndaproject/pnda-cli.git
+RUN git clone -b $PLATFORMSALTTAG https://github.com/pndaproject/platform-salt.git
 
 RUN pip2 install --no-cache-dir -r pnda-cli/cli/requirements.txt --install-option="--prefix=/install"
 
