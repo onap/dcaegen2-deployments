@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1a76adc5_2fb2fee4",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2813
+      },
+      "writtenOn": "2018-09-21T07:04:07Z",
+      "side": 1,
+      "message": "So it means that this script won\u0027t be executed.\nCan I bring something if this changes will be merged?\nRemove those all changes or leave them as before?",
+      "parentUuid": "1a76adc5_cdea7ad7",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "856f78fb13f75e8b1c38f8e2d5b052634f7f0e0f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a76adc5_8da7a2bc",
         "filename": "k8s-bootstrap-container/bootstrap.sh",
         "patchSetId": 4
