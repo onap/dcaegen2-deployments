@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1a76adc5_76e1aecf",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-09-21T15:04:33Z",
+      "side": 1,
+      "message": "We can remove this line as the DFC Blueprint for docker is not there.",
+      "parentUuid": "1a76adc5_2fb2fee4",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "856f78fb13f75e8b1c38f8e2d5b052634f7f0e0f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a76adc5_8da7a2bc",
         "filename": "k8s-bootstrap-container/bootstrap.sh",
         "patchSetId": 4
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "This ticket (https://gerrit.onap.org/r/#/c/67419/ ) is an answer to your comment about k8s inputs definition in OOM project. We have synchronized in deployment scripts definitions of filenames with oom static files paths/name (You know what I mean). Please, check this :)",
       "parentUuid": "1a76adc5_8da7a2bc",
+      "range": {
+        "startLine": 226,
+        "startChar": 54,
+        "endLine": 226,
+        "endChar": 87
+      },
+      "revId": "856f78fb13f75e8b1c38f8e2d5b052634f7f0e0f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_f6ccde63",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-09-21T15:04:33Z",
+      "side": 1,
+      "message": "Thanks.. Noticed it after I commented..Name are matching; but the PR is not merged by OOM team (likely due to verify build issue).",
+      "parentUuid": "1a76adc5_4f8bba1e",
       "range": {
         "startLine": 226,
         "startChar": 54,
