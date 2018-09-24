@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_ad04d118",
+        "filename": "bootstrap/installer-docker.sh-template",
+        "patchSetId": 6
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 4593
+      },
+      "writtenOn": "2018-09-24T13:48:09Z",
+      "side": 1,
+      "message": "Why change PRH path in a DFC commit?",
+      "revId": "42517301e671cc1ba96fc9e02de2985af57e9736",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
