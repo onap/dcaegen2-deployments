@@ -16,6 +16,8 @@ services:
        - "SERVICE_8080_CHECK_HTTP=/dcae-service-types"
        - "SERVICE_8080_CHECK_INTERVAL=15s"
        - "SERVICE_8080_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - "./tls/shared:/opt/tls/shared"
 
 
    service-change-handler:
@@ -33,6 +35,8 @@ services:
        - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/health.sh"
        - "SERVICE_CHECK_INTERVAL=15s"
        - "SERVICE_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - "./tls/shared:/opt/tls/shared"
 
 
    deployment_handler:
@@ -50,6 +54,8 @@ services:
        - "SERVICE_8443_CHECK_HTTP=/"
        - "SERVICE_8443_CHECK_INTERVAL=15s"
        - "SERVICE_8443_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - "./tls/shared:/opt/tls/shared"
 
 
    policy_handler:
@@ -64,4 +70,6 @@ services:
        - "SERVICE_25577_CHECK_HTTP=/healthcheck"
        - "SERVICE_25577_CHECK_INTERVAL=15s"
        - "SERVICE_25577_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - "./tls/shared:/opt/tls/shared"
 
