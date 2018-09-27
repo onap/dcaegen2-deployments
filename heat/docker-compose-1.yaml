@@ -61,9 +61,19 @@ services:
        - "10000:10000"
       depends_on:
        - "consul"
+       - "tls-init"
       labels:
        - "SERVICE_10000_NAME=config_binding_service"
        - "SERVICE_10000_CHECK_HTTP=/healthcheck"
        - "SERVICE_10000_CHECK_INTERVAL=15s"
        - "SERVICE_10000_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - ./tls/shared:/opt/tls/shared
 
+
+   tls-init:
+      image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.platform.configbinding.app-app:{{ dcae_docker_tls }}"
+      container_name: "tls-init"
+      hostname: "tls-init"
+      volumes:
+       - ./tls/shared:/opt/tls/shared

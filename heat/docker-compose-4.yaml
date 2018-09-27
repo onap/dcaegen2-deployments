@@ -20,6 +20,8 @@ services:
        - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/snmptrap/bin/snmptrapd.sh status"
        - "SERVICE_CHECK_INTERVAL=300s"
        - "SERVICE_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - ./tls/shared:/opt/tls/shared
 
 
    prh:
@@ -42,6 +44,8 @@ services:
        - "SERVICE_8082_CHECK_HTTP=/heartbeat"
        - "SERVICE_8082_CHECK_INTERVAL=15s"
        - "SERVICE_8082_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - ./tls/shared:/opt/tls/shared
 
 
    hvves:
@@ -64,6 +68,8 @@ services:
        - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/hvves/bin/healthcheck.sh"
        - "SERVICE_CHECK_INTERVAL=15s"
        - "SERVICE_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - ./tls/shared:/opt/tls/shared
 
 
    datafile:
@@ -84,6 +90,8 @@ services:
        - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/datafile/bin/healthcheck.sh"
        - "SERVICE_CHECK_INTERVAL=15s"
        - "SERVICE_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - ./tls/shared:/opt/tls/shared
 
    mapper-universalvesadaptor:
       image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.services.mapper.vesadapter.universalvesadaptor:{{ dcae_docker_mua }}"
@@ -103,6 +111,8 @@ services:
        - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/datafile/bin/healthcheck.sh"
        - "SERVICE_CHECK_INTERVAL=15s"
        - "SERVICE_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - ./tls/shared:/opt/tls/shared
 
    mapper-snmp:
       image: "{{ nexus_docker_repo }}/onap/org.onap.dcaegen2.services.mapper.vesadapter.snmpmapper:{{ dcae_docker_msnmp }}"
@@ -122,6 +132,8 @@ services:
        - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/datafile/bin/healthcheck.sh"
        - "SERVICE_CHECK_INTERVAL=15s"
        - "SERVICE_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - ./tls/shared:/opt/tls/shared
 
 
    heartbeat:
@@ -142,4 +154,6 @@ services:
        - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/datafile/bin/healthcheck.sh"
        - "SERVICE_CHECK_INTERVAL=15s"      
        - "SERVICE_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - ./tls/shared:/opt/tls/shared
 
