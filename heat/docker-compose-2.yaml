@@ -20,6 +20,8 @@ services:
        - "SERVICE_8080_CHECK_HTTP=/healthcheck"
        - "SERVICE_8080_CHECK_INTERVAL=15s"
        - "SERVICE_8080_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - "./tls/shared:/opt/tls/shared"
 
 
    mvp-dcaegen2-analytics-tca:
@@ -51,6 +53,8 @@ services:
        - "SERVICE_11011_CHECK_HTTP=/cdap/ns/cdap_tca_hi_lo"
        - "SERVICE_11011_CHECK_INTERVAL=15s"
        - "SERVICE_11011_CHECK_INITIAL_STATUS=passing"
+      volumes:
+       - "./tls/shared:/opt/tls/shared"
 
    mvp-dcaegen2-analytics-holmes-engine-management:
       image: "{{ nexus_docker_repo }}/onap/holmes/engine-management:{{ holmes_docker_em }}"
@@ -70,6 +74,8 @@ services:
        - "9102:9102"
       labels:
        - "SERVICE_9102_IGNORE=true"
+      volumes:
+       - "./tls/shared:/opt/tls/shared"
 
    mvp-dcaegen2-analytics-holmes-rule-management:
       image: "{{ nexus_docker_repo }}/onap/holmes/rule-management:{{ holmes_docker_rm }}"
@@ -89,4 +95,5 @@ services:
        - "9101:9101"
       labels:
        - "SERVICE_9101_IGNORE=true"
-
+      volumes:
+       - "./tls/shared:/opt/tls/shared"
