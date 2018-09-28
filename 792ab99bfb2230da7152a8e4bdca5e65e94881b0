@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a76adc5_989d7a5c",
+        "filename": "heat/docker-compose-3.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1071
+      },
+      "writtenOn": "2018-09-28T14:02:13Z",
+      "side": 1,
+      "message": "Can you remind me how inventory gets its configuration in this deployment?  It\u0027s critical that this path here matches what\u0027s in the configuration.  Same with SCH.",
+      "revId": "792ab99bfb2230da7152a8e4bdca5e65e94881b0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a76adc5_7d8170fa",
         "filename": "heat/docker-compose-3.yaml",
         "patchSetId": 2
