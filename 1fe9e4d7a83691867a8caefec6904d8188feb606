@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bada0100_39ec93c7",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-10-01T15:19:44Z",
+      "side": 1,
+      "message": "The current input name in oom tree is k8s-datafile-collector-input --\u003e https://git.onap.org/oom/tree/kubernetes/dcaegen2/charts/dcae-bootstrap/resources/inputs/k8s-datafile-collector-input.yaml\n\nChanging to plural will break the deployment. As this is cosmetic change, will suggest to modify this post R3 as it involves more than one project repo update.",
+      "range": {
+        "startLine": 226,
+        "startChar": 54,
+        "endLine": 226,
+        "endChar": 83
+      },
+      "revId": "1fe9e4d7a83691867a8caefec6904d8188feb606",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
