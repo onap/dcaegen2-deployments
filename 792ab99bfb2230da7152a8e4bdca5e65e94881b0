@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bada0100_df952789",
+        "filename": "heat/docker-compose-3.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-10-01T21:06:01Z",
+      "side": 1,
+      "message": "The configuration comes from this script - https://git.onap.org/dcaegen2/deployments/tree/heat/register.sh \n\nPls do verify if any updates needed here... Alex - pls check same for PH and DH.",
+      "parentUuid": "1a76adc5_989d7a5c",
+      "revId": "792ab99bfb2230da7152a8e4bdca5e65e94881b0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a76adc5_7d8170fa",
         "filename": "heat/docker-compose-3.yaml",
         "patchSetId": 2
