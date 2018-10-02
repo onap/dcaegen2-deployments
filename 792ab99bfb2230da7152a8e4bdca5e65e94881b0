@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "bada0100_376ed7ca",
+        "filename": "heat/docker-compose-3.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1071
+      },
+      "writtenOn": "2018-10-02T17:22:01Z",
+      "side": 1,
+      "message": "@Alex raises good point.  The same maybe the case with service change handler too.  I\u0027m checking.  I thought I put in code to use https without verifying the server side cert...",
+      "parentUuid": "bada0100_b74ac753",
+      "revId": "792ab99bfb2230da7152a8e4bdca5e65e94881b0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a76adc5_7d8170fa",
         "filename": "heat/docker-compose-3.yaml",
         "patchSetId": 2
