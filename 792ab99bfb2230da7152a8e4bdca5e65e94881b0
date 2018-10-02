@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "bada0100_b74ac753",
+        "filename": "heat/docker-compose-3.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1949
+      },
+      "writtenOn": "2018-10-02T17:17:00Z",
+      "side": 1,
+      "message": "@Mike and @Vijay - if we change the inventory to use aaf tls on the https web-server, we will also need to change the https client on deployment-handler to use the aaf cacert to verify the https on inventory - we do not have that functionality at the moment",
+      "parentUuid": "bada0100_774d3f72",
+      "revId": "792ab99bfb2230da7152a8e4bdca5e65e94881b0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a76adc5_7d8170fa",
         "filename": "heat/docker-compose-3.yaml",
         "patchSetId": 2
