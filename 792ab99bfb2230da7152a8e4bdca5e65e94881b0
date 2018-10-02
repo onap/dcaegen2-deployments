@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "bada0100_774d3f72",
+        "filename": "heat/docker-compose-3.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1071
+      },
+      "writtenOn": "2018-10-02T17:10:47Z",
+      "side": 1,
+      "message": "@Vijay if you want inventory to work with https as a server, you\u0027ll need to modify the inventory configuration that you showed me.  The configuration changes need to line up with the compose changes here.  Here are the details about https support with dropwizard:\n\nhttps://www.dropwizard.io/1.0.5/docs/manual/configuration.html#https\n\nI can help you with the configuration modification if are able to help test.",
+      "parentUuid": "bada0100_df952789",
+      "revId": "792ab99bfb2230da7152a8e4bdca5e65e94881b0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a76adc5_7d8170fa",
         "filename": "heat/docker-compose-3.yaml",
         "patchSetId": 2
