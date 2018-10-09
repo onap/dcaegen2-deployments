@@ -16,6 +16,24 @@
       "revId": "6d902d90058494caeb234011b14ce56f4d276d76",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bada0100_eef14696",
+        "filename": "heat/docker-compose-1.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-10-09T15:36:58Z",
+      "side": 1,
+      "message": "Good catch! shld be updated to tls container. will patch it shortly",
+      "parentUuid": "bada0100_2ecaee4f",
+      "revId": "6d902d90058494caeb234011b14ce56f4d276d76",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
