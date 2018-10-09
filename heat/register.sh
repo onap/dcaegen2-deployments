@@ -49,8 +49,8 @@ HOSTNAME_STATIC_PRH="static-dcaegen2-services-prh"
 SRVCNAME_STATIC_PRH="static-dcaegen2-services-prh"
 HOSTNAME_STATIC_HVVES="static-dcaegen2-collectors-hvves"
 SRVCNAME_STATIC_HVVES="static-dcaegen2-collectors-hvves"
-HOSTNAME_STATIC_DF="static-dcaegen2-collectors-df"
-SRVCNAME_STATIC_DF="static-dcaegen2-collectors-df"
+HOSTNAME_STATIC_DFC="static-dcaegen2-collectors-datafile"
+SRVCNAME_STATIC_DFC="static-dcaegen2-collectors-datafile"
 
 
 # registering docker host
@@ -512,9 +512,31 @@ curl -v -X PUT -H "Content-Type: application/json" \
 
 
 # data file collector
-SERVICENAME="${SRVCNAME_STATIC_DF}"
-REGKV='{
-}'
+SERVICENAME="${SRVCNAME_STATIC_DFC}"
+ REGKV='{
+  "dmaap.dmaapConsumerConfiguration.dmaapHostName": "{{ mr_ip_addr }}",
+  "dmaap.dmaapConsumerConfiguration.dmaapPortNumber": 2222,
+  "dmaap.dmaapConsumerConfiguration.dmaapTopicName": "/events/unauthenticated.VES_NOTIFICATION_OUTPUT",
+  "dmaap.dmaapConsumerConfiguration.dmaapProtocol": "http",
+  "dmaap.dmaapConsumerConfiguration.dmaapUserName": "",
+  "dmaap.dmaapConsumerConfiguration.dmaapUserPassword": "",
+  "dmaap.dmaapConsumerConfiguration.dmaapContentType": "application/json",
+  "dmaap.dmaapConsumerConfiguration.consumerId": "C12",
+  "dmaap.dmaapConsumerConfiguration.consumerGroup": "OpenDcae-c12",
+  "dmaap.dmaapConsumerConfiguration.timeoutMs": -1,
+  "dmaap.dmaapConsumerConfiguration.messageLimit": 1,
+  "dmaap.dmaapProducerConfiguration.dmaapHostName": "{{ dr_ip_addr }}",
+  "dmaap.dmaapProducerConfiguration.dmaapPortNumber": 3907,
+  "dmaap.dmaapProducerConfiguration.dmaapTopicName": "publish",
+  "dmaap.dmaapProducerConfiguration.dmaapProtocol": "https",
+  "dmaap.dmaapProducerConfiguration.dmaapUserName": "dradmin",
+  "dmaap.dmaapProducerConfiguration.dmaapUserPassword": "dradmin",
+  "dmaap.dmaapProducerConfiguration.dmaapContentType": "application/octet-stream",
+  "ftp.ftpesConfiguration.keyCert": "config/ftpKey.jks",
+  "ftp.ftpesConfiguration.keyPassword": "secret",
+  "ftp.ftpesConfiguration.trustedCA": "config/cacerts",
+  "ftp.ftpesConfiguration.trustedCAPassword": "secret"
+ }'
 curl -v -X PUT -H "Content-Type: application/json" \
 --data "${REGKV}" \
 "http://${HOSTNAME_CONSUL}:8500/v1/kv/${SERVICENAME}"
