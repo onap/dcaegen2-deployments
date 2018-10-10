@@ -49,7 +49,67 @@ for wagon in ./wagons/*.wgn; do cfy plugins upload \$wagon ; done
 deactivate
 EOL
 
-wget -O scripts-in-container/build-plugins.sh https://git.onap.org/dcaegen2/deployments/plain/k8s-bootstrap-container/build-plugins.sh
+#wget -O scripts-in-container/build-plugins.sh https://git.onap.org/dcaegen2/deployments/plain/k8s-bootstrap-container/build-plugins.sh
+cat > scripts-in-container/build-plugins.sh << EOL
+#!/bin/bash
+
+# Pull plugin archives from repos
+# Build wagons
+# $1 is the DCAE repo URL
+# $2 is the CCSDK repo URL
+# (This script runs at Docker image build time)
+#
+set -x
+DEST=wagons
+
+# For DCAE, we get zips of the archives and build wagons
+DCAEPLUGINFILES=\
+"\
+relationshipplugin/1.0.0/relationshipplugin-1.0.0.tgz
+dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0.tgz 
+dockerplugin/3.2.0/dockerplugin-3.2.0.tgz \
+"
+
+# For CCSDK, we pull down the wagon files directly
+CCSDKPLUGINFILES=\
+"\
+plugins/pgaas-1.1.0-py27-none-any.wgn
+plugins/sshkeyshare-1.0.0-py27-none-any.wgn
+"
+
+# Build a set of wagon files from archives in a repo
+# $1 -- repo base URL
+# $2 -- list of paths to archive files in the repo
+function build {
+	for plugin in $2
+	do
+		# Could just do wagon create with the archive URL as source,
+		# but can't use a requirements file with that approach
+		mkdir work
+		target=$(basename ${plugin})
+		curl -Ss $1/${plugin} > ${target}
+		tar zxvf ${target} --strip-components=2 -C work
+		wagon create -t tar.gz -o ${DEST}  -r work/requirements.txt --validate ./work
+		rm -rf work
+	done
+}
+
+# Copy a set of wagons from a repo
+# $1 -- repo baseURL
+# $2 -- list of paths to wagons in the repo
+function get_wagons {
+	for wagon in $2
+	do
+		target=$(basename ${wagon})
+		curl -Ss $1/${wagon} > ${DEST}/${target}
+	done
+}
+
+mkdir ${DEST}
+build $1 "${DCAEPLUGINFILES}"
+get_wagons $2 "${CCSDKPLUGINFILES}"
+EOL
+
 chmod 777 scripts-in-container/*
 
 echo "Launching Cloudify Manager container"
