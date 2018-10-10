@@ -197,7 +197,10 @@ REGKV='
   "policy_handler": {
     "deploy_handler": {
         "target_entity": "deployment_handler",
+        "tls_ca_mode": "do_not_verify",
         "max_msg_length_mb": 5,
+        "url" : "https://{{ dcae_ip_addr }}:8188",
+        "tls_ca_mode" : "cert_directory",
         "query": {
           "cfy_tenant_name": "default_tenant"
         }
@@ -214,6 +217,9 @@ REGKV='
     },
     "policy_engine": {
       "path_api": "/pdp/api/",
+      "path_notifications" : "/pdp/notifications",
+      "tls_ca_mode" : "cert_directory",
+      "tls_wss_ca_mode" : "cert_directory",
       "headers": {
         "Environment": "TEST",
         "ClientAuth": "cHl0aG9uOnRlc3Q=",
@@ -222,8 +228,10 @@ REGKV='
         "Authorization": "Basic dGVzdHBkcDphbHBoYTEyMw=="
       },
       "path_pdp": "/pdp/",
-      "url": "http://{{ policy_ip_addr }}:8081",
-      "target_entity": "policy_engine"
+      "url": "https://{{ policy_ip_addr }}:8081",
+      "target_entity": "policy_engine",
+      "tls_wss_ca_mode": "do_not_verify", 
+      "tls_ca_mode": "do_not_verify"
     }
   }
 }'
