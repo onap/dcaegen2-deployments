@@ -55,7 +55,7 @@ SRVCNAME_STATIC_DFC="static-dcaegen2-collectors-datafile"
 
 # registering docker host
 SVC_NAME="dockerhost"
-SVC_IP="$(cat /opt/config/dcae_ip_addr.txt)"
+SVC_IP="$(cat /opt/config/dcae_float_ip.txt)"
 REGREQ="
 {
   \"Name\" : \"${SVC_NAME}\",

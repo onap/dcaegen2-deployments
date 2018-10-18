@@ -36,13 +36,16 @@ services:
    consul:
       image: "consul:0.8.3"
       container_name: "consul"
+      privileged: true
       restart: "always"
       hostname: "consul"
       ports:
        - "8500:8500"
+       - "53:8600/udp"
+       - "53:8600/tcp"
       environment:
        - "DOCKER_HOST=tcp://{{ dcae_ip_addr }}:2376"
-      command: "agent -ui -server -bootstrap-expect 1 -client 0.0.0.0 -log-level trace"
+      command: "agent -ui -server -bootstrap-expect 1 -client 0.0.0.0 -log-level trace -recursor {{ dns_ip_addr }}"
       labels:
        - "SERVICE_8500_NAME=consul"
        - "SERVICE_8500_CHECK_HTTP=/v1/agent/services"
