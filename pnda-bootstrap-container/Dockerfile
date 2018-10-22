@@ -18,8 +18,8 @@
 
 FROM python:2.7.15 as build
 
-ARG PNDACLITAG=2.0.0
-ARG PLATFORMSALTTAG=5.0.0
+ARG PNDACLITAG=release/5.0
+ARG PLATFORMSALTTAG=release/5.0
 
 RUN git clone -b $PNDACLITAG https://github.com/pndaproject/pnda-cli.git
 RUN git clone -b $PLATFORMSALTTAG https://github.com/pndaproject/platform-salt.git
