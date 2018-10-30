@@ -1,0 +1,9 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Julien Barbot <julien@barbot.org>
+Code-Review+1: Fabien Andrieux <krickwix@gmail.com>
+Code-Review+2: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-by: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-at: Tue, 30 Oct 2018 21:21:24 +0000
+Reviewed-on: https://gerrit.onap.org/r/71321
+Project: dcaegen2/deployments
+Branch: refs/heads/master
