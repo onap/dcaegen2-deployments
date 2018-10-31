@@ -50,7 +50,7 @@ limitations under the License.
   <profiles>
     <profile>
       <id>pnda</id>
-      <activation><activeByDefault>true</activeByDefault></activation>
+      <activation><activeByDefault>false</activeByDefault></activation>
       <modules>
         <module>pnda-mirror-container</module>
         <module>pnda-bootstrap-container</module>
