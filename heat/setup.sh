@@ -44,7 +44,7 @@ pip install pip==9.0.3
 cfy profiles use 127.0.0.1 -u admin -p admin -t default_tenant
 cfy status
 cd /tmp/bin
-./build-plugins.sh https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/R3 https://nexus.onap.org/service/local/repositories/raw/content/org.onap.ccsdk.platform.plugins/releases
+./build-plugins.sh https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/R4 https://nexus.onap.org/service/local/repositories/raw/content/org.onap.ccsdk.platform.plugins/releases
 for wagon in ./wagons/*.wgn; do cfy plugins upload \$wagon ; done
 deactivate
 EOL

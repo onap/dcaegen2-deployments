@@ -37,9 +37,6 @@ limitations under the License.
 
   <modules>
      <module>heat</module>
-     <module>scripts</module>
-     <module>cloud_init</module>
-     <module>bootstrap</module>
      <module>redis-cluster-container</module>
      <module>cm-container</module>
      <module>k8s-bootstrap-container</module>
