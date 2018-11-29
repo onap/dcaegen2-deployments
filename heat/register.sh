@@ -533,7 +533,7 @@ SERVICENAME="${SRVCNAME_STATIC_DFC}"
   "dmaap.dmaapConsumerConfiguration.consumerGroup": "OpenDcae-c12",
   "dmaap.dmaapConsumerConfiguration.timeoutMs": -1,
   "dmaap.dmaapConsumerConfiguration.messageLimit": 1,
-  "dmaap.dmaapProducerConfiguration.dmaapHostName": "{{ dr_ip_addr }}",
+  "dmaap.dmaapProducerConfiguration.dmaapHostName": "{{ mr_ip_addr }}",
   "dmaap.dmaapProducerConfiguration.dmaapPortNumber": 3907,
   "dmaap.dmaapProducerConfiguration.dmaapTopicName": "publish",
   "dmaap.dmaapProducerConfiguration.dmaapProtocol": "https",
