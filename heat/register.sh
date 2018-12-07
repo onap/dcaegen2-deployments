@@ -89,6 +89,28 @@ curl -v -X PUT -H 'Content-Type: application/json' \
 "http://${HOSTNAME_CONSUL}:8500/v1/kv/docker_plugin/docker_logins"
 
 
+# registering deployment handler
+SVC_NAME="deployment_handler"
+SVC_IP="$(cat /opt/config/dcae_ip_addr.txt)"
+REGREQ="
+{
+  \"Name\" : \"${SVC_NAME}\",
+  \"ID\" : \"${SVC_NAME}\",
+  \"Address\": \"${SVC_IP}\",
+  \"Port\": 8188,
+  \"Check\" : {
+    \"Name\" : \"${SVC_NAME}_health\",
+    \"Interval\" : \"15s\",
+    \"HTTP\" : \"https://${SVC_IP}:8188/\",
+    \"tls_skip_verify\": true,
+    \"Status\" : \"passing\"
+  }
+}
+"
+curl -v -X PUT -H 'Content-Type: application/json' \
+--data-binary \
+"$REGREQ" "http://${HOSTNAME_CONSUL}:8500/v1/agent/service/register"
+
 
 # registering Holmes services
 SVC_NAME="${SRVCNAME_MVP_HR}"
