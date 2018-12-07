@@ -49,11 +49,6 @@ services:
        - "CLOUDIFY_USER=admin"
       ports:
        - "8188:8443"
-      labels:
-       - "SERVICE_8443_NAME=deployment_handler"
-       - "SERVICE_8443_CHECK_HTTP=/"
-       - "SERVICE_8443_CHECK_INTERVAL=15s"
-       - "SERVICE_8443_CHECK_INITIAL_STATUS=passing"
       volumes:
        - "./tls/shared:/opt/app/dh/etc/cert/"
 
