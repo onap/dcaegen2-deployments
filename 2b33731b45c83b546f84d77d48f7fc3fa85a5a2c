@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9adffdf1_d3d4c4be",
+        "filename": "heat/docker-compose-4.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-12-12T05:23:06Z",
+      "side": 1,
+      "message": "updates looks good. Missed to notice the pg referenced is not included in the any of the docker-compose. Check docker-compose-1.yaml and include similar config either under same file or under docker-compose-4 itself.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 37
+      },
+      "revId": "2b33731b45c83b546f84d77d48f7fc3fa85a5a2c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
