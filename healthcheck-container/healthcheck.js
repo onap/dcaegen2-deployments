@@ -14,8 +14,7 @@ CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 */
 
-//Expect ONAP and DCAE namespaces and Helm "release" name to be passed via environment variables
-// 
+// Expect ONAP and DCAE namespaces and Helm "release" name to be passed via environment variables
 const ONAP_NS = process.env.ONAP_NAMESPACE || 'default';
 const DCAE_NS = process.env.DCAE_NAMESPACE || process.env.ONAP_NAMESPACE || 'default';
 const HELM_REL = process.env.HELM_RELEASE || '';
@@ -30,33 +29,12 @@ const helmDeps =
 		'dcae-cloudify-manager'
 	];
 
-// List of deployments expected to be created via Cloudify Manager
-const dcaeDeps  = 
-	[
-		'dep-config-binding-service',
-		'dep-deployment-handler',
-		'dep-inventory',
-		'dep-service-change-handler',
-		'dep-policy-handler',
-		'dep-dcae-ves-collector',
-		'dep-dcae-tca-analytics',
-		'dep-dcae-prh',
-		'dep-dcae-hv-ves-collector',
-		'dep-dcae-datafile-collector'
-	];
-
 const status = require('./get-status');
 const http = require('http');
 
 // Helm deployments are always in the ONAP namespace and prefixed by Helm release name
 const helmList = helmDeps.map(function(name) {
 	return {namespace: ONAP_NS, deployment: HELM_REL.length > 0 ? HELM_REL + '-' + name : name};
-});
-
-// DCAE deployments via CM don't have a release prefix and are in the DCAE namespace,
-// which can be the same as the ONAP namespace
-const dcaeList = dcaeDeps.map(function(name) {
-	return {namespace: DCAE_NS, deployment: name};
 });
 
 const isHealthy = function(summary) {
@@ -70,8 +48,13 @@ const checkHealth = function (callback) {
 	// If we get responses from k8s but don't find all deployments ready, health status is UNHEALTHY (503)
 	// If we get responses from k8s and all deployments are ready, health status is HEALTHY (200)
 	// This could be a lot more nuanced, but what's here should be sufficient for R2 OOM healthchecking
-	
-	status.getStatusListPromise(helmList.concat(dcaeList))
+
+	// Query k8s to find all the deployments launched by CM (they all have a 'cfydeployment' label)
+	status.getDCAEDeploymentsPromise(DCAE_NS)
+	.then(function(dcaeList) {
+		// Now get status for Helm deployments and CM deployments
+		return status.getStatusListPromise(helmList.concat(dcaeList));
+	})
 	.then(function(body) {
 		callback({status: isHealthy(body) ? HEALTHY : UNHEALTHY, body: body});
 	})
