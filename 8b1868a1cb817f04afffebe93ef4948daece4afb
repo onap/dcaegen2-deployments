@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9adffdf1_39564f2b",
+        "filename": "healthcheck-container/get-status.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1949
+      },
+      "writtenOn": "2018-12-12T22:07:51Z",
+      "side": 1,
+      "message": "did you loose the semicolon \";\" here ?",
+      "range": {
+        "startLine": 25,
+        "startChar": 54,
+        "endLine": 25,
+        "endChar": 56
+      },
+      "revId": "8b1868a1cb817f04afffebe93ef4948daece4afb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9adffdf1_59531339",
+        "filename": "healthcheck-container/get-status.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1949
+      },
+      "writtenOn": "2018-12-12T22:07:51Z",
+      "side": 1,
+      "message": "and here \";\"",
+      "range": {
+        "startLine": 29,
+        "startChar": 21,
+        "endLine": 29,
+        "endChar": 22
+      },
+      "revId": "8b1868a1cb817f04afffebe93ef4948daece4afb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9adffdf1_f933e711",
+        "filename": "healthcheck-container/get-status.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1949
+      },
+      "writtenOn": "2018-12-12T22:07:51Z",
+      "side": 1,
+      "message": "would you prefer using console.error for errors ?",
+      "range": {
+        "startLine": 87,
+        "startChar": 3,
+        "endLine": 87,
+        "endChar": 34
+      },
+      "revId": "8b1868a1cb817f04afffebe93ef4948daece4afb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
