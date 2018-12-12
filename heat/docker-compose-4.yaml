@@ -106,6 +106,10 @@ services:
        - "SERVICE_NAME=static-dcaegen2-services-mua"
        - "HOSTNAME=static-dcaegen2-services-mua"
        - "HOSTALIASES=/etc/host.aliases"
+       - "MR_DEFAULT_PORT_NUMBER=3904"
+       - "URL_JDBC=jdbc:postgresql://{{dcae_ip_addr}}:5433/inventory"
+       - "JDBC_USERNAME=inventory"
+       - "JDBC_PASSWORD=inventorypwd"
       labels:
        - "SERVICE_NAME=static-dcaegen2-services-mua"
        - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/datafile/bin/healthcheck.sh"
@@ -127,6 +131,9 @@ services:
        - "SERVICE_NAME=static-dcaegen2-services-msnmp"
        - "HOSTNAME=static-dcaegen2-services-msnmp"
        - "HOSTALIASES=/etc/host.aliases"
+       - "URL_JDBC=jdbc:postgresql://{{dcae_ip_addr}}:5433/inventory"
+       - "JDBC_USERNAME=inventory"
+       - "JDBC_PASSWORD=inventorypwd"
       labels:
        - "SERVICE_NAME=static-dcaegen2-services-msnmp"
        - "SERVICE_CHECK_DOCKER_SCRIPT=/opt/app/datafile/bin/healthcheck.sh"
