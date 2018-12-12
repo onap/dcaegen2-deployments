@@ -22,6 +22,30 @@
       "revId": "2b33731b45c83b546f84d77d48f7fc3fa85a5a2c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9adffdf1_6efacf76",
+        "filename": "heat/docker-compose-4.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1539
+      },
+      "writtenOn": "2018-12-12T12:55:15Z",
+      "side": 1,
+      "message": "Hi Vijay,\n\nwe are using the same instance of pgInventory as in docker-compose-1.yaml so we don\u0027t want to create new instance for pg \"",
+      "parentUuid": "9adffdf1_d3d4c4be",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 37
+      },
+      "revId": "2b33731b45c83b546f84d77d48f7fc3fa85a5a2c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
