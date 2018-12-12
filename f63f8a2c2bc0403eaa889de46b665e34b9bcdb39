@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9adffdf1_b30a6077",
+        "filename": "heat/docker-compose-4.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-12-12T04:02:01Z",
+      "side": 1,
+      "message": "replace with {{ dcae_ip_addr }}",
+      "range": {
+        "startLine": 110,
+        "startChar": 37,
+        "endLine": 110,
+        "endChar": 45
+      },
+      "revId": "f63f8a2c2bc0403eaa889de46b665e34b9bcdb39",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9adffdf1_d30fe486",
+        "filename": "heat/docker-compose-4.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2018-12-12T04:02:01Z",
+      "side": 1,
+      "message": "replace with {{ dcae_ip_addr }}",
+      "range": {
+        "startLine": 134,
+        "startChar": 37,
+        "endLine": 134,
+        "endChar": 45
+      },
+      "revId": "f63f8a2c2bc0403eaa889de46b665e34b9bcdb39",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
