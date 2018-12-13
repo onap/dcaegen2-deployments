@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9adffdf1_e870f2dd",
+        "filename": "healthcheck-container/Dockerfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2018-12-13T18:33:32Z",
+      "side": 1,
+      "message": "Major release 10 is the current \"long-term support\" release, major release 8 was the previous \"long-term support\" release.\n(If I recall correctly, node versioning isn\u0027t strictly semantic versioning.)",
+      "parentUuid": "9adffdf1_a8250a0a",
+      "revId": "e60d88b5821a75754b60fd3b004da08f221a3fc6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9adffdf1_c8816ec4",
         "filename": "healthcheck-container/get-status.js",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-12-13T15:23:25Z",
       "side": 1,
       "message": "Am I reading this correctly...you are limiting the response to contain 1K items and expecting the response to not contain more because there is no code to paginate through.  Just want to double check that I understand this impl.",
+      "revId": "e60d88b5821a75754b60fd3b004da08f221a3fc6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9adffdf1_88604602",
+        "filename": "healthcheck-container/get-status.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2018-12-13T18:33:32Z",
+      "side": 1,
+      "message": "You\u0027re reading it correctly.\n\nThe Kubernetes API documentation is unclear about what happens if the \"limit\" parameter is not provided.  The documentation that I found doesn\u0027t say if there\u0027s a default limit.  I put in the limit parameter and set it to a high value as a defense against the possibility that there was a relatively small default value. (The documentation does say that \"some servers\" might not honor the limit and will send everything regardless of the limit setting.)  It\u0027s possible that leaving off the limit would give everything--I just didn\u0027t find a clear statement to that effect.\n\nThe healthcheck is used in the integration testing environment to validate that DCAE has come up properly.  1000 deployments won\u0027t happen in that environment, at least not intentionally.",
+      "parentUuid": "9adffdf1_c8816ec4",
       "revId": "e60d88b5821a75754b60fd3b004da08f221a3fc6",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
