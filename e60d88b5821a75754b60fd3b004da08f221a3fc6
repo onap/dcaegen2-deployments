@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9adffdf1_a8250a0a",
+        "filename": "healthcheck-container/Dockerfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1071
+      },
+      "writtenOn": "2018-12-13T15:23:25Z",
+      "side": 1,
+      "message": "Wow big leap",
+      "revId": "e60d88b5821a75754b60fd3b004da08f221a3fc6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9adffdf1_c8816ec4",
+        "filename": "healthcheck-container/get-status.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1071
+      },
+      "writtenOn": "2018-12-13T15:23:25Z",
+      "side": 1,
+      "message": "Am I reading this correctly...you are limiting the response to contain 1K items and expecting the response to not contain more because there is no code to paginate through.  Just want to double check that I understand this impl.",
+      "revId": "e60d88b5821a75754b60fd3b004da08f221a3fc6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
