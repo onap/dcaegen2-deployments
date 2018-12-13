@@ -19,11 +19,14 @@ See the License for the specific language governing permissions and limitations 
  */
 
 const fs = require('fs');
-const request = require('request');
+const https = require('https');
 
 const K8S_CREDS = '/var/run/secrets/kubernetes.io/serviceaccount';
-const K8S_API = 'https://kubernetes.default.svc.cluster.local/';	// Full name to match cert for TLS
+const K8S_HOST = 'kubernetes.default.svc.cluster.local';	// Full name to match cert for TLS
 const K8S_PATH = 'apis/apps/v1beta2/namespaces/';
+
+const CFY_LABEL = 'cfydeployment';		// All k8s deployments created by Cloudify--and only k8s deployments created by Cloudify--have this label
+const MAX_DEPS = 1000;		// Maximum number of k8s deployments to return from a query to k8s
 
 //Get token and CA cert
 const ca = fs.readFileSync(K8S_CREDS + '/ca.crt');
@@ -65,24 +68,31 @@ const summarizeDeployment = function(deployment) {
 };
 
 const queryKubernetes = function(path, callback) {
-	// Make request to Kubernetes
-	
+	// Make GET request to Kubernetes API
 	const options = {
-		url: K8S_API + path,
+		host: K8S_HOST,
+		path: "/" + path,
 		ca : ca,
 		headers: {
 			Authorization: 'bearer ' + token
-		},
-		json: true
-	};
-	console.log ("request url: " + options.url);
-	request(options, function(error, res, body) {
-		console.log ("status: " + (res && res.statusCode) ? res.statusCode : "NONE");
-		if (error) {
-			console.log("error: " + error);
 		}
-		callback(error, res, body);
+	};
+	console.log ("request url: " + options.host + options.path);
+	const req = https.get(options, function(resp) {
+		let rawBody = "";
+		resp.on("data", function(data) {
+			rawBody += data;
+		});
+		resp.on("error", function (error) {
+			console.error("error: " + error);
+			callback(error, null, null)
+		});
+		resp.on("end", function() {
+			console.log ("status: " + resp.statusCode ? resp.statusCode: "NONE")
+			callback(null, resp, JSON.parse(rawBody));
+		});
 	});
+	req.end();
 };
 
 const getStatus = function(path, extract, callback) {
@@ -139,3 +149,25 @@ exports.getStatusListPromise = function (list) {
 	    return summarizeDeploymentList({items: results});
 	});
 }
+
+exports.getDCAEDeploymentsPromise = function (namespace) {
+	// Return list of the form [{namespace: "namespace"}, deployment: "deployment_name"].
+	// List contains all k8s deployments in the specified namespace that were deployed
+	// by Cloudify, based on Cloudify's use of a "marker" label on each k8s deployment that
+	// the k8s plugin created.
+
+	return new Promise(function(resolve, reject) {
+		const path = K8S_PATH + namespace + '/deployments?labelSelector=' + CFY_LABEL + '&limit=' + MAX_DEPS
+		queryKubernetes(path, function(error, res, body){
+			if (error) {
+				reject(error);
+			}
+			else if (res.statusCode !== 200) {
+				reject(body);
+			}
+			else {
+				resolve(body.items.map(function(i) {return {namespace : namespace, deployment: i.metadata.name};}));
+			}
+		});
+	});
+};
