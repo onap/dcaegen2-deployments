@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9adffdf1_fe1ae87b",
+        "filename": "healthcheck-container/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1071
+      },
+      "writtenOn": "2018-12-14T15:08:14Z",
+      "side": 0,
+      "message": "For my benefit, why did you remove this line?  Is the thought that the container has only one user anyways so no need to install it to be shared globally?",
+      "revId": "f3f9d04cfd325ac427d7a6a6f1596bc2d5c40970",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
