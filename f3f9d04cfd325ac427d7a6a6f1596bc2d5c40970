@@ -16,6 +16,24 @@
       "revId": "f3f9d04cfd325ac427d7a6a6f1596bc2d5c40970",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9adffdf1_017751a1",
+        "filename": "healthcheck-container/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2018-12-14T16:13:12Z",
+      "side": 0,
+      "message": "The npm install installs any dependencies that are listed in the package.json file. Since there aren\u0027t any, this step isn\u0027t needed at all.",
+      "parentUuid": "9adffdf1_fe1ae87b",
+      "revId": "f3f9d04cfd325ac427d7a6a6f1596bc2d5c40970",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
