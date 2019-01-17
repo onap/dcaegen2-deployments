@@ -7,7 +7,6 @@ set -x
 
 BLUEPRINTS=\
 "
-k8s-config_binding_service.yaml  \
 k8s-deployment_handler.yaml  \
 k8s-holmes-engine.yaml \
 k8s-holmes-rules.yaml \

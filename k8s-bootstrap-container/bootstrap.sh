@@ -201,12 +201,9 @@ set +e
 
 # Deploy platform components
 # Allow for some parallelism to speed up the process.  Probably could be somewhat more aggressive.
-# config_binding_service and pgaas_initdb needed by others, but can execute in parallel
-deploy config_binding_service k8s-config_binding_service.yaml k8s-config_binding_service-inputs.yaml &
-CBS_PID=$!
 deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml &
 PG_PID=$!
-wait ${CBS_PID} ${PG_PID}
+wait ${PG_PID}
 # inventory, deployment_handler, and policy_handler can be deployed simultaneously
 deploy inventory k8s-inventory.yaml k8s-inventory-inputs.yaml &
 INV_PID=$!

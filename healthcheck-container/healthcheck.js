@@ -26,13 +26,13 @@ const UNKNOWN = 503;
 // List of deployments expected to be created via Helm
 const helmDeps =
     [
-        'dcae-cloudify-manager'
+        'dcae-cloudify-manager',
+        'dcae-config-binding-service'
     ];
 
 // List of deployments expected to be created by CM at boot time
 const bootDeps =
     [
-        'dep-config-binding-service',
         'dep-deployment-handler',
         'dep-inventory',
         'dep-service-change-handler',
