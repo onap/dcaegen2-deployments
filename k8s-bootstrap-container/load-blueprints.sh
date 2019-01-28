@@ -10,7 +10,6 @@ BLUEPRINTS=\
 k8s-deployment_handler.yaml  \
 k8s-holmes-engine.yaml \
 k8s-holmes-rules.yaml \
-k8s-inventory.yaml  \
 k8s-policy_handler.yaml \
 k8s-pgaas-initdb.yaml \
 k8s-tca.yaml \

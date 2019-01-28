@@ -204,8 +204,7 @@ set +e
 deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml &
 PG_PID=$!
 wait ${PG_PID}
-# inventory, deployment_handler, and policy_handler can be deployed simultaneously
-deploy inventory k8s-inventory.yaml k8s-inventory-inputs.yaml &
+# deployment_handler and policy_handler can be deployed simultaneously
 INV_PID=$!
 deploy deployment_handler k8s-deployment_handler.yaml k8s-deployment_handler-inputs.yaml &
 DH_PID=$!
