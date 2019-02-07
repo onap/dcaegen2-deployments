@@ -31,8 +31,8 @@ DCAETYPEFILES=\
 "\
 /dcaepolicyplugin/2.3.0/dcaepolicyplugin_types.yaml \
 /relationshipplugin/1.0.0/relationshipplugin_types.yaml \
-/k8splugin/1.4.3/k8splugin_types.yaml \
-/dockerplugin/3.2.0/dockerplugin_types.yaml \
+/k8splugin/1.4.5/k8splugin_types.yaml \
+/dockerplugin/3.2.1/dockerplugin_types.yaml \
 
 "
 

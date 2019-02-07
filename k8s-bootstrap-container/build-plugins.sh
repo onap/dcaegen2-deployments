@@ -31,7 +31,7 @@ DEST=wagons
 # For DCAE, we get zips of the archives and build wagons
 DCAEPLUGINFILES=\
 "\
-k8splugin/1.4.4/k8splugin-1.4.4.tgz
+k8splugin/1.4.5/k8splugin-1.4.5.tgz
 relationshipplugin/1.0.0/relationshipplugin-1.0.0.tgz
 dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0.tgz \
 "

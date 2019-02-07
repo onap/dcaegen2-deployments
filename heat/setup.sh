@@ -67,7 +67,7 @@ DCAEPLUGINFILES=\
 "\
 relationshipplugin/1.0.0/relationshipplugin-1.0.0.tgz
 dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0.tgz 
-dockerplugin/3.2.0/dockerplugin-3.2.0.tgz \
+dockerplugin/3.2.1/dockerplugin-3.2.1.tgz \
 "
 
 # For CCSDK, we pull down the wagon files directly
