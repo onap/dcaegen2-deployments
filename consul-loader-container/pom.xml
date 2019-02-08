@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 ================================================================================
-Copyright (c) 2018 AT&T Intellectual Property. All rights reserved.
+Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
 ================================================================================
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ limitations under the License.
     <version>1.2.0-SNAPSHOT</version>
   </parent>
   <groupId>org.onap.dcaegen2.deployments</groupId>
-  <artifactId>healthcheck-container</artifactId>
-  <name>dcaegen2-deployments-healthcheck-container</name>
-  <version>1.2.4</version>
+  <artifactId>consul-loader-container</artifactId>
+  <name>dcaegen2-deployments-consul-loader-container</name>
+  <version>1.0.0</version>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

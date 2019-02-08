@@ -1,7 +1,7 @@
 {
   "name": "k8s-healthcheck",
   "description": "DCAE healthcheck server",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "main": "healthcheck.js",
   "author": "author",
   "license": "(Apache-2.0)"
