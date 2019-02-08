@@ -1,6 +1,6 @@
 #!/bin/bash
 # ================================================================================
-# Copyright (c) 2018 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2018-2019 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -123,23 +123,14 @@ set -e
 # Consul service registration data
 CBS_REG='{"ID": "dcae-cbs0", "Name": "config_binding_service", "Address": "config-binding-service", "Port": 10000}'
 CBS_REG1='{"ID": "dcae-cbs1", "Name": "config-binding-service", "Address": "config-binding-service", "Port": 10000}'
-INV_REG='{"ID": "dcae-inv0", "Name": "inventory", "Address": "inventory", "Port": 8080}'
 HE_REG='{"ID": "dcae-he0", "Name": "holmes-engine-mgmt", "Address": "holmes-engine-mgmt", "Port": 9102}'
 HR_REG='{"ID": "dcae-hr0", "Name": "holmes-rule-mgmt", "Address": "holmes-rule-mgmt", "Port": 9101}'
-
-# Cloudify Manager will always be in the ONAP namespace.
-CM_REG='{"ID": "dcae-cm0", "Name": "cloudify_manager", "Port": 80, "Address": "dcae-cloudify-manager.'${ONAP_NAMESPACE}'"}'
-# Policy handler will be looked up from a plugin on CM.  If DCAE components are running in a different k8s
-# namespace than CM (which always runs in the common ONAP namespace), then the policy handler address must
-# be qualified with the DCAE namespace.
 PH_REG='{"ID": "dcae-ph0", "Name": "policy_handler", "Port": 25577, "Address": "policy-handler'
 if [ ! -z "${DCAE_NAMESPACE}" ]
 then
 	PH_REG="${PH_REG}.${DCAE_NAMESPACE}"
 fi
 PH_REG="${PH_REG}\"}"
-
-
 
 # Set up profile to access Cloudify Manager
 cfy profiles use -u admin -t default_tenant -p "${CMPASS}"  "${CMADDR}"
@@ -178,7 +169,7 @@ do
 done
 
 # Put service registrations into the local Consul configuration directory
-for sr in CBS_REG CBS_REG1 INV_REG HE_REG HR_REG CM_REG PH_REG
+for sr in CBS_REG CBS_REG1 HE_REG HR_REG PH_REG
 do
   echo '{"service" : ' ${!sr}  ' }'> /opt/consul/config/${sr}.json
 done
@@ -204,13 +195,6 @@ set +e
 deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml &
 PG_PID=$!
 wait ${PG_PID}
-# deployment_handler and policy_handler can be deployed simultaneously
-INV_PID=$!
-deploy deployment_handler k8s-deployment_handler.yaml k8s-deployment_handler-inputs.yaml &
-DH_PID=$!
-deploy policy_handler k8s-policy_handler.yaml k8s-policy_handler-inputs.yaml&
-PH_PID=$!
-wait ${INV_PID} ${DH_PID} ${PH_PID}
 
 # Deploy service components
 # tca, ves, prh, hv-ves, datafile-collector can be deployed simultaneously

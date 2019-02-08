@@ -3,7 +3,7 @@
 ============LICENSE_START=======================================================
 org.onap.dcae
 ================================================================================
-Copyright (c) 2017-2018 AT&T Intellectual Property. All rights reserved.
+Copyright (c) 2017-2019 AT&T Intellectual Property. All rights reserved.
 ================================================================================
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -43,6 +43,7 @@ limitations under the License.
      <module>tca-cdap-container</module>
      <module>healthcheck-container</module>
      <module>tls-init-container</module>
+     <module>consul-loader-container</module>
   </modules>
   <profiles>
     <profile>
@@ -97,7 +98,7 @@ limitations under the License.
           </configuration>
         </plugin>
         <!-- first disable the default Java plugins at various stages -->
-        <!-- maven-resources-plugin is called during "*resource" phases by default behavior.  it prepares 
+        <!-- maven-resources-plugin is called during "*resource" phases by default behavior.  it prepares
          the resources dir.  we do not need it -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -128,7 +129,7 @@ limitations under the License.
             </execution>
           </executions>
         </plugin>
-        <!-- maven-install-plugin is called during "install" phase by default behavior.  it tries to copy stuff under 
+        <!-- maven-install-plugin is called during "install" phase by default behavior.  it tries to copy stuff under
          target dir to ~/.m2.  we do not need it -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>

@@ -29,14 +29,14 @@ const helmDeps =
         'dcae-cloudify-manager',
         'dcae-config-binding-service',
         'dcae-inventory-api',
-        'dcae-servicechange-handler'
+        'dcae-servicechange-handler',
+        'dcae-deployment-handler',
+        'dcae-policy-handler'
     ];
 
 // List of deployments expected to be created by CM at boot time
 const bootDeps =
     [
-        'dep-deployment-handler',
-        'dep-policy-handler',
         'dep-dcae-ves-collector',
         'dep-dcae-tca-analytics',
         'dep-dcae-prh',
