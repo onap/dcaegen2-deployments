@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e76fc522_b691fb85",
+        "filename": "cm-container/get-type-files.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-02-12T03:48:07Z",
+      "side": 1,
+      "message": "cm-container version should be incremented",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 43
+      },
+      "revId": "4d972da44db21e5418ed4820931d6a81a3434b40",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aad80ea6_e0f07d70",
+        "filename": "heat/setup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-02-12T03:48:07Z",
+      "side": 1,
+      "message": "This change is not required as heat setup is no longer used; fine to update though.",
+      "range": {
+        "startLine": 70,
+        "startChar": 1,
+        "endLine": 70,
+        "endChar": 43
+      },
+      "revId": "4d972da44db21e5418ed4820931d6a81a3434b40",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ca26719_a940e241",
+        "filename": "k8s-bootstrap-container/build-plugins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-02-12T03:48:07Z",
+      "side": 1,
+      "message": "k8s bootstrap container version should be incremented also",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 35
+      },
+      "revId": "4d972da44db21e5418ed4820931d6a81a3434b40",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
