@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa34431d_f7fe09d5",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-02-15T21:59:08Z",
+      "side": 1,
+      "message": "2018 \u003d\u003e 2018-2019",
+      "revId": "8268eb811c0f8314574eee1e5bb72bd37e97701e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f46c61ef_11012305",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-02-15T21:59:08Z",
+      "side": 1,
+      "message": "2018-2019",
+      "revId": "8268eb811c0f8314574eee1e5bb72bd37e97701e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3010b4be_960d27be",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-02-15T21:59:08Z",
+      "side": 1,
+      "message": "needs a license block",
+      "revId": "8268eb811c0f8314574eee1e5bb72bd37e97701e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c019528_8594a133",
+        "filename": "k8s-bootstrap-container/load-blueprints.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-02-15T21:59:08Z",
+      "side": 1,
+      "message": "needs a license block",
+      "revId": "8268eb811c0f8314574eee1e5bb72bd37e97701e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "762adda2_6f25a8e2",
+        "filename": "k8s-bootstrap-container/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-02-15T21:59:08Z",
+      "side": 1,
+      "message": "2018-2019",
+      "revId": "8268eb811c0f8314574eee1e5bb72bd37e97701e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8115a63_68ae24bd",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-02-15T21:59:08Z",
+      "side": 1,
+      "message": "2017-2019",
+      "revId": "8268eb811c0f8314574eee1e5bb72bd37e97701e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
