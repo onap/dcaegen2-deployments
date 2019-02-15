@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "05aeec9f_ea02812e",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2019-02-15T22:09:48Z",
+      "side": 1,
+      "message": "I don\u0027t understand why I would put a second license block in the middle of the file.",
+      "parentUuid": "3010b4be_960d27be",
+      "revId": "8268eb811c0f8314574eee1e5bb72bd37e97701e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c019528_8594a133",
         "filename": "k8s-bootstrap-container/load-blueprints.sh",
         "patchSetId": 1
