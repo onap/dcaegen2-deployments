@@ -26,6 +26,10 @@ RUN yum clean all && rm -rf /var/cache/yum/* && yum install gettext git -y
 
 RUN git clone -b $PNDARELEASE https://github.com/pndaproject/pnda.git
 
+COPY pnda-5.0-maint.patch /
+WORKDIR /pnda
+RUN git apply /pnda-5.0-maint.patch
+
 WORKDIR /pnda/mirror
 # Add the -r flag to mirror rpm packages
 RUN ./create_mirror.sh -d $HADOOPDIST -r
