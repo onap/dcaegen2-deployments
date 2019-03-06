@@ -25,7 +25,7 @@
 # Rather than using the 'cfy uninstall' command to run a full 'uninstall' workflow
 # against the deployments, this script uses 'cfy executions' to run a 'stop'
 # stop operation against the nodes in each deployment.  The reason for this is that,
-# at the time this script run, we have no# guarantees about what other components are
+# at the time this script runs, we have no guarantees about what other components are
 # still running.  In particular, a full 'uninstall' will cause API requests to Consul
 # and will raise RecoverableErrors if it cannot connect.  RecoverableErrors send Cloudify
 # into a long retry loop.  Instead, we invoke only the 'stop'
@@ -33,7 +33,7 @@
 # present) but not the Consul API.
 #
 # Note that the script finds all of the deployments known to Cloudify and runs the
-# 'stop' operation on every node
+# 'stop' operation on every k8s node.
 # The result of the script is that all of the k8s entities deployed by Cloudify
 # should be destroyed.  Cloudify Manager itself isn't fully cleaned up (the deployments and
 # blueprints are left), but that doesn't matter because Cloudify Manager will be
@@ -47,7 +47,7 @@ set +e
 # Brittle, but the container is built with an unchanging version of CM,
 # so no real risk of a breaking change
 CMPASS=$(grep 'admin_password:' /etc/cloudify/config.yaml | cut -d ':' -f2 | tr -d ' ')
-TYPENAMES='[dcae.nodes.ContainerizedServiceComponent,dcae.nodes.ContainerizedServiceComponent,dcae.nodes.ContainerizedServiceComponent,dcae.nodes.ContainerizedServiceComponent]'
+TYPENAMES=[\\\"dcae.nodes.ContainerizedServiceComponent\\\",\\\"dcae.nodes.ContainerizedServiceComponentUsingDmaap\\\",\\\"dcae.nodes.ContainerizedPlatformComponent\\\",\\\"dcae.nodes.ContainerizedApplication\\\"]
 
 # Uninstall components managed by Cloudify
 # Get the list of deployment ids known to Cloudify via curl to Cloudify API.
@@ -59,4 +59,4 @@ TYPENAMES='[dcae.nodes.ContainerizedServiceComponent,dcae.nodes.ContainerizedSer
 
 curl -Ss --user admin:$CMPASS -H "Tenant: default_tenant" "localhost/api/v3.1/deployments?_include=id" \
 | /bin/jq .items[].id \
-| xargs -I % sh -c 'cfy executions start -d %  -p type_names=${TYPENAMES} -p operation=cloudify.interfaces.lifecycle.stop execute_operation'
+| xargs -I % sh -c "cfy executions start -d %  -p '{'\\\"type_names\\\":${TYPENAMES},\\\"operation\\\":\\\"cloudify.interfaces.lifecycle.stop\\\"'}' execute_operation"
