@@ -40,7 +40,7 @@ CCSDKTYPEFILES=\
 "\
 /type_files/pgaas/1.1.0/pgaas_types.yaml \
 /type_files/sshkeyshare/sshkey_types.yaml \
-
+/type_files/helm/4.0.0/helm-type.yaml \
 "
 
 mkdir ${DEST}
