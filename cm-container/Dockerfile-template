@@ -25,7 +25,7 @@ ENV CCSDK_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releas
 
 # Store type files locally
 RUN mkdir scripts
-COPY get-type-files.sh dcae-cleanup.sh start-persistent.sh setup-secret.sh scripts/
+COPY scripts/* scripts/
 # Load our type files and the Cloudify 3.4 type files
 # Setup rc.local to set up k8s credentials for CM
 RUN scripts/get-type-files.sh ${TYPE_REPO} ${CCSDK_REPO}\
@@ -34,6 +34,7 @@ RUN scripts/get-type-files.sh ${TYPE_REPO} ${CCSDK_REPO}\
     && chown -R cfyuser:cfyuser /opt/manager/resources/spec/cloudify/3.4\
     && chmod +x scripts/*.sh\
     && echo "/scripts/setup-secret.sh" >> /etc/rc.d/rc.local\
+    && echo "/scripts/set-resolver-rules.sh" >> /etc/rc.d/rc.local\
     && chmod +x /etc/rc.d/rc.local
 # Create mount point for CM config file
 RUN mkdir -p /opt/onap && chown cfyuser:cfyuser /opt/onap
