@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02de0b9f_101bae87",
+        "filename": "cm-container/Dockerfile-template",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-03-26T02:55:23Z",
+      "side": 1,
+      "message": "should we consider moving to newer version?",
+      "range": {
+        "startLine": 20,
+        "startChar": 22,
+        "endLine": 20,
+        "endChar": 39
+      },
+      "revId": "205fc2e449f9bcc2f447c58d2bd15e9b563237d3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
