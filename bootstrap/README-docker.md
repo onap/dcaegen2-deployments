@@ -107,6 +107,7 @@ application_config:
     #    related to policy-engine itself.
     policy_engine :
         url : "https://policy-engine.onap.org:8081"
+        path_decision : "/decision/v1"
         path_pdp : "/pdp/"
         path_api : "/pdp/api/"
         headers :

@@ -238,6 +238,7 @@ REGKV='
       "interval": 600
     },
     "policy_engine": {
+      "path_decision": "/decision/v1",
       "path_api": "/pdp/api/",
       "path_notifications" : "/pdp/notifications",
       "tls_ca_mode" : "cert_directory",
@@ -249,11 +250,8 @@ REGKV='
         "Accept": "application/json",
         "Authorization": "Basic dGVzdHBkcDphbHBoYTEyMw=="
       },
-      "path_pdp": "/pdp/",
       "url": "https://{{ policy_ip_addr }}:8081",
-      "target_entity": "policy_engine",
-      "tls_wss_ca_mode": "do_not_verify", 
-      "tls_ca_mode": "do_not_verify"
+      "target_entity": "policy_engine"
     }
   }
 }'
@@ -527,12 +525,12 @@ curl -v -X PUT -H "Content-Type: application/json" \
 
 
 
-# hv-ves collector 
+# hv-ves collector
 SERVICENAME="${SRVCNAME_STATIC_HVVES}"
-REGKV='{ 
-  "dmaap.kafkaBootstrapServers": "{{ mr_ip_addr }}:9092", 
+REGKV='{
+  "dmaap.kafkaBootstrapServers": "{{ mr_ip_addr }}:9092",
   "collector.routing": {
-    "fromDomain": "HVMEAS", 
+    "fromDomain": "HVMEAS",
     "toTopic": "HV_VES_MEASUREMENTS"
   }
 }'
