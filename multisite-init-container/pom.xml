@@ -25,9 +25,9 @@ limitations under the License.
     <version>1.2.0-SNAPSHOT</version>
   </parent>
   <groupId>org.onap.dcaegen2.deployments</groupId>
-  <artifactId>cm-container</artifactId>
-  <name>dcaegen2-deployments-cm-container</name>
-  <version>1.6.0</version>
+  <artifactId>multisite-init-container</artifactId>
+  <name>dcaegen2-deployments-multisite-init-container</name>
+  <version>1.0.0</version>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

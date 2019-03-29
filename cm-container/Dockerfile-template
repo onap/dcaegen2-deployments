@@ -17,7 +17,7 @@
 # ============LICENSE_END=========================================================
 #
 # ECOMP is a trademark and service mark of AT&T Intellectual Property.
-FROM cloudifyplatform/community:18.7.23
+FROM cloudifyplatform/community:19.01.24
 MAINTAINER maintainer
 
 ENV TYPE_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}

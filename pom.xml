@@ -44,6 +44,7 @@ limitations under the License.
      <module>healthcheck-container</module>
      <module>tls-init-container</module>
      <module>consul-loader-container</module>
+     <module>multisite-init-container</module>
   </modules>
   <profiles>
     <profile>
