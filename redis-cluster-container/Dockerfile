@@ -1,5 +1,5 @@
 # ================================================================================
-# Copyright (c) 2018 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2018-2019 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,9 @@
 # ============LICENSE_END=========================================================
 FROM redis:4.0.8
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get -y update \
+RUN echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list
+RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list
+RUN apt-get -y -o Acquire::Check-Valid-Until=false update \
   && apt-get -y upgrade \
   && apt-get -y --no-install-recommends install ruby wget jq \
   && gem install redis -v 3.3.5 \
