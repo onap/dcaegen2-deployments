@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "934e97f5_926af421",
+        "filename": "bootstrap/README-docker.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-04-02T23:53:12Z",
+      "side": 1,
+      "message": "This module is specific to heat deployment and not used/build currently; is this change intended to be updating different read me instead?",
+      "range": {
+        "startLine": 110,
+        "startChar": 1,
+        "endLine": 110,
+        "endChar": 38
+      },
+      "revId": "30d02e82c80f215fadbedd1a452e4d3eb2a0cf52",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
