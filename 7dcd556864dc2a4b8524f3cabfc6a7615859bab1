@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20c508a9_65f1e06e",
+        "filename": "k8s-bootstrap-container/build-plugins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1907
+      },
+      "writtenOn": "2019-04-03T18:16:06Z",
+      "side": 1,
+      "message": "Should this be 1.4.12 in both places?",
+      "revId": "7dcd556864dc2a4b8524f3cabfc6a7615859bab1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5283e79d_e1a711e9",
+        "filename": "k8s-bootstrap-container/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1907
+      },
+      "writtenOn": "2019-04-03T18:16:06Z",
+      "side": 1,
+      "message": "Should this be 1.4.12 like the other places?",
+      "revId": "7dcd556864dc2a4b8524f3cabfc6a7615859bab1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
