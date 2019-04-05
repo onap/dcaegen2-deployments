@@ -193,6 +193,7 @@ set +e
 # Deploy platform components
 # Allow for some parallelism to speed up the process.  Probably could be somewhat more aggressive.
 deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml &
+deploy dashboard k8s-dashboard.yaml k8s-dashboard-inputs.yaml &
 PG_PID=$!
 wait ${PG_PID}
 
