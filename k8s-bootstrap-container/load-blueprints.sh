@@ -30,7 +30,9 @@ k8s-ves.yaml \
 k8s-snmptrap.yaml \
 k8s-prh.yaml \
 k8s-hv-ves.yaml \
-k8s-datafile-collector.yaml
+k8s-helm-override.yaml \
+k8s-helm.yaml \
+k8s-dashboard.yaml 
 "
 
 BPDEST=blueprints

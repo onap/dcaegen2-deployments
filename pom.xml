@@ -36,7 +36,6 @@ limitations under the License.
   <packaging>pom</packaging>
 
   <modules>
-     <module>heat</module>
      <module>redis-cluster-container</module>
      <module>cm-container</module>
      <module>k8s-bootstrap-container</module>
@@ -46,7 +45,7 @@ limitations under the License.
      <module>consul-loader-container</module>
      <module>multisite-init-container</module>
   </modules>
-  <profiles>
+<!--  <profiles>
     <profile>
       <id>pnda</id>
       <activation><activeByDefault>false</activeByDefault></activation>
@@ -56,6 +55,7 @@ limitations under the License.
       </modules>
     </profile>
   </profiles>
+-->
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
