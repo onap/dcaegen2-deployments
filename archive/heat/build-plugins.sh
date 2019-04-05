@@ -2,7 +2,7 @@
 # ============LICENSE_START=======================================================
 # org.onap.dcae
 # ================================================================================
-# Copyright (c) 2018-2019 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2018 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,22 +29,19 @@ set -x
 DEST=wagons
 
 # For DCAE, we get zips of the archives and build wagons
-# 2 versions of k8s plugin to ease transition
 DCAEPLUGINFILES=\
 "\
-k8splugin/1.4.5/k8splugin-1.4.5.tgz
-k8splugin/1.4.12/k8splugin-1.4.12.tgz
+k8splugin/1.4.3/k8splugin-1.4.3.tgz
 relationshipplugin/1.0.0/relationshipplugin-1.0.0.tgz
-dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0.tgz \
+dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0.tgz 
+dockerplugin/3.2.0/dockerplugin-3.2.0.tgz \
 "
 
 # For CCSDK, we pull down the wagon files directly
 CCSDKPLUGINFILES=\
 "\
 plugins/pgaas-1.1.0-py27-none-any.wgn
-plugins/dmaap-1.3.2-py27-none-any.wgn
 plugins/sshkeyshare-1.0.0-py27-none-any.wgn
-plugins/helm-4.0.0-py27-none-linux_x86_64.wgn
 "
 
 # Build a set of wagon files from archives in a repo
