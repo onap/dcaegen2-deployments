@@ -46,6 +46,30 @@
       "revId": "30d02e82c80f215fadbedd1a452e4d3eb2a0cf52",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95e05307_321edc3f",
+        "filename": "bootstrap/README-docker.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-04-08T16:33:56Z",
+      "side": 1,
+      "message": "Thanks for confirming",
+      "parentUuid": "5bb82231_bec34fcb",
+      "range": {
+        "startLine": 110,
+        "startChar": 1,
+        "endLine": 110,
+        "endChar": 38
+      },
+      "revId": "30d02e82c80f215fadbedd1a452e4d3eb2a0cf52",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
