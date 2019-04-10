@@ -191,11 +191,9 @@ trap - ERR
 set +e
 
 # Deploy platform components
-# Allow for some parallelism to speed up the process.  Probably could be somewhat more aggressive.
-deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml &
-deploy dashboard k8s-dashboard.yaml k8s-dashboard-inputs.yaml &
-PG_PID=$!
-wait ${PG_PID}
+# No opportunity for parallelism here -- dashboard needs pgaas
+deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml
+deploy dashboard k8s-dashboard.yaml k8s-dashboard-inputs.yaml
 
 # Deploy service components
 # tca, ves, prh, hv-ves, datafile-collector can be deployed simultaneously
@@ -204,7 +202,6 @@ deploy ves k8s-ves.yaml k8s-ves-inputs.yaml &
 deploy snmptrap k8s-snmptrap.yaml k8s-snmptrap-inputs.yaml &
 deploy prh k8s-prh.yaml k8s-prh-inputs.yaml &
 deploy hv-ves k8s-hv-ves.yaml k8s-hv_ves-inputs.yaml &
-deploy datafile-collector k8s-datafile-collector.yaml k8s-datafile-collector-inputs.yaml &
 # holmes_rules must be deployed before holmes_engine, but holmes_rules can go in parallel with other service components
 deploy holmes_rules k8s-holmes-rules.yaml k8s-holmes_rules-inputs.yaml
 deploy holmes_engine k8s-holmes-engine.yaml k8s-holmes_engine-inputs.yaml
