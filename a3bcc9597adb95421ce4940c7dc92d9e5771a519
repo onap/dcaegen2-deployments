@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Henrik Andersson <henrik.b.andersson@est.tech>
+Code-Review+2: Jack Lucas <jflucas@research.att.com>
+Submitted-by: Jack Lucas <jflucas@research.att.com>
+Submitted-at: Wed, 10 Apr 2019 11:43:09 +0000
+Reviewed-on: https://gerrit.onap.org/r/84852
+Project: dcaegen2/deployments
+Branch: refs/heads/master
