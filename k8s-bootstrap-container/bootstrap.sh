@@ -186,6 +186,16 @@ do
     install_plugin ${wagon}
 done
 
+# In some oversubscribed cloud environments, we have
+# observed that even though the plugin installations appear
+# to have completed, there are background installation tasks
+# that might still be running.  So we check for running system workflows
+while cm_hasany "executions?is_system_workflow=true&status=pending&status=started&status=queued&status=scheduled"
+do
+    echo "Waiting for running system workflows to complete"
+    sleep 15
+done
+
 # After this point, failures should not stop the script or block later commands
 trap - ERR
 set +e
