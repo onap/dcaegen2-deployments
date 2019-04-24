@@ -1,6 +1,6 @@
 #!/bin/bash
 # ================================================================================
-# Copyright (c) 2018 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2018-2019 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -201,7 +201,7 @@ function tca_poll_policy {
     else
         CONFIG=$(echo "$HTTP_BODY" | jq .config.app_config)
         PREF=$(echo "$HTTP_BODY" | jq .config.app_preferences)
-        POLICY=$(echo "$HTTP_BODY" | jq .policies.items[0].config.content.tca_policy)
+        POLICY=$(echo "$HTTP_BODY" | jq .policies.items[0].config.tca_policy)
 
 
         if [[ "$CONFIG" == "null"  || "$PREF" == "null" ]]; then
