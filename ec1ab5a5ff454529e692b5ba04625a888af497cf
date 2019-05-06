@@ -1,0 +1,11 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Piotr Bochenski <piotr.bochenski@nokia.com>
+Code-Review+1: Marcin Migdal <marcin.migdal@nokia.com>
+Code-Review+1: Piotr Wielebski <piotr.wielebski@nokia.com>
+Code-Review+1: Damian Nowak <damain.nowak@nokia.com>
+Code-Review+2: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-by: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-at: Mon, 06 May 2019 12:01:41 +0000
+Reviewed-on: https://gerrit.onap.org/r/86997
+Project: dcaegen2/deployments
+Branch: refs/heads/dublin
