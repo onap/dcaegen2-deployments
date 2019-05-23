@@ -28,15 +28,13 @@
 set -x
 DEST=wagons
 
-# For DCAE, we get zips of the archives and build wagons
-# 2 versions of k8s plugin to ease transition
+# For DCAE, starting in R5, we pull down wagons directly
 DCAEPLUGINFILES=\
 "\
-k8splugin/1.4.5/k8splugin-1.4.5.tgz
-k8splugin/1.4.13/k8splugin-1.4.13.tgz
-relationshipplugin/1.0.0/relationshipplugin-1.0.0.tgz
-clamppolicyplugin/1.0.0/clamppolicyplugin-1.0.0.tgz
-dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0.tgz \
+k8splugin/1.4.13/k8splugin-1.4.13-py27-none-linux_x86_64.wgn
+relationshipplugin/1.0.0/relationshipplugin-1.0.0-py27-none-any.wgn
+clamppolicyplugin/1.0.0/clamppolicyplugin-1.0.0-py27-none-any.wgn
+dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0-py27-none-any.wgn \
 "
 
 # For CCSDK, we pull down the wagon files directly
@@ -48,6 +46,7 @@ plugins/sshkeyshare-1.0.0-py27-none-any.wgn
 plugins/helm-4.0.0-py27-none-linux_x86_64.wgn
 "
 
+# Not needed in R5
 # Build a set of wagon files from archives in a repo
 # $1 -- repo base URL
 # $2 -- list of paths to archive files in the repo
@@ -77,5 +76,5 @@ function get_wagons {
 }
 
 mkdir ${DEST}
-build $1 "${DCAEPLUGINFILES}"
+get_wagons $1 "${DCAEPLUGINFILES}"
 get_wagons $2 "${CCSDKPLUGINFILES}"
