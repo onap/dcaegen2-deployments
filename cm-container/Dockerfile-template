@@ -33,24 +33,15 @@ RUN scripts/get-type-files.sh ${TYPE_REPO} ${CCSDK_REPO}\
     && curl -Ss https://cloudify.co/spec/cloudify/3.4/types.yaml > /opt/manager/resources/spec/cloudify/3.4/types.yaml\
     && chown -R cfyuser:cfyuser /opt/manager/resources/spec/cloudify/3.4\
     && chmod +x scripts/*.sh\
+    && /scripts/configure-tls.sh\
     && echo "/scripts/setup-secret.sh" >> /etc/rc.d/rc.local\
     && echo "/scripts/set-resolver-rules.sh" >> /etc/rc.d/rc.local\
     && chmod +x /etc/rc.d/rc.local
 # Create mount point for CM config file
 RUN mkdir -p /opt/onap && chown cfyuser:cfyuser /opt/onap
 
-# For HEAT environment, install software needed to use Cloudify CLI 4.2 to install plugins & deploy blueprints locally
-# Install python development-related packages
-RUN yum install -y gcc python-devel python-virtualenv python-pip
-
 # Install jq (used for cleanup--parsing output of CM API call)
 RUN curl -Ss -L "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"  > /bin/jq \
 && chmod +x /bin/jq
-
-# Set up virtualenv and install Cloudify CLI 4.2
-RUN pip install --upgrade pip==9.0.3 \
-    && virtualenv cfy42 \
-    && source cfy42/bin/activate \
-    && pip install cloudify==4.2
 
 CMD ["/scripts/start-persistent.sh"]
