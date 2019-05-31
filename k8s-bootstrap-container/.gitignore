@@ -1,4 +1,4 @@
 .project
 Dockerfile
-.vscode/
+.vscode
 bootstrap-container.code-workspace

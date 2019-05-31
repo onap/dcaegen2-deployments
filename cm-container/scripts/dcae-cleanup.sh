@@ -57,6 +57,6 @@ TYPENAMES=[\\\"dcae.nodes.ContainerizedServiceComponent\\\",\\\"dcae.nodes.Conta
 #
 # xargs -I lets us run the cfy executions command once for each deployment id extracted by jq
 
-curl -Ss --user admin:$CMPASS -H "Tenant: default_tenant" "localhost/api/v3.1/deployments?_include=id" \
+curl -k -Ss --user admin:$CMPASS -H "Tenant: default_tenant" "https://dcae-cloudify-manager/api/v3.1/deployments?_include=id" \
 | /bin/jq .items[].id \
 | xargs -I % sh -c "cfy executions start -d %  -p '{'\\\"type_names\\\":${TYPENAMES},\\\"operation\\\":\\\"cloudify.interfaces.lifecycle.stop\\\"'}' execute_operation"
