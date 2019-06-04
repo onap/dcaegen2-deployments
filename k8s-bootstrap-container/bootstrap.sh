@@ -27,6 +27,26 @@
 #   Input files for components to be installed in /inputs
 #   Configuration JSON files that need to be loaded into Consul in /dcae-configs
 #   Consul is installed in /opt/consul/bin/consul, with base config in /opt/consul/config/00consul.json
+# Optionally, allows:
+#   CM protocol in CMPROTO environment variable (defaults to HTTP)
+#   CM port in CMPORT environment variable (defaults to 80)
+# If CMPROTO is set to "https", bootstrap will use HTTPS to communicate with CM.  Otherwise,
+# it will use HTTP.
+# If CMPROTO is set to "https", the script assumes the CA cert needed to verify the cert
+# presented by CM is mounted at /certs/cacert.pem.
+
+# Set defaults for CM protocol and port
+CMPROTO=${CMPROTO:-http}
+CMPORT=${CMPORT:-80}
+
+# Set up additional parameters for using HTTPS
+CFYTLS=""
+CURLTLS=""
+if [ $CMPROTO = "https" ]
+then
+    CFYTLS="--rest-certificate /certs/cacert.pem --ssl"
+    CURLTLS="--cacert /certs/cacert.pem"
+fi
 
 ### FUNCTION DEFINITIONS ###
 
@@ -45,7 +65,7 @@ function cm_hasany {
     # We use _include=id to limit the amount of data the CM sends back
     # We rely on the "metadata.pagination.total" field in the response
     # for the total number of matching entities
-    COUNT=$(curl -Ss -H "Tenant: default_tenant" --user admin:${CMPASS} "${CMADDR}/api/v3.1/$1&_include=id" \
+    COUNT=$(curl -Ss -H "Tenant: default_tenant" --user admin:${CMPASS} ${CURLTLS} "${CMPROTO}://${CMADDR}:${CMPORT}/api/v3.1/$1&_include=id" \
              | /bin/jq .metadata.pagination.total)
     if (( $COUNT > 0 ))
     then
@@ -133,7 +153,7 @@ fi
 PH_REG="${PH_REG}\"}"
 
 # Set up profile to access Cloudify Manager
-cfy profiles use -u admin -t default_tenant -p "${CMPASS}"  "${CMADDR}"
+cfy profiles use -u admin -t default_tenant -p "${CMPASS}" ${CFYTLS} "${CMADDR}"
 
 # Output status, for debugging purposes
 cfy status
