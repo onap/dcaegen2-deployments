@@ -16,6 +16,11 @@
 
 FROM caskdata/cdap-standalone:4.1.2
 
+ARG USER_GROUP=tca-cdap-group
+ARG NON_ROOT_USER=tca-cdap
+
+#Add a new user and group to allow container to be run as non-root
+RUN addgroup --system ${USER_GROUP} && adduser --system ${NON_ROOT_USER} --ingroup ${USER_GROUP}
 RUN apt-get update && apt-get install -y netcat jq iputils-ping wget vim curl
 COPY get-tca.sh /opt/tca/get-tca.sh
 RUN /opt/tca/get-tca.sh
@@ -33,4 +38,5 @@ RUN chmod 755 /opt/tca/mr-watchdog.sh
 EXPOSE 11011
 EXPOSE 11015
 
+USER ${NON_ROOT_USER}:${USER_GROUP}
 ENTRYPOINT /opt/tca/restart.sh
