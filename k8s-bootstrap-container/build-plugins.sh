@@ -41,7 +41,7 @@ dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0-py27-none-any.wgn \
 CCSDKPLUGINFILES=\
 "\
 plugins/pgaas-1.1.0-py27-none-any.wgn
-plugins/dmaap-1.3.2-py27-none-any.wgn
+plugins/dmaap-1.3.3-py27-none-any.wgn
 plugins/sshkeyshare-1.0.0-py27-none-any.wgn
 plugins/helm-4.0.0-py27-none-linux_x86_64.wgn
 "
