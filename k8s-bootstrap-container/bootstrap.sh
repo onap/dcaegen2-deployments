@@ -220,10 +220,8 @@ done
 trap - ERR
 set +e
 
-# Deploy platform components
-# No opportunity for parallelism here -- dashboard needs pgaas
+# Initialize the DCAE postgres instance
 deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml
-deploy dashboard k8s-dashboard.yaml k8s-dashboard-inputs.yaml
 
 # Deploy service components
 # tca, ves, prh, hv-ves, datafile-collector can be deployed simultaneously

@@ -49,12 +49,12 @@ RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
 
 # Copy scripts
 RUN mkdir scripts
-COPY build-plugins.sh load-blueprints.sh bootstrap.sh uninstall.sh scripts/
+COPY load-plugins.sh load-blueprints.sh bootstrap.sh uninstall.sh scripts/
 RUN chmod +x /scripts/*.sh
 
 # Get plugin archives and build wagons
-RUN scripts/build-plugins.sh ${DCAE_REPO} ${CCSDK_REPO} \
-  && rm scripts/build-plugins.sh
+RUN scripts/load-plugins.sh ${DCAE_REPO} ${CCSDK_REPO} \
+  && rm scripts/load-plugins.sh
 
 # Load blueprints and input templates
 RUN scripts/load-blueprints.sh ${BP_REPO} \
