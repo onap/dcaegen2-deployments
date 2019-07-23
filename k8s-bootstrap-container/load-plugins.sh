@@ -20,7 +20,6 @@
 # ECOMP is a trademark and service mark of AT&T Intellectual Property.
 
 # Pull plugin archives from repos
-# Build wagons
 # $1 is the DCAE repo URL
 # $2 is the CCSDK repo URL
 # (This script runs at Docker image build time)
@@ -32,6 +31,7 @@ DEST=wagons
 DCAEPLUGINFILES=\
 "\
 k8splugin/1.4.13/k8splugin-1.4.13-py27-none-linux_x86_64.wgn
+k8splugin/1.6.0/k8splugin-1.6.0-py27-none-linux_x86_64.wgn
 relationshipplugin/1.0.0/relationshipplugin-1.0.0-py27-none-any.wgn
 clamppolicyplugin/1.0.0/clamppolicyplugin-1.0.0-py27-none-any.wgn
 dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0-py27-none-any.wgn \
@@ -41,28 +41,10 @@ dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0-py27-none-any.wgn \
 CCSDKPLUGINFILES=\
 "\
 plugins/pgaas-1.1.0-py27-none-any.wgn
-plugins/dmaap-1.3.3-py27-none-any.wgn
+plugins/dmaap-1.3.5-py27-none-any.wgn
 plugins/sshkeyshare-1.0.0-py27-none-any.wgn
 plugins/helm-4.0.0-py27-none-linux_x86_64.wgn
 "
-
-# Not needed in R5
-# Build a set of wagon files from archives in a repo
-# $1 -- repo base URL
-# $2 -- list of paths to archive files in the repo
-function build {
-	for plugin in $2
-	do
-		# Could just do wagon create with the archive URL as source,
-		# but can't use a requirements file with that approach
-		mkdir work
-		target=$(basename ${plugin})
-		curl -Ss $1/${plugin} > ${target}
-		tar zxvf ${target} --strip-components=2 -C work
-		wagon create -t tar.gz -o ${DEST}  -r work/requirements.txt --validate ./work
-		rm -rf work
-	done
-}
 
 # Copy a set of wagons from a repo
 # $1 -- repo baseURL
