@@ -49,13 +49,13 @@ mkdir ${DEST}
 for typefile in ${DCAETYPEFILES}
 do
 	mkdir -p ${DEST}/$(dirname ${typefile})
-	curl -Ss $1/${typefile} >> ${DEST}/${typefile}
+	curl -Ss -L -f $1/${typefile} >> ${DEST}/${typefile}
 done
 
 for typefile in ${CCSDKTYPEFILES}
 do
 	mkdir -p ${DEST}/$(dirname ${typefile})
-	curl -Ss $2/${typefile} >> ${DEST}/${typefile}
+	curl -Ss -L -f $2/${typefile} >> ${DEST}/${typefile}
 done
 
 chown cfyuser:cfyuser ${DEST}

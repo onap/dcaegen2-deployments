@@ -30,7 +30,7 @@ COPY scripts/* scripts/
 # Setup rc.local to set up k8s credentials for CM
 RUN scripts/get-type-files.sh ${TYPE_REPO} ${CCSDK_REPO}\
     && mkdir /opt/manager/resources/spec/cloudify/3.4\
-    && curl -Ss https://cloudify.co/spec/cloudify/3.4/types.yaml > /opt/manager/resources/spec/cloudify/3.4/types.yaml\
+    && curl -Ss -L -f https://getcloudify.org/spec/cloudify/3.4/types.yaml > /opt/manager/resources/spec/cloudify/3.4/types.yaml\
     && chown -R cfyuser:cfyuser /opt/manager/resources/spec/cloudify/3.4\
     && chmod +x scripts/*.sh\
     && /scripts/configure-tls.sh\
@@ -41,7 +41,7 @@ RUN scripts/get-type-files.sh ${TYPE_REPO} ${CCSDK_REPO}\
 RUN mkdir -p /opt/onap && chown cfyuser:cfyuser /opt/onap
 
 # Install jq (used for cleanup--parsing output of CM API call)
-RUN curl -Ss -L "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"  > /bin/jq \
+RUN curl -Ss -L -f "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"  > /bin/jq \
 && chmod +x /bin/jq
 
 CMD ["/scripts/start-persistent.sh"]
