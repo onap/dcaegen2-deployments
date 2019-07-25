@@ -31,7 +31,8 @@ const helmDeps =
         'dcae-inventory-api',
         'dcae-servicechange-handler',
         'dcae-deployment-handler',
-        'dcae-policy-handler'
+        'dcae-policy-handler',
+        'dcae-dashboard'
     ];
 
 // List of deployments expected to be created by CM at boot time
@@ -40,8 +41,7 @@ const bootDeps =
         'dep-dcae-ves-collector',
         'dep-dcae-tca-analytics',
         'dep-dcae-prh',
-        'dep-dcae-hv-ves-collector',
-        'dep-dcae-dashboard'
+        'dep-dcae-hv-ves-collector'
     ];
 
 const status = require('./get-status');
