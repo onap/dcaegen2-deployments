@@ -44,6 +44,7 @@ limitations under the License.
      <module>tls-init-container</module>
      <module>consul-loader-container</module>
      <module>multisite-init-container</module>
+     <module>dcae-cleanup-container</module>
   </modules>
 <!--  <profiles>
     <profile>
