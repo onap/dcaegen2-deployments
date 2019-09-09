@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77851ca2_b30c2ab9",
+        "filename": "k8s-bootstrap-container/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-09-09T21:50:28Z",
+      "side": 1,
+      "message": "both master and el-alto may be pushing out same version; should we change to 1.7.0 to keep master build separate?",
+      "range": {
+        "startLine": 30,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 16
+      },
+      "revId": "dc6d9a3209278212b1d84e14f8ff1d3a70e6a3c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
