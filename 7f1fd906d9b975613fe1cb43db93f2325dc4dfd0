@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5f3dc16_d1fc418d",
+        "filename": "k8s-bootstrap-container/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-09-10T12:52:33Z",
+      "side": 1,
+      "message": "Should this be changed to 1.7.0 to avoid conflict with el-alto build?",
+      "range": {
+        "startLine": 30,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 16
+      },
+      "revId": "7f1fd906d9b975613fe1cb43db93f2325dc4dfd0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
