@@ -1,7 +1,7 @@
 # ============LICENSE_START=======================================================
 # org.onap.dcae
 # ================================================================================
-# Copyright (c) 2018 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ============LICENSE_END=========================================================
-FROM busybox
-RUN mkdir -p /opt/tls/source && mkdir -p /opt/tls/shared
-COPY ./tls /opt/tls/source
-RUN base64 -d /opt/tls/source/trust.jks.b64 > /opt/tls/source/trust.jks  && base64 -d /opt/tls/source/cert.jks.b64 > /opt/tls/source/cert.jks && base64 -d /opt/tls/source/cert.p12.b64 > /opt/tls/source/cert.p12
-COPY setup-tls.sh /opt/tls
-ENTRYPOINT  ["/opt/tls/setup-tls.sh"]
+FROM nexus3.onap.org:10001/onap/aaf/aaf_agent:2.1.15
+RUN mkdir -p /opt/dcae
+COPY ./dcae-cert-setup.sh /opt/dcae
+ENTRYPOINT  ["bash", "-c", "exec /opt/dcae/dcae-cert-setup.sh"]
