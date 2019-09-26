@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Andrew Gauld <agauld@att.com>
+Code-Review+2: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-by: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-at: Thu, 26 Sep 2019 09:47:33 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/dcaegen2/deployments/+/96150
+Project: dcaegen2/deployments
+Branch: refs/heads/master
