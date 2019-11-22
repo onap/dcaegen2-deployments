@@ -29,13 +29,17 @@ export DEPLOY_PASSWORD=${DEPLOY_PASSWORD:-"demo123456!"}
 export cadi_longitude=${cadi_longitude:-"-72.0"}
 export cadi_latitude=${cadi_latitude:-"38.0"}
 
-# For now, we can deault aaf_locator_fqdn
+# For now, we can default aaf_locator_fqdn
 # This points to the single DCAE cert with many SANs,
 # as used in previous releases
 # When we have individual certs per component, we will override this
 # by setting the environment variable explicitly in a Helm chart
 # or via the k8s plugin
 export aaf_locator_fqdn=${aaf_locator_fqdn:-"dcae"}
+
+# Our own environment variable to signal that the tls-init-container
+# is being run for a component that is a TLS server
+export TLS_SERVER=${TLS_SERVER:-"true"}
 
 # Directory where AAF agent puts artifacts
 ARTIFACTS=/opt/app/osaaf/local
@@ -45,9 +49,19 @@ TARGET=/opt/app/osaaf
 # AAF namespace for the certs--used in naming artifacts
 AAFNS=org.onap.dcae
 
+# Dummy certificate FQDN for client-only components
+# Must be set up in AAF, but won't actually be used
+DUMMY_FQDN=dcae
+
 # Clean out any existing artifacts
 rm -rf ${ARTIFACTS}
 rm -f ${TARGET}/*
+
+# Set the dummy FQDN for a client-only component
+if [ "${TLS_SERVER}" == "false" ]
+then
+    export aaf_locator_fqdn=${DUMMY_FQDN}
+fi
 
 # Get the certificate artifacts from AAF
 /opt/app/aaf_config/bin/agent.sh
@@ -70,3 +84,10 @@ chmod 644 ${TARGET}/cert.pem ${TARGET}/key.pem
 
 # Get the ONAP AAF CA certificate -- pass in an empty password, since the trust store doesn't have one
 echo "" | keytool -exportcert -rfc -file ${TARGET}/cacert.pem -keystore ${ARTIFACTS}/${AAFNS}.trust.jks -alias ca_local_0
+
+# Remove server-related files for client-only components
+if [ "${TLS_SERVER}" == "false" ]
+then
+    rm ${TARGET}/cert.p12 ${TARGET}/cert.jks ${TARGET}/cert.pem ${TARGET}/key.pem ${TARGET}/p12.pass ${TARGET}/jks.pass
+    rm ${ARTIFACTS}/${AAFNS}.p12 ${ARTIFACTS}/${AAFNS}.jks
+fi
