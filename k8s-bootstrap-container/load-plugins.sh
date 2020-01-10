@@ -25,16 +25,16 @@
 # (This script runs at Docker image build time)
 #
 set -x
+set -e
 DEST=wagons
 
 # For DCAE, starting in R5, we pull down wagons directly
 DCAEPLUGINFILES=\
 "\
-k8splugin/1.4.13/k8splugin-1.4.13-py27-none-linux_x86_64.wgn
-k8splugin/1.6.0/k8splugin-1.6.0-py27-none-linux_x86_64.wgn
-relationshipplugin/1.0.0/relationshipplugin-1.0.0-py27-none-any.wgn
-clamppolicyplugin/1.0.0/clamppolicyplugin-1.0.0-py27-none-any.wgn
-dcaepolicyplugin/2.3.0/dcaepolicyplugin-2.3.0-py27-none-any.wgn \
+k8splugin/1.7.1/k8splugin-1.7.1-py27-none-linux_x86_64.wgn
+relationshipplugin/1.1.0/relationshipplugin-1.1.0-py27-none-linux_x86_64.wgn
+clamppolicyplugin/1.1.0/clamppolicyplugin-1.1.0-py27-none-linux_x86_64.wgn
+dcaepolicyplugin/2.4.0/dcaepolicyplugin-2.4.0-py27-none-linux_x86_64.wgn \
 "
 
 # For CCSDK, we pull down the wagon files directly
@@ -53,7 +53,7 @@ function get_wagons {
 	for wagon in $2
 	do
 		target=$(basename ${wagon})
-		curl -Ss $1/${wagon} > ${DEST}/${target}
+		curl -Ssf $1/${wagon} > ${DEST}/${target}
 	done
 }
 

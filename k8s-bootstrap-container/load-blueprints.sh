@@ -19,6 +19,7 @@
 # Expect blueprints to be at <base URL>/blueprints
 
 set -x
+set -e
 
 BLUEPRINTS=\
 "
@@ -40,5 +41,5 @@ mkdir ${BPDEST}
 # Download blueprints
 for bp in ${BLUEPRINTS}
 do
-    curl -Ss $1/blueprints/${bp} > ${BPDEST}/$(basename ${bp})
+    curl -Ssf $1/blueprints/${bp} > ${BPDEST}/$(basename ${bp})
 done

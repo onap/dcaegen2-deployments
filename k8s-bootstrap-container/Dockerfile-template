@@ -32,13 +32,13 @@ RUN yum install -y unzip \
   && mkdir -p /opt/consul/bin \
   && mkdir -p /opt/consul/data \
   && mkdir -p /opt/consul/config \
-  && curl -Ss https://releases.hashicorp.com/consul/1.2.1/consul_1.2.1_linux_amd64.zip > /tmp/consul.zip \
+  && curl -Ssf https://releases.hashicorp.com/consul/1.2.1/consul_1.2.1_linux_amd64.zip > /tmp/consul.zip \
   && unzip -pj /tmp/consul.zip > /opt/consul/bin/consul \
   && chmod +x /opt/consul/bin/consul
 COPY 00-consul.json /opt/consul/config/
 
 # Install jq
-RUN curl -Ss -L "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"  > /bin/jq \
+RUN curl -Ssf -L "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"  > /bin/jq \
 && chmod +x /bin/jq
 
 # Install pip and Cloudify CLI (stay at version 4.2 because of changes in higher versions)
