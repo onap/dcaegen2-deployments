@@ -1,6 +1,6 @@
 #!/bin/bash
 # ================================================================================
-# Copyright (c) 2018-2019 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2018-2020 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,11 +41,15 @@ MR_WATCHDOG_PATH="${TCA_FILE_PATH}/mr-watchdog.sh"
 
 WORKER_COUNT='0'
 
-CONSUL_HOST=${CONSUL_HOST:-consul}
-CONSUL_PORT=${CONSUL_PORT:-8500}
-CONFIG_BINDING_SERVICE=${CONFIG_BINDING_SERVICE:-config_binding_service}
+# Remove consul dependency for CBS lookup (DCAEGEN2-2021)
+# CBS Host and port are set to CBS K8S service name and port identified on CBS deployment via Helm
+CBS_HOST=${CBS_HOST:-config-binding-service}
+CBS_PORT=${CBS_PORT:-10000}
 
-CBS_SERVICE_NAME=${CONFIG_BINDING_SERVICE}
+#CONSUL_HOST=${CONSUL_HOST:-consul}
+#CONSUL_PORT=${CONSUL_PORT:-8500}
+#CONFIG_BINDING_SERVICE=${CONFIG_BINDING_SERVICE:-config_binding_service}
+CBS_SERVICE_NAME=${CBS_SERVICE_NAME:-config_binding_service}
 
 #Changing to HOSTNAME parameter for consistency with k8s deploy
 MY_NAME=${HOSTNAME:-tca}
@@ -317,9 +321,7 @@ echo "TCA-CDAP standalone mode initialization completed, with $WORKER_COUNT / 3 
 #Changing to HOSTNAME parameter for consistency with k8s deploy
 MY_NAME=${HOSTNAME:-tca}
 
-unset CBS_HOST
-unset CBS_PORT
-echo "TCA environment: I am ${MY_NAME}, consul at ${CONSUL_HOST}:${CONSUL_PORT}, CBS service name ${CBS_SERVICE_NAME}"
+echo "TCA environment: I am ${MY_NAME}, CBS K8S Service Name and port is ${CBS_HOST}:${CBS_PORT}"
 
 while echo
 do
@@ -335,13 +337,14 @@ do
     done
 
 
-    if [[ -z "$CBS_HOST" ||  -z "$CBS_PORT" ]]; then
-       echo "Retrieving host and port for ${CBS_SERVICE_NAME} from ${CONSUL_HOST}:${CONSUL_PORT}"
-       sleep 2
-       CBS_HOST=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServiceAddress |sed -e 's/\"//g')
-       CBS_PORT=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServicePort |sed -e 's/\"//g')
-       echo "CBS discovered to be at ${CBS_HOST}:${CBS_PORT}"
-    fi
+#Below commented to remove consul lookup and use k8s servicename for CBS (DCAEGEN2-2021)
+#    if [[ -z "$CBS_HOST" ||  -z "$CBS_PORT" ]]; then
+#       echo "Retrieving host and port for ${CBS_SERVICE_NAME} from ${CONSUL_HOST}:${CONSUL_PORT}"
+#       sleep 2
+#       CBS_HOST=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServiceAddress |sed -e 's/\"//g')
+#       CBS_PORT=$(curl -s "${CONSUL_HOST}:${CONSUL_PORT}/v1/catalog/service/${CBS_SERVICE_NAME}" |jq .[0].ServicePort |sed -e 's/\"//g')
+#       echo "CBS discovered to be at ${CBS_HOST}:${CBS_PORT}"
+#    fi
 
     if [ ! -z "$CBS_HOST" ] && [ ! -z "$CBS_PORT" ]; then
        tca_poll_policy
