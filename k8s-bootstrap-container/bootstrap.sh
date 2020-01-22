@@ -143,14 +143,6 @@ set -e
 # Consul service registration data
 CBS_REG='{"ID": "dcae-cbs0", "Name": "config_binding_service", "Address": "config-binding-service", "Port": 10000}'
 CBS_REG1='{"ID": "dcae-cbs1", "Name": "config-binding-service", "Address": "config-binding-service", "Port": 10000}'
-HE_REG='{"ID": "dcae-he0", "Name": "holmes-engine-mgmt", "Address": "holmes-engine-mgmt", "Port": 9102}'
-HR_REG='{"ID": "dcae-hr0", "Name": "holmes-rule-mgmt", "Address": "holmes-rule-mgmt", "Port": 9101}'
-PH_REG='{"ID": "dcae-ph0", "Name": "policy_handler", "Port": 25577, "Address": "policy-handler'
-if [ ! -z "${DCAE_NAMESPACE}" ]
-then
-	PH_REG="${PH_REG}.${DCAE_NAMESPACE}"
-fi
-PH_REG="${PH_REG}\"}"
 
 # Set up profile to access Cloudify Manager
 cfy profiles use -u admin -t default_tenant -p "${CMPASS}" ${CFYTLS} "${CMADDR}"
@@ -189,7 +181,7 @@ do
 done
 
 # Put service registrations into the local Consul configuration directory
-for sr in CBS_REG CBS_REG1 HE_REG HR_REG PH_REG
+for sr in CBS_REG CBS_REG1
 do
   echo '{"service" : ' ${!sr}  ' }'> /opt/consul/config/${sr}.json
 done
@@ -227,7 +219,6 @@ deploy pgaas_initdb k8s-pgaas-initdb.yaml k8s-pgaas-initdb-inputs.yaml
 # tca, ves, prh, hv-ves, datafile-collector can be deployed simultaneously
 deploy tca k8s-tca.yaml k8s-tca-inputs.yaml &
 deploy ves k8s-ves.yaml k8s-ves-inputs.yaml &
-deploy snmptrap k8s-snmptrap.yaml k8s-snmptrap-inputs.yaml &
 deploy prh k8s-prh.yaml k8s-prh-inputs.yaml &
 deploy hv-ves k8s-hv-ves.yaml k8s-hv_ves-inputs.yaml &
 # holmes_rules must be deployed before holmes_engine, but holmes_rules can go in parallel with other service components

@@ -28,7 +28,6 @@ k8s-holmes-rules.yaml \
 k8s-pgaas-initdb.yaml \
 k8s-tca.yaml \
 k8s-ves.yaml \
-k8s-snmptrap.yaml \
 k8s-prh.yaml \
 k8s-hv-ves.yaml \
 k8s-helm-override.yaml \
