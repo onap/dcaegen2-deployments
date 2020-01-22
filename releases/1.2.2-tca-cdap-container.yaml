@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '1.2.2'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/223'
+ref:  2cabee9fd1443514279d76390ef439d8cdad5e6f
+containers:
+    - name: 'org.onap.dcaegen2.deployments.tca-cdap-container'
+      version: '1.2.2-SNAPSHOT-20200116T215342Z'
