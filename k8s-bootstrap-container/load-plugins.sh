@@ -2,7 +2,7 @@
 # ============LICENSE_START=======================================================
 # org.onap.dcae
 # ================================================================================
-# Copyright (c) 2018-2019 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2018-2020 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ DEST=wagons
 # For DCAE, starting in R5, we pull down wagons directly
 DCAEPLUGINFILES=\
 "\
-k8splugin/1.7.1/k8splugin-1.7.1-py27-none-linux_x86_64.wgn
+k8splugin/1.7.2/k8splugin-1.7.2-py27-none-linux_x86_64.wgn
 relationshipplugin/1.1.0/relationshipplugin-1.1.0-py27-none-linux_x86_64.wgn
 clamppolicyplugin/1.1.0/clamppolicyplugin-1.1.0-py27-none-linux_x86_64.wgn
 dcaepolicyplugin/2.4.0/dcaepolicyplugin-2.4.0-py27-none-linux_x86_64.wgn \

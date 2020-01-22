@@ -1,6 +1,6 @@
 #!/bin/bash
 # ================================================================================
-# Copyright (c) 2018-2019 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2018-2020 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ k8s-holmes-rules.yaml \
 k8s-pgaas-initdb.yaml \
 k8s-tca.yaml \
 k8s-ves.yaml \
-k8s-snmptrap.yaml \
 k8s-prh.yaml \
 k8s-hv-ves.yaml \
 k8s-helm-override.yaml \
