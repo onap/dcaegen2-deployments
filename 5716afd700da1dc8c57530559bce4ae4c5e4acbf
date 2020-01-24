@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d20619b6_b4fa2a32",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-24T15:31:36Z",
+      "side": 1,
+      "message": "2020",
+      "range": {
+        "startLine": 3,
+        "startChar": 21,
+        "endLine": 3,
+        "endChar": 25
+      },
+      "revId": "5716afd700da1dc8c57530559bce4ae4c5e4acbf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bae558e4_90ac4277",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-24T15:31:36Z",
+      "side": 1,
+      "message": "do we need this second entry as well? From service component standpoint only config_binding_service is being used",
+      "range": {
+        "startLine": 145,
+        "startChar": 39,
+        "endLine": 145,
+        "endChar": 61
+      },
+      "revId": "5716afd700da1dc8c57530559bce4ae4c5e4acbf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00ea4796_246b5e05",
+        "filename": "k8s-bootstrap-container/load-blueprints.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-24T15:31:36Z",
+      "side": 1,
+      "message": "2020",
+      "range": {
+        "startLine": 3,
+        "startChar": 21,
+        "endLine": 3,
+        "endChar": 25
+      },
+      "revId": "5716afd700da1dc8c57530559bce4ae4c5e4acbf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c160975_f258483b",
+        "filename": "k8s-bootstrap-container/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-24T15:31:36Z",
+      "side": 1,
+      "message": "2020",
+      "range": {
+        "startLine": 4,
+        "startChar": 19,
+        "endLine": 4,
+        "endChar": 23
+      },
+      "revId": "5716afd700da1dc8c57530559bce4ae4c5e4acbf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
