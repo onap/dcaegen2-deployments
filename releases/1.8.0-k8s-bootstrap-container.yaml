@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '1.8.0'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/227'
+ref: 89bde25d3d440cc95919c2ce527d85e7dc427f2c
+containers:
+    - name: 'org.onap.dcaegen2.deployments.k8s-bootstrap-container'
+      version: '1.8.0-20200127T134156Z'
