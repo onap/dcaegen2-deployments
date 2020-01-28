@@ -31,7 +31,9 @@ k8s-ves.yaml \
 k8s-prh.yaml \
 k8s-hv-ves.yaml \
 k8s-helm-override.yaml \
-k8s-helm.yaml
+k8s-helm.yaml\
+k8s-datafile.yaml\
+k8s-pm-mapper.yaml
 "
 
 BPDEST=blueprints

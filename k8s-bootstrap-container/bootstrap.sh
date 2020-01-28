@@ -117,7 +117,32 @@ function deploy {
         echo deployment $1 appears to have had an install workflow executed already or is not ready for an install
     fi
 }
-
+# undeploy: Undeploy components if they're already deployed
+# $1 -- name (for bp and deployment)
+function undeploy {
+    # Don't crash the script on error
+    set +e
+    if !cm_hasany "node-instances?deployment_id=$1&state=uninitialized&state=deleted"
+    then
+        cfy executions start -d $1 uninstall
+    else
+        echo deployment $1 appears to be already uninstalled
+    fi
+    # Deletes deployment if it exist
+    if cm_hasany "deployments?id=$1"
+    then
+        cfy deployments delete $1
+    else
+         echo deployment $1
+    fi
+     # Deletes blueprint if it is presnt
+    if cm_hasany "blueprints?id=$1"
+    then
+        cfy blueprints delete $1
+    else
+        echo blueprint $1 has been already deleted from ${CMADDR}
+    fi
+}
 # Install plugin if it's not already installed
 # $1 -- path to wagon file for plugin
 function install_plugin {
@@ -220,6 +245,18 @@ deploy tca k8s-tca.yaml k8s-tca-inputs.yaml &
 deploy ves k8s-ves.yaml k8s-ves-inputs.yaml &
 deploy prh k8s-prh.yaml k8s-prh-inputs.yaml &
 deploy hv-ves k8s-hv-ves.yaml k8s-hv_ves-inputs.yaml &
+if [ $DATA_FILE_COLLECTOR ]
+then
+deploy datafile k8s-datafile.yaml k8s-datafile-collector-inputs.yaml &
+else
+undeploy datafile &
+fi
+if [ $PM_MAPPER ]
+then
+deploy pmmaper k8s-pm-mapper.yaml k8s-pm_mapper-inputs.yaml &
+else
+undeploy pmmaper &
+fi
 # holmes_rules must be deployed before holmes_engine, but holmes_rules can go in parallel with other service components
 deploy holmes_rules k8s-holmes-rules.yaml k8s-holmes_rules-inputs.yaml
 deploy holmes_engine k8s-holmes-engine.yaml k8s-holmes_engine-inputs.yaml
@@ -230,3 +267,4 @@ cfy deployments list
 # Continue running
 keep_running "Finished bootstrap steps."
 echo "Exiting!"
+
