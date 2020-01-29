@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2b50dc5_f6af38d8",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5597
+      },
+      "writtenOn": "2020-01-29T13:20:09Z",
+      "side": 1,
+      "message": "Separate this in the code from the previous \"deploy\" calls\n(a comment line or sth).\n\nJust wondering, could this be more generic?\nActually it`s same code for different components (DFC, PM_Mapper).",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 2
+      },
+      "revId": "da47d557795b38a836f810043aef91cb1ff7895d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
