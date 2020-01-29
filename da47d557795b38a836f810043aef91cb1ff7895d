@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "6169755d_b583889e",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2020-01-29T13:39:32Z",
+      "side": 1,
+      "message": "bootstrap.sh is responsible for initial deployment of DCAE components as part of the ONAP OOM installation process.  Undeploying is done elsewhere.  bootstrap.sh is not intended to be a tool for deploying and undeploying an individual DCAE component on-demand after initial installation.",
+      "revId": "da47d557795b38a836f810043aef91cb1ff7895d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14eb3f92_98b462eb",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2020-01-29T13:39:32Z",
+      "side": 1,
+      "message": "Does this need to be [ \"$DATA_FILE_COLLECTOR\" \u003d\u003d \"true\" ] ?",
+      "revId": "da47d557795b38a836f810043aef91cb1ff7895d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "505ea3da_5d67e904",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2020-01-29T13:39:32Z",
+      "side": 1,
+      "message": "Does this need to be [ \"$PM_MAPPER\" \u003d\u003d \"true\" ] ?",
+      "revId": "da47d557795b38a836f810043aef91cb1ff7895d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c2b50dc5_f6af38d8",
         "filename": "k8s-bootstrap-container/bootstrap.sh",
         "patchSetId": 2
