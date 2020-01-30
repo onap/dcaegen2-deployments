@@ -53,10 +53,10 @@ rm -f ${TARGET}/*
 /opt/app/aaf_config/bin/agent.sh
 
 # Extract the p12 and JKS passwords
-/opt/app/aaf_config/bin/agent.sh aafcli showpass ${APP_FQI} ${aaf_locator_fqdn} | grep cadi_keystore_password_p12 | cut -d '=' -f 2- > /opt/app/osaaf/p12.pass
-/opt/app/aaf_config/bin/agent.sh aafcli showpass ${APP_FQI} ${aaf_locator_fqdn} | grep cadi_keystore_password_jks= | cut -d '=' -f 2- > /opt/app/osaaf/jks.pass
+/opt/app/aaf_config/bin/agent.sh aafcli showpass ${APP_FQI} ${aaf_locator_fqdn} | grep cadi_keystore_password_p12 | cut -d '=' -f 2- | tr -d '\n' > /opt/app/osaaf/p12.pass
+/opt/app/aaf_config/bin/agent.sh aafcli showpass ${APP_FQI} ${aaf_locator_fqdn} | grep cadi_keystore_password_jks= | cut -d '=' -f 2- | tr -d '\n' > /opt/app/osaaf/jks.pass
 # AAF provides a truststore password, but it appears that the truststore is not password-protected
-/opt/app/aaf_config/bin/agent.sh aafcli showpass ${APP_FQI} ${aaf_locator_fqdn} | grep cadi_truststore_password= | cut -d '=' -f 2- > /opt/app/osaaf/trust.pass
+/opt/app/aaf_config/bin/agent.sh aafcli showpass ${APP_FQI} ${aaf_locator_fqdn} | grep cadi_truststore_password= | cut -d '=' -f 2- | tr -d '\n' > /opt/app/osaaf/trust.pass
 
 # Copy the p12 and JKS artifacts to target directory and rename according to DCAE conventions
 cp ${ARTIFACTS}/${AAFNS}.p12 ${TARGET}/cert.p12
