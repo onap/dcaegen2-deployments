@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4b717d1_34ca64e3",
+        "filename": "tls-init-container/dcae-cert-setup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-02-03T23:39:31Z",
+      "side": 1,
+      "message": "Is this required as aaf_locator_fqdn will be defaulted in line#38 for client only components.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 15
+      },
+      "revId": "81a0a2ed19dda1916df0a4695069e612697ba7c7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
