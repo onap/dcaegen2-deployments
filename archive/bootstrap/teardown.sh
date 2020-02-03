@@ -33,6 +33,7 @@ cfy uninstall -d hengine
 cfy uninstall -d hrules
 cfy uninstall -d tca
 cfy uninstall -d ves
+cfy uninstall -d ves-tls
 cfy uninstall -d cdapbroker
 cfy uninstall -d cdap7
 cfy uninstall -d policy_handler
