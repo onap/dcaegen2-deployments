@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '2.0.1'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/229'
+ref:  ae2142b60611311f15beddfdcf778de06179998f
+containers:
+    - name: 'org.onap.dcaegen2.deployments.tls-init-container'
+      version: '2.0.1-SNAPSHOT-20200130T205448Z'
