@@ -38,7 +38,7 @@ limitations under the License.
   <modules>
      <module>redis-cluster-container</module>
      <module>cm-container</module>
-     <module>tca-cdap-container</module>
+     <!-- module>tca-cdap-container</module -->
      <module>healthcheck-container</module>
      <module>tls-init-container</module>
      <module>consul-loader-container</module>
