@@ -1,5 +1,5 @@
 /*
-Copyright(c) 2018-2019 AT&T Intellectual Property. All rights reserved.
+Copyright(c) 2018-2020 AT&T Intellectual Property. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -91,4 +91,4 @@ const server = http.createServer(function(req, res) {
         res.end(JSON.stringify(ret.body || {}), 'utf8');
     });
 });
-server.listen(80);
+server.listen(8080);
