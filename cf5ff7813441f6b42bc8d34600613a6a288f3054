@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bca62d38_a0382bbc",
+        "filename": "cm-container/scripts/get-type-files.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-03T16:49:25Z",
+      "side": 1,
+      "message": "As this patch includes type files, should DCAEGEN2-2097 (clamp plugin/type file fix) be addressed prior merging this?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 52
+      },
+      "revId": "cf5ff7813441f6b42bc8d34600613a6a288f3054",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
