@@ -2,7 +2,7 @@
 # ============LICENSE_START=======================================================
 # org.onap.dcae
 # ================================================================================
-# Copyright (c) 2018-2019 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2018-2020 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,11 +28,11 @@ EXTRA_RULES=/opt/manager/extra-resolver-rules
 
 DCAETYPEFILES=\
 "\
-/dcaepolicyplugin/2.3.0/dcaepolicyplugin_types.yaml \
-/relationshipplugin/1.0.0/relationshipplugin_types.yaml \
-/k8splugin/1.4.13/k8splugin_types.yaml \
-/k8splugin/1.6.0/k8splugin_types.yaml \
-clamppolicyplugin/1.0.0/clamppolicyplugin_types.yaml \
+/dcaepolicyplugin/2.4.0/dcaepolicyplugin_types.yaml \
+/relationshipplugin/1.1.0/relationshipplugin_types.yaml \
+/k8splugin/1.7.2/k8splugin_types.yaml \
+/k8splugin/2.0.0/k8splugin_types.yaml \
+clamppolicyplugin/1.1.0/clamppolicyplugin_types.yaml \
 
 "
 
@@ -40,7 +40,7 @@ CCSDKTYPEFILES=\
 "\
 /type_files/pgaas/1.1.0/pgaas_types.yaml \
 /type_files/sshkeyshare/sshkey_types.yaml \
-/type_files/helm/4.0.0/helm-type.yaml \
+/type_files/helm/4.0.2/helm-type.yaml \
 /type_files/dmaap/dmaap.yaml \
 "
 

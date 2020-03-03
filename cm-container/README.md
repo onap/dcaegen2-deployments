@@ -3,12 +3,11 @@
 The artifacts in this directory build a Docker image based on the
 public image from Cloudify (`cloudifyplatform/community`).  The
 image has the Cloudify Manager software from the base image
-and adds our types files.  It edits `/etc/cloudify/config.yaml`
-to configure the import resolver to use our local type files instead
-of fetching them over the Internet.   It adds
-Cloudify 3.4 type files that are still used in some plugins
-and blueprints.  Finally, it sets up the `/opt/onap` mount point
-for our config files.
+and adds our types files.  It configures
+the import resolver to use our local type files instead
+of fetching them over the Internet.   It sets up the `/opt/onap` mount point
+for our config files.  It also sets up the certificate, key and other
+configuration for using TLS.
 
 ## Running the Container
 The container is intended to be launched via a Helm chart as part
@@ -37,7 +36,7 @@ In an ONAP deployment driven by OOM, Cloudify Manager will store data related to
 in a Kubernetes PersistentVolume.  If the Cloudify Manager pod is destroyed and recreated,
 the new instance will have all of the state information from the previous run.
 
-To set up persistent, we replace the command run by the container (`CMD` in the Dockerfile) with
+To set up persistent storage, we replace the command run by the container (`CMD` in the Dockerfile) with
 our own script `start-persistent.sh`.  This script checks to see if a persistent volume has been
 mounted in a well-known place (`/cfy-persist` in the container's file system).  If so, the script
 then checks to see if the persistent volume has been populated with data.  There are two possibilities:
