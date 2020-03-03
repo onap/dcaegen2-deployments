@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '2.1.0'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/241'
+ref:  cf5ff7813441f6b42bc8d34600613a6a288f3054
+containers:
+    - name: 'org.onap.dcaegen2.deployments.cm-container'
+      version: '2.1.0-SNAPSHOT-20200303T221412Z'
