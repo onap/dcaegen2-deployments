@@ -14,7 +14,30 @@
 # limitations under the License.
 -->
 # Deployment of proxy server for DCAE remote sites
-_Last update: 2019-05-13_
+_Last update: 2020-03-09_
+
+_Note for Frankfurt Release (R6):  The proxy server for remote sites relies on having access from the remote site to the config-binding-service
+server at the central site.  Prior to R6, we accomplished this by configuring a NodePort service on the central site exposing the config-binding-service
+http port (10000) and the https (10443) port.  In R6, by default, we configure a ClusterIP service for config-service-service.  This prevents the http port from
+being exposed outside the central site Kubernetes Cluster._
+
+_In addition, R6 changed how components get certificate for TLS.  In prior releases, components that needed a certificate (a server certificate or just a CA certificate to use to validate servers) got the certificate using an init container (org.onap.dcaegen2.deployments.tls-init-container, version 1.0.3) that has
+the certificates "baked in" to the container image.   In R6, the init container (org.onap.dcaegen2.deployments.tls-init-container, version 2.1.0) executes code
+that pulls a certificate from AAF.  This will not work from a remote site because the necessary AAF services are not exposed there.   We expect that work will
+be done for R7 to remedy this._
+
+_In the meantime, to use a remote, it will be necessary to deploy DCAE at the central site with these changes:_
+
+_1. Override dcaegen2.dcae-config-binding-service.service.type.  Set it to "NodePort", overriding the current setting of "ClusterIP"._
+
+_2. Override global.tlsImage.  Set it to "onap/org.onap.dcaegen2.deployments.tls-init-container:1.0.3".  This will use the container with "baked in" certificates._
+
+_3. Make sure all blueprints import "https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/R6/k8splugin/1.7.2/k8splugin_types.yaml",i.e., they need to use version 1.7.2 of the k8s plugin.  (The blueprints loaded into inventory at deployment time currently meet this requirement._
+
+_We expect significant changes to multi-site support in R7._
+
+_Note that as of this update, there has been no testing of multi-site support in R6._
+
 ## Background
 Beginning with the ONAP Dublin release, DCAE allows for deploying data collection and analytics components into a remote site--specifically, into a Kubernetes cluster other than the central site cluster where the main ONAP and DCAE platform components are deployed.  A proxy server is deployed into each remote cluster to allow components running in the remote cluster to access DCAE platform components in the central site.   DCAE components running in a remote site can address platform components at the central site as if the platform components were running in the remote site.
 
