@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eae5a404_e0f07ab1",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-27T17:36:50Z",
+      "side": 1,
+      "message": "With VES/http removal (https://gerrit.onap.org/r/#/c/dcaegen2/platform/blueprints/+/104534/), VES-tls will use the default \"dcae-ves-collector\". The dns_name and service_name for VES-TLS input (in OOM) will be changed accordingly. This is needed to match the SAN defined in AAF",
+      "range": {
+        "startLine": 45,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 35
+      },
+      "revId": "00aafd0c680d25f178f8f9eee1c119d76230fda2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
