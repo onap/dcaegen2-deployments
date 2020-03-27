@@ -46,6 +46,30 @@
       "revId": "00aafd0c680d25f178f8f9eee1c119d76230fda2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28b129f6_f3de8776",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2020-03-27T18:51:47Z",
+      "side": 1,
+      "message": "Sorry for the confusion.  The Kubernetes deployment name is based on the component name, so if you\u0027re changing the inputs to use the same component name that was used for the non-tls component, we should be looking for dep-dcae-ves-collector, not dep-dcae-ves-collector-tls.",
+      "parentUuid": "0eeb95e9_8e7e1869",
+      "range": {
+        "startLine": 45,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 35
+      },
+      "revId": "00aafd0c680d25f178f8f9eee1c119d76230fda2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
