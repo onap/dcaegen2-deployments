@@ -22,6 +22,30 @@
       "revId": "00aafd0c680d25f178f8f9eee1c119d76230fda2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eeb95e9_8e7e1869",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2020-03-27T18:15:35Z",
+      "side": 1,
+      "message": "The healthcheck uses the name of the Kubernetes deployment, not the DNS name.  The deployment name is based on the first parameter of the call to the deploy function in the bootstrap script, and that has not changed.\n\nHealthcheck queries Kubernetes about the status of a deployment.  Kubernetes checks the status of the deployment by directly accessing the container(s) associated with the component, by making an HTTP(S) request, by doing a simple TCP connection, or by running a script in the container, depending on how the probes are set up.",
+      "parentUuid": "eae5a404_e0f07ab1",
+      "range": {
+        "startLine": 45,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 35
+      },
+      "revId": "00aafd0c680d25f178f8f9eee1c119d76230fda2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
