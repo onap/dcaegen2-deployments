@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '1.0.4'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-elalto-merge-java/1'
+ref: 8bc43d0f42f54245a5bdedb5178a8484c79a55d1
+containers:
+    - name: 'onap/org.onap.dcaegen2.deployments.tls-init-container'
+      version: '1.0.4-SNAPSHOT-20200422T182555Z'
