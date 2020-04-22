@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ================================================================================
-# Copyright (c) 2017-2018 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2017-2020 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -83,7 +83,7 @@ deploy)
     upload_files_of_extension sh
     build_and_push_docker
     ;;
-  k8s-bootstrap-container|tca-cdap-container|cm-container|redis-cluster-container|healthcheck-container|pnda-mirror-container|pnda-bootstrap-container|tls-init-container|consul-loader-container|multisite-init-container|dcae-k8s-cleanup-container)
+  k8s-bootstrap-container|cm-container|redis-cluster-container|healthcheck-container|pnda-mirror-container|pnda-bootstrap-container|tls-init-container|consul-loader-container|multisite-init-container|dcae-k8s-cleanup-container)
     build_and_push_docker
     ;;
   scripts|cloud_init|heat)
