@@ -1,7 +1,5 @@
 # ============LICENSE_START=======================================================
-# org.onap.dcae
-# ================================================================================
-# Copyright (c) 2018-2019 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2018-2020 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,27 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ============LICENSE_END=========================================================
-#
-# ECOMP is a trademark and service mark of AT&T Intellectual Property.
 FROM cloudifyplatform/community:19.01.24
-MAINTAINER maintainer
 
-ENV TYPE_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}
-ENV CCSDK_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_ccsdk_platform_plugins_releases }}
+ENV PLUGIN_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}
 
-# Store type files locally
+# Store plugin files locally
 RUN mkdir scripts
 COPY scripts/* scripts/
-# Load our type files and the Cloudify 3.4 type files
+# Load our plugin files
 # Setup rc.local to set up k8s credentials for CM
-RUN scripts/get-type-files.sh ${TYPE_REPO} ${CCSDK_REPO}\
-    && mkdir /opt/manager/resources/spec/cloudify/3.4\
-    && curl -Ss -L -f https://getcloudify.org/spec/cloudify/3.4/types.yaml > /opt/manager/resources/spec/cloudify/3.4/types.yaml\
-    && chown -R cfyuser:cfyuser /opt/manager/resources/spec/cloudify/3.4\
+RUN scripts/get-plugins.sh ${PLUGIN_REPO} \
     && chmod +x scripts/*.sh\
     && /scripts/configure-tls.sh\
     && echo "/scripts/setup-secret.sh" >> /etc/rc.d/rc.local\
-    && echo "/scripts/set-resolver-rules.sh" >> /etc/rc.d/rc.local\
+    && echo "/scripts/load-plugins.sh > /load-plugins.log 2>&1" >> /etc/rc.d/rc.local\
     && chmod +x /etc/rc.d/rc.local
 # Create mount point for CM config file
 RUN mkdir -p /opt/onap && chown cfyuser:cfyuser /opt/onap
