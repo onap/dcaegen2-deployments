@@ -2,7 +2,7 @@
 # ============LICENSE_START=======================================================
 # org.onap.dcae
 # ================================================================================
-# Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2019-2020 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,12 +24,14 @@
 #       /opt/manager/extra-resolver-rules-loaded.
 #    -- All Cloudify Manager services must be running, as
 #       indicated by the output of the cfy status command.
+#    -- The plugins have been loaded.  This is indicated by the
+#       presence of the /opt/manager/plugins-loaded file.
 
-RULES_LOADED=/opt/manager/extra-resolver-rules-loaded
+PLUGINS_LOADED=/opt/manager/plugins-loaded
 
 set -x
 
-if [[ -f  $RULES_LOADED ]]
+if [[ -f  $PLUGINS_LOADED ]]
 then
   # Check for all services running
   if /scripts/cloudify-ready.sh
