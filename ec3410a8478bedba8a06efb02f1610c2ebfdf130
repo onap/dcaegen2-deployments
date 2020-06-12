@@ -22,6 +22,30 @@
       "revId": "ec3410a8478bedba8a06efb02f1610c2ebfdf130",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27133bc6_bc8a837c",
+        "filename": "cm-container/scripts/load-plugins.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2020-06-12T18:05:07Z",
+      "side": 1,
+      "message": "set -ex is already being done at line 76.\nThe output of this script doesn\u0027t actually end up in the docker logs from stdout/stderr,\nbecause of the way the CM image works.   I send the output of this script to /load-plugins.log.",
+      "parentUuid": "5b1cfb1c_f1c9bb49",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 43
+      },
+      "revId": "ec3410a8478bedba8a06efb02f1610c2ebfdf130",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
