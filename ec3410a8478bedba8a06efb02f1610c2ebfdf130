@@ -46,6 +46,30 @@
       "revId": "ec3410a8478bedba8a06efb02f1610c2ebfdf130",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f303208_ba0fe42f",
+        "filename": "cm-container/scripts/load-plugins.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-06-12T18:47:28Z",
+      "side": 1,
+      "message": "okay. missed to notice on #76",
+      "parentUuid": "27133bc6_bc8a837c",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 43
+      },
+      "revId": "ec3410a8478bedba8a06efb02f1610c2ebfdf130",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
