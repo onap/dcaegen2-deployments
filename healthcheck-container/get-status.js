@@ -25,7 +25,6 @@ const K8S_CREDS = '/var/run/secrets/kubernetes.io/serviceaccount';
 const K8S_HOST = 'kubernetes.default.svc.cluster.local';	// Full name to match cert for TLS
 const K8S_PATH = 'apis/apps/v1beta2/namespaces/';
 
-const CFY_LABEL = 'cfydeployment';		// All k8s deployments created by Cloudify--and only k8s deployments created by Cloudify--have this label
 const MAX_DEPS = 1000;		// Maximum number of k8s deployments to return from a query to k8s
 
 //Get token and CA cert
@@ -60,13 +59,6 @@ const summarizeDeploymentList = function(list) {
     return ret;
 };
 
-const summarizeDeployment = function(deployment) {
-    // deployment is a Deployment object returned by k8s
-    // we make it look enough like a DeploymentList object to
-    // satisfy summarizeDeploymentList
-    return summarizeDeploymentList({items: [deployment]});
-};
-
 const queryKubernetes = function(path, callback) {
     // Make GET request to Kubernetes API
     const options = {
@@ -95,17 +87,6 @@ const queryKubernetes = function(path, callback) {
     req.end();
 };
 
-const getStatus = function(path, extract, callback) {
-    // Get info from k8s and extract readiness info
-    queryKubernetes(path, function(error, res, body) {
-        let ret = body;
-        if (!error && res && res.statusCode === 200) {
-            ret = extract(body);
-        }
-        callback (error, res, ret);
-    });
-};
-
 const getStatusSinglePromise = function (item) {
     // Expect item to be of the form {namespace: "namespace", deployment: "deployment_name"}
     return new Promise(function(resolve, reject){
@@ -130,17 +111,6 @@ const getStatusSinglePromise = function (item) {
         });
     });
 }
-exports.getStatusNamespace = function (namespace, callback) {
-    // Get readiness information for all deployments in namespace
-    const path = K8S_PATH + namespace + '/deployments';
-    getStatus(path, summarizeDeploymentList, callback);
-};
-
-exports.getStatusSingle = function (namespace, deployment, callback) {
-    // Get readiness information for a single deployment
-    const path = K8S_PATH + namespace + '/deployments/' + deployment;
-    getStatus(path, summarizeDeployment, callback);
-};
 
 exports.getStatusListPromise = function (list) {
     // List is of the form [{namespace: "namespace", deployment: "deployment_name"}, ... ]
@@ -150,24 +120,32 @@ exports.getStatusListPromise = function (list) {
     });
 }
 
-exports.getDCAEDeploymentsPromise = function (namespace) {
-    // Return list of the form [{namespace: "namespace"}, deployment: "deployment_name"].
+exports.getLabeledDeploymentsPromise = function (namespace, label) {
+    // Return list of the form [{namespace: "namespace", deployment: "deployment_name"}].
     // List contains all k8s deployments in the specified namespace that were deployed
+    // with the specified 'label'.  (The check is for the presence of the label--its
+    // values is not important.)  In DCAE, this is used to find deployments created
     // by Cloudify, based on Cloudify's use of a "marker" label on each k8s deployment that
     // the k8s plugin created.
+    // If 'label' is unspecified or has zero length, returns an empty list.
 
     return new Promise(function(resolve, reject) {
-        const path = K8S_PATH + namespace + '/deployments?labelSelector=' + CFY_LABEL + '&limit=' + MAX_DEPS
-        queryKubernetes(path, function(error, res, body){
-            if (error) {
-                reject(error);
-            }
-            else if (res.statusCode !== 200) {
-                reject(body);
-            }
-            else {
-                resolve(body.items.map(function(i) {return {namespace : namespace, deployment: i.metadata.name};}));
-            }
-        });
+        if (!label || label.length < 1) {
+          resolve([]);
+        }
+        else {
+            const path = K8S_PATH + namespace + '/deployments?labelSelector=' + label + '&limit=' + MAX_DEPS
+            queryKubernetes(path, function(error, res, body){
+                if (error) {
+                    reject(error);
+                }
+                else if (res.statusCode !== 200) {
+                    reject(body);
+                }
+                else {
+                    resolve(body.items.map(function(i) {return {namespace : namespace, deployment: i.metadata.name};}));
+                }
+            });
+        }
     });
 };

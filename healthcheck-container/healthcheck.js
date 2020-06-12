@@ -19,31 +19,31 @@ const ONAP_NS = process.env.ONAP_NAMESPACE || 'default';
 const DCAE_NS = process.env.DCAE_NAMESPACE || process.env.ONAP_NAMESPACE || 'default';
 const HELM_REL = process.env.HELM_RELEASE || '';
 
+// If the healthcheck should include k8s deployments that are marked with a specific label,
+// the DEPLOY_LABEL environment variable will be set to the name of the label.
+// Note that the only the name of label is important--the value isn't used by the
+// the healthcheck.  If a k8s deployment has the label, it is included in the check.
+// For DCAE (dcaegen2), this capability is used to check for k8s deployments that are
+// created by Cloudify using the k8s plugin.
+const DEPLOY_LABEL = process.env.DEPLOY_LABEL || '';
+
 const HEALTHY = 200;
 const UNHEALTHY = 500;
 const UNKNOWN = 503;
 
-// List of deployments expected to be created via Helm
-const helmDeps =
-    [
-        'dcae-cloudify-manager',
-        'dcae-config-binding-service',
-        'dcae-inventory-api',
-        'dcae-servicechange-handler',
-        'dcae-deployment-handler',
-        'dcae-policy-handler',
-        'dcae-dashboard'
-    ];
+const EXPECTED_COMPONENTS='/opt/app/expected-components.json'
 
-// List of deployments expected to be created by CM at boot time
-const bootDeps =
-    [
-        'dep-dcae-tca-analytics',
-        'dep-dcae-tcagen2',
-        'dep-dcae-prh',
-        'dep-dcae-hv-ves-collector',
-        'dep-dcae-ves-collector'
-    ];
+const fs = require('fs');
+
+// List of deployments expected to be created via Helm
+let helmDeps = [];
+try {
+    helmDeps = JSON.parse(fs.readFileSync(EXPECTED_COMPONENTS, {encoding: 'utf8'}));
+}
+catch (error) {
+    console.log(`Could not access ${EXPECTED_COMPONENTS}: ${error}`);
+    console.log ('Using empty list of expected components');
+}
 
 const status = require('./get-status');
 const http = require('http');
@@ -55,7 +55,7 @@ const helmList = helmDeps.map(function(name) {
 
 const isHealthy = function(summary) {
     // Current healthiness criterion is simple--all deployments are ready
-    return summary.count && summary.ready && summary.count === summary.ready;
+    return summary.hasOwnProperty('count') && summary.hasOwnProperty('ready') && summary.count === summary.ready;
 };
 
 const checkHealth = function (callback) {
@@ -65,15 +65,11 @@ const checkHealth = function (callback) {
     // If we get responses from k8s and all deployments are ready, health status is HEALTHY (200)
     // This could be a lot more nuanced, but what's here should be sufficient for R2 OOM healthchecking
 
-    // Query k8s to find all the deployments launched by CM (they all have a 'cfydeployment' label)
-    status.getDCAEDeploymentsPromise(DCAE_NS)
+    // Query k8s to find all the deployments with specified DEPLOY_LABEL
+    status.getLabeledDeploymentsPromise(DCAE_NS, DEPLOY_LABEL)
     .then(function(fullDCAEList) {
-        // Remove any expected boot-time CM deployments from the list to avoid duplicates
-        dynamicDCAEDeps = fullDCAEList.filter(function(i) {return !(bootDeps.includes(i.deployment));})
-        // Create full list of CM deployments to check: boot deployments and anything else created by CM
-        dcaeList = (bootDeps.map(function(name){return {namespace: DCAE_NS, deployment: name}})).concat(dynamicDCAEDeps);
         // Now get status for Helm deployments and CM deployments
-        return status.getStatusListPromise(helmList.concat(dcaeList));
+        return status.getStatusListPromise(helmList.concat(fullDCAEList));
     })
     .then(function(body) {
         callback({status: isHealthy(body) ? HEALTHY : UNHEALTHY, body: body});
