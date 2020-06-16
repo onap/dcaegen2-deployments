@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcda47be_655317a8",
+        "filename": "healthcheck-container/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-06-16T19:13:08Z",
+      "side": 1,
+      "message": "is this value hardcoded in the plugin? dont see it on k8s plugin config under oom - https://git.onap.org/oom/tree/kubernetes/dcaegen2/components/dcae-bootstrap/resources/config/k8s-plugin.json",
+      "range": {
+        "startLine": 14,
+        "startChar": 93,
+        "endLine": 14,
+        "endChar": 106
+      },
+      "revId": "ef3183f5ae33b63be4aca2dd95e52e009f15f4c3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
