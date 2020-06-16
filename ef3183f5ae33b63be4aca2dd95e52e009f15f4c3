@@ -22,6 +22,30 @@
       "revId": "ef3183f5ae33b63be4aca2dd95e52e009f15f4c3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00f0aabf_15286bb5",
+        "filename": "healthcheck-container/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2020-06-16T20:11:16Z",
+      "side": 1,
+      "message": "The label name is fixed in the k8s plugin.  There\u0027s no real reason to make it configurable for the plugin.\n\nThe reason the label name is configurable for the healthcheck service is that we want to be able to use the container to support services other than DCAE.  (Specifically, for now, we want to support DCAE MOD, where we don\u0027t set the DEPLOY_LABEL at all.)",
+      "parentUuid": "dcda47be_655317a8",
+      "range": {
+        "startLine": 14,
+        "startChar": 93,
+        "endLine": 14,
+        "endChar": 106
+      },
+      "revId": "ef3183f5ae33b63be4aca2dd95e52e009f15f4c3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
