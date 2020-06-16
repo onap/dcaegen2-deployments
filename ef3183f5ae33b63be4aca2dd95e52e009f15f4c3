@@ -46,6 +46,30 @@
       "revId": "ef3183f5ae33b63be4aca2dd95e52e009f15f4c3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59040625_da2fc7d9",
+        "filename": "healthcheck-container/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-06-16T21:34:08Z",
+      "side": 1,
+      "message": "OKay. I assume if made configurable on the plugin, both healthcheck and bootstrap/k8splugin config may need to be sourced from global values.",
+      "parentUuid": "00f0aabf_15286bb5",
+      "range": {
+        "startLine": 14,
+        "startChar": 93,
+        "endLine": 14,
+        "endChar": 106
+      },
+      "revId": "ef3183f5ae33b63be4aca2dd95e52e009f15f4c3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
