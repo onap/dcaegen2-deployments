@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '2.0.0'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/250'
+ref: 2d167ba53ef3f3bb31a9f93fcb0f4d1b5da0a7f1
+containers:
+    - name: 'org.onap.dcaegen2.deployments.healthcheck-container'
+      version: '2.0.0-SNAPSHOT-20200622T200302Z'
