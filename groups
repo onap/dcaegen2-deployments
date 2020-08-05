@@ -1,5 +1,6 @@
 # UUID                                                                               	Group Name
 #
+9c0457cb0ea6727ad9c82cbb1b19e73c2154f471                                             	saml/onap-gerrit-dcaegen2-deployments-committers
 daebbf523be390041a1a9c0e340a6d833aae5043                                             	GitHub Replication
 global:Registered-Users                                                              	Registered Users
 ldap:cn=onap-gerrit-dcaegen2-deployments-committers,ou=Groups,dc=freestandards,dc=org	ldap/onap-gerrit-dcaegen2-deployments-committers
