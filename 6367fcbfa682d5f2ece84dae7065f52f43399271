@@ -1,0 +1,11 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Magdalena Biernacka <magdalena.1.biernacka@nokia.com>
+Code-Review+1: Remigiusz Janeczek <remigiusz.janeczek@nokia.com>
+Code-Review+1: Tomasz Wróbel <tomasz.wrobel@nokia.com>
+Code-Review+1: Sylwia Jakubek <sylwia.jakubek@nokia.com>
+Code-Review+2: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-by: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-at: Wed, 12 Aug 2020 18:59:57 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/dcaegen2/deployments/+/111168
+Project: dcaegen2/deployments
+Branch: refs/heads/master
