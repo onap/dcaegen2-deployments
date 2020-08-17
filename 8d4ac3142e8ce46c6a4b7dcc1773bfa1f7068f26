@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7623525f_7b528254",
+        "filename": "healthcheck-container/get-status.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5597
+      },
+      "writtenOn": "2020-08-17T11:04:16Z",
+      "side": 1,
+      "message": "Add modification copyrights after this line.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 66
+      },
+      "revId": "8d4ac3142e8ce46c6a4b7dcc1773bfa1f7068f26",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0812f10b_494eed51",
+        "filename": "healthcheck-container/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5597
+      },
+      "writtenOn": "2020-08-17T11:04:16Z",
+      "side": 1,
+      "message": "Add modification copyrights after this line.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 72
+      },
+      "revId": "8d4ac3142e8ce46c6a4b7dcc1773bfa1f7068f26",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
