@@ -1,5 +1,6 @@
 /*
 Copyright(c) 2018 AT&T Intellectual Property. All rights reserved.
+Copyright(c) 2020 Nokia Intellectual Property. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23,7 +24,7 @@ const https = require('https');
 
 const K8S_CREDS = '/var/run/secrets/kubernetes.io/serviceaccount';
 const K8S_HOST = 'kubernetes.default.svc.cluster.local';	// Full name to match cert for TLS
-const K8S_PATH = 'apis/apps/v1beta2/namespaces/';
+const K8S_PATH = 'apis/apps/v1/namespaces/';
 
 const MAX_DEPS = 1000;		// Maximum number of k8s deployments to return from a query to k8s
 
