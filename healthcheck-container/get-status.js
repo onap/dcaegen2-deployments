@@ -23,7 +23,7 @@ const https = require('https');
 
 const K8S_CREDS = '/var/run/secrets/kubernetes.io/serviceaccount';
 const K8S_HOST = 'kubernetes.default.svc.cluster.local';	// Full name to match cert for TLS
-const K8S_PATH = 'apis/apps/v1beta2/namespaces/';
+const K8S_PATH = 'apis/apps/v1/namespaces/';
 
 const MAX_DEPS = 1000;		// Maximum number of k8s deployments to return from a query to k8s
 
