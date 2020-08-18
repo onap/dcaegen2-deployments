@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '2.1.0'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-release-version-java-daily/972/'
+ref: 5d4676685ce7cb7c3c04e177fc6cef84e8733c21
+containers:
+    - name: 'org.onap.dcaegen2.deployments.healthcheck-container'
+      version: '2.1.0-SNAPSHOT-20200817T153824Z'
