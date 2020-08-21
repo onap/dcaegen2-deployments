@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # ================================================================================
 # Copyright (c) 2018 AT&T Intellectual Property. All rights reserved.
