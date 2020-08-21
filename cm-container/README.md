@@ -58,7 +58,7 @@ The last command in the script is the command from the original Cloudify version
 which then brings up the many other processes needed for a working instance of Cloudify Manager.
 
 ## The `setup-secret.sh` script
-When Kubernetes starts a container, it mounts a directory containing the credentials that the container needs to access the Kubernetes API on the local Kubernetes cluster.  The mountpoint is `/var/run/secrets/kubernetes.io/serviceaccount`.   Something about the way that Cloudify Manager is started (possibly because `/sbin/init` is run) causes this mountpoint to be hidden.   `setup-secret.sh` will recreated the directory if it's not present and symbolically link it to a copy of the credentials mounted at `/secret` in the container file system.  This gives Cloudify Manager the credentials that the Kubernetes plugin needs to deploy Kubernetes-based DCAE components.
+When Kubernetes starts a container, it mounts a directory containing the credentials that the container needs to access the Kubernetes API on the local Kubernetes cluster.  The mountpoint is `/var/run/secrets/kubernetes.io/serviceaccount`.   Something about the way that Cloudify Manager is started (possibly because `/sbin/init` is run) causes this mountpoint to be hidden.   `setup-secret.sh` will recreate the directory if it's not present and symbolically link it to a copy of the credentials mounted at `/secret` in the container file system.  This gives Cloudify Manager the credentials that the Kubernetes plugin needs to deploy Kubernetes-based DCAE components.
 
 `setup-secret.sh` needs to run after '/sbin/init'.  The Dockerfile installs it in the `rc.local` script that runs at startup.
 

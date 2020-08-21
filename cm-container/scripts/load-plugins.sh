@@ -25,8 +25,10 @@ CMADDR=${CMADDR:-dcae-cloudify-manager}
 CMPROTO=${CMPROTO:-https}
 CMPORT=${CMPORT:-443}
 
-# Password is currently fixed at the default
-# Eventually the password will be passed in as an environment variable
+# Expect Cloudify password to be in file mounted from Kubernetes secret,
+# but allow overriding by CMPASS environment variable,
+# and if not provided, use the default
+CMPASS=${CMPASS:-$(cat /opt/onap/cm-secrets/password 2>/dev/null)}
 CMPASS=${CMPASS:-admin}
 
 # Set up additional parameters for using HTTPS

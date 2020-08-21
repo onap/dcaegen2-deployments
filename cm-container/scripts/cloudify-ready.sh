@@ -2,7 +2,7 @@
 # ============LICENSE_START=======================================================
 # org.onap.dcae
 # ================================================================================
-# Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2019-2020 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,14 +41,32 @@
 # | Riemann                        | running |
 # +--------------------------------+---------+
 #
-# When an individual service is not running, it will have a status other than "running".
+# or:
+#
+# cfy status
+# Retrieving manager services status... [ip=dcae-cloudify-manager]
+#
+# Services:
+# +--------------------------------+--------+
+# |            service             | status |
+# +--------------------------------+--------+
+# | Cloudify Console               | Active |
+# | PostgreSQL                     | Active |
+# | AMQP-Postgres                  | Active |
+# | Manager Rest-Service           | Active |
+# | RabbitMQ                       | Active |
+# | Webserver                      | Active |
+# | Management Worker              | Active |
+# +--------------------------------+--------+
+#
+# When an individual service is not running, it will have a status other than "running" or "Active".
 # If the Cloudify API cannot be reached, the "Services:" line will not appear.
 
 STAT=$(cfy status)
 if (echo "${STAT}" | grep "^Services:$")
 then
    echo "Got a status response"
-   if !(echo "${STAT}" | egrep '^\| [[:alnum:]]+'| grep -iv '| running ')
+   if !(echo "${STAT}" | egrep '^\| [[:alnum:]]+'| egrep -iv ' Active | running ')
    then
       echo "All services running"
       exit 0

@@ -1,6 +1,6 @@
 #!/bin/bash
 # ================================================================================
-# Copyright (c) 2018-2019 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2018-2020 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,10 +43,12 @@
 set -x
 set +e
 
-# Get the CM admin password from the config file
-# Brittle, but the container is built with an unchanging version of CM,
-# so no real risk of a breaking change
-CMPASS=$(grep 'admin_password:' /etc/cloudify/config.yaml | cut -d ':' -f2 | tr -d ' ')
+# Expect Cloudify password to be in file mounted from Kubernetes secret,
+# but allow overriding by CMPASS environment variable,
+# and if not provided, use the default
+CMPASS=${CMPASS:-$(cat /opt/onap/cm-secrets/password 2>/dev/null)}
+CMPASS=${CMPASS:-admin}
+
 TYPENAMES=[\\\"dcae.nodes.ContainerizedServiceComponent\\\",\\\"dcae.nodes.ContainerizedServiceComponentUsingDmaap\\\",\\\"dcae.nodes.ContainerizedPlatformComponent\\\",\\\"dcae.nodes.ContainerizedApplication\\\"]
 
 # Uninstall components managed by Cloudify
