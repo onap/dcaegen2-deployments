@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99bd0147_ffb6e718",
+        "filename": "cm-container/Dockerfile-template",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-26T20:55:39Z",
+      "side": 1,
+      "message": "why not use 20.03.03?  cloudifyplatform/community-cloudify-manager-aio:20.03.03 looks more recent",
+      "range": {
+        "startLine": 16,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 61
+      },
+      "revId": "41ac30342e63f5fe3f222f089b0f78ba5b817dbe",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
