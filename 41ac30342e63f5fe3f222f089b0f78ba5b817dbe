@@ -46,6 +46,30 @@
       "revId": "41ac30342e63f5fe3f222f089b0f78ba5b817dbe",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e78e2e24_8f90cb58",
+        "filename": "cm-container/Dockerfile-template",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-28T00:31:25Z",
+      "side": 1,
+      "message": "Thanks",
+      "parentUuid": "fb3fcb29_a4691ded",
+      "range": {
+        "startLine": 16,
+        "startChar": 53,
+        "endLine": 16,
+        "endChar": 61
+      },
+      "revId": "41ac30342e63f5fe3f222f089b0f78ba5b817dbe",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
