@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "07c6aab9_8d2f9728",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-05T21:31:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f46c61ef_11012305",
+      "revId": "8268eb811c0f8314574eee1e5bb72bd37e97701e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3010b4be_960d27be",
         "filename": "k8s-bootstrap-container/bootstrap.sh",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "side": 1,
       "message": "I don\u0027t understand why I would put a second license block in the middle of the file.",
       "parentUuid": "3010b4be_960d27be",
+      "revId": "8268eb811c0f8314574eee1e5bb72bd37e97701e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5835abbe_bcea321b",
+        "filename": "k8s-bootstrap-container/bootstrap.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-05T21:31:39Z",
+      "side": 1,
+      "message": "oops, never mind -- it was hidden",
+      "parentUuid": "05aeec9f_ea02812e",
       "revId": "8268eb811c0f8314574eee1e5bb72bd37e97701e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
