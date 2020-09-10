@@ -1,0 +1,9 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Kornel Janiak <kornel.janiak@nokia.com>
+Code-Review+1: Paweł Baniewski <pawel.baniewski@nokia.com>
+Code-Review+2: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-by: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-at: Thu, 10 Sep 2020 02:30:16 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/dcaegen2/deployments/+/112346
+Project: dcaegen2/deployments
+Branch: refs/heads/master
