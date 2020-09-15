@@ -99,6 +99,22 @@ then
     install_plugin ${wagons[0]} ${types[0]}
   done
 
+  # The cfy plugin upload commands issued above will return
+  # before all of the processing is complete.  The processing
+  # occurs in what Cloudify calls "system workflows", and if a
+  # system workflow is pending or running, other operations such
+  # as uploading a blueprint will fail.  So we wait for any
+  # system workflows to finish before we create the PLUGINS_LOADED
+  # file and exit the script.   That way, the bootstrap container
+  # (which waits for k8s to declare the CM container to be ready)
+  # will not try to upload blueprints while a system execution is
+  # underway.  (See Jira DCAEGEN2-2430.)
+  while cm_hasany "executions?is_system_workflow=true&status=pending&status=started&status=queued&status=scheduled"
+  do
+    echo "Waiting for running system workflows to complete"
+    sleep 15
+  done
+
   touch ${PLUGINS_LOADED}
 else
   echo "Plugins already loaded"
