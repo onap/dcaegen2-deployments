@@ -1,0 +1,10 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Daniel Milaszkiewicz <daniel.milaszkiewicz@nokia.com>
+Code-Review+1: Damian Nowak <damian.nowak@nokia.com>
+Code-Review+1: Remigiusz Janeczek <remigiusz.janeczek@nokia.com>
+Code-Review+2: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-by: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-at: Wed, 16 Sep 2020 17:14:35 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/dcaegen2/deployments/+/112746
+Project: dcaegen2/deployments
+Branch: refs/heads/master
