@@ -51,4 +51,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     db_update_password(args.password)
-    print 'Done!\n'
+    print 'Password updated in DB!\n'
