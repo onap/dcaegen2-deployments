@@ -48,6 +48,9 @@ then
 else
   echo "No persistent storage available"
 fi
+
+# start background script that updates CM password and uploads plugins
+/scripts/init-cloudify.sh &
 # start up init, which brings up CM and supporting software
 exec /sbin/init --log-target=journal 3>&1
 
