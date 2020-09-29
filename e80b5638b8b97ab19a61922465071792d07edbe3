@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c86fd2a2_c9a5fe57",
+        "filename": "cm-container/scripts/init-cloudify.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 511
+      },
+      "writtenOn": "2020-09-29T14:53:32Z",
+      "side": 1,
+      "message": "Probably don\u0027t need to put this output into a log file.  Just let it go to stdout/stderr like the first two.",
+      "revId": "e80b5638b8b97ab19a61922465071792d07edbe3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
