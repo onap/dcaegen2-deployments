@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '3.3.3'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-release-version-java-daily/1017'
+ref:  e97f287e4664c2e2eef568ee43225014449aa5fd
+containers:
+  - name: 'org.onap.dcaegen2.deployments.cm-container'
+    version: '3.3.3-SNAPSHOT-20200930T002951Z'
