@@ -1,5 +1,6 @@
 # ============LICENSE_START=======================================================
 # Copyright (c) 2018-2020 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2020 J. F. Lucas.  All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,12 +22,15 @@ ENV PLUGIN_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_re
 RUN mkdir scripts
 COPY scripts/* scripts/
 COPY reset_admin.py /opt/manager/
-# Load our plugin files
-# Setup rc.local to set up k8s credentials for CM
-RUN chmod +x /opt/manager/reset_admin.py\
-    && chmod +x scripts/*.sh\
+
+# Load plugins, set up TLS configuration, load Cloudify type file
+RUN chmod +x /opt/manager/reset_admin.py \
+    && chmod +x scripts/*.sh \
     && scripts/get-plugins.sh ${PLUGIN_REPO} \
-    && /scripts/configure-tls.sh
+    && /scripts/configure-tls.sh \
+    && mkdir /opt/manager/resources/spec/cloudify/4.5.5 \
+    && curl -Ss -L -f https://www.getcloudify.org/spec/cloudify/4.5.5/types.yaml > /opt/manager/resources/spec/cloudify/4.5.5/types.yaml \
+    && chown -R cfyuser:cfyuser /opt/manager/resources/spec/cloudify/4.5.5
 
 # Create mount point for CM config file
 RUN mkdir -p /opt/onap && chown cfyuser:cfyuser /opt/onap
