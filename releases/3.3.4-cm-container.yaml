@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '3.3.4'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/271'
+ref:  96a00ab0363cf3062eaf8ca11f506dc6a06cc1c0
+containers:
+  - name: 'org.onap.dcaegen2.deployments.cm-container'
+    version: '3.3.4-SNAPSHOT-20201006T130729Z'
