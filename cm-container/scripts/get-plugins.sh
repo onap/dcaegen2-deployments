@@ -32,10 +32,8 @@ PLUGINS=\
 /dcaepolicyplugin/2.4.0/dcaepolicyplugin-2.4.0-py27-none-linux_x86_64.wgn|/dcaepolicyplugin/2.4.0/dcaepolicyplugin_types.yaml \
 /relationshipplugin/1.1.0/relationshipplugin-1.1.0-py27-none-linux_x86_64.wgn|/relationshipplugin/1.1.0/relationshipplugin_types.yaml \
 /k8splugin/2.0.0/k8splugin-2.0.0-py27-none-linux_x86_64.wgn|/k8splugin/2.0.0/k8splugin_types.yaml \
-/k8splugin/3.0.0/k8splugin-3.0.0-py27-none-linux_x86_64.wgn|/k8splugin/3.0.0/k8splugin_types.yaml \
-/k8splugin/3.3.0/k8splugin-3.3.0-py27-none-linux_x86_64.wgn|/k8splugin/3.3.0/k8splugin_types.yaml \
-/k8splugin/3.4.1/k8splugin-3.4.1-py27-none-linux_x86_64.wgn|/k8splugin/3.4.1/k8splugin_types.yaml \
 /k8splugin/3.4.2/k8splugin-3.4.2-py27-none-linux_x86_64.wgn|/k8splugin/3.4.2/k8splugin_types.yaml \
+/k8splugin/3.4.3/k8splugin-3.4.3-py27-none-linux_x86_64.wgn|/k8splugin/3.4.3/k8splugin_types.yaml \
 /clamppolicyplugin/1.1.0/clamppolicyplugin-1.1.0-py27-none-linux_x86_64.wgn|/clamppolicyplugin/1.1.0/clamppolicyplugin_types.yaml \
 /dmaap/1.5.0/dmaap-1.5.0-py27-none-linux_x86_64.wgn|/dmaap/1.5.0/dmaap_types.yaml \
 /helm/4.2.0/helm-4.2.0-py27-none-linux_x86_64.wgn|/helm/4.2.0/helm_types.yaml \
