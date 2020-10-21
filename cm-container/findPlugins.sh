@@ -33,7 +33,7 @@
 shopt -s expand_aliases
 
 alias cu='curl -Ss -H "Accept: application/json" -L -f'
-PLUGIN_ROOT=${1:-"https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/R7/"}
+PLUGIN_ROOT=${1:-"https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/R8/"}
 
 function getPlugins() {
     local root=$1
