@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d484738_dc03f71f",
+        "filename": "cm-container/scripts/get-plugins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-10-21T18:03:25Z",
+      "side": 1,
+      "message": "remove 3.4.2 (and bootstrap blueprints should be aligned to use 3.4.3 version; we will need only single version to be loaded going forward)",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 99
+      },
+      "revId": "45b26aa4df6c534b7a4d94c9e4d608d263b78ef1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
