@@ -1,6 +1,7 @@
 #!/bin/bash
 # ============LICENSE_START=======================================================
 # Copyright (c) 2018-2020 AT&T Intellectual Property. All rights reserved.
+# Copyright (d) 2020-2021 J. F. Lucas.  All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,14 +30,13 @@ DEST=${DEST:-/opt/plugins}
 # /path/to/plugin/wagon|/path/to/type/file
 PLUGINS=\
 "\
-/dcaepolicyplugin/2.4.0/dcaepolicyplugin-2.4.0-py27-none-linux_x86_64.wgn|/dcaepolicyplugin/2.4.0/dcaepolicyplugin_types.yaml \
-/relationshipplugin/1.1.0/relationshipplugin-1.1.0-py27-none-linux_x86_64.wgn|/relationshipplugin/1.1.0/relationshipplugin_types.yaml \
-/k8splugin/3.5.1/k8splugin-3.5.1-py27-none-linux_x86_64.wgn|/k8splugin/3.5.1/k8splugin_types.yaml \
-/clamppolicyplugin/1.1.0/clamppolicyplugin-1.1.0-py27-none-linux_x86_64.wgn|/clamppolicyplugin/1.1.0/clamppolicyplugin_types.yaml \
-/dmaap/1.5.0/dmaap-1.5.0-py27-none-linux_x86_64.wgn|/dmaap/1.5.0/dmaap_types.yaml \
-/helm/4.2.0/helm-4.2.0-py27-none-linux_x86_64.wgn|/helm/4.2.0/helm_types.yaml \
-/pgaas/1.3.0/pgaas-1.3.0-py27-none-linux_x86_64.wgn|/pgaas/1.3.0/pgaas_types.yaml \
-/sshkeyshare/1.2.0/sshkeyshare-1.2.0-py27-none-linux_x86_64.wgn|/sshkeyshare/1.2.0/sshkeyshare_types.yaml
+/dcaepolicyplugin/2.4.0/dcaepolicyplugin-2.4.0-py36-none-linux_x86_64.wgn|/dcaepolicyplugin/2.4.0/dcaepolicyplugin_types.yaml \
+/relationshipplugin/1.1.0/relationshipplugin-1.1.0-py36-none-linux_x86_64.wgn|/relationshipplugin/1.1.0/relationshipplugin_types.yaml \
+/k8splugin/3.5.1/k8splugin-3.5.1-py36-none-linux_x86_64.wgn|/k8splugin/3.5.1/k8splugin_types.yaml \
+/clamppolicyplugin/1.1.0/clamppolicyplugin-1.1.0-py36-none-linux_x86_64.wgn|/clamppolicyplugin/1.1.0/clamppolicyplugin_types.yaml \
+/dmaap/1.5.0/dmaap-1.5.0-py36-none-linux_x86_64.wgn|/dmaap/1.5.0/dmaap_types.yaml \
+/pgaas/1.3.0/pgaas-1.3.0-py36-none-linux_x86_64.wgn|/pgaas/1.3.0/pgaas_types.yaml \
+/sshkeyshare/1.2.0/sshkeyshare-1.2.0-py36-none-linux_x86_64.wgn|/sshkeyshare/1.2.0/sshkeyshare_types.yaml
 "
 
 mkdir -p ${DEST}

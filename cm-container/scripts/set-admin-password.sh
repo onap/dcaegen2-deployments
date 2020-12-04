@@ -1,6 +1,7 @@
 #!/bin/bash
 # ============LICENSE_START=======================================================
 # Copyright (c) 2020 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2020-2021 J. F. Lucas.  All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +36,7 @@ CMPASS=${CMPASS:-admin}
 
 echo "Set Cloudify's admin password"
 cd /opt/manager
-cfy_manager --reset_admin_password $CMPASS || ./env/bin/python reset_admin.py -p $CMPASS
+cfy_manager reset-admin-password $CMPASS 
 
 echo "Set the password used by the cfy client"
 cfy profile set -p $CMPASS

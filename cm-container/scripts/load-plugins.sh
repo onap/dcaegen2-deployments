@@ -1,6 +1,7 @@
 #!/bin/bash
 # ============LICENSE_START=======================================================
 # Copyright (c) 2019-2020 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2020-2021 J. F. Lucas.  All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -77,13 +78,15 @@ function install_plugin {
 
 set -ex
 
-
 # Wait for Cloudify Manager to come up
 while ! /scripts/cloudify-ready.sh
 do
     echo "Waiting for CM to come up"
     sleep 15
 done
+
+# Set nullglob to handle the case of an empty plugin directory
+shopt -s nullglob
 
 if [[ ! -f ${PLUGINS_LOADED} ]]
 then

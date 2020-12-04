@@ -1,13 +1,17 @@
-# Cloudify Manager Container Builder
+# Cloudify Manager Image Builder
 ## Purpose
 The artifacts in this directory build a Docker image based on the
-public image from Cloudify (`cloudifyplatform/community`).  The
-image has the Cloudify Manager software from the base image
-and adds our types files.  It configures
-the import resolver to use our local type files instead
-of fetching them over the Internet.   It sets up the `/opt/onap` mount point
-for our config files.  It also sets up the certificate, key and other
-configuration for using TLS.
+public image from Cloudify (`cloudifyplatform/community`).  The image
+build process, driven by the Dockerfile:
+  - retrieves the Cloudify plugins and type files needed to deploy DCAE components.  
+  - edits the Cloudify configuration file (`/etc/cloudify/config.yaml`) to
+set up Cloudify Manager to use TLS on its HTTP interfaces.
+  - sets up the `/opt/onap` mount point for configuration file.  
+  - installs scripts that run when the container is started.  These scripts:
+      - set up persistent storage for the container
+      - make the credentials for accessing the Kubernetes API available to Cloudify Manager
+      - set the administrative password to a value generated during the Helm deployment process
+      - upload the plugins and type files to the Cloudify Manager once it is running
 
 ## Running the Container
 The container is intended to be launched via a Helm chart as part
@@ -59,8 +63,6 @@ which then brings up the many other processes needed for a working instance of C
 
 ## The `setup-secret.sh` script
 When Kubernetes starts a container, it mounts a directory containing the credentials that the container needs to access the Kubernetes API on the local Kubernetes cluster.  The mountpoint is `/var/run/secrets/kubernetes.io/serviceaccount`.   Something about the way that Cloudify Manager is started (possibly because `/sbin/init` is run) causes this mountpoint to be hidden.   `setup-secret.sh` will recreate the directory if it's not present and symbolically link it to a copy of the credentials mounted at `/secret` in the container file system.  This gives Cloudify Manager the credentials that the Kubernetes plugin needs to deploy Kubernetes-based DCAE components.
-
-`setup-secret.sh` needs to run after '/sbin/init'.  The Dockerfile installs it in the `rc.local` script that runs at startup.
 
 ## Cleaning up Kubernetes components deployed by Cloudify Manager
 Using the `helm undeploy` (or `helm delete`) command will destroy the Kubernetes components deployed via helm.  In an ONAP deployment
