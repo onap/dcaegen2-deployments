@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "760b7159_3779d2fd",
+        "filename": "releases/3.4.2-cm-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-12-17T15:09:36Z",
+      "side": 1,
+      "message": "since this is multi-component repo, lets add unique tag to release file.. something like \ngit_tag: \u00273.4.2-cm-container\u0027",
+      "revId": "ea39c22e93ecbcdee2f70ed4153f023453698f07",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
