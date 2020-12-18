@@ -16,6 +16,24 @@
       "revId": "ea39c22e93ecbcdee2f70ed4153f023453698f07",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22a4c04d_087f0f12",
+        "filename": "releases/3.4.2-cm-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2020-12-18T14:01:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "760b7159_3779d2fd",
+      "revId": "ea39c22e93ecbcdee2f70ed4153f023453698f07",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
