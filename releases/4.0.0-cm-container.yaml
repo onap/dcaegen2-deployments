@@ -1,0 +1,9 @@
+distribution_type: 'container'
+container_release_tag: '4.0.0'
+git_tag: '4.0.0-cm-container'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/279'
+ref:  bc4f7b8493766b757ad6ebc204b48b4dc5a82e82 
+containers:
+  - name: 'org.onap.dcaegen2.deployments.cm-container'
+    version: '4.0.0-SNAPSHOT-20210108T090033Z'
