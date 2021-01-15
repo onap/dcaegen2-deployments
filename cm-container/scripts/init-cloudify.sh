@@ -20,7 +20,6 @@
 set -ex
 
 /scripts/setup-secret.sh
-/scripts/set-admin-password.sh
 /scripts/load-plugins.sh
 
 set +x
