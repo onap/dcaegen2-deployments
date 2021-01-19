@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e11488ec_6d7cf464",
+        "filename": "cm-container/scripts/start-persistent.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-19T23:20:53Z",
+      "side": 1,
+      "message": "line could be removed instead of commenting",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 116
+      },
+      "revId": "a4e03d8ebe341fe103af86504858dcc213028687",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
