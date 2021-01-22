@@ -1,0 +1,9 @@
+distribution_type: 'container'
+container_release_tag: '4.1.0'
+git_tag: '4.1.0-cm-container'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-release-version-java-daily/1130'
+ref:  a4e03d8ebe341fe103af86504858dcc213028687 
+containers:
+  - name: 'org.onap.dcaegen2.deployments.cm-container'
+    version: '4.1.0-SNAPSHOT-20210120T002928Z'
