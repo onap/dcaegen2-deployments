@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ============LICENSE_END=========================================================
-FROM cloudifyplatform/community-cloudify-manager-aio:20.12.15
+FROM cloudifyplatform/community-cloudify-manager-aio:5.1.2
 
 ENV PLUGIN_REPO {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}
 
