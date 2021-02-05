@@ -1,6 +1,7 @@
 #!/bin/bash
 # ================================================================================
 # Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
+# Copyright (c) 2021 J. F. Lucas. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,6 +26,11 @@
 # Command line options
 # --service name|address|port :  Register a service with name 'name', address 'address', and port 'port'.
 # --key keyname|filepath:  Register a key-value pair with key 'keyname' and the contents of a file at 'filepath' as its value
+# --key-yaml keyname|filepath: Register a key-value pair with name 'keyname', converting the YAML content of the file at 'filepath'
+#   to JSON, and storing the JSON result as the value.  This is used for Helm deployment of DCAE microservices, where the initial
+#   application configuration is stored in a Helm values.yaml file in YAML form.  --key-yaml converts the YAML configuration into
+#   JSON, which is the format that microservices expect.
+# -- delete-key
 # A command can include multiple instances of each option.
 
 CONSUL_ADDR=${CONSUL_PROTO:-http}://${CONSUL_HOST:-consul}:${CONSUL_PORT:-8500}
@@ -46,6 +52,12 @@ function register_service {
 #  $2: Path to file whose content will be the value associated with the key
 function put_key {
   curl -v -X PUT --data-binary @$2 -H 'Content-Type: application/json' ${KV_URL}/$1
+}
+
+# Delete a key from the Consul KV store
+# $1: Key to be deleted
+function delete_key {
+  curl -v -X DELETE ${KV_URL}/$1
 }
 
 set -x
@@ -84,6 +96,16 @@ do
     # See above for explanation of (${2//|/ })
     kv=(${2//|/ })
     put_key ${kv[@]}
+    shift 2;
+    ;;
+  "--key-yaml")
+    # See above for explanation of (${2//|/ })
+    kv=(${2//|/ })
+    cat ${kv[1]} | /opt/app/yaml2json.py | put_key ${kv[0]} -
+    shift 2;
+    ;;
+  "--delete-key")
+    delete_key $2
     shift 2;
     ;;
   *)
