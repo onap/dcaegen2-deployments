@@ -1,14 +1,12 @@
-# ============LICENSE_START=======================================================
-# org.onap.dcae
+#!/usr/bin/env python
 # ================================================================================
-# Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
-# Copyright (c) 2021 J. F. Lucas.  All rights reserved.
+# Copyright (c) 2021 J. F. Lucas. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,14 +15,19 @@
 # limitations under the License.
 # ============LICENSE_END=========================================================
 #
-FROM nexus3.onap.org:10001/onap/integration-python:8.0.0
-USER root
-RUN apk update \
-    && apk add bash \
-    && apk add curl \
-    && pip install --upgrade pip \
-    && pip install pyyaml
-COPY *.sh *.py /opt/app/
-WORKDIR /opt/app
-ENTRYPOINT ["/opt/app/consul_store.sh"]
-USER $user
+import yaml
+import json
+import sys
+
+def _yaml_to_json (y):
+    return json.dumps(yaml.safe_load(y), indent=2)
+
+def main():
+    try:
+        print (_yaml_to_json(sys.stdin.read()))
+    except Exception as e:
+        print(e, file=sys.stderr)
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
