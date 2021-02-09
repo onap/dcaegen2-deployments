@@ -1,0 +1,9 @@
+distribution_type: 'container'
+container_release_tag: '1.1.0'
+git_tag: '1.1.0-consul-loader-container'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/288'
+ref:  f706e2f0f401c26a507f38b13c6f6bac7f6594bb
+containers:
+  - name: 'org.onap.dcaegen2.deployments.consul-loader-container'
+    version: '1.1.0-SNAPSHOT-20210208T162433Z'
