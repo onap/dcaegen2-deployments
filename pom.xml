@@ -40,6 +40,7 @@ limitations under the License.
      <module>healthcheck-container</module>
      <module>tls-init-container</module>
      <module>consul-loader-container</module>
+     <module>dcae-services-policy-sync</module>
      <!--<module>multisite-init-container</module> -->
      <module>dcae-k8s-cleanup-container</module>
   </modules>
