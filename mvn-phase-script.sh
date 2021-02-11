@@ -62,6 +62,27 @@ compile)
   ;;
 test)
   echo "==> test phase script"
+  case $MVN_PROJECT_MODULEID in
+  dcae-services-policy-sync)
+    set -e -x
+    CURDIR=$(pwd)
+    TOXINIS=$(find . -name "tox.ini")
+    for TOXINI in "${TOXINIS[@]}"; do
+      DIR=$(echo "$TOXINI" | rev | cut -f2- -d'/' | rev)
+      cd "${CURDIR}/${DIR}"
+      rm -rf ./venv-tox ./.tox
+      virtualenv ./venv-tox
+      source ./venv-tox/bin/activate
+      pip install pip==21.0.1
+      pip install --upgrade argparse
+      pip install tox==3.22.0
+      pip freeze
+      tox
+      deactivate
+      rm -rf ./venv-tox ./.tox
+    done 
+    ;;
+  esac
   ;;
 package)
   echo "==> package phase script"
