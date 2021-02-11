@@ -62,6 +62,11 @@ compile)
   ;;
 test)
   echo "==> test phase script"
+  case $MVN_PROJECT_MODULEID in
+  dcae-services-policy-sync)
+    run_tox_test
+    ;;
+  esac
   ;;
 package)
   echo "==> package phase script"
