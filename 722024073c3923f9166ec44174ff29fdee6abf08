@@ -771,6 +771,24 @@
       "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48275187_0e624167",
+        "filename": "dcae-services-policy-sync/tox.ini",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:59:30Z",
+      "side": 1,
+      "message": "The requirement is for py38 to be listed at a minimum. Others (py36, py37) are optional.",
+      "parentUuid": "1708b6b8_263af951",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
