@@ -68,6 +68,709 @@
       "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4688d46_debd27b0",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "missing module docstring",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f53c9122_27362591",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "not all of these imports are used",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93cc3590_18497947",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "missing function docstrings here and elsewhere",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16022479_515cf271",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "class docstring missing\n\nwhere is your __init__() function?",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcd97557_86345f1f",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "where does self.session get set? there\u0027s no __init__()",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb349ea1_76023825",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "using a default argument of [] doesn\u0027t work the way you expect, as the default value itself can get modifie. You have to instead use\nids\u003dNone\nand then add code that says\nif ids \u003d\u003d None:\n  ids \u003d []",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "273b6bbe_be0f55c2",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "where does self.pdp_url get set? there\u0027s no __init__()",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf63e915_31df5f09",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "see comment above on [] default parameter",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0878fa86_526e34c6",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "see comment above on [] default parameter",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9762a9e_3374651e",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "see comment above on [] default parameter",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2621ad3e_1b1b24b2",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "because of the break, this could be an \"if\" instead of \"elif\"",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a459ce87_2fb4c1f6",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "the comment above on default [] parameters applies to default {} parameters. it doesn\u0027t work the way you want it to.",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08bc1969_9a943266",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "see comments above on default [] parameters",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5acd92a_9d7d6f71",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "see comments above on default [] parameters",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a9e5061_12876dc6",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "missing return False",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78924c9a_911000a7",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "see comments above on default [] parameters\n\nthe filters parameter does not appear to be used",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b380076_984dda5d",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "the indentation got messed up here",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eb852ad_79dff0c2",
+        "filename": "dcae-services-policy-sync/policysync/clients.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "see comments above on default [] parameters",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60aa7e91_75a39a1a",
+        "filename": "dcae-services-policy-sync/policysync/cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "add a module docstring",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c29a253_d25375c9",
+        "filename": "dcae-services-policy-sync/policysync/cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "some of these imports appear to be unused",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbe91094_360a1e2e",
+        "filename": "dcae-services-policy-sync/policysync/cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "class docstring",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4114d8a5_d16f939e",
+        "filename": "dcae-services-policy-sync/policysync/cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "method docstrings here and elsewhere",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc162d23_2990780a",
+        "filename": "dcae-services-policy-sync/policysync/cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "remove \"\u003d\u003d True\"\nif args.http_metrics \nis sufficient",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "956a65cf_5c6c8bd4",
+        "filename": "dcae-services-policy-sync/policysync/cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "change comment to a docstring",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56a446d2_b9e83b9a",
+        "filename": "dcae-services-policy-sync/policysync/coroutines.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "missing module docstring",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bac67fa8_6e50bea4",
+        "filename": "dcae-services-policy-sync/policysync/coroutines.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "some of these imports appear to be unused",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f39ae496_5eac9980",
+        "filename": "dcae-services-policy-sync/policysync/coroutines.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "missing method docstrings here and below",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e08e60f0_ccf2773a",
+        "filename": "dcae-services-policy-sync/policysync/coroutines.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "sig is local to the loop. Assuming that the signal handler gets invoked after this function ends, sig is going to be looked up when the lambda is invoked. At that point, it will have the last value it had in the for-loop, getattr(signal, \"SIGTERM\").",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d427c4be_a169a8ae",
+        "filename": "dcae-services-policy-sync/policysync/inventory.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "please add a module docstring here",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1c357e8_4c51517d",
+        "filename": "dcae-services-policy-sync/policysync/inventory.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "aiohttp, re and shutil are unused",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 6
+      },
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bda41fcc_d8ba08e9",
+        "filename": "dcae-services-policy-sync/policysync/inventory.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "a class docstring should be added",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a5dad60_63d4a90d",
+        "filename": "dcae-services-policy-sync/policysync/inventory.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "missing docstring",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73d5ff8b_607f56ef",
+        "filename": "dcae-services-policy-sync/policysync/inventory.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "missing docstring",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4de41fc2_d41ff52c",
+        "filename": "dcae-services-policy-sync/policysync/inventory.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "missing docstring",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8d3878b_c95e2373",
+        "filename": "dcae-services-policy-sync/policysync/inventory.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "by the way, this is a very nice function. I might reuse this pattern for some other code. :)",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf96bbe5_80824d26",
+        "filename": "dcae-services-policy-sync/policysync/inventory.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "missing docstring",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "963edfc2_8e6c4f0d",
+        "filename": "dcae-services-policy-sync/policysync/inventory.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "um, why not a set comprehension instead of a list comprehension that is then turned into a set?\n\ntmp \u003d { x.get(\"policyName\") for x in policy_bodies if \"policyName\" in x }\n\nNote: the equivalent python 2 code would have been\ntmp \u003d set(x.get(\"policyName\") for x in policy_bodies if \"policyName\" in x)",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "480a1848_8e67f77e",
+        "filename": "dcae-services-policy-sync/policysync/inventory.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "no {} inside this f-string",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdcd73ad_ff2e9f64",
+        "filename": "dcae-services-policy-sync/policysync/inventory.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "because of the return right above, there\u0027s no need for an else here for the remaining code",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3809277d_6b2bade2",
+        "filename": "dcae-services-policy-sync/policysync/metrics.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "please move the comment into a file docstring\n\n(make it a multi-line string before the imports)",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1708b6b8_263af951",
+        "filename": "dcae-services-policy-sync/tox.ini",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-12T18:57:44Z",
+      "side": 1,
+      "message": "add py37, py38",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
