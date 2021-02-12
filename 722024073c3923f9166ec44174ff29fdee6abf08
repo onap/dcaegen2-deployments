@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1849d0bc_aeef6911",
+        "filename": "dcae-services-policy-sync/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-12T15:54:42Z",
+      "side": 1,
+      "message": "should reflect onap nexus url  (container will be available here once merged)\nnexus3.onap.org:10001/onap/org.onap.dcaegen2.deployments.policy-sync:1.0.0",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 66
+      },
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "572d4a13_5476d248",
+        "filename": "dcae-services-policy-sync/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-12T15:54:42Z",
+      "side": 1,
+      "message": "replace with onap base image",
+      "range": {
+        "startLine": 128,
+        "startChar": 11,
+        "endLine": 128,
+        "endChar": 77
+      },
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8c22244_41903300",
+        "filename": "dcae-services-policy-sync/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-12T15:54:42Z",
+      "side": 1,
+      "message": "To be updated to onap url noted earlier",
+      "range": {
+        "startLine": 140,
+        "startChar": 11,
+        "endLine": 140,
+        "endChar": 74
+      },
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
