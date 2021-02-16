@@ -5,6 +5,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.3.0] - 12/02/2021 
-* Upgrade k8s-plugin to 3.5.2
+* Upgrade k8s-plugin to 3.5.2 - add support for config maps to k8s_plugin
 
 ## [4.2.0] - 05/02/2021      
