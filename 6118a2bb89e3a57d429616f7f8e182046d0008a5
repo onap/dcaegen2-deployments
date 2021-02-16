@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe3741de_2f0553a2",
+        "filename": "cm-container/Changelog.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-16T15:03:11Z",
+      "side": 1,
+      "message": "Suggest adding brief description of plugin enhancement/fix introduced with this version or linkage to corresponding jira",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 29
+      },
+      "revId": "6118a2bb89e3a57d429616f7f8e182046d0008a5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
