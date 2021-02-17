@@ -1587,6 +1587,24 @@
       "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51e0df5c_e8218dd4",
+        "filename": "dcae-services-policy-sync/tox.ini",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 7560
+      },
+      "writtenOn": "2021-02-17T20:01:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48275187_0e624167",
+      "revId": "722024073c3923f9166ec44174ff29fdee6abf08",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
