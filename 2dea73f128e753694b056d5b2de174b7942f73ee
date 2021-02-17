@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "469cedb6_734a26a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-02-17T09:01:05Z",
+      "side": 1,
+      "message": "Release.\n\nCould you also apply comment from: https://gerrit.onap.org/r/c/dcaegen2/deployments/+/117783/2/cm-container/Changelog.md#8\nhere?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "2dea73f128e753694b056d5b2de174b7942f73ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
