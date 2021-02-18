@@ -14,7 +14,7 @@
 # limitations under the License.
 # ============LICENSE_END=========================================================
 #
-FROM python:3-alpine
+FROM nexus3.onap.org:10001/onap/integration-python:latest
 RUN mkdir /opt/onap
 RUN pip install kubernetes
 COPY buildconf.py /opt/onap
