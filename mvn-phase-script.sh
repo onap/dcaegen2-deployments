@@ -99,16 +99,8 @@ deploy)
   echo "==> deploy phase script"
 
   case $MVN_PROJECT_MODULEID in
-  bootstrap)
-    # build docker image from Docker file (under module dir) and push to registry
-    upload_files_of_extension sh
-    build_and_push_docker
-    ;;
   cm-container|healthcheck-container|tls-init-container|consul-loader-container|multisite-init-container|dcae-k8s-cleanup-container|dcae-services-policy-sync)
-    # upload all sh file under the root of module
-    upload_files_of_extension_recursively sh $MVN_PROJECT_MODULEID
-    upload_files_of_extension_recursively py $MVN_PROJECT_MODULEID
-    upload_files_of_extension_recursively yaml $MVN_PROJECT_MODULEID
+    build_and_push_docker
     ;;
   *)
     echo "====> unknown mvn project module"
