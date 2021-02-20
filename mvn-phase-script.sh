@@ -104,10 +104,7 @@ deploy)
     upload_files_of_extension sh
     build_and_push_docker
     ;;
-  tca-cdap-container|cm-container|redis-cluster-container|healthcheck-container|pnda-mirror-container|pnda-bootstrap-container|tls-init-container|consul-loader-container|multisite-init-container|dcae-k8s-cleanup-container)
-    build_and_push_docker
-    ;;
-  scripts|cloud_init|heat)
+  cm-container|healthcheck-container|tls-init-container|consul-loader-container|multisite-init-container|dcae-k8s-cleanup-container|dcae-services-policy-sync)
     # upload all sh file under the root of module
     upload_files_of_extension_recursively sh $MVN_PROJECT_MODULEID
     upload_files_of_extension_recursively py $MVN_PROJECT_MODULEID
