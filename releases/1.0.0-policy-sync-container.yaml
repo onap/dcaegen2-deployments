@@ -1,0 +1,9 @@
+distribution_type: 'container'
+container_release_tag: '1.0.0'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/298'
+ref:  cfef2605776d125abe4c5e042913b7c35e7fffac
+containers:
+  - name: 'org.onap.dcaegen2.deployments.dcae-services-policy-sync'
+    version: '1.0.0-SNAPSHOT-20210220T202657Z'
+git_tag: '1.0.0-policy-sync'
