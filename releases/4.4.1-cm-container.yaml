@@ -1,0 +1,9 @@
+distribution_type: 'container'
+container_release_tag: '4.4.1'
+git_tag: '4.4.1-cm-container'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/303'
+ref:  8c97d2616a7929ce88d7bf627463ae2577515cb4
+containers:
+  - name: 'org.onap.dcaegen2.deployments.cm-container'
+    version: '4.4.1-SNAPSHOT-20210309T144541Z'
