@@ -32,7 +32,7 @@ PLUGINS=\
 "\
 /dcaepolicyplugin/2.4.0/dcaepolicyplugin-2.4.0-py36-none-linux_x86_64.wgn|/dcaepolicyplugin/2.4.0/dcaepolicyplugin_types.yaml \
 /relationshipplugin/1.1.0/relationshipplugin-1.1.0-py36-none-linux_x86_64.wgn|/relationshipplugin/1.1.0/relationshipplugin_types.yaml \
-/k8splugin/3.7.0/k8splugin-3.7.0-py36-none-linux_x86_64.wgn|/k8splugin/3.7.0/k8splugin_types.yaml \
+/k8splugin/3.8.0/k8splugin-3.8.0-py36-none-linux_x86_64.wgn|/k8splugin/3.8.0/k8splugin_types.yaml \
 /clamppolicyplugin/1.1.0/clamppolicyplugin-1.1.0-py36-none-linux_x86_64.wgn|/clamppolicyplugin/1.1.0/clamppolicyplugin_types.yaml \
 /dmaap/1.5.0/dmaap-1.5.0-py36-none-linux_x86_64.wgn|/dmaap/1.5.0/dmaap_types.yaml \
 /pgaas/1.3.0/pgaas-1.3.0-py36-none-linux_x86_64.wgn|/pgaas/1.3.0/pgaas_types.yaml \
