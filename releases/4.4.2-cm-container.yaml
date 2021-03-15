@@ -1,0 +1,9 @@
+distribution_type: 'container'
+container_release_tag: '4.4.2'
+git_tag: '4.4.2-cm-container'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-honolulu-merge-java/2'
+ref:  964b7b1887926e206a6db8260b72c0499e297356
+containers:
+  - name: 'org.onap.dcaegen2.deployments.cm-container'
+    version: '4.4.2-SNAPSHOT-20210314T013254Z'
