@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.5.0] - 12/04/2021 
+* Upgrade k8s-plugin to 3.9.0 (Add a configuration of certificates for communication between 
+ external-tls init container and CertService API)
+
 ## [4.4.2] - 12/03/2021 
 * Upgrade k8s-plugin to 3.8.0 (Switch to policy-lib 2.5.1 to fix base64 encoding issue during policy 
  configuration fetch)
