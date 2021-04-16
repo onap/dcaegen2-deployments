@@ -27,7 +27,7 @@ limitations under the License.
   <groupId>org.onap.dcaegen2.deployments</groupId>
   <artifactId>dcae-services-policy-sync</artifactId>
   <name>dcaegen2-deployments-dcae-services-policy-sync</name>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

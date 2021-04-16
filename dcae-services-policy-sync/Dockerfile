@@ -35,8 +35,13 @@ ADD policysync policysync
 RUN /policysync/bin/pip install .
 
 FROM nexus3.onap.org:10001/onap/integration-python:7.0.1 as runtime
-
+USER root
 COPY --from=build /policysync /policysync
+
+# Load ONAP root CA
+COPY ./cacert.pem /usr/local/share/ca-certificates/
+RUN update-ca-certificates
+
 
 USER onap
 ENTRYPOINT [ "/policysync/bin/policysync" ]
