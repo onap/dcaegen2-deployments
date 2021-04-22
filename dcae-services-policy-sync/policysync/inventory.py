@@ -80,6 +80,7 @@ class Inventory:
             temp_file.close()
 
         os.rename(temp_file.name, os.path.abspath(self.file))
+        os.chmod(os.path.abspath(self.file), 0o744)
 
     async def get_policy_content(self, action=ACTION_UPDATED):
         """
