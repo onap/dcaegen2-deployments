@@ -34,7 +34,7 @@ PLUGINS=\
 /relationshipplugin/1.1.0/relationshipplugin-1.1.0-py36-none-linux_x86_64.wgn|/relationshipplugin/1.1.0/relationshipplugin_types.yaml \
 /k8splugin/3.9.0/k8splugin-3.9.0-py36-none-linux_x86_64.wgn|/k8splugin/3.9.0/k8splugin_types.yaml \
 /clamppolicyplugin/1.1.0/clamppolicyplugin-1.1.0-py36-none-linux_x86_64.wgn|/clamppolicyplugin/1.1.0/clamppolicyplugin_types.yaml \
-/dmaap/1.5.0/dmaap-1.5.0-py36-none-linux_x86_64.wgn|/dmaap/1.5.0/dmaap_types.yaml \
+/dmaap/1.5.1/dmaap-1.5.1-py36-none-linux_x86_64.wgn|/dmaap/1.5.1/dmaap_types.yaml \
 /pgaas/1.3.0/pgaas-1.3.0-py36-none-linux_x86_64.wgn|/pgaas/1.3.0/pgaas_types.yaml \
 /sshkeyshare/1.2.0/sshkeyshare-1.2.0-py36-none-linux_x86_64.wgn|/sshkeyshare/1.2.0/sshkeyshare_types.yaml
 "
