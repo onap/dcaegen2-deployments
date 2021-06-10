@@ -1,0 +1,9 @@
+distribution_type: 'container'
+container_release_tag: '4.6.0'
+git_tag: '4.6.0-cm-container'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/316'
+ref:  4faf24adf432182f4358313fcf9c074a63eb5f7b
+containers:
+  - name: 'org.onap.dcaegen2.deployments.cm-container'
+    version: '4.6.0-SNAPSHOT-20210608T062221Z'
