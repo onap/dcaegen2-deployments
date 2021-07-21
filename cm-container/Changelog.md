@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.6.1] - 07/06/2021 
+* Upgrade clamp-plugin to 1.1.1 (Fix dcaepolicyplugin dependency)
+
 ## [4.6.0] - 07/06/2021 
 * Upgrade dmaap-plugin to 1.5.1 (Fix incorrect var name in DMaaP plugin topic creation)
 
