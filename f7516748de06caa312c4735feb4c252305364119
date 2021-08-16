@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf6d24fe_2e48cea2",
+        "filename": "consul-loader-container/delete_key.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-16T21:27:02Z",
+      "side": 1,
+      "message": "please add \"\" around \"${KV_URL}/$1\"",
+      "revId": "f7516748de06caa312c4735feb4c252305364119",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
