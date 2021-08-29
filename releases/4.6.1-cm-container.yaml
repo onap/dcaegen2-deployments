@@ -1,0 +1,9 @@
+distribution_type: 'container'
+container_release_tag: '4.6.1'
+git_tag: '4.6.1-cm-container'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-release-version-java-daily/1350'
+ref:  504637f4d5ba8b5dfb69b585e79f4cb54b3688ab
+containers:
+  - name: 'org.onap.dcaegen2.deployments.cm-container'
+    version: '4.6.1-SNAPSHOT-20210829T002904Z'
