@@ -33,7 +33,7 @@
 shopt -s expand_aliases
 
 alias cu='curl -Ss -H "Accept: application/json" -L -f'
-RELEASE_TAG=${MVN_RELEASE_TAG:-R10}
+RELEASE_TAG=${MVN_RELEASE_TAG:-R9}
 PLUGIN_ROOT=${1:-"https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/${RELEASE_TAG}/"}
 
 function getPlugins() {
