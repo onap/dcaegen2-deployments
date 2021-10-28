@@ -31,9 +31,11 @@ const HEALTHY = 200;
 const UNHEALTHY = 500;
 const UNKNOWN = 503;
 
-const EXPECTED_COMPONENTS='/opt/app/expected-components.json'
+const EXPECTED_COMPONENTS = '/opt/app/expected-components.json'
+const LISTEN_PORT = 8080;
 
 const fs = require('fs');
+const log = require('./log')
 
 // List of deployments expected to be created via Helm
 let helmDeps = [];
@@ -41,8 +43,8 @@ try {
     helmDeps = JSON.parse(fs.readFileSync(EXPECTED_COMPONENTS, {encoding: 'utf8'}));
 }
 catch (error) {
-    console.log(`Could not access ${EXPECTED_COMPONENTS}: ${error}`);
-    console.log ('Using empty list of expected components');
+    log.error(`Could not access ${EXPECTED_COMPONENTS}: ${error}`);
+    log.error ('Using empty list of expected components');
 }
 
 const status = require('./get-status');
@@ -82,10 +84,11 @@ const checkHealth = function (callback) {
 // Simple HTTP server--any incoming request triggers a health check
 const server = http.createServer(function(req, res) {
     checkHealth(function(ret) {
-        console.log ((new Date()).toISOString() + ": " + JSON.stringify(ret));
+        log.info(`Incoming request: ${req.url} -- response: ${JSON.stringify(ret)}`);
         res.statusCode = ret.status;
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify(ret.body || {}), 'utf8');
     });
 });
-server.listen(8080);
+server.listen(LISTEN_PORT);
+log.info(`Listening on port ${LISTEN_PORT} -- expected components: ${JSON.stringify(helmDeps)}`);

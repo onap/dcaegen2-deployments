@@ -1,6 +1,7 @@
 /*
 Copyright(c) 2018 AT&T Intellectual Property. All rights reserved.
 Copyright(c) 2020 Nokia Intellectual Property. All rights reserved.
+Copyright(c) 2021 J. F. Lucas.  All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,6 +22,7 @@ See the License for the specific language governing permissions and limitations 
 
 const fs = require('fs');
 const https = require('https');
+const log = require('./log');
 
 const K8S_CREDS = '/var/run/secrets/kubernetes.io/serviceaccount';
 const K8S_HOST = 'kubernetes.default.svc.cluster.local';	// Full name to match cert for TLS
@@ -38,7 +40,7 @@ const summarizeDeploymentList = function(list) {
 
     let ret =
     {
-        type: "summary",
+        type: 'summary',
         count: 0,
         ready: 0,
         items: []
@@ -64,24 +66,25 @@ const queryKubernetes = function(path, callback) {
     // Make GET request to Kubernetes API
     const options = {
         host: K8S_HOST,
-        path: "/" + path,
+        path: '/' + path,
         ca : ca,
         headers: {
             Authorization: 'bearer ' + token
         }
     };
-    console.log ("request url: " + options.host + options.path);
+
     const req = https.get(options, function(resp) {
-        let rawBody = "";
-        resp.on("data", function(data) {
+        let rawBody = '';
+        resp.on('data', function(data) {
             rawBody += data;
         });
-        resp.on("error", function (error) {
-            console.error("error: " + error);
+        resp.on('error', function (error) {
+            log.debug(`k8s API query: ${options.host}${options.path} -- error: ${error}`);
             callback(error, null, null)
         });
-        resp.on("end", function() {
-            console.log ("status: " + resp.statusCode ? resp.statusCode: "NONE")
+        resp.on('end', function() {
+            const deployment = JSON.parse(rawBody);
+            log.debug (`k8s API query: ${options.host}${options.path}  -- status: ${resp.statusCode ? resp.statusCode: 'NONE'}`);
             callback(null, resp, JSON.parse(rawBody));
         });
     });
@@ -92,7 +95,7 @@ const getStatusSinglePromise = function (item) {
     // Expect item to be of the form {namespace: "namespace", deployment: "deployment_name"}
     return new Promise(function(resolve, reject){
         const path = K8S_PATH + item.namespace + '/deployments/' + item.deployment;
-        queryKubernetes(path, function(error, res, body){
+        queryKubernetes(path, function(error, res, body) {
             if (error) {
                 reject(error);
             }
