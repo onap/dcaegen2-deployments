@@ -17,7 +17,7 @@
 # limitations under the License.
 # ============LICENSE_END=========================================================
 #
-FROM node:14.17.0-alpine3.13
+FROM node:16.12.0-alpine3.14
 RUN mkdir -p /opt/app \
   && adduser -D -h /opt/app health
 COPY *.js /opt/app/
