@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "871a5b6d_4abbcd55",
+        "filename": "healthcheck-container/log.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-16T00:57:56Z",
+      "side": 1,
+      "message": "no trailing NL in the file",
+      "revId": "544591c9be4418a96f561521461231968d144164",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
