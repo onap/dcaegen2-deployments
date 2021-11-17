@@ -16,6 +16,24 @@
       "revId": "2b571e5954fd539d565fea398e82f91614591c13",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d122b0f_2d39ed35",
+        "filename": "mvn-phase-script.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-11-17T19:00:23Z",
+      "side": 1,
+      "message": "yeah, probably not required... Although there should be no impact to other active modules as the tag was primarily used for push/pull of nexus raw artifacts (plugins \u0026 mvn-phase-lib.sh; all the other modules builds local and pushes container to nexus3)\n\nAs mvn-phase-lib.sh (maintained under utils) could possibly evolve, will revert this to R10 to keep build script in sync.",
+      "parentUuid": "252bcc0b_a5f1c27c",
+      "revId": "2b571e5954fd539d565fea398e82f91614591c13",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
