@@ -1,5 +1,6 @@
 /*
 Copyright(c) 2018-2020 AT&T Intellectual Property. All rights reserved.
+Copyright(c) 2021 J. F. Lucas.  All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37,10 +38,10 @@ const LISTEN_PORT = 8080;
 const fs = require('fs');
 const log = require('./log')
 
-// List of deployments expected to be created via Helm
-let helmDeps = [];
+// List of microservices expected to be deployed automatically at DCAE installation time
+let expectedMicroservices = [];
 try {
-    helmDeps = JSON.parse(fs.readFileSync(EXPECTED_COMPONENTS, {encoding: 'utf8'}));
+    expectedMicroservices = JSON.parse(fs.readFileSync(EXPECTED_COMPONENTS, {encoding: 'utf8'}));
 }
 catch (error) {
     log.error(`Could not access ${EXPECTED_COMPONENTS}: ${error}`);
@@ -51,9 +52,12 @@ const status = require('./get-status');
 const http = require('http');
 
 // Helm deployments are always in the ONAP namespace and prefixed by Helm release name
-const helmList = helmDeps.map(function(name) {
+const expectedList = expectedMicroservices.map(function(name) {
     return {namespace: ONAP_NS, deployment: HELM_REL.length > 0 ? HELM_REL + '-' + name : name};
 });
+
+// List of deployment names for the microservices deployed automatically at DCAE installation time
+const expectedDepNames = expectedList.map((d) => d.deployment);
 
 const isHealthy = function(summary) {
     // Current healthiness criterion is simple--all deployments are ready
@@ -62,16 +66,18 @@ const isHealthy = function(summary) {
 
 const checkHealth = function (callback) {
     // Makes queries to Kubernetes and checks results
-    // If we encounter some kind of error contacting k8s (or other), health status is UNKNOWN (500)
-    // If we get responses from k8s but don't find all deployments ready, health status is UNHEALTHY (503)
+    // If we encounter some kind of error contacting k8s (or other), health status is UNKNOWN (503)
+    // If we get responses from k8s but don't find all deployments ready, health status is UNHEALTHY (500)
     // If we get responses from k8s and all deployments are ready, health status is HEALTHY (200)
-    // This could be a lot more nuanced, but what's here should be sufficient for R2 OOM healthchecking
+    // This could be a lot more nuanced, but what's here should be sufficient for OOM healthchecking
 
     // Query k8s to find all the deployments with specified DEPLOY_LABEL
     status.getLabeledDeploymentsPromise(DCAE_NS, DEPLOY_LABEL)
     .then(function(fullDCAEList) {
-        // Now get status for Helm deployments and CM deployments
-        return status.getStatusListPromise(helmList.concat(fullDCAEList));
+        // Remove expected deployments from the list
+        dynamicDCAEDeps = fullDCAEList.filter( (n) => !(expectedDepNames.includes(n.deployment)) );
+        // Get status for expected deployments and any dynamically deployed components
+        return status.getStatusListPromise(expectedList.concat(dynamicDCAEDeps));
     })
     .then(function(body) {
         callback({status: isHealthy(body) ? HEALTHY : UNHEALTHY, body: body});
@@ -91,4 +97,4 @@ const server = http.createServer(function(req, res) {
     });
 });
 server.listen(LISTEN_PORT);
-log.info(`Listening on port ${LISTEN_PORT} -- expected components: ${JSON.stringify(helmDeps)}`);
+log.info(`Listening on port ${LISTEN_PORT} -- expected components: ${JSON.stringify(expectedMicroservices)}`);
