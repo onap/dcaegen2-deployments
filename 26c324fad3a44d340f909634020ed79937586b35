@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "9affe8bc_0c4c40b0",
+        "filename": "healthcheck-container/healthcheck.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-12-08T21:36:56Z",
+      "side": 1,
+      "message": "There\u0027s no \u003d\u003d\u003d\u003d\u003d LICENSE_START \u003d\u003d\u003d\u003d\u003d line in this file, nor a corresponding LICENSE_END line",
+      "revId": "26c324fad3a44d340f909634020ed79937586b35",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "575fb75f_c7745ad4",
         "filename": "healthcheck-container/healthcheck.js",
         "patchSetId": 1
