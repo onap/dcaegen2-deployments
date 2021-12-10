@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '2.4.0'
+project: 'dcaegen2/deployments'
+log_dir: 'dcaegen2-deployments-master-merge-java/332/'
+ref: 2afffed5e9487fab47ddcb49063dd2cb55170841
+containers:
+    - name: 'org.onap.dcaegen2.deployments.healthcheck-container'
+      version: '2.4.0-SNAPSHOT-20211209T201157Z'
