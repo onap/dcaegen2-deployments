@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "919bb0ba_d410ea50",
+        "filename": "mvn-phase-script.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-27T16:49:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0be50abd_b812d120",
+      "revId": "81fcff60184d7678cae53872e7222075e1719763",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4593be5e_89b8b1cc",
         "filename": "pom.xml",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2022-04-27T15:08:52Z",
       "side": 1,
       "message": "remove commented-out code",
+      "revId": "81fcff60184d7678cae53872e7222075e1719763",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c15bb32c_1b2d8cbc",
+        "filename": "pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-27T16:49:14Z",
+      "side": 1,
+      "message": "Would prefer to retain this commented (to allow view of supported sub-component)",
+      "parentUuid": "4593be5e_89b8b1cc",
       "revId": "81fcff60184d7678cae53872e7222075e1719763",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
