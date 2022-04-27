@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0be50abd_b812d120",
+        "filename": "mvn-phase-script.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-04-27T15:08:52Z",
+      "side": 1,
+      "message": "remove commented-out code",
+      "revId": "81fcff60184d7678cae53872e7222075e1719763",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4593be5e_89b8b1cc",
+        "filename": "pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-04-27T15:08:52Z",
+      "side": 1,
+      "message": "remove commented-out code",
+      "revId": "81fcff60184d7678cae53872e7222075e1719763",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
