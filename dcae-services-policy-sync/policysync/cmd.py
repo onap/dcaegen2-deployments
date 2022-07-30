@@ -60,7 +60,7 @@ def parsecmd(args):
     parser.add_argument(
         "--duration",
         type=int,
-        default=os.environ.get("POLICY_SYNC_DURATION", 1200),
+        default=os.environ.get("POLICY_SYNC_DURATION", 300),
         help="frequency (in seconds) to conduct periodic check",
     )
 
