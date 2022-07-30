@@ -1,0 +1,8 @@
+{
+  "policies": [
+    {
+      "policy-id": "onap.dcae.slicems.config",
+       "policy-version": 1
+    }
+  ]
+}
