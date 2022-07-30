@@ -1,0 +1,23 @@
+{
+  "tosca_definitions_version": "tosca_simple_yaml_1_1_0",
+  "topology_template": {
+    "policies": [
+      {
+        "onap.dcae.slicems.config": {
+          "type": "onap.policies.monitoring.docker.slicems.app",
+          "type_version": "1.0.0",
+          "version": "1.0.0",
+          "metadata": {
+            "policy-id": "onap.dcae.slicems.config",
+            "policy-version": 1
+          },
+          "properties": {
+            "ves_ccvpn_notification_topic": "on",
+            "ccvpnThreshold": "0.8",
+            "isPeriodicOn": "true"
+          }
+        }
+      }
+    ]
+  }
+}
