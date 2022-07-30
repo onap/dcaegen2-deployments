@@ -1,11 +1,13 @@
 # Policy Sync
 This page serves as an implementation for the Policy sync container described in the [wiki](https://wiki.onap.org/display/DW/Policy+function+as+Sidecar)
 
-
 Policy Sync utility is a python based utility that interfaces with the ONAP/ECOMP policy websocket and REST APIs. It is designed to keep a local listing of policies in sync with an environment's policy distribution point (PDP). It functions well as a Kubernetes sidecar container which can pull down the latest policies for consumption by an application container. 
 
 The sync utility primarily utilizes the PDP's websocket notification API to receive policy update notifications. It also includes a periodic check of the  PDP for resilliency purposes in the event of websocket API issues. 
 
+Policy Sync provides a way to realize runtime configuration for DCAE microservices through Policy Module. 
+
+Currently, SON-Handler and SliceMS is utilizing policy sync.
 
 ## Build and Run
 Easiest way to use is via docker by building the provided docker file
@@ -39,7 +41,7 @@ General configuration that is used regardless of which PDP API you are using.
 | POLICY_SYNC_PDP_URL       | --pdp-url          | PDP URL to query                             | None (must be set in env or flag) |
 | POLICY_SYNC_FILTER        | --filters          | yaml list of regex of policies to match      | []                                |
 | POLICY_SYNC_ID            | --ids              | yaml list of ids of policies to match        | []                                |
-| POLICY_SYNC_DURATION      | --duration         | duration in seconds for periodic checks      | 2600                              |
+| POLICY_SYNC_DURATION      | --duration         | duration in seconds for periodic checks      | 300                               |
 | POLICY_SYNC_OUTFILE       | --outfile          | File to output policies to                   | ./policies.json                   |
 | POLICY_SYNC_PDP_USER      | --pdp-user         | Set user if you need basic auth for PDP      | None                              |
 | POLICY_SYNC_PDP_PASS      | --pdp-password     | Set pass if you need basic auth for PDP      | None                              |
@@ -85,7 +87,7 @@ docker run
     --env POLICY_SYNC_V1_DMAAP_USER='<pass>' \
     --env POLICY_SYNC_ID=['DCAE.Config_MS_AGING_UVERSE_PROD'] \
     -v $(pwd)/policy-volume:/etc/policy \
-    nexus3.onap.org:10001/onap/org.onap.dcaegen2.deployments.policy-sync:1.0.0
+    nexus3.onap.org:10001/onap/org.onap.dcaegen2.deployments.policy-sync:1.0.1
 ```
 
 Or on Kubernetes: 
@@ -125,7 +127,7 @@ spec:
  
   # Sample app that uses inotifyd (part of busybox/alpine). For demonstration purposes only...
   - name: main
-    image: nexus3.onap.org:10001/onap/org.onap.dcaegen2.deployments.policy-sync:1.0.0
+    image: nexus3.onap.org:10001/onap/org.onap.dcaegen2.deployments.policy-sync:1.0.1
     volumeMounts:
     - name: policy-shared
       mountPath: /etc/policies.json
@@ -137,7 +139,7 @@ spec:
  
     # The sidecar app which keeps the policies in sync
   - name: policy-sync
-    image: nexus3.onap.org:10001/onap/org.onap.dcaegen2.deployments.policy-sync:1.0.0
+    image: nexus3.onap.org:10001/onap/org.onap.dcaegen2.deployments.policy-sync:1.0.1
     envFrom:
       - configMapRef:
           name: special-config
@@ -147,4 +149,13 @@ spec:
       mountPath: /etc/policies
 ```
 
-
+## How to apply
+Steps to utilize policy sync as a way to do runtime configuration:
+1. Create policy Type: curl -k -v --user 'policyadmin:zb!XztG34' -X POST "https://{{Policy-API-IP}}:6969/policy/api/v1/policytypes" -H "Content-Type:application/json" -H "Accept: application/json" -d @policy_type.json 
+2. Create xcaml policy: curl -v -k --silent --user 'policyadmin:zb!XztG34' -X POST "https://{{Policy-API-IP}}:6969/policy/api/v1/policytypes/{{PolicyType}}}/versions/{PolicyVersion}/policies" -H "Accept: application/json" -H "Content-Type: application/json" -d @policy.json
+   * URL param "PolicyType" value is used to tell policy api which policy type should the current policy belongs to
+   * URL param "PolicyType" value should refer to Policy Type Name you define in policy_type.json
+   * URL param "PolicyVersion" value should refer to Version you define in policy.json
+   * "Policy Id" defines in policy.json should be consistent with the "policyID" in /oom/kubernetes/dcaegen2-services/components/dcae-slice-analysis-ms/values.yaml
+3. Deploy policy to xacml pdp engine: curl --silent -k --user 'policyadmin:zb!XztG34' -X POST "https://{{Policy-PAP-IP}}:6969/policy/pap/v1/pdps/policies" -H "Accept: application/json" -H "Content-Type: application/json" -d @deploy.json
+4. Example policy_type.json, policy.json, deploy.json can be found in resources
