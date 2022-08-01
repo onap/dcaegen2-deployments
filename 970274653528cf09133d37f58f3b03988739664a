@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2f0537e_1f2f1ca6",
+        "filename": "dcae-services-policy-sync/Changelog.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-01T15:31:52Z",
+      "side": 1,
+      "message": "Default value update not required; rest of doc related updates are useful and would limit this patch to it",
+      "range": {
+        "startLine": 8,
+        "startChar": 27,
+        "endLine": 8,
+        "endChar": 62
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32527971_1f7e8bde",
+        "filename": "dcae-services-policy-sync/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-01T15:31:52Z",
+      "side": 1,
+      "message": "looks like valid credentials, replace with placeholders or dummy cred",
+      "range": {
+        "startLine": 154,
+        "startChar": 42,
+        "endLine": 154,
+        "endChar": 63
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7e750b9_897355e7",
+        "filename": "dcae-services-policy-sync/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-01T15:31:52Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 155,
+        "startChar": 52,
+        "endLine": 155,
+        "endChar": 73
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6fbc595_2c968a5f",
+        "filename": "dcae-services-policy-sync/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-01T15:31:52Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 160,
+        "startChar": 63,
+        "endLine": 160,
+        "endChar": 84
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7dac7cf_98e9005e",
+        "filename": "dcae-services-policy-sync/policysync/cmd.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-01T15:31:52Z",
+      "side": 1,
+      "message": "1200 default is okay as we do not want all policy-sync containers to overload policies. App requiring different duration can specify the override in the deployment by using \"duration\" property like below\n\n#policies:\n#  duration: 300\n#  policyRelease: \"onap\"\n#  policyID: |\n#    \u0027[\"onap.vfirewall.tca\",\"onap.vdns.tca\"]\u0027",
+      "range": {
+        "startLine": 64,
+        "startChar": 55,
+        "endLine": 64,
+        "endChar": 58
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cd0a297_596f485a",
+        "filename": "dcae-services-policy-sync/resources/son-handler-policy-examples/son_policy.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-01T15:31:52Z",
+      "side": 1,
+      "message": "remove tab/spaces",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 14
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db4b7eaf_f764de2f",
+        "filename": "dcae-services-policy-sync/resources/son-handler-policy-examples/son_policy.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-01T15:31:52Z",
+      "side": 1,
+      "message": "remove tab/spaces",
+      "range": {
+        "startLine": 19,
+        "startChar": 74,
+        "endLine": 19,
+        "endChar": 95
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15cc203a_82f7fdea",
+        "filename": "dcae-services-policy-sync/resources/son-handler-policy-examples/son_policy_type.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-01T15:31:52Z",
+      "side": 1,
+      "message": "remove this line",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 3
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
