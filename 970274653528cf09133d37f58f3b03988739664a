@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "05c1d2f8_8ceca25f",
+        "filename": "dcae-services-policy-sync/Changelog.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-02T14:16:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2f0537e_1f2f1ca6",
+      "range": {
+        "startLine": 8,
+        "startChar": 27,
+        "endLine": 8,
+        "endChar": 62
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32527971_1f7e8bde",
         "filename": "dcae-services-policy-sync/README.md",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "970274653528cf09133d37f58f3b03988739664a",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1744c6b7_aa3082b4",
+        "filename": "dcae-services-policy-sync/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-02T14:16:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32527971_1f7e8bde",
+      "range": {
+        "startLine": 154,
+        "startChar": 42,
+        "endLine": 154,
+        "endChar": 63
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "91a154f1_9025f2f5",
+        "filename": "dcae-services-policy-sync/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-02T14:16:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7e750b9_897355e7",
+      "range": {
+        "startLine": 155,
+        "startChar": 52,
+        "endLine": 155,
+        "endChar": 73
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6fbc595_2c968a5f",
         "filename": "dcae-services-policy-sync/README.md",
         "patchSetId": 4
@@ -91,6 +163,30 @@
       "revId": "970274653528cf09133d37f58f3b03988739664a",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9bbb379_3c644895",
+        "filename": "dcae-services-policy-sync/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-02T14:16:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6fbc595_2c968a5f",
+      "range": {
+        "startLine": 160,
+        "startChar": 63,
+        "endLine": 160,
+        "endChar": 84
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "d2c97516_9b0a396c",
+        "filename": "dcae-services-policy-sync/policysync/cmd.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-02T14:16:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7dac7cf_98e9005e",
+      "range": {
+        "startLine": 64,
+        "startChar": 55,
+        "endLine": 64,
+        "endChar": 58
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cd0a297_596f485a",
         "filename": "dcae-services-policy-sync/resources/son-handler-policy-examples/son_policy.json",
         "patchSetId": 4
@@ -137,6 +257,30 @@
       "revId": "970274653528cf09133d37f58f3b03988739664a",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d16c1ad2_b9f3ca2c",
+        "filename": "dcae-services-policy-sync/resources/son-handler-policy-examples/son_policy.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-02T14:16:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cd0a297_596f485a",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 14
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "6f990dc8_caa06a8a",
+        "filename": "dcae-services-policy-sync/resources/son-handler-policy-examples/son_policy.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-02T14:16:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db4b7eaf_f764de2f",
+      "range": {
+        "startLine": 19,
+        "startChar": 74,
+        "endLine": 19,
+        "endChar": 95
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15cc203a_82f7fdea",
         "filename": "dcae-services-policy-sync/resources/son-handler-policy-examples/son_policy_type.json",
         "patchSetId": 4
@@ -183,6 +351,30 @@
       "revId": "970274653528cf09133d37f58f3b03988739664a",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ff4f906_33625cd9",
+        "filename": "dcae-services-policy-sync/resources/son-handler-policy-examples/son_policy_type.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-02T14:16:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15cc203a_82f7fdea",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 3
+      },
+      "revId": "970274653528cf09133d37f58f3b03988739664a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
