@@ -2,7 +2,7 @@
 # org.onap.dcae
 # ================================================================================
 # Copyright (c) 2018-2020 AT&T Intellectual Property. All rights reserved.
-# Copyright (c) 2021 J. F. Lucas.  All rights reserved.
+# Copyright (c) 2021, 2023 J. F. Lucas.  All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 # limitations under the License.
 # ============LICENSE_END=========================================================
 #
-FROM node:16.12.0-alpine3.14
+FROM node:18.18.0-alpine3.18
 RUN mkdir -p /opt/app \
   && adduser -D -h /opt/app health
 COPY *.js /opt/app/

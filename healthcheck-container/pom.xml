@@ -3,7 +3,7 @@
 ============LICENSE_START=======================================================
 Copyright (c) 2018-2020 AT&T Intellectual Property. All rights reserved.
 Copyright (c) 2020 NOKIA Intellectual Property. All rights reserved.
-Copyright (c) 2021 J. F. Lucas.  All rights reserved.
+Copyright (c) 2021, 2023 J. F. Lucas.  All rights reserved.
 ================================================================================
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ limitations under the License.
   <groupId>org.onap.dcaegen2.deployments</groupId>
   <artifactId>healthcheck-container</artifactId>
   <name>dcaegen2-deployments-healthcheck-container</name>
-  <version>2.4.0</version>
+  <version>2.4.1</version>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
