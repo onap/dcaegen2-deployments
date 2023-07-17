@@ -1,17 +1,19 @@
-# DCAE and DCAE MOD Healthcheck Service
+# DCAE Healthcheck Service
 
-The Healthcheck service provides a simple HTTP API to check the status of DCAE or DCAE MOD components running in the Kubernetes environment.  When it receives any incoming HTTP request, the service makes queries to the Kubernetes API to determine the current status of the DCAE or DCAE MOD components, as seen by Kubernetes.  Most components have defined a "readiness probe" (an HTTP healthcheck endpoint or a healthcheck script) that Kubernetes uses to determine readiness.
+The Healthcheck service provides a simple HTTP API to check the status of DCAE components running in the Kubernetes environment.  When it receives any incoming HTTP request, the service makes queries to the Kubernetes API to determine the current status of the DCAE components, as seen by Kubernetes.  Most components have defined a "readiness probe" (an HTTP healthcheck endpoint or a healthcheck script) that Kubernetes uses to determine readiness.  The Healthcheck service itself does not directly connect to the DCAE components to check their status.
 
-Three instances of the Healthcheck service are deployed in ONAP: one for DCAE platform (dcaegen2, to be eliminated during the R10 development cycle), one for DCAE Helm-deployed microservices (dcaegen2-services), and one for DCAE MOD (dcaemod).
+A single instance of the DCAE Healthcheck service is deployed in ONAP.
 
 The Healthcheck service has two sources for identifying components that should be running:
 1. A list of components that are expected to be deployed by Helm as part of the ONAP installation, specified in a JSON array stored in a file at `/opt/app/expected-components.json`.
 
-    dcaegen2, dcaegen2-services, and dcaemod have configurable deployments.  By setting flags in the `values.yaml` file or in an override file, a user can select which components are deployed.  The`/opt/app/expected-components.json` file is generated at deployment time based on which components have been selected for deployment.  The file is stored in a Kubernetes ConfigMap that is mounted on the healthcheck container at `/opt/app/expected-components.json`.   See the Helm charts for dcaegen2, dcaegen2-services, and dcaemod in the OOM repository for details on how the ConfigMap is created.
+    The DCAE ONAP deployment (using the OOM dcaegen2-services Helm charts) is configurable.  By setting flags in the `values.yaml` file or in an override file, a user can select which components are deployed.  The`/opt/app/expected-components.json` file is generated at deployment time based on which components have been selected for deployment.  The file is stored in a Kubernetes ConfigMap that is mounted on the healthcheck container at `/opt/app/expected-components.json`.   See the Helm charts for dcaegen2-services in the OOM repository for details on how the ConfigMap is created.
 
-2. Components whose Kubernetes deployments have been marked with the labeled specified by the environment variable `DEPLOY_LABEL`.  These are identified by a query to the Kubernetes API requesting a list of all the deployments with the label.  The query is made each time an incoming HTTP request is made, so that as new deployments are created, they will be detected and included in the health check.
+2. Components whose Kubernetes deployments have been marked with the label whose name is given by the environment variable `DEPLOY_LABEL`. The dcaegen2-services-common deployment template inserts this label into every deployment that uses the template. On every incoming HTTP request, the Healthcheck
+service queries the Kubernetes API to get a list of all the deployments that have this label.   This allows the Healthcheck service to detect components that
+have been deployed after the initial DCAE ONAP deployment.
 
-    For the dcaegen2-services instance of the Healthcheck service, the `DEPLOY_LABEL` variable is set to `dcaeMicroserviceName`.  This is the label that the dcaegen2-services-common deployment template inserts into every deployment that uses the template.  The dcaegen2-services Healthcheck instance therefore includes in its healthcheck all components deployed using the dcaegen2-services-common deployment template.  For the dcaemod and dcaegen2 instances of the Healthcheck service, the `DEPLOY_LABEL` is not set, so the dcaemod and dcaegen2-services health checks do not make any checks based on a label.
+_Note that since the London release, having two methods for determining what components should be running is redundant.  The label method is sufficient.  The two methods are historical.  At one time, as many as three different instances of the Healthcheck service ran in ONAP, and two of them did not have labeling._
 
 The Healthcheck service returns an HTTP status code of 200 if Kubernetes reports that all of the components that should be running are in a ready state.  It returns a status code of 500 if some of the components are not ready.  It returns a status code of 503 if some kind of error prevented it from completing a query.
 
