@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.1.0] - Unreleased
+          - [DCAEGEN2-3467] Bump the development version to 1.1.0.
           - [DCAEGEN2-3400] Migrate the Policy Sync image and tests to Python 3.15.
 
 ## [1.0.1] - 2022-08-02

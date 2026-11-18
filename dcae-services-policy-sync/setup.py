@@ -1,5 +1,6 @@
 # ============LICENSE_START=======================================================
 # Copyright (c) 2021 AT&T Intellectual Property. All rights reserved.
+# Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +20,7 @@ from setuptools import setup, find_packages
 setup(
     name="policysync",
     author="Chris Luckenbaugh",
-    version="1.0.1",
+    version="1.1.0",
     packages=find_packages(),
     include_package_data=True,
     install_requires=["aiohttp>=2.3", "PyYAML", "prometheus_client"],

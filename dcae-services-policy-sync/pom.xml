@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <!--
-================================================================================
+============LICENSE_START=======================================================
 Copyright (c) 2021 AT&T Intellectual Property. All rights reserved.
+Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 ================================================================================
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -27,7 +28,7 @@ limitations under the License.
   <groupId>org.onap.dcaegen2.deployments</groupId>
   <artifactId>dcae-services-policy-sync</artifactId>
   <name>dcaegen2-deployments-dcae-services-policy-sync</name>
-  <version>1.0.1</version>
+  <version>1.1.0</version>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
