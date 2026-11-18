@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+* [DCAEGEN2-3400] Bump the development version to 2.5.0.
+
 ## [2.4.1] - 2023-10-10
 * [DCAEGEN2-3400] Update Docker base image to node.js 18.x (the latest LTS release).
 * Update README to eliminate references to dcaemod and the old dcaegen2 platform services,
