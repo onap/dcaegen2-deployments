@@ -1,5 +1,6 @@
 # ============LICENSE_START=======================================================
 # Copyright (c) 2021 AT&T Intellectual Property. All rights reserved.
+# Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +20,7 @@ FROM nexus3.onap.org:10001/onap/integration-python:7.0.1 as build
 
 USER root
 
-RUN python3 -m venv /policysync
+RUN python3 -m venv /policysync && /policysync/bin/python -m pip install --upgrade pip
 # Need GCC, musl and associated dependencies to compile dependencies against musl
 RUN apk add --no-cache --virtual .build-deps gcc musl-dev
 
