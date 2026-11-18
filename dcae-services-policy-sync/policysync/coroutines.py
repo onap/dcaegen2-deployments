@@ -1,5 +1,6 @@
 # ============LICENSE_START=======================================================
 # Copyright (c) 2021 AT&T Intellectual Property. All rights reserved.
+# Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -143,7 +144,7 @@ def _setup_coroutines(
         sig = getattr(signal, signame)
         loop.add_signal_handler(
             sig,
-            lambda: asyncio.ensure_future(
+            lambda: loop.create_task(
                 shutdown_handler(loop, tasks, inventory)
             ),
         )
@@ -159,24 +160,26 @@ def start_event_loop(config):
     start the event loop that runs the application
     :param config: Config object for the application
     """
-    loop = asyncio.get_event_loop()
-    inventory = Inventory(
-        config.filters,
-        config.ids,
-        config.out_file,
-        config.client
-    )
+    loop = asyncio.new_event_loop()
+    try:
+        inventory = Inventory(
+            config.filters,
+            config.ids,
+            config.out_file,
+            config.client
+        )
 
-    _setup_coroutines(
-        loop,
-        inventory,
-        shutdown,
-        task_runner,
-        metrics_server=start_http_server,
-        bind=config.bind,
-        check_period=config.check_period
-    )
+        _setup_coroutines(
+            loop,
+            inventory,
+            shutdown,
+            task_runner,
+            metrics_server=start_http_server,
+            bind=config.bind,
+            check_period=config.check_period
+        )
 
-    loop.run_forever()
-    loop.close()
+        loop.run_forever()
+    finally:
+        loop.close()
     logger.info("shutdown complete")

@@ -1,5 +1,6 @@
 # ============LICENSE_START=======================================================
 # Copyright (c) 2021 AT&T Intellectual Property. All rights reserved.
+# Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -119,10 +120,10 @@ async def get_decision(request):
 
 
 @pytest.fixture
-def policyclient(aiohttp_client, loop):
+async def policyclient(aiohttp_client):
     app = web.Application()
     app.router.add_route("POST", "/" + DECISION_ENDPOINT, get_decision)
-    fake_client = loop.run_until_complete(aiohttp_client(app))
+    fake_client = await aiohttp_client(app)
     server = "{}://{}:{}".format("http", fake_client.host, fake_client.port)
     return PolicyClient({}, server)
 

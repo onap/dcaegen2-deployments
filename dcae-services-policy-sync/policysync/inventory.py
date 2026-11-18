@@ -1,5 +1,6 @@
 # ============LICENSE_START=======================================================
 # Copyright (c) 2021 AT&T Intellectual Property. All rights reserved.
+# Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -115,7 +116,7 @@ class Inventory:
 
         if tmp != self.hp_active_inventory:
             data = json.dumps(out)
-            loop = asyncio.get_event_loop()
+            loop = asyncio.get_running_loop()
             await loop.run_in_executor(None, self._atomic_dump, data)
             logger.info(
                 "Update complete. Policies dumped to: %s", self.file

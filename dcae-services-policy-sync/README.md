@@ -29,6 +29,11 @@ pip install .
 policysync -h 
 ```
 
+Policy Sync runs on Python 3.15. Use Python 3.15 for local development
+and run `python -m pip install tox` followed by `python -m tox -e py315`
+from this module directory. The Maven test phase runs the same tox
+environment in Docker using the base image from the Dockerfile.
+
 ## Configuration
 
 Configuration is currently done via either env variables or by flag. Flags take precedence env variables, env variables take precedence over default

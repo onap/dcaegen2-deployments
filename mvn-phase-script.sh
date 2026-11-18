@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# ================================================================================
+# ============LICENSE_START=========================================================
 # Copyright (c) 2017-2022 AT&T Intellectual Property. All rights reserved.
+# Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,23 +51,14 @@ test)
   echo "==> test phase script"
   case $MVN_PROJECT_MODULEID in
   dcae-services-policy-sync)
-    set -e -x
-    CURDIR=$(pwd)
-    TOXINIS=$(find . -name "tox.ini")
-    for TOXINI in "${TOXINIS[@]}"; do
-      DIR=$(echo "$TOXINI" | rev | cut -f2- -d'/' | rev)
-      cd "${CURDIR}/${DIR}"
-      rm -rf ./venv-tox ./.tox
-      virtualenv ./venv-tox
-      source ./venv-tox/bin/activate
-      pip install pip==20.3.4
-      pip install --upgrade argparse
-      pip install tox
-      pip freeze
-      tox
-      deactivate
-      rm -rf ./venv-tox ./.tox
-    done 
+    python_image=$(awk '$1 == "FROM" && $4 == "python-base" {print $2}' Dockerfile)
+    docker pull "$python_image"
+    docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp \
+      -v "$PWD:$PWD" -w "$PWD" "$python_image" sh -ec '
+        python -m venv /tmp/venv-tox
+        /tmp/venv-tox/bin/python -m pip install tox
+        /tmp/venv-tox/bin/python -m tox --workdir /tmp/tox -e py315
+      '
     ;;
   esac
   ;;
