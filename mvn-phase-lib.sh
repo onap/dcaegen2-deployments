@@ -424,8 +424,12 @@ build_and_push_docker()
   VERSION="${MVN_PROJECT_VERSION//[^0-9.]/}"
   VERSION2=$(echo "$VERSION" | cut -f1-2 -d'.')
   LFQI="${IMAGENAME}:${VERSION}-${TIMESTAMP}"Z
-  # build a docker image
-  docker build --rm -f ./Dockerfile -t "${LFQI}" ./
+  # Refresh the moving Python base tag on persistent builders.
+  local docker_build_args=()
+  if [ "$MVN_PROJECT_MODULEID" = "dcae-services-policy-sync" ]; then
+    docker_build_args+=(--pull)
+  fi
+  docker build --rm "${docker_build_args[@]}" -f ./Dockerfile -t "${LFQI}" ./
   # all local builds push to SNAPSHOT repo
   REPO=""
   if [ $MVN_DEPLOYMENT_TYPE == "SNAPSHOT" ]; then

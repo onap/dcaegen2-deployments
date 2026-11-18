@@ -14,7 +14,14 @@
 # limitations under the License.
 # ============LICENSE_END=========================================================
 
-import pytest, json, sys, asyncio, signal
+import asyncio
+import json
+from pathlib import Path
+import signal
+import sys
+
+from aiohttp import ClientConnectionError, ClientSession, web
+import pytest
 from tests.mocks import (
     MockClient,
     MockTask,
@@ -75,10 +82,14 @@ async def test_task_runner():
 
     should_run.counter = 0
 
-    def mocktask(inventory):
-        assert True
+    calls = []
 
-    await task_runner(MockInventory(), 1, mocktask, should_run)
+    async def mocktask(inventory, sleep):
+        calls.append((inventory, sleep))
+
+    inventory = MockInventory()
+    await task_runner(inventory, 1, mocktask, should_run)
+    assert calls == [(inventory, 1)]
 
 
 async def test_task_runner_cancel():
@@ -140,3 +151,60 @@ def test_setup_coroutines():
     # Signal handlers for SIGINT and SIGTERM
     assert signal.SIGINT in loop.handlers
     assert signal.SIGTERM in loop.handlers
+
+
+@pytest.mark.asyncio
+async def test_cli_fetches_policy_and_exits_on_sigterm(
+    aiohttp_server, unused_tcp_port, tmp_path
+):
+    async def decision(request):
+        return web.json_response({
+            "policies": {
+                "sample": {
+                    "metadata": {"policy-id": "sample"},
+                    "version": "1.2.3",
+                    "properties": {"threshold": 10},
+                }
+            }
+        })
+
+    app = web.Application()
+    app.router.add_post("/policy/pdpx/v1/decision", decision)
+    server = await aiohttp_server(app)
+    outfile = tmp_path / "policies.json"
+    cli = Path(sys.executable).with_name("policysync")
+    process = await asyncio.create_subprocess_exec(
+        str(cli),
+        "--pdp-url", str(server.make_url("/")).rstrip("/"),
+        "--out", str(outfile),
+        "--http-bind", f"127.0.0.1:{unused_tcp_port}",
+        stderr=asyncio.subprocess.PIPE,
+    )
+    try:
+        # The metrics server starts after the initial fetch and signal setup.
+        async with ClientSession() as session, asyncio.timeout(10):
+            while process.returncode is None:
+                try:
+                    async with session.get(
+                        f"http://127.0.0.1:{unused_tcp_port}/metrics"
+                    ) as response:
+                        assert response.status == 200
+                        break
+                except ClientConnectionError:
+                    await asyncio.sleep(0.05)
+            else:
+                _, stderr = await process.communicate()
+                pytest.fail(f"Policy Sync exited during startup: {stderr.decode()}")
+
+        policy = json.loads(outfile.read_text())["policies"]["items"][0]
+        assert policy["policyName"] == "sample.1-2-3.xml"
+        assert policy["config"] == {"threshold": 10}
+        assert outfile.stat().st_mode & 0o777 == 0o644
+
+        process.terminate()
+        _, stderr = await asyncio.wait_for(process.communicate(), timeout=5)
+        assert process.returncode == 0, stderr.decode()
+    finally:
+        if process.returncode is None:
+            process.kill()
+            await process.communicate()

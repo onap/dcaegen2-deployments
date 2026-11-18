@@ -81,12 +81,12 @@ async def wshandler(request):
 
 
 @pytest.fixture
-def policyclient(aiohttp_client, loop):
+async def policyclient(aiohttp_client):
     app = web.Application()
     app.router.add_route("POST", "/pdp/api/listPolicy", listpolicy)
     app.router.add_route("POST", "/pdp/api/getConfig", getconfig)
     app.router.add_get("/pdp/notifications", wshandler)
-    fake_client = loop.run_until_complete(aiohttp_client(app))
+    fake_client = await aiohttp_client(app)
     server = "{}://{}:{}".format("http", fake_client.host, fake_client.port)
     return PolicyClient({}, server)
 

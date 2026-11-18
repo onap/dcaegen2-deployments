@@ -115,7 +115,7 @@ class Inventory:
 
         if tmp != self.hp_active_inventory:
             data = json.dumps(out)
-            loop = asyncio.get_event_loop()
+            loop = asyncio.get_running_loop()
             await loop.run_in_executor(None, self._atomic_dump, data)
             logger.info(
                 "Update complete. Policies dumped to: %s", self.file

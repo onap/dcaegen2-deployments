@@ -119,10 +119,10 @@ async def get_decision(request):
 
 
 @pytest.fixture
-def policyclient(aiohttp_client, loop):
+async def policyclient(aiohttp_client):
     app = web.Application()
     app.router.add_route("POST", "/" + DECISION_ENDPOINT, get_decision)
-    fake_client = loop.run_until_complete(aiohttp_client(app))
+    fake_client = await aiohttp_client(app)
     server = "{}://{}:{}".format("http", fake_client.host, fake_client.port)
     return PolicyClient({}, server)
 
